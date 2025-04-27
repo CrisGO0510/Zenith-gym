@@ -1,0 +1,107 @@
+@use "sass:color";
+@use "@angular/material" as mat;
+@use "./responsive-styles";
+
+@include mat.core();
+
+$zenith-darkest: #1b262c;
+$zenith-dark-blue: #0f4c75;
+$zenith-medium-blue: #3282b8;
+$zenith-light-blue: #bbe1fa;
+$white: #ffffff;
+
+$zenith-primary: mat.m2-define-palette(
+  (
+    50: $zenith-light-blue,
+    100: $zenith-light-blue,
+    200: $zenith-medium-blue,
+    300: $zenith-medium-blue,
+    400: $zenith-medium-blue,
+    500: $zenith-dark-blue,
+    600: $zenith-dark-blue,
+    700: $zenith-dark-blue,
+    800: $zenith-darkest,
+    900: $zenith-darkest,
+    A100: $zenith-light-blue,
+    A200: $zenith-medium-blue,
+    A400: $zenith-dark-blue,
+    A700: $zenith-darkest,
+    contrast: (
+      50: $zenith-darkest,
+      100: $zenith-darkest,
+      200: $white,
+      300: $white,
+      400: $white,
+      500: $white,
+      600: $white,
+      700: $white,
+      800: $white,
+      900: $white,
+      A100: $zenith-darkest,
+      A200: $white,
+      A400: $white,
+      A700: $white,
+    ),
+  ),
+  500,
+  100,
+  700
+);
+
+$zenith-accent: mat.m2-define-palette(
+  (
+    50: color.adjust($zenith-medium-blue, $lightness: 30%),
+    100: color.adjust($zenith-medium-blue, $lightness: 20%),
+    200: $zenith-medium-blue,
+    500: $zenith-medium-blue,
+    700: color.adjust($zenith-medium-blue, $lightness: -10%),
+    contrast: (
+      50: $zenith-darkest,
+      100: $zenith-darkest,
+      200: $white,
+      500: $white,
+      700: $white,
+    ),
+    A100: $zenith-light-blue,
+    A200: $zenith-medium-blue,
+    A400: $zenith-dark-blue,
+    A700: $zenith-darkest,
+  ),
+  A200,
+  A100,
+  A400
+);
+
+$zenith-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$zenith-theme: mat.m2-define-dark-theme(
+  (
+    color: (
+      primary: $zenith-primary,
+      accent: $zenith-accent,
+      warn: $zenith-warn,
+    ),
+    typography: mat.m2-define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.core-theme($zenith-theme);
+@include mat.button-theme($zenith-theme);
+@include mat.card-theme($zenith-theme);
+@include mat.toolbar-theme($zenith-theme);
+@include mat.input-theme($zenith-theme);
+@include mat.form-field-theme($zenith-theme);
+@include mat.select-theme($zenith-theme);
+@include mat.list-theme($zenith-theme);
+@include mat.icon-theme($zenith-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

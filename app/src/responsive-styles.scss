@@ -1,0 +1,22 @@
+.button {
+  background-color: #073d62 !important;
+  transition:
+    background-color 0.2s ease-in-out,
+    transform 0.15s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+
+  cursor: pointer;
+  margin: 4px;
+}
+
+.button:hover {
+  background-color: #0f4c75;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  filter: brightness(85%);
+}
