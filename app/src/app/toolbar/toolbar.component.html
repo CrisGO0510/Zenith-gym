@@ -1,11 +1,17 @@
 <mat-toolbar color="primary" class="toolbar">
-  <span>Zenith Gym</span>
+  <span class="toolbar-title" (click)="navigateTo('')">Zenith Gym</span>
   <div class="buttons-actions">
-    <button mat-icon-button class="button">
+    <button mat-icon-button class="button" (click)="navigateTo('/memberships')">
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
-    <button mat-icon-button class="button">
+    <button mat-icon-button class="button" [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="navigateTo('/login')">
+        Iniciar Sesión
+      </button>
+      <button mat-menu-item (click)="navigateTo('/singup')">Registrarse</button>
+    </mat-menu>
   </div>
 </mat-toolbar>
