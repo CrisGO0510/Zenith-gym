@@ -1,1 +1,46 @@
-<p>upcoming-reservations works!</p>
+<div class="reservations-container">
+  <h2>Próximas Reservas</h2>
+
+  @if (reservations && reservations.length > 0) {
+    <mat-list role="list" class="reservations-list">
+      @for (reservation of reservations; track trackById) {
+        <mat-list-item role="listitem" class="reservation-item">
+          <div matListItemLine class="reservation-info">
+            <span class="routine-name">{{ reservation.routineName }}</span>
+
+            <span class="start-date">{{
+              reservation.startDate | date: "dd/MM/yyyy"
+            }}</span>
+
+            <span class="time-range">
+              {{ reservation.startDate | date: "HH:mm" }} -
+              {{ reservation.endDate | date: "HH:mm" }}
+            </span>
+          </div>
+
+          <div matListItemMeta class="reservation-actions">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="onViewClick(reservation.id)"
+              aria-label="Ver detalles de reserva"
+            >
+              <mat-icon>search</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="onDeleteClick(reservation.id)"
+              aria-label="Eliminar reserva"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      }
+    </mat-list>
+  } @else {
+    <p class="no-reservations">No hay próximas reservas.</p>
+  }
+</div>

@@ -1,0 +1,147 @@
+@use "@angular/material" as mat;
+@use "sass:color"; // <--- IMPORTANTE: Importar el módulo de color
+
+// --- Variables de Color (Reutiliza las de tu tema) ---
+$zenith-darkest: #1b262c;
+$zenith-dark-blue: #0f4c75;
+$zenith-medium-blue: #3282b8;
+$zenith-light-blue: #bbe1fa;
+$white: #ffffff;
+$divider-color: #424242;
+$secondary-text-color: #bdbdbd;
+// --- CORRECCIÓN: Usar color.adjust ---
+$hover-bg-color: color.adjust(
+  $zenith-darkest,
+  $lightness: 10%
+); // Fondo sutil para hover
+// --- FIN CORRECCIÓN ---
+$header-bg-color: $zenith-dark-blue;
+
+// --- Contenedor General ---
+.calendar-container {
+  background-color: $zenith-darkest;
+  padding: 15px;
+  border-radius: 8px;
+  color: $zenith-light-blue;
+  margin: 20px 0;
+}
+
+// --- Estilos para la Cabecera ---
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background-color: $header-bg-color;
+  border-radius: 6px;
+  color: $white;
+
+  .row {
+    display: contents;
+  }
+
+  .btn-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  button.button {
+    color: $white;
+    &.mat-mdc-button:not([class*="mat-elevation-z"]) {
+      background-color: transparent;
+    }
+    &:hover {
+      background-color: rgba($white, 0.1);
+    }
+  }
+  button[mat-icon-button].button {
+    &:hover {
+      background-color: rgba($white, 0.15);
+    }
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+    flex-grow: 1;
+  }
+}
+
+// --- Estilos para el Calendario (mwl-calendar-week-view) ---
+.calendar-container mwl-calendar-week-view {
+  .cal-week-view {
+    background-color: transparent;
+    border: none;
+
+    .cal-day-header {
+      // --- CORRECCIÓN: Usar color.adjust ---
+      background-color: color.adjust(
+        $zenith-darkest,
+        $lightness: 5%
+      ); // Fondo ligeramente más claro
+      // --- FIN CORRECCIÓN ---
+      color: $zenith-light-blue;
+      border: 1px solid $divider-color;
+      border-bottom: 2px solid $divider-color;
+      border-top: none;
+      border-left: none;
+      padding: 8px 0;
+      text-align: center;
+      font-weight: 500;
+
+      &:first-child {
+        border-left: 1px solid $divider-color;
+      }
+    }
+
+    .cal-time-label-column .cal-hour-segment .cal-time {
+      color: $secondary-text-color;
+      font-size: 0.8em;
+      padding-right: 10px;
+    }
+
+    .cal-hour-segment {
+      border: 1px solid $divider-color !important;
+      background-color: transparent;
+      margin: 0;
+
+      .cal-event {
+        display: none;
+      }
+
+      &:hover {
+        background-color: $hover-bg-color !important; // Ya usa la variable corregida
+        cursor: pointer;
+      }
+
+      &.cal-current-time {
+        border-top: 1px dashed $zenith-medium-blue !important;
+        position: relative;
+      }
+    }
+
+    .cal-day-column + .cal-day-column {
+      border-left: none !important;
+    }
+    .cal-hour + .cal-hour .cal-hour-segment {
+      border-top: none !important;
+    }
+
+    .cal-weekend {
+      .cal-day-header {
+        // --- CORRECCIÓN: Usar color.adjust ---
+        background-color: color.adjust(
+          $zenith-darkest,
+          $lightness: 8%
+        ); // Ligeramente diferente
+        // --- FIN CORRECCIÓN ---
+      }
+      .cal-hour-segment {
+        // background-color: rgba($zenith-medium-blue, 0.05);
+      }
+    }
+  }
+}

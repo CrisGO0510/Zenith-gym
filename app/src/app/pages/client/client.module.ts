@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ClientRoutingModule } from './client-routing.module';
 import { HomeClientComponent } from './components/home-client/home-client.component';
 import { UpcomingReservationsComponent } from './components/upcoming-reservations/upcoming-reservations.component';
@@ -10,6 +9,9 @@ import { DialogCreateReservationComponent } from './components/dialog-create-res
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CalendarModule } from 'angular-calendar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
+    MatIconModule,
+    MatListModule,
     NgxChartsModule,
+    CalendarModule,
   ],
 })
 export class ClientModule {}

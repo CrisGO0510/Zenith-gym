@@ -1,0 +1,95 @@
+@use "@angular/material" as mat;
+
+$container-bg: #212121;
+$item-bg: #333;
+$text-color: #e0e0e0;
+$secondary-text-color: #bdbdbd;
+$divider-color: #424242;
+$icon-view-color: #2196f3;
+$icon-delete-color: #f44336;
+
+.reservations-container {
+  background-color: $container-bg;
+  padding: 15px;
+  border-radius: 8px;
+  color: $text-color;
+  max-width: 400px;
+  margin: 20px auto;
+
+  h2 {
+    text-align: left;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .reservations-list {
+    padding: 0;
+  }
+
+  .reservation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+
+    height: auto !important;
+    min-height: 60px;
+
+    .reservation-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      text-align: initial;
+      margin-right: 10px;
+      color: $text-color;
+
+      .routine-name {
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      .start-date {
+        font-size: 0.9em;
+        color: $secondary-text-color;
+      }
+
+      .time-range {
+        font-size: 0.9em;
+        color: $secondary-text-color;
+      }
+    }
+
+    .reservation-actions {
+      display: flex;
+      align-items: center;
+
+      padding: 0;
+      margin: 0;
+
+      button {
+        &[color="primary"] mat-icon {
+          color: $icon-view-color;
+        }
+        &[color="warn"] mat-icon {
+          color: $icon-delete-color;
+        }
+      }
+    }
+  }
+
+  mat-divider {
+    border-top-color: $divider-color;
+  }
+
+  .no-reservations {
+    text-align: center;
+    padding: 20px;
+    color: $secondary-text-color;
+  }
+}
+
+::ng-deep .mat-mdc-list-item .mdc-list-item__content {
+  display: flex;
+  width: 100%;
+}
