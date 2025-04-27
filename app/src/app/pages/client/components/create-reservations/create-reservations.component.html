@@ -1,0 +1,17 @@
+<div class="schedule-container">
+  <ngx-charts-heat-map
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="calendarData"
+    [legend]="legend"
+    [gradient]="false"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [tooltipDisabled]="tooltipDisabled"
+    (select)="onSlotSelect($event)">
+  </ngx-charts-heat-map>
+</div>
