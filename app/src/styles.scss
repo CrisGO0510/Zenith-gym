@@ -95,6 +95,7 @@ $zenith-theme: mat.m2-define-dark-theme(
 @include mat.select-theme($zenith-theme);
 @include mat.list-theme($zenith-theme);
 @include mat.icon-theme($zenith-theme);
+@include mat.datepicker-theme($zenith-theme);
 
 html,
 body {

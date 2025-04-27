@@ -1,1 +1,134 @@
-<p>singup works!</p>
+<main class="signup-content">
+  <mat-card class="signup-card">
+    <h2>Crear Cuenta</h2>
+
+    <div class="login-prompt">
+      <span>¿Ya tienes cuenta? </span>
+      <a
+        class="login-link"
+        href="javascript:void(0)"
+        (click)="navigateTo('login')"
+      >
+        Inicia Sesión
+      </a>
+      <span class="spacer"></span>
+    </div>
+
+    <mat-card-content>
+      <form [formGroup]="signupForm" class="signup-form" (ngSubmit)="submitForm()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombres</mat-label>
+          <input matInput type="text" formControlName="firstName" required />
+          @if (signupForm.get('firstName')?.errors?.['required'] && signupForm.get('firstName')?.touched) {
+            <mat-error>Los nombres son obligatorios</mat-error>
+          }
+          @if (signupForm.get('firstName')?.errors?.['pattern'] && signupForm.get('firstName')?.touched) {
+            <mat-error>Los nombres solo pueden contener letras y espacios</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Apellidos</mat-label>
+          <input matInput type="text" formControlName="lastName" required />
+          @if (signupForm.get('lastName')?.errors?.['required'] && signupForm.get('lastName')?.touched) {
+            <mat-error>Los apellidos son obligatorios</mat-error>
+          }
+          @if (signupForm.get('lastName')?.errors?.['pattern'] && signupForm.get('lastName')?.touched) {
+            <mat-error>Los apellidos solo pueden contener letras y espacios</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          @if (signupForm.get('birthDate')?.errors?.['required'] && signupForm.get('birthDate')?.touched) {
+            <mat-error>La fecha de nacimiento es obligatoria</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Documento</mat-label>
+          <input matInput type="text" formControlName="document" required />
+          @if (signupForm.get('document')?.errors?.['required'] && signupForm.get('document')?.touched) {
+            <mat-error>El documento es obligatorio</mat-error>
+          }
+          @if (signupForm.get('document')?.errors?.['pattern'] && signupForm.get('document')?.touched) {
+            <mat-error>El documento solo puede contener números</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput type="tel" formControlName="phone" required />
+          @if (signupForm.get('phone')?.errors?.['required'] && signupForm.get('phone')?.touched) {
+            <mat-error>El teléfono es obligatorio</mat-error>
+          }
+          @if (signupForm.get('phone')?.errors?.['pattern'] && signupForm.get('phone')?.touched) {
+            <mat-error>Ingrese un número de teléfono válido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required />
+          @if (signupForm.get('email')?.errors?.['required'] && signupForm.get('email')?.touched) {
+            <mat-error>El email es obligatorio</mat-error>
+          }
+          @if (signupForm.get('email')?.errors?.['email'] && signupForm.get('email')?.touched) {
+            <mat-error>Introduce un email válido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            [type]="hidePassword() ? 'password' : 'text'"
+            formControlName="password"
+            required
+          />
+          <button mat-icon-button class="button" matSuffix (click)="hidePassword.set(!hidePassword())" type="button">
+            <mat-icon>{{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          @if (signupForm.get('password')?.errors?.['required'] && signupForm.get('password')?.touched) {
+            <mat-error>La contraseña es obligatoria</mat-error>
+          }
+          @if (signupForm.get('password')?.errors?.['minlength'] && signupForm.get('password')?.touched) {
+            <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+          }
+          @if (signupForm.get('password')?.errors?.['pattern'] && signupForm.get('password')?.touched) {
+            <mat-error>La contraseña solo puede contener letras y números</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirmar Contraseña</mat-label>
+          <input
+            matInput
+            [type]="hideConfirmPassword() ? 'password' : 'text'"
+            formControlName="confirmPassword"
+            required
+          />
+          <button mat-icon-button class="button" matSuffix (click)="hideConfirmPassword.set(!hideConfirmPassword())" type="button">
+            <mat-icon>{{ hideConfirmPassword() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          @if (passwordMismatch) {
+            <mat-error>Las contraseñas no coinciden</mat-error>
+          }
+
+          @if (signupForm.get('confirmPassword')?.errors?.['required'] && signupForm.get('confirmPassword')?.touched) {
+            <mat-error>Confirmar la contraseña es obligatorio</mat-error>
+
+          }
+        </mat-form-field>
+
+        <button mat-stroked-button class="button full-width" type="submit">
+          Registrarse
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</main>
