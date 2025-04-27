@@ -8,10 +8,13 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <!--TODO: Solo cuando no esté logeado -->
       <button mat-menu-item (click)="navigateTo('/login')">
         Iniciar Sesión
       </button>
       <button mat-menu-item (click)="navigateTo('/singup')">Registrarse</button>
+      <!--TODO: Solo cuando sea cliente -->
+
     </mat-menu>
   </div>
 </mat-toolbar>

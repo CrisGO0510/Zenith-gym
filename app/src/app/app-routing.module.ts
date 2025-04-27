@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./singup/singup.module').then((m) => m.SingupModule),
   },
+  {
+    path: 'client',
+    loadChildren: () =>
+      import('./pages/client/client.module').then((m) => m.ClientModule),
+  },
 ];
 
 @NgModule({
