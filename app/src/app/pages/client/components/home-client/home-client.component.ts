@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Client } from '../../../../core/interfaces/client.interface';
 import { Reservation } from '../../../../core/interfaces/reservation.interface';
+import { DialogViewReservationComponent } from '../../../../core/components/dialog-view-reservation/dialog-view-reservation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home-client',
@@ -75,5 +77,23 @@ export class HomeClientComponent {
     },
   ];
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
+
+  viewReservation(reservation: Reservation): void {
+    if (!reservation) {
+      console.error(
+        'Intento de abrir diálogo con datos de reserva nulos o indefinidos.',
+      );
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DialogViewReservationComponent, {
+      width: '80%',
+      data: { reservation: reservation },
+    });
+
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log('El diálogo de detalles se cerró. Resultado:', result);
+    // });
+  }
 }

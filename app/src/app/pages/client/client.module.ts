@@ -5,7 +5,6 @@ import { HomeClientComponent } from './components/home-client/home-client.compon
 import { UpcomingReservationsComponent } from './components/upcoming-reservations/upcoming-reservations.component';
 import { CreateReservationsComponent } from './components/create-reservations/create-reservations.component';
 import { MatCardModule } from '@angular/material/card';
-import { DialogCreateReservationComponent } from './components/dialog-create-reservation/dialog-create-reservation.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -18,7 +17,6 @@ import { MatListModule } from '@angular/material/list';
     HomeClientComponent,
     UpcomingReservationsComponent,
     CreateReservationsComponent,
-    DialogCreateReservationComponent,
   ],
   imports: [
     CommonModule,

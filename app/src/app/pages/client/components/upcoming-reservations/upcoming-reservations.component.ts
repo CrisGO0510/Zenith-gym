@@ -12,7 +12,7 @@ export class UpcomingReservationsComponent {
   @Input() reservations: Reservation[] = [];
 
   // Emite el ID de la reservación cuando se hace clic en "ver"
-  @Output() viewReservation = new EventEmitter<number>();
+  @Output() viewReservation = new EventEmitter<Reservation>();
 
   // Emite el ID de la reservación cuando se hace clic en "eliminar"
   @Output() deleteReservation = new EventEmitter<number>();
@@ -24,10 +24,8 @@ export class UpcomingReservationsComponent {
     return item.id;
   }
 
-  onViewClick(id: number): void {
-    console.log('View reservation:', id);
-    this.viewReservation.emit(id);
-    // Aquí podrías abrir un diálogo o navegar a otra vista
+  onViewClick(reservation: Reservation): void {
+    this.viewReservation.emit(reservation);
   }
 
   onDeleteClick(id: number): void {

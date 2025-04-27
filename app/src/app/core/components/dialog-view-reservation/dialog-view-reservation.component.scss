@@ -1,0 +1,107 @@
+@use "@angular/material" as mat;
+
+$dialog-bg: #333;
+$text-color: #e0e0e0;
+$label-color: #bdbdbd;
+$input-bg: #424242;
+$input-border-color: #616161;
+$input-text-color: $text-color;
+
+:host {
+}
+
+h1[mat-dialog-title] {
+  color: $text-color;
+  margin: 0;
+  padding: 24px;
+  background-color: $dialog-bg;
+}
+
+.dialog-content {
+  background-color: $dialog-bg;
+  color: $text-color;
+  min-width: 550px;
+  padding: 0 24px 10px 24px;
+}
+
+[mat-dialog-actions] {
+  background-color: $dialog-bg;
+  padding: 8px 24px 16px 24px;
+  border-top: 1px solid $input-border-color;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: min-content;
+  grid-column-gap: 20px;
+  grid-row-gap: 15px;
+
+  .grid-area-10 {
+    grid-area: 3 / 2 / 6 / 4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-item {
+    width: 100%;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  mat-form-field.readonly-field {
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+
+    ::ng-deep .mdc-notched-outline > * {
+      border-color: $input-border-color !important;
+    }
+
+    &.mat-focused ::ng-deep .mdc-notched-outline > * {
+      border-width: 1px !important;
+    }
+
+    .mat-mdc-input-element[readonly],
+    textarea[readonly].mat-mdc-input-element {
+      color: $input-text-color !important;
+      background-color: $input-bg !important;
+      border-radius: 4px;
+      cursor: default !important;
+      margin-top: -4px;
+      padding: 4px 8px;
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: $input-text-color !important;
+        box-shadow: 0 0 0 1000px $input-bg inset !important;
+      }
+    }
+
+    textarea[readonly].mat-mdc-input-element {
+      resize: none;
+      overflow: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .mdc-floating-label,
+    .mat-mdc-floating-label,
+    .mat-label {
+      color: $label-color !important;
+      background-color: $dialog-bg !important;
+      padding: 0 4px;
+      margin-top: -1px;
+    }
+
+    &.mat-focused .mdc-floating-label,
+    &.mat-focused .mat-mdc-floating-label {
+      color: $label-color !important;
+    }
+  }
+
+  .description-field {
+    grid-area: 3 / 2 / 6 / 4;
+  }
+}
