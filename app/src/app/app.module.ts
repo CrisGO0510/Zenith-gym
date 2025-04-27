@@ -6,6 +6,12 @@ import { ToolbarModule } from './toolbar/toolbar.module';
 import { MembershipsModule } from './pages/memberships/memberships.module';
 import { LoginModule } from './login/login.module';
 import { SingupModule } from './singup/singup.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +22,10 @@ import { SingupModule } from './singup/singup.module';
     MembershipsModule,
     LoginModule,
     SingupModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   bootstrap: [AppComponent],
 })
