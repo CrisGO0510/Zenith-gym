@@ -11,6 +11,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ReceptionistModule } from './pages/receptionist/receptionist.module';
 
 registerLocaleData(localeEs);
 
@@ -23,6 +24,7 @@ registerLocaleData(localeEs);
     MembershipsModule,
     LoginModule,
     SingupModule,
+    ReceptionistModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

@@ -1,7 +1,6 @@
 @use "@angular/material" as mat;
-@use "sass:color"; // <--- IMPORTANTE: Importar el módulo de color
+@use "sass:color";
 
-// --- Variables de Color (Reutiliza las de tu tema) ---
 $zenith-darkest: #1b262c;
 $zenith-dark-blue: #0f4c75;
 $zenith-medium-blue: #3282b8;
@@ -9,15 +8,11 @@ $zenith-light-blue: #bbe1fa;
 $white: #ffffff;
 $divider-color: #424242;
 $secondary-text-color: #bdbdbd;
-// --- CORRECCIÓN: Usar color.adjust ---
-$hover-bg-color: color.adjust(
-  $zenith-darkest,
-  $lightness: 10%
-); // Fondo sutil para hover
-// --- FIN CORRECCIÓN ---
+
+$hover-bg-color: color.adjust($zenith-darkest, $lightness: 10%);
+
 $header-bg-color: $zenith-dark-blue;
 
-// --- Contenedor General ---
 .calendar-container {
   background-color: $zenith-darkest;
   padding: 15px;
@@ -26,7 +21,6 @@ $header-bg-color: $zenith-dark-blue;
   margin: 20px 0;
 }
 
-// --- Estilos para la Cabecera ---
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -70,19 +64,14 @@ $header-bg-color: $zenith-dark-blue;
   }
 }
 
-// --- Estilos para el Calendario (mwl-calendar-week-view) ---
 .calendar-container mwl-calendar-week-view {
   .cal-week-view {
     background-color: transparent;
     border: none;
 
     .cal-day-header {
-      // --- CORRECCIÓN: Usar color.adjust ---
-      background-color: color.adjust(
-        $zenith-darkest,
-        $lightness: 5%
-      ); // Fondo ligeramente más claro
-      // --- FIN CORRECCIÓN ---
+      background-color: color.adjust($zenith-darkest, $lightness: 5%);
+
       color: $zenith-light-blue;
       border: 1px solid $divider-color;
       border-bottom: 2px solid $divider-color;
@@ -113,7 +102,7 @@ $header-bg-color: $zenith-dark-blue;
       }
 
       &:hover {
-        background-color: $hover-bg-color !important; // Ya usa la variable corregida
+        background-color: $hover-bg-color !important;
         cursor: pointer;
       }
 
@@ -132,15 +121,9 @@ $header-bg-color: $zenith-dark-blue;
 
     .cal-weekend {
       .cal-day-header {
-        // --- CORRECCIÓN: Usar color.adjust ---
-        background-color: color.adjust(
-          $zenith-darkest,
-          $lightness: 8%
-        ); // Ligeramente diferente
-        // --- FIN CORRECCIÓN ---
+        background-color: color.adjust($zenith-darkest, $lightness: 8%);
       }
       .cal-hour-segment {
-        // background-color: rgba($zenith-medium-blue, 0.05);
       }
     }
   }
