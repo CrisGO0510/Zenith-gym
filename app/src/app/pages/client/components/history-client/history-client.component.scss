@@ -1,0 +1,118 @@
+@use "@angular/material" as mat;
+@use "sass:color";
+
+$container-bg: #212121;
+$card-bg: #333;
+$text-color: #e0e0e0;
+$secondary-text-color: #bdbdbd;
+$border-color: #424242;
+
+$table-header-bg: color.adjust($card-bg, $lightness: 5%);
+$table-row-hover-bg: color.adjust($card-bg, $lightness: 8%);
+
+$line-color: #3282b8;
+$point-color: #f44336;
+
+:host {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.history-container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: $card-bg;
+  color: $text-color;
+
+  .component-title {
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+
+  .content-layout {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+
+  .chart-container {
+    flex: 2;
+    min-width: 300px;
+
+    background-color: color.adjust($card-bg, $lightness: 3%);
+
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid $border-color;
+
+    ::ng-deep .ngx-charts {
+      text {
+        fill: $secondary-text-color !important;
+      }
+      .gridline-path {
+        stroke: $border-color !important;
+      }
+      .axis-label {
+        fill: $text-color !important;
+        font-weight: 500;
+      }
+    }
+
+    .no-data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      color: $secondary-text-color;
+      font-style: italic;
+    }
+  }
+
+  .table-container {
+    flex: 1;
+    min-width: 200px;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+
+    .attendance-table {
+      width: 100%;
+      background-color: transparent;
+
+      th.mat-mdc-header-cell {
+        background-color: $table-header-bg;
+        color: $text-color;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      td.mat-mdc-cell {
+        color: $secondary-text-color;
+        border-bottom: 1px solid $border-color;
+        padding: 8px;
+        text-align: center;
+      }
+
+      tr.mat-mdc-row:hover {
+        background-color: $table-row-hover-bg;
+      }
+
+      .mat-row.mat-no-data-row {
+        td {
+          text-align: center;
+          padding: 15px;
+          color: $secondary-text-color;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}

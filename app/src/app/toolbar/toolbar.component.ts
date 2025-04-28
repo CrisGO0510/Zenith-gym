@@ -14,4 +14,8 @@ export class ToolbarComponent {
     console.log('Navigating to:', path);
     this.router.navigate([path]);
   }
+
+  logout() {
+    console.log('Logging out...');
+  }
 }

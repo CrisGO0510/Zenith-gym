@@ -10,6 +10,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeEs);
 
@@ -28,5 +29,6 @@ registerLocaleData(localeEs);
     }),
   ],
   bootstrap: [AppComponent],
+  providers: [provideAnimations()],
 })
 export class AppModule {}
