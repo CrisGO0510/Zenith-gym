@@ -26,13 +26,12 @@ export class CreateReservationsComponent {
 
   private isValidReservationTime(date: Date): boolean {
     const now = new Date();
-    const minimumReservationTime = new Date(now.getTime() + 2 * 60 * 60 * 1000); // Hora actual + 2 horas
+    const minimumReservationTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
 
-    // Si la hora actual tiene minutos, ajustamos al siguiente horario en punto
     if (now.getMinutes() > 0) {
       minimumReservationTime.setTime(
         minimumReservationTime.getTime() - 60 * 60 * 1000,
-      ); // Restamos una hora
+      );
     }
 
     return date.getTime() >= minimumReservationTime.getTime();
