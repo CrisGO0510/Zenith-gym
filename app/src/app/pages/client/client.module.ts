@@ -11,12 +11,15 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalendarModule } from 'angular-calendar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { DialogTrainingReservationComponent } from './components/dialog-training-reservation/dialog-training-reservation.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     HomeClientComponent,
     UpcomingReservationsComponent,
     CreateReservationsComponent,
+    DialogTrainingReservationComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +29,7 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatIconModule,
     MatListModule,
+    MatProgressSpinnerModule,
     NgxChartsModule,
     CalendarModule,
   ],

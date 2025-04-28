@@ -1,0 +1,103 @@
+<div class="dialog-header">
+  <h1 mat-dialog-title>¿Qué desea entrenar?</h1>
+  <button
+    mat-icon-button
+    (click)="closeDialog()"
+    aria-label="Cerrar diálogo"
+    class="close-button"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+  @if (isLoading()) {
+    <div class="loading-container">
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="50"
+      ></mat-progress-spinner>
+      <p>Cargando rutinas...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-container">
+      <mat-icon color="warn">warning</mat-icon>
+      <p>{{ error() }}</p>
+      <button mat-stroked-button (click)="loadRoutines()">Reintentar</button>
+    </div>
+  }
+
+  @if (!isLoading() && !error()) {
+    <div class="content-layout">
+      <div class="routines-list-container">
+        <h3>Rutinas disponibles</h3>
+        @if (routines().length > 0) {
+          <mat-nav-list class="routines-list">
+            @for (routine of routines(); track trackRoutineById) {
+              <mat-list-item
+                (click)="selectRoutine(routine)"
+                [class.selected]="routine === selectedRoutine()"
+              >
+                <span matListItemTitle>{{ routine.name }}</span>
+              </mat-list-item>
+            }
+          </mat-nav-list>
+        } @else {
+          <p>No hay rutinas disponibles.</p>
+        }
+      </div>
+
+      <div class="routine-details-container">
+        <h3>Descripción de la rutina</h3>
+        <div class="details-box">
+          @if (selectedRoutine()) {
+            <div class="routine-description">
+              <p>{{ selectedRoutine()?.description }}</p>
+              <hr />
+              <h4>Ejercicios:</h4>
+              <ul class="exercise-list">
+                @for (
+                  exercise of selectedRoutine()?.exercises;
+                  track trackExerciseById
+                ) {
+                  <li>
+                    <div class="exercise-name">
+                      <span>+ {{ exercise.name }}</span>
+                    </div>
+                    <div class="exercise-description">
+                      <span>- {{ exercise.description }}</span>
+                    </div>
+                  </li>
+                } @empty {
+                  <li>No hay ejercicios definidos para esta rutina.</li>
+                }
+              </ul>
+            </div>
+          } @else {
+            <p class="placeholder">
+              Selecciona una rutina de la lista para ver sus detalles.
+            </p>
+          }
+        </div>
+
+        @if (selectedRoutine()) {
+          <button
+            mat-flat-button
+            color="primary"
+            class="select-button"
+            (click)="confirmSelection()"
+          >
+            Seleccionar esta rutina
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+</div>
+-->

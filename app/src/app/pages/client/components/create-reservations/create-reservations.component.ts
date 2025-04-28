@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarView } from 'angular-calendar';
+import { DialogTrainingReservationComponent } from '../dialog-training-reservation/dialog-training-reservation.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-reservations',
@@ -11,36 +14,59 @@ import { CalendarView } from 'angular-calendar';
 export class CreateReservationsComponent {
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
-
   events = [];
-
   weekStartsOn: number = 1;
+  private subscription$: Subscription = new Subscription();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {}
+
+  private isValidReservationTime(date: Date): boolean {
+    const now = new Date();
+    const minimumReservationTime = new Date(now.getTime() + 2 * 60 * 60 * 1000); // Hora actual + 2 horas
+
+    // Si la hora actual tiene minutos, ajustamos al siguiente horario en punto
+    if (now.getMinutes() > 0) {
+      minimumReservationTime.setTime(
+        minimumReservationTime.getTime() - 60 * 60 * 1000,
+      ); // Restamos una hora
+    }
+
+    return date.getTime() >= minimumReservationTime.getTime();
+  }
 
   hourSegmentClicked(event: { date: Date }): void {
     const clickedDate = event.date;
-    console.log('Segmento clickeado:', clickedDate);
 
-    // const dialogRef = this.dialog.open(TimeSlotDialogComponent, {
-    //   width: '350px',
-    //   data: { clickedDate: clickedDate },
-    // });
-    //
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log('El diálogo se cerró', result);
-    // });
+    if (!this.isValidReservationTime(clickedDate)) {
+      this.snackBar.open(
+        'Las reservas deben hacerse con al menos 1 hora de anticipación y para la próxima hora en punto disponible',
+        'Cerrar',
+        { duration: 5000 },
+      );
+      return;
+    }
 
-    console.log('Clicked date:', clickedDate);
+    const dialogRef = this.dialog.open(DialogTrainingReservationComponent, {
+      width: '80%',
+      data: { selectedDate: clickedDate },
+    });
+
+    this.subscription$.add(
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('El diálogo se cerró', result);
+      }),
+    );
   }
 
   setView(view: CalendarView) {
     this.view = view;
   }
 
-  closeOpenMonthViewDay() {
-    // Lógica si usaras vista mensual (no aplica aquí)
+  ngOnDestroy() {
+    this.subscription$.unsubscribe();
   }
 }

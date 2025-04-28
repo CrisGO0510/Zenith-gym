@@ -1,0 +1,98 @@
+$dialog-bg: #333;
+$text-color: #e0e0e0;
+$label-color: #bdbdbd;
+$input-bg: #424242;
+$input-border-color: #616161;
+$input-text-color: $text-color;
+$secondary-text: #bdbdbd;
+$border-color: #555;
+$list-hover-bg: $input-bg;
+
+$list-selected-bg: #0d47a1;
+
+$primary-color: #388e3c;
+
+$white: #ffffff;
+
+:host {
+  display: block;
+  background-color: $dialog-bg;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+
+  h1[mat-dialog-title] {
+    color: $text-color;
+  }
+  .close-button {
+    color: $secondary-text;
+  }
+}
+
+.dialog-content {
+  color: $text-color;
+}
+
+.loading-container,
+.error-container {
+  color: $secondary-text;
+}
+
+.content-layout {
+  display: flex;
+  gap: 25px;
+}
+
+.routines-list-container {
+  .routines-list {
+    border: 1px solid $input-border-color;
+    .mat-mdc-list-item {
+      color: $text-color;
+      border-bottom: 1px solid $input-border-color;
+      &:last-child {
+        border-bottom: none;
+      }
+      &:hover {
+        background-color: $list-hover-bg;
+      }
+      &.selected {
+        background-color: $list-selected-bg;
+        color: $white;
+        .mat-mdc-list-item-title {
+          color: $white !important;
+        }
+      }
+      .mat-mdc-list-item-title {
+        color: $text-color;
+      }
+    }
+  }
+}
+
+.routine-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .details-box {
+    background-color: $input-bg;
+    border: 1px solid $input-border-color;
+    color: $text-color;
+
+    hr {
+      border-color: $border-color;
+    }
+  }
+
+  .select-button {
+    background-color: $primary-color;
+    color: $dialog-bg;
+
+    &:hover {
+      filter: brightness(110%);
+    }
+  }
+}

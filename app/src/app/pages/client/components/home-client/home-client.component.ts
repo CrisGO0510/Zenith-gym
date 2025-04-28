@@ -3,6 +3,7 @@ import { Client } from '../../../../core/interfaces/client.interface';
 import { Reservation } from '../../../../core/interfaces/reservation.interface';
 import { DialogViewReservationComponent } from '../../../../core/components/dialog-view-reservation/dialog-view-reservation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-client',
@@ -11,6 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './home-client.component.scss',
 })
 export class HomeClientComponent {
+  private suscription$: Subscription = new Subscription();
+
   user: Client = {
     user_id: 1,
     name: 'John',
@@ -87,13 +90,13 @@ export class HomeClientComponent {
       return;
     }
 
-    const dialogRef = this.dialog.open(DialogViewReservationComponent, {
+    this.dialog.open(DialogViewReservationComponent, {
       width: '80%',
       data: { reservation: reservation },
     });
+  }
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log('El diálogo de detalles se cerró. Resultado:', result);
-    // });
+  ngOnDestroy(): void {
+    this.suscription$.unsubscribe();
   }
 }
