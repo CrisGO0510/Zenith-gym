@@ -15,7 +15,7 @@ export class HomeClientComponent {
   private suscription$: Subscription = new Subscription();
 
   user: Client = {
-    user_id: 1,
+    userId: 1,
     name: 'John',
     lastname: 'Doe',
     email: 'cris@gmal.com',
