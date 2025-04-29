@@ -2,23 +2,22 @@ export enum ReservationStatus {
   COMPLETED = 3,
   PENDING = 2,
   CANCELLED = 1,
-  ABSENT = 0
+  ABSENT = 0,
 }
 
 export namespace ReservationStatus {
   export function toLabel(status: ReservationStatus): string {
     switch (status) {
       case ReservationStatus.PENDING:
-        return 'Pending';
+        return 'Pendiente';
       case ReservationStatus.COMPLETED:
-        return 'Completed';
+        return 'Completada';
       case ReservationStatus.CANCELLED:
-        return 'Cancelled';
+        return 'Cancelada';
       case ReservationStatus.ABSENT:
-        return 'Absent';
+        return 'Ausente';
       default:
         return 'Unknown';
     }
   }
 }
-
