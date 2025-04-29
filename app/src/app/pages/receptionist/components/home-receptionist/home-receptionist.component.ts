@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { CalendarView } from 'angular-calendar';
+import { RegisterAttendanceComponent } from '../register-attendance/register-attendance.component';
+import { DialogFormClientComponent } from '../../../../core/components/dialog-form-client/dialog-form-client.component';
+import { ActivateClientComponent } from '../activate-client/activate-client.component';
 
 @Component({
   selector: 'app-home-receptionist',
@@ -12,4 +16,24 @@ export class HomeReceptionistComponent {
   viewDate: Date = new Date();
   locale: string = 'es';
   weekStartsOn: number = 1;
+
+  constructor(private dialog: MatDialog) {}
+
+  openAttendance() {
+    const dialogRef = this.dialog.open(RegisterAttendanceComponent, {
+      width: '80%',
+    });
+  }
+
+  openUser() {
+    const dialogRef = this.dialog.open(DialogFormClientComponent, {
+      width: '80%',
+    });
+  }
+
+  activateUser() {
+    const dialogRef = this.dialog.open(ActivateClientComponent, {
+      width: '80%',
+    });
+  }
 }

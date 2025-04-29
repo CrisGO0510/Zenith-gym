@@ -5,13 +5,28 @@
         <div class="actions-column">
           <h2>Acciones</h2>
           <div class="action-buttons">
-            <button class="button" mat-raised-button color="primary">
+            <button
+              class="button"
+              mat-raised-button
+              color="primary"
+              (click)="openAttendance()"
+            >
               Registrar Asistencia
             </button>
-            <button class="button" mat-raised-button color="primary">
+            <button
+              class="button"
+              mat-raised-button
+              color="primary"
+              (click)="openUser()"
+            >
               Registrar Usuario
             </button>
-            <button class="button" mat-raised-button color="primary">
+            <button
+              class="button"
+              mat-raised-button
+              color="primary"
+              (click)="activateUser()"
+            >
               Activar Usuario
             </button>
           </div>
