@@ -1,10 +1,5 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -30,7 +25,7 @@ export interface EditUserDialogData {
 }
 
 @Component({
-  selector: 'app-dialog-edit-user',
+  selector: 'app-dialog-form-client',
   standalone: true,
   imports: [
     CommonModule,
@@ -44,10 +39,10 @@ export interface EditUserDialogData {
     MatNativeDateModule,
     TextFieldModule,
   ],
-  templateUrl: './dialog-edit-user.component.html',
-  styleUrl: './dialog-edit-user.component.scss',
+  templateUrl: './dialog-form-client.component.html',
+  styleUrl: './dialog-form-client.component.scss',
 })
-export class DialogEditUserComponent implements OnInit {
+export class DialogFormClientComponent implements OnInit {
   userForm!: FormGroup;
   originalUser?: User = {
     userId: 1,
@@ -74,7 +69,7 @@ export class DialogEditUserComponent implements OnInit {
   }
 
   constructor(
-    public dialogRef: MatDialogRef<DialogEditUserComponent>,
+    public dialogRef: MatDialogRef<DialogFormClientComponent>,
     private fb: FormBuilder,
   ) {}
 

@@ -1,8 +1,8 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DialogEditUserComponent } from '../core/components/dialog-edit-user/dialog-edit-user.component';
 import { Subscription } from 'rxjs';
+import { DialogFormClientComponent } from '../core/components/dialog-form-client/dialog-form-client.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -24,7 +24,7 @@ export class ToolbarComponent implements OnDestroy {
   }
 
   editUser() {
-    const dialogRef = this.dialog.open(DialogEditUserComponent, {
+    const dialogRef = this.dialog.open(DialogFormClientComponent, {
       width: '80%',
     });
 
