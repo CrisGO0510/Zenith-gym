@@ -1,0 +1,29 @@
+.membership-list-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e1e2f, #2e2e48);
+    padding: 2rem;
+    color: #fff;
+  
+    mat-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+  
+      mat-expansion-panel {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+        mat-expansion-panel-header {
+          font-weight: bold;
+        }
+  
+        p {
+          margin: 0.5rem 0;
+        }
+      }
+    }
+  }
+  

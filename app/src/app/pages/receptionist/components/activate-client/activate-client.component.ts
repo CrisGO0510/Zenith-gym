@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Membership } from '../../../../core/interfaces/membership.interface';
+import { MembershipClient } from '../../../../core/interfaces/membership.interface';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -40,7 +40,7 @@ export class ActivateClientComponent implements OnInit {
 
   onSaveClick(): void {
     if (this.membershipForm.valid) {
-      const savedData: Partial<Membership> = this.membershipForm.getRawValue();
+      const savedData: Partial<MembershipClient> = this.membershipForm.getRawValue();
       console.log('Guardando membresía:', savedData);
       this.dialogRef.close({ savedMembership: savedData });
     } else {

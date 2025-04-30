@@ -1,4 +1,4 @@
-export interface Membership {
+export interface MembershipClient {
   id: number;
   thirdPartyId: number;
   name: string;

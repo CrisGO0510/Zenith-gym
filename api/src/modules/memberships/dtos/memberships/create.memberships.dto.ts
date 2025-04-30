@@ -3,8 +3,6 @@ import { $Enums } from 'generated/prisma';
 
 export class CreateMembershipsDto {
   @ApiProperty()
-  id: number;
-  @ApiProperty()
   name: string;
   @ApiProperty()
   description: string;

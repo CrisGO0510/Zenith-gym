@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 registerLocaleData(localeEs);
 
@@ -28,6 +29,6 @@ registerLocaleData(localeEs);
     }),
   ],
   bootstrap: [AppComponent],
-  providers: [provideAnimations()],
+  providers: [provideAnimations(), provideHttpClient(withInterceptorsFromDi()) ],
 })
 export class AppModule {}

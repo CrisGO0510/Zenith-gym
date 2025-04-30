@@ -1,1 +1,20 @@
-<p>memberships works!</p>
+<div class="membership-list-container">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let membership of memberships">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ membership.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ membership.paymentFrequency | titlecase }} – ${{ membership.price }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <p><strong>Descripción:</strong> {{ membership.description }}</p>
+        <p><strong>Frecuencia de pago:</strong> {{ membership.paymentFrequency }}</p>
+        <p><strong>Precio:</strong> {{ membership.price | currency:'COP':'symbol':'1.0-0' }}</p>
+        <p><em>Comunicarse con un asesor</em></p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  
