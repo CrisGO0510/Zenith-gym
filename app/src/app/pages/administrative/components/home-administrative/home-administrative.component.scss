@@ -1,0 +1,154 @@
+@use "@angular/material" as mat;
+@use "sass:color";
+
+$container-padding: 20px;
+$header-padding: 15px;
+$card-bg: #333;
+$text-color: #e0e0e0;
+$secondary-text-color: #bdbdbd;
+$border-color: #424242;
+$table-header-bg: color.adjust($card-bg, $lightness: 5%);
+$table-row-hover-bg: color.adjust($card-bg, $lightness: 8%);
+$primary-color-button: #3282b8;
+$warn-color-icon: #f44336;
+$primary-color-icon: #90caf9;
+$button-spacing: 15px;
+$save-button-bg: #388e3c;
+
+.home-administrative-content {
+  padding: $container-padding;
+}
+
+.home-administrative-card {
+  background-color: $card-bg;
+  color: $text-color;
+  padding: 0;
+}
+
+.component-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $border-color;
+  h2 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 400;
+  }
+}
+
+.list-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: $header-padding;
+
+  border-radius: 6px;
+
+  .filter-select {
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .action-button {
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+  .new-employee-button {
+    border-color: $save-button-bg;
+    color: $save-button-bg;
+    background-color: transparent;
+
+    mat-icon {
+      color: $save-button-bg;
+    }
+
+    &:hover {
+      background-color: rgba($save-button-bg, 0.1);
+
+      color: color.adjust($save-button-bg, $lightness: 10%);
+      border-color: color.adjust($save-button-bg, $lightness: 10%);
+      mat-icon {
+        color: color.adjust($save-button-bg, $lightness: 10%);
+      }
+    }
+  }
+}
+
+.loading-shade,
+.error-shade {
+  /* ... estilos sin cambios ... */
+}
+.error-shade {
+  /* ... estilos sin cambios ... */
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+}
+
+.employee-table {
+  width: 100%;
+  background-color: transparent;
+
+  th.mat-mdc-header-cell {
+    background-color: $table-header-bg;
+    color: $text-color;
+    font-weight: 500;
+    text-align: left;
+    padding: 10px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  td.mat-mdc-cell {
+    color: $secondary-text-color;
+    border-bottom: 1px solid $border-color;
+    padding: 10px 16px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th.mat-mdc-header-cell:last-of-type,
+  td.mat-mdc-cell:last-of-type {
+    text-align: center;
+    width: 120px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  tr.mat-mdc-row:hover {
+    background-color: $table-row-hover-bg;
+    td.mat-mdc-cell {
+      color: $text-color;
+    }
+  }
+
+  td.mat-mdc-cell button[mat-icon-button] {
+    margin: 0 4px;
+    mat-icon {
+      font-size: 20px;
+    }
+    &[color="primary"] mat-icon {
+      color: $primary-color-icon;
+    }
+    &[color="warn"] mat-icon {
+      color: $warn-color-icon;
+    }
+    &:hover mat-icon {
+      opacity: 0.8;
+    }
+  }
+
+  .mat-row.mat-no-data-row td.no-data-cell {
+    /* ... estilos sin cambios ... */
+  }
+}
