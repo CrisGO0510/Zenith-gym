@@ -11,31 +11,13 @@
 </div>
 
 <div mat-dialog-content class="dialog-content">
-  @if (isLoading()) {
-    <div class="loading-container">
-      <mat-progress-spinner
-        mode="indeterminate"
-        diameter="50"
-      ></mat-progress-spinner>
-      <p>Cargando rutinas...</p>
-    </div>
-  }
-
-  @if (error()) {
-    <div class="error-container">
-      <mat-icon color="warn">warning</mat-icon>
-      <p>{{ error() }}</p>
-      <button mat-stroked-button (click)="loadRoutines()">Reintentar</button>
-    </div>
-  }
-
-  @if (!isLoading() && !error()) {
+  @if (true) {
     <div class="content-layout">
       <div class="routines-list-container">
         <h3>Rutinas disponibles</h3>
-        @if (routines().length > 0) {
+        @if (routines.length > 0) {
           <mat-nav-list class="routines-list">
-            @for (routine of routines(); track trackRoutineById) {
+            @for (routine of routines; track trackRoutineById) {
               <mat-list-item
                 (click)="selectRoutine(routine)"
                 [class.selected]="routine === selectedRoutine()"

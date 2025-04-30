@@ -20,6 +20,12 @@ export class ExercisesController {
     return this.exercises.get(query);
   }
 
+    // GET /exercises/:id
+    @Get(':id')
+    public getById(@Param('id') id: string) {
+      return this.exercises.getById(+id); // convierte string a number si el id es numérico
+    }
+
   @Post('')
   public create(@Body() body: any) {
     return this.exercises.create(body);

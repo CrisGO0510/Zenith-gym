@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { LoginBody } from '../core/interfaces/login-body';
+import { StorageService } from '../core/services/storage/storage.service';
+import { StorageKey } from '../core/services/storage/storage.model';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private storageService: StorageService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -33,7 +36,7 @@ export class LoginComponent {
   submitForm() {
     if (this.loginForm.valid) {
       const loginBody: LoginBody = {
-        id_user: this.loginForm.value.username,
+        id_user: parseInt(this.loginForm.value.username),
         password: this.loginForm.value.password,
       };
 
@@ -41,7 +44,12 @@ export class LoginComponent {
       this.loginService.login(loginBody).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          this.navigateTo('/home');
+
+          // Guardar en localStorage usando StorageService
+          this.storageService.save(StorageKey.USER_SESSION, response);
+
+          // Navegar después de guardar sesión
+          this.navigateTo('/client');
         },
         error: (error) => {
           console.error('Login failed', error);

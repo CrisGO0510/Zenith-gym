@@ -14,6 +14,7 @@ import {
   Routine,
 } from '../../../../core/interfaces/routine.interface';
 import { RoutineService } from './dialog-training-reservation.services';
+import { ClientService } from '../../services/client.service';
 
 export interface SelectRoutineDialogData {
   selectedDate: Date;
@@ -31,16 +32,17 @@ export interface SelectRoutineDialogResult {
   styleUrl: './dialog-training-reservation.component.scss',
 })
 export class DialogTrainingReservationComponent implements OnInit {
-  routines: WritableSignal<Routine[]> = signal([]);
   selectedRoutine: WritableSignal<Routine | null> = signal(null);
   isLoading: WritableSignal<boolean> = signal(true);
   error: WritableSignal<string | null> = signal(null);
   selectedDate: Date;
+  routines: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogTrainingReservationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SelectRoutineDialogData,
     private routineService: RoutineService,
+    private clientService: ClientService
   ) {
     this.selectedDate = data.selectedDate;
   }
@@ -50,37 +52,35 @@ export class DialogTrainingReservationComponent implements OnInit {
   }
 
   loadRoutines(): void {
-    this.isLoading.set(true);
-    this.error.set(null);
-    this.selectedRoutine.set(null);
-
-    this.routineService
-      .getAvailableRoutines()
-      .pipe(finalize(() => this.isLoading.set(false)))
-      .subscribe({
-        next: (fetchedRoutines) => {
-          this.routines.set(fetchedRoutines);
-        },
-        error: (err) => {
-          console.error('Error fetching routines:', err);
-          this.error.set(
-            'No se pudieron cargar las rutinas. Intente de nuevo.',
-          );
-        },
-      });
+    this.clientService.getRoutines().subscribe({
+      next: (response) => {
+        this.routines = response;
+        console.log('Routines:', this.routines);
+      },
+      error: (error) => {
+        this.error.set('Error loading routines');
+        this.isLoading.set(false);
+      },
+    })
   }
 
   selectRoutine(routine: Routine): void {
     this.selectedRoutine.set(routine);
+
+    console.log(this.selectedRoutine());
   }
 
   confirmSelection(): void {
     const routineToConfirm = this.selectedRoutine();
     if (routineToConfirm) {
-      this.dialogRef.close({
+      const result: SelectRoutineDialogResult = {
         selectedRoutineId: routineToConfirm.id,
         selectedDate: this.selectedDate,
-      });
+      };
+
+      this.dialogRef.close(result);
+    } else {
+      this.error.set('Please select a routine before confirming.');
     }
   }
 

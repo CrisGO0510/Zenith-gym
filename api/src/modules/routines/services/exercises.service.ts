@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ExercisesRepository } from '../repositories/exercises.repository';
 
 @Injectable()
@@ -9,6 +9,16 @@ export class ExercisesService {
     return this.exercises.get(where);
   }
 
+  public async getById(id: number) {
+    const exercise = await this.exercises.get({ id });
+
+    if (!exercise || exercise.length === 0) {
+      throw new NotFoundException(`Exercise with ID ${id} not found`);
+    }
+
+    return exercise[0];
+  }
+  
   public create(data: any) {
     return this.exercises.create(data);
   }
