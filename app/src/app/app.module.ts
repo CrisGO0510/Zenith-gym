@@ -11,7 +11,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { ReceptionistModule } from './pages/receptionist/receptionist.module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 registerLocaleData(localeEs);
 
@@ -20,11 +20,8 @@ registerLocaleData(localeEs);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatNativeDateModule,
     ToolbarModule,
-    MembershipsModule,
-    LoginModule,
-    SingupModule,
-    ReceptionistModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
