@@ -1,1 +1,18 @@
-<p>home-administrative works!</p>
+<main class="home-administrative-content">
+  <mat-card class="home-administrative-card">
+    <mat-card-content>
+      <div class="home-administrative-description">
+        <app-table-employee />
+
+        <button
+          class="button"
+          mat-raised-button
+          color="primary"
+          (click)="openDialog()"
+        >
+          Activar Usuario
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</main>
