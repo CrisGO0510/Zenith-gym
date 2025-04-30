@@ -10,16 +10,19 @@ import { GetUsersRolesType } from 'src/modules/users/types/users_roles/get.users
 export class AuthService {
   constructor(private readonly usersRole: UsersRolesService) {}
 
-  async login(where: Omit<GetUsersRolesType | 'id_user', 'id_role'>) {
-    const user = this.usersRole.get({ email: where['email'] })[0];
+  async login(where: Partial<GetUsersRolesType>) {
+
+    //TODO: Quitar el any
+    const user = (await this.usersRole.get({ id_user: where['id_user'] }))[0] as any;
 
     if (!user) {
       throw new NotFoundException();
     }
-
-    if (user.password !== where['password']) {
-      throw new ForbiddenException();
+    
+    if (user.TB_users.password !== where['password']) {
+      throw new ForbiddenException('Invalid password');
     }
+    
 
     return user;
   }
