@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { MembershipsRepository } from '../memberships.repository';
 
 @Injectable()
-export class ClientsPrisma implements MembershipsRepository {
+export class MembershipsPrisma implements MembershipsRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   public async get(
