@@ -19,7 +19,7 @@ export class UsersRolesController {
   constructor(private readonly usersRoles: UsersRolesService) {}
 
   @Get('')
-  public get(@Query() query: GetUsersRolesDto) {
+  public get(@Query() query: Omit<GetUsersRolesDto | 'password', 'email'>) {
     return this.usersRoles.get(query);
   }
 

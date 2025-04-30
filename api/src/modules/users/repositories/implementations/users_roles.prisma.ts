@@ -1,7 +1,9 @@
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { UsersRolesRepository } from '../users_roles.repository';
 import { Prisma, TB_user_role } from 'generated/prisma';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UsersRolesPrisma implements UsersRolesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
