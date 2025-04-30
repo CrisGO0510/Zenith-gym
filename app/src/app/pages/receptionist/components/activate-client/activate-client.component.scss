@@ -16,7 +16,7 @@ $cancel-button-text: #f44336;
 $cancel-button-hover-bg: rgba($cancel-button-border, 0.1);
 $readonly-input-bg: $input-bg;
 
-h1[mat-dialog-title] {
+h[mat-dialog-title] {
   color: $text-color;
   margin: 0;
   padding: 20px 24px 15px 24px;

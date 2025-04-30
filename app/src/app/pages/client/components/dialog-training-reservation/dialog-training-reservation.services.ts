@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs'; // Importar 'of' y 'delay' para simulación
+import { Observable, of, delay } from 'rxjs';
 import {
   Exercise,
   Routine,
 } from '../../../../core/interfaces/routine.interface';
 
 @Injectable({
-  providedIn: 'root', // Servicio disponible globalmente
+  providedIn: 'root',
 })
 export class RoutineService {
   constructor() {}
 
-  // Simula la obtención de rutinas disponibles
   getAvailableRoutines(): Observable<Routine[]> {
-    // Datos de ejemplo
     const mockExercises: Exercise[] = [
       {
         id: 101,
@@ -80,7 +78,6 @@ export class RoutineService {
       },
     ];
 
-    // Simula un retraso de red y devuelve los datos con 'of'
-    return of(mockRoutines).pipe(delay(800)); // Simula 800ms de carga
+    return of(mockRoutines).pipe(delay(800));
   }
 }
