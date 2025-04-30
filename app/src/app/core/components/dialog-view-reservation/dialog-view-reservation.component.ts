@@ -61,12 +61,11 @@ export class DialogViewReservationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Datos recibidos en diálogo:', this.data);
     this.reservationStatusOptions = Object.values(ReservationStatus)
       .filter((value): value is ReservationStatus => typeof value === 'number')
-      .map(status => ({
+      .map((status) => ({
         value: status,
-        label: ReservationStatus.toLabel(status)
+        label: ReservationStatus.toLabel(status),
       }));
     this.reservationForm = this.buildForm(this.data.data);
   }
