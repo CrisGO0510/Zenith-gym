@@ -22,7 +22,7 @@ export class RoutinesController {
 
   @Post('')
   public create(@Body() body: any) {
-    return this.routines;
+    return this.routines.create(body);
   }
 
   @Patch(':id')

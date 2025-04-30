@@ -25,7 +25,7 @@ export class RolesController {
 
   @Post('')
   public create(@Body() body: CreateRolesDto) {
-    return this.roles;
+    return this.roles.create(body);
   }
 
   @Patch(':id')

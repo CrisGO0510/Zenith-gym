@@ -25,7 +25,7 @@ export class ClientsController {
 
   @Post('')
   public create(@Body() body: CreateClientsDto) {
-    return this.clients;
+    return this.clients.create(body);
   }
 
   @Patch(':id')

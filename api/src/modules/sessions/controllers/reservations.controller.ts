@@ -9,20 +9,20 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { RoutinesExercisesService } from '../services/routines_exercises.service';
+import { ReservationsService } from '../services/reservations.service';
 
-@Controller('routines-exercises')
-export class RoutinesExercisesController {
-  constructor(private readonly exercises: RoutinesExercisesService) {}
+@Controller('reservations')
+export class ReservationsController {
+  constructor(private readonly employees: ReservationsService) {}
 
   @Get('')
   public get(@Query() query: any) {
-    return this.exercises.get(query);
+    return this.employees.get(query);
   }
 
   @Post('')
   public create(@Body() body: any) {
-    return this.exercises.create(body);
+    return this.employees.create(body);
   }
 
   @Patch(':id')
@@ -30,11 +30,11 @@ export class RoutinesExercisesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() body: any,
   ) {
-    return this.exercises.update({ id: id }, body);
+    return this.employees.update({ id: id }, body);
   }
 
   @Delete(':id')
   public delete(@Param('id', ParseIntPipe) id: number) {
-    return this.exercises.delete({ id: id });
+    return this.employees.delete({ id: id });
   }
 }

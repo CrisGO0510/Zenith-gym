@@ -25,7 +25,7 @@ export class EmployeesController {
 
   @Post('')
   public create(@Body() body: CreateEmployeesDto) {
-    return this.employees;
+    return this.employees.create(body);
   }
 
   @Patch(':id')

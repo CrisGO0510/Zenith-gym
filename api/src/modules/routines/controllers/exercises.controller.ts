@@ -22,7 +22,7 @@ export class ExercisesController {
 
   @Post('')
   public create(@Body() body: any) {
-    return this.exercises;
+    return this.exercises.create(body);
   }
 
   @Patch(':id')

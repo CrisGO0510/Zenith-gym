@@ -25,7 +25,7 @@ export class MembershipsController {
 
   @Post('')
   public create(@Body() body: CreateMembershipsDto) {
-    return this.memberships;
+    return this.memberships.create(body);
   }
 
   @Patch(':id')
