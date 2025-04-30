@@ -1,0 +1,89 @@
+<main class="home-receptionist-content">
+  <mat-card class="home-receptionist-card">
+    <mat-card-content>
+      <div class="home-receptionist-layout">
+        <div class="actions-column">
+          <h2>Acciones</h2>
+          <div class="action-buttons">
+            <button
+              class="button"
+              mat-raised-button
+              color="primary"
+              (click)="openAttendance()"
+            >
+              Registrar Asistencia
+            </button>
+            <button
+              class="button"
+              mat-raised-button
+              color="primary"
+              (click)="openUser()"
+            >
+              Registrar Usuario
+            </button>
+            <button
+              class="button"
+              mat-raised-button
+              color="primary"
+              (click)="activateUser()"
+            >
+              Activar Usuario
+            </button>
+          </div>
+        </div>
+
+        <div class="calendar-column">
+          <h2>Calendario</h2>
+
+          <div class="calendar-header">
+            <div class="row text-center">
+              <div class="col-md-4">
+                <div class="btn-group">
+                  <button
+                    mat-icon-button
+                    class="button"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                  >
+                    <mat-icon>chevron_left</mat-icon>
+                  </button>
+                  <button
+                    class="button"
+                    mat-button
+                    mwlCalendarToday
+                    [(viewDate)]="viewDate"
+                  >
+                    Hoy
+                  </button>
+                  <button
+                    mat-icon-button
+                    class="button"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                  >
+                    <mat-icon>chevron_right</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h3>
+                  {{ viewDate | calendarDate: view + "ViewTitle" : locale }}
+                </h3>
+              </div>
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+
+          <mwl-calendar-month-view
+            [viewDate]="viewDate"
+            [locale]="locale"
+            [weekStartsOn]="weekStartsOn"
+          >
+          </mwl-calendar-month-view>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</main>

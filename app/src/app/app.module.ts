@@ -10,6 +10,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
 
 registerLocaleData(localeEs);
 
@@ -18,15 +20,14 @@ registerLocaleData(localeEs);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatNativeDateModule,
     ToolbarModule,
-    MembershipsModule,
-    LoginModule,
-    SingupModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
   ],
   bootstrap: [AppComponent],
+  providers: [provideAnimations()],
 })
 export class AppModule {}

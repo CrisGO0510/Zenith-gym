@@ -1,0 +1,179 @@
+@use "@angular/material" as mat;
+@use "sass:color";
+
+$dialog-bg: #2d2d2d;
+$text-color: #e0e0e0;
+$label-color: #bdbdbd;
+$input-bg: #424242;
+$input-border-color: #616161;
+$input-text-color: $text-color;
+$focused-border-color: #90caf9;
+$error-color: #ef9a9a;
+$save-button-bg: #388e3c;
+$save-button-text: #ffffff;
+$cancel-button-border: #f44336;
+$cancel-button-text: #f44336;
+$cancel-button-hover-bg: rgba($cancel-button-border, 0.1);
+$readonly-input-bg: $input-bg;
+
+h1[mat-dialog-title] {
+  color: $text-color;
+  margin: 0;
+  padding: 20px 24px 15px 24px;
+  background-color: $dialog-bg;
+  font-size: 1.25em;
+  font-weight: 500;
+  border-bottom: 1px solid $input-border-color;
+}
+
+.dialog-content-area {
+  background-color: $dialog-bg;
+  color: $text-color;
+  padding: 20px 24px;
+  min-width: 550px;
+}
+
+.user-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: min-content;
+  gap: 15px 20px;
+
+  .grid-area-doc {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .grid-area-name {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .grid-area-lastname {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+  .grid-area-phone {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .grid-area-email {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .grid-area-birthdate {
+    grid-area: 2 / 3 / 3 / 4;
+  }
+  .grid-area-restrictions {
+    grid-area: 3 / 1 / 4 / 4;
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+  }
+}
+
+.user-details-grid mat-form-field {
+  width: 100%;
+
+  .mdc-floating-label,
+  .mat-mdc-floating-label,
+  .mat-label {
+    color: $label-color !important;
+    background: none !important;
+  }
+
+  &.mat-mdc-form-field-has-icon-suffix .mdc-floating-label--float-above,
+  &.mat-mdc-form-field:not(.mat-form-field-has-icon-suffix)
+    .mdc-floating-label--float-above,
+  &.mat-focused .mdc-floating-label,
+  &.mat-focused .mat-mdc-floating-label {
+    background-color: $dialog-bg !important;
+    padding: 0 4px;
+    margin-top: -1px;
+    color: $focused-border-color !important;
+  }
+
+  &:not(.mat-focused) {
+    &.mat-mdc-form-field-has-icon-suffix .mdc-floating-label--float-above,
+    &.mat-mdc-form-field:not(.mat-form-field-has-icon-suffix)
+      .mdc-floating-label--float-above {
+      color: $label-color !important;
+    }
+  }
+
+  .mat-mdc-input-element {
+    color: $input-text-color !important;
+    caret-color: $input-text-color;
+  }
+  textarea.mat-mdc-input-element {
+    box-sizing: border-box;
+    padding: 8px 0;
+  }
+
+  ::ng-deep .mdc-notched-outline > * {
+    border-color: $input-border-color !important;
+  }
+
+  &.mat-focused ::ng-deep .mdc-notched-outline > * {
+    border-color: $focused-border-color !important;
+    border-width: 2px !important;
+  }
+
+  &.mat-form-field-invalid ::ng-deep .mdc-notched-outline > * {
+    border-color: $error-color !important;
+  }
+
+  mat-datepicker-toggle .mdc-icon-button svg,
+  button[matSuffix] mat-icon {
+    color: $label-color;
+  }
+  button[matSuffix]:hover mat-icon {
+    color: $text-color;
+  }
+
+  mat-error {
+    color: $error-color;
+    font-size: 0.75em;
+  }
+
+  &.grid-area-doc input.mat-mdc-input-element {
+    cursor: default;
+    border-radius: 4px;
+    padding-left: 12px;
+    padding-right: 40px;
+    margin-top: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    &:-webkit-autofill {
+      -webkit-text-fill-color: $input-text-color !important;
+      box-shadow: 0 0 0 1000px $readonly-input-bg inset !important;
+    }
+  }
+}
+
+.dialog-actions {
+  background-color: $dialog-bg;
+  padding: 15px 24px 20px 24px;
+  border-top: 1px solid $input-border-color;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  .cancel-button {
+    border-color: $cancel-button-border;
+    color: $cancel-button-text;
+    &:hover {
+      background-color: $cancel-button-hover-bg;
+    }
+  }
+  .save-button {
+    background-color: $save-button-bg;
+    color: $save-button-text;
+    &.mat-mdc-button:not([class*="mat-elevation-z"]) {
+      box-shadow: none;
+    }
+    &:hover {
+      filter: brightness(110%);
+    }
+    &[disabled] {
+      background-color: rgba($save-button-bg, 0.5);
+      color: rgba($save-button-text, 0.7);
+    }
+  }
+}

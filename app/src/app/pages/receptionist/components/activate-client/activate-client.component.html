@@ -1,0 +1,71 @@
+<form [formGroup]="membershipForm" (ngSubmit)="onSaveClick()">
+  <h1 mat-dialog-title>Gestionar Membresía</h1>
+
+  <div mat-dialog-content class="dialog-content-area">
+    <div class="user-details-grid">
+      <mat-form-field appearance="outline" class="grid-area-doc">
+        <mat-label>Documento</mat-label>
+        <input matInput formControlName="thirdPartyId" />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          aria-label="Buscar documento"
+          (click)="searchUserByDocument()"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="grid-area-name">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="grid-area-lastname">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="grid-area-type">
+        <mat-label>Tipo de membresía</mat-label>
+        <mat-select formControlName="membershipTypeId">
+          <mat-option [value]="0">{{membershipForm.get('membershipTypeName')?.value || 'Seleccione tipo'}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="grid-area-startdate">
+        <mat-label>Fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="startPicker" formControlName="createdAt">
+        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="grid-area-enddate">
+        <mat-label>Fecha de finalización</mat-label>
+        <input matInput [matDatepicker]="endPicker" formControlName="endAt">
+        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions" align="end">
+    <button
+      mat-stroked-button
+      type="button"
+      class="cancel-button"
+      (click)="onCancelClick()"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      class="save-button"
+      [disabled]="membershipForm.invalid"
+    >
+      Guardar
+    </button>
+  </div>
+</form>

@@ -26,6 +26,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/client/client.module').then((m) => m.ClientModule),
   },
+  {
+    path: 'receptionist',
+    loadChildren: () =>
+      import('./pages/receptionist/receptionist.module').then(
+        (m) => m.ReceptionistModule,
+      ),
+  },
+  {
+    path: 'administrative',
+    loadChildren: () =>
+      import('./pages/administrative/administrative.module').then(
+        (m) => m.AdministrativeModule,
+      ),
+  },
 ];
 
 @NgModule({

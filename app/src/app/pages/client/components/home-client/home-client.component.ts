@@ -4,6 +4,7 @@ import { Reservation } from '../../../../core/interfaces/reservation.interface';
 import { DialogViewReservationComponent } from '../../../../core/components/dialog-view-reservation/dialog-view-reservation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { Mode } from '../../../../core/interfaces/mode.enum';
 
 @Component({
   selector: 'app-home-client',
@@ -15,7 +16,7 @@ export class HomeClientComponent {
   private suscription$: Subscription = new Subscription();
 
   user: Client = {
-    user_id: 1,
+    userId: 1,
     name: 'John',
     lastname: 'Doe',
     email: 'cris@gmal.com',
@@ -92,7 +93,7 @@ export class HomeClientComponent {
 
     this.dialog.open(DialogViewReservationComponent, {
       width: '80%',
-      data: { reservation: reservation },
+      data: { reservation: reservation, mode: Mode.update },
     });
   }
 
