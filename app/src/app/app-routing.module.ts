@@ -33,6 +33,13 @@ const routes: Routes = [
         (m) => m.ReceptionistModule,
       ),
   },
+  {
+    path: 'administrative',
+    loadChildren: () =>
+      import('./pages/administrative/administrative.module').then(
+        (m) => m.AdministrativeModule,
+      ),
+  },
 ];
 
 @NgModule({
