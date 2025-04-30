@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum frequency {
+  diario
+  semanal
+  quincenal
+  mensual
+  semestral
+  anual
+}
+
+enum reservationStatus {
+  pendiente
+  completada
+  cancelada
+  ausente
+}
+
+model TB_users {
+  id_user          Int                @id @default(autoincrement())
+  name             String             @db.VarChar(64)
+  lastname         String             @db.VarChar(64)
+  email            String             @unique @db.VarChar(128)
+  password         String             @db.VarChar(255)
+  phone_number     String             @db.VarChar(16)
+  birthday         DateTime           @db.Date()
+  TB_user_role     TB_user_role[]
+  TB_notifications TB_notifications[]
+}
+
+model TB_role {
+  id_role      Int            @id @default(autoincrement())
+  name         String         @unique @db.VarChar(64)
+  description  String         @db.VarChar(1024)
+  TB_user_role TB_user_role[]
+}
+
+model TB_user_role {
+  id_user_role Int @id @default(autoincrement())
+  id_user      Int @db.Integer()
+  id_role      Int @db.Integer()
+
+  TB_users             TB_users               @relation(fields: [id_user], references: [id_user])
+  TB_role              TB_role                @relation(fields: [id_role], references: [id_role])
+  TB_restriction       TB_restriction[]
+  TB_employees         TB_employees[]
+  TB_client_membership TB_client_membership[]
+}
+
+model TB_restriction {
+  id_restriction Int    @id @default(autoincrement())
+  id_user_role   Int    @db.Integer()
+  description    String @db.VarChar(1024)
+
+  TB_user_role TB_user_role @relation(fields: [id_user_role], references: [id_user_role])
+}
+
+model TB_employees {
+  id             Int      @id @default(autoincrement())
+  id_user_role   Int      @db.Integer()
+  bio            String   @db.VarChar(1024)
+  specialization String   @db.VarChar(128)
+  date_entry     DateTime @db.Date()
+
+  TB_user_role        TB_user_role          @relation(fields: [id_user_role], references: [id_user_role])
+  TB_session_capacity TB_session_capacity[]
+}
+
+model TB_memberships {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @unique @db.VarChar(64)
+  description          String                 @db.VarChar(1024)
+  price                Float                  @db.DoublePrecision()
+  paymentFrequency     frequency
+  TB_client_membership TB_client_membership[]
+}
+
+model TB_client_membership {
+  id            Int      @id @default(autoincrement())
+  id_user_role  Int      @db.Integer()
+  id_membership Int      @db.Integer()
+  start_date    DateTime @db.Date()
+  end_date      DateTime @db.Date()
+
+  TB_user_role    TB_user_role      @relation(fields: [id_user_role], references: [id_user_role])
+  TB_memberships  TB_memberships    @relation(fields: [id_membership], references: [id])
+  TB_reservations TB_reservations[]
+}
+
+model TB_routines {
+  id                  Int                   @id @default(autoincrement())
+  name                String                @unique @db.VarChar(64)
+  description         String                @db.VarChar(1024)
+  estimatedDuration   Int                   @db.Integer()
+  TB_routine_exercise TB_routine_exercise[]
+  TB_session_capacity TB_session_capacity[]
+}
+
+model TB_exercises {
+  id                  Int                   @id @default(autoincrement())
+  name                String                @unique @db.VarChar(64)
+  description         String                @db.VarChar(1024)
+  muscle_group        String                @db.VarChar(64)
+  TB_routine_exercise TB_routine_exercise[]
+}
+
+model TB_routine_exercise {
+  id          Int @id @default(autoincrement())
+  id_routine  Int @db.Integer()
+  id_exercise Int @db.Integer()
+
+  TB_routines  TB_routines  @relation(fields: [id_routine], references: [id])
+  TB_exercises TB_exercises @relation(fields: [id_exercise], references: [id])
+}
+
+model TB_session_capacity {
+  id            Int @id @default(autoincrement())
+  id_routine    Int @db.Integer()
+  id_instructor Int @db.Integer()
+  capacity      Int @db.Integer()
+
+  TB_routines     TB_routines       @relation(fields: [id_routine], references: [id])
+  TB_employees    TB_employees      @relation(fields: [id_instructor], references: [id])
+  TB_reservations TB_reservations[]
+}
+
+model TB_reservations {
+  id                   Int               @id @default(autoincrement())
+  id_client_membership Int               @db.Integer()
+  id_session_capacity  Int               @db.Integer()
+  start_time           DateTime          @db.Date()
+  status               reservationStatus
+
+  TB_client_membership TB_client_membership @relation(fields: [id_client_membership], references: [id])
+  TB_session_capacity  TB_session_capacity  @relation(fields: [id_session_capacity], references: [id])
+}
+
+model TB_notifications {
+  id        Int      @id @default(autoincrement())
+  id_user   Int      @db.Integer()
+  message   String   @db.VarChar(64)
+  sent_date DateTime @db.Date()
+
+  TB_users TB_users @relation(fields: [id_user], references: [id_user])
+}
