@@ -2,11 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: linear-gradient(135deg, #1e1e2f, #2e2e48);
-  padding: 2rem;
 
   .login-card {
+    height: fit-content;
     width: 100%;
     max-width: 400px;
     background-color: rgba(255, 255, 255, 0.05);
