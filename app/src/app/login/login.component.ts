@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { LoginBody } from '../core/interfaces/login-body';
 import { StorageService } from '../core/services/storage/storage.service';
-import { StorageKey } from '../core/services/storage/storage.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSelectRoleComponent } from '../core/components/dialog-select-role/dialog-select-role.component';
 import { Subscription } from 'rxjs';
@@ -29,7 +28,6 @@ export class LoginComponent implements OnDestroy {
 
   private router = inject(Router);
   private loginService = inject(LoginService);
-  private storageService = inject(StorageService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
 

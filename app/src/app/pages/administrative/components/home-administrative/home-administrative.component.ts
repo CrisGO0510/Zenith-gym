@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DialogEmployeeComponent } from '../dialog-employee/dialog-employee.component';
@@ -6,6 +6,10 @@ import { Mode } from '../../../../core/interfaces/mode.enum';
 import { Employee } from '../../../../core/interfaces/employee.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { StorageKey } from '../../../../core/services/storage/storage.model';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-administrative',
@@ -24,57 +28,42 @@ export class HomeAdministrativeComponent implements OnInit {
     'employeeType',
     'actions',
   ];
+
   employeeTypeFilter = new FormControl<number | null>(null);
 
-  employeeTypes = signal([
-    { id: 0, name: 'Todos' },
-    { id: 1, name: 'Profesor' },
-    { id: 2, name: 'Personal de limpieza' },
-    { id: 3, name: 'Recepcionista' },
-  ]);
+  private dialog = inject(MatDialog);
+  private storageService = inject(StorageService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
-  constructor(private dialog: MatDialog) {
+  constructor() {}
+
+  ngOnInit(): void {
+    this.roleValidate();
     this.setupFilters();
   }
 
-  ngOnInit(): void {
-    this.dataSource.data = [
-      {
-        userId: 11234123,
-        name: 'Martín',
-        lastname: 'González',
-        email: 'martin.gonzalez@gym.com',
-        phone: '1123456789',
-        birthdate: new Date('1990-01-01'),
-        thirdPartyId: 123456,
-        biography: 'Profesor de yoga con 10 años de experiencia.',
-        specialty: 'Yoga',
-        date_entry: new Date('2020-01-01'),
-        employeeType: 'Profesor',
-        employeeTypeId: 1,
-      },
-      {
-        userId: 11234124,
-        name: 'Ana',
-        lastname: 'Pérez',
-        email: '',
-        phone: '',
-        birthdate: new Date('1995-05-15'),
-        thirdPartyId: 123457,
-        biography: 'Personal de limpieza con 5 años de experiencia.',
-        specialty: '',
-        date_entry: new Date('2018-01-01'),
-        employeeType: 'Personal de limpieza',
-        employeeTypeId: 2,
-      },
-    ];
+  private roleValidate() {
+    const user = this.storageService.read(StorageKey.CURRENT_ROLE);
+
+    if (user?.id_role != 2) {
+      this.snackBar.open(
+        'No tienes permisos para acceder a esta página',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+        }
+      );
+      this.router.navigate(['/']);
+    }
   }
 
   private setupFilters(): void {
     this.suscription$.add(
       this.employeeTypeFilter.valueChanges.subscribe((value) => {
         this.applyFilter(value);
-      }),
+      })
     );
   }
 
