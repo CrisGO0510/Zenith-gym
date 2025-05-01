@@ -87,7 +87,7 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
       this.userService.updateUser(id_user, userData).subscribe({
         next: (_) => {
           this.snackBar.open(
-            'El cliente ha sido creado correctamente.',
+            'El cliente ha sido actualizado correctamente.',
             'Cerrar',
             {
               duration: 3000,

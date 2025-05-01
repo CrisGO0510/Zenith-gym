@@ -122,6 +122,7 @@ export class DialogFormClientComponent implements OnInit, OnDestroy {
               phone_number: user[0].phone_number,
               email: user[0].email,
               birthday: user[0].birthday,
+              restriction: user[0].restriction,
             });
           },
           error: (err) => {
