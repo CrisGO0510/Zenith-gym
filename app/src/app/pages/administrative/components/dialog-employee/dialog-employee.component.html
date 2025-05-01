@@ -27,6 +27,8 @@
           >
             <mat-icon>search</mat-icon>
           </button>
+          @if (!employeeForm.get('userId')?.value) {
+          <mat-error> Por favor, haga clic en la lupa para buscar. </mat-error>}
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-name">
@@ -46,7 +48,7 @@
 
         <mat-form-field appearance="outline" class="grid-area-email">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" readonly />
+          <input matInput formControlName="email" readonly />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-birthday">
@@ -67,7 +69,7 @@
 
         <mat-form-field appearance="outline" class="grid-area-specialty">
           <mat-label>Especialidad</mat-label>
-          <input matInput formControlName="especialty" />
+          <input matInput formControlName="specialty" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-entry-date">
@@ -87,7 +89,6 @@
         <mat-form-field appearance="outline" class="grid-area-employee-type">
           <mat-label>Tipo de Empleado</mat-label>
           <mat-select formControlName="employeeTypeId">
-            <mat-option [value]="null">Seleccione tipo</mat-option>
             <mat-option
               *ngFor="let role of rolesOptions"
               [value]="role.id_role"
@@ -113,14 +114,7 @@
       >
         Cancelar
       </button>
-      <button
-        mat-flat-button
-        type="submit"
-        class="save-button"
-        [disabled]="employeeForm.invalid"
-      >
-        Guardar
-      </button>
+      <button mat-flat-button type="submit" class="save-button">Guardar</button>
     </div>
   </form>
 </main>

@@ -88,7 +88,7 @@ export class HomeAdministrativeComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogEmployeeComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      console.log('resul', result);
     });
   }
 

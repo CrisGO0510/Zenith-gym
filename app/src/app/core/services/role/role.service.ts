@@ -18,6 +18,10 @@ export class RoleService extends CrudService {
     return this.get<Role[]>('');
   }
 
+  getEmployeeRoles(): Observable<Role[]> {
+    return this.get<Role[]>('employees');
+  }
+
   getRoleById(id: number): Observable<Role[]> {
     return this.get<Role[]>(`?id_role=${id}`);
   }

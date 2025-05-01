@@ -1,5 +1,5 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Employee } from '../../../../shared/interfaces/employee.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SendDataDialog } from '../../../../core/interfaces/send-data-dialog';
@@ -37,16 +37,16 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
 
   private buildForm(item: Partial<Employee> = {}): FormGroup {
     return this.formBuilder.group({
-      userId: item.userId,
-      name: [item.name || ''],
-      lastname: [item.lastname || ''],
-      phone_number: [item.phone_number || ''],
-      especialty: [item.specialty || ''],
-      birthday: [item.birthday],
-      email: [item.email || ''],
-      employeeType: [item.employeeType || ''],
-      employeeTypeId: [item.employeeTypeId || 0],
-      date_entry: [item.date_entry || new Date()],
+      userId: [item.userId, Validators.required],
+      name: [item.name, Validators.required],
+      lastname: [item.lastname, Validators.required],
+      phone_number: [item.phone_number, Validators.required],
+      specialty: [item.specialty, Validators.required],
+      birthday: [item.birthday, Validators.required],
+      email: [item.email, Validators.required],
+      employeeType: item.employeeType,
+      employeeTypeId: [item.employeeTypeId, Validators.required],
+      date_entry: [item.date_entry, Validators.required],
       biography: [item.biography || ''],
     });
   }
@@ -88,12 +88,40 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('Form submitted:', this.employeeForm.value);
+    if (this.employeeForm.invalid) {
+      this.snackBar.open(
+        'Por favor, completa todos los campos requeridos.',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        }
+      );
+      return;
+    }
+
+    const employeeData: Employee = {
+      userId: this.employeeForm.get('userId')?.value,
+      name: this.employeeForm.get('name')?.value,
+      lastname: this.employeeForm.get('lastname')?.value,
+      email: this.employeeForm.get('email')?.value,
+      phone_number: this.employeeForm.get('phone_number')?.value,
+      birthday: this.employeeForm.get('birthday')?.value,
+
+      biography: this.employeeForm.get('biography')?.value,
+      specialty: this.employeeForm.get('specialty')?.value,
+      date_entry: this.employeeForm.get('date_entry')?.value,
+      employeeTypeId: this.employeeForm.get('employeeTypeId')?.value,
+      employeeType: this.employeeForm.get('employeeType')?.value,
+    };
+
+    this.dialogRef.close(employeeData);
   }
 
   getRolesTypes() {
     this.subscription$.add(
-      this.roleService.getRoles().subscribe({
+      this.roleService.getEmployeeRoles().subscribe({
         next: (roles) => {
           this.rolesOptions = roles;
         },
