@@ -57,7 +57,7 @@ export class SingupComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(6),
+          Validators.minLength(4),
           Validators.pattern(/^[a-zA-Z0-9]*$/),
         ],
       ],

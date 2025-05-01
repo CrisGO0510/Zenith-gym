@@ -97,7 +97,7 @@
             <mat-error>La contraseña es obligatoria</mat-error>
           }
           @if (signupForm.get('password')?.errors?.['minlength'] && signupForm.get('password')?.touched) {
-            <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+            <mat-error>La contraseña debe tener al menos 4 caracteres</mat-error>
           }
           @if (signupForm.get('password')?.errors?.['pattern'] && signupForm.get('password')?.touched) {
             <mat-error>La contraseña solo puede contener letras y números</mat-error>

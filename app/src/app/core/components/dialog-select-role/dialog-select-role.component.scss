@@ -1,0 +1,54 @@
+@use "@angular/material" as mat;
+@use "sass:color";
+
+$dialog-bg: #2d2d2d;
+$text-color: #e0e0e0;
+$secondary-text: #bdbdbd;
+$border-color: #555;
+$button-border-color: #616161;
+$button-hover-bg: rgba($text-color, 0.1);
+$button-text-color: $text-color;
+$error-color: #ef9a9a;
+
+:host {
+  display: block;
+  background-color: $dialog-bg;
+}
+
+.dialog-header-simple {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 8px 0 8px;
+}
+
+.dialog-content {
+  padding: 20px 24px 30px 24px;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+}
+
+.role-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: stretch;
+
+  .role-button {
+    padding: 12px 15px;
+    border: 1px solid $button-border-color;
+    color: $button-text-color;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      background-color: $button-hover-bg;
+      border-color: color.adjust($button-border-color, $lightness: 10%);
+    }
+  }
+}

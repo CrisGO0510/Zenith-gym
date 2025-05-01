@@ -1,0 +1,15 @@
+<div class="dialog-header-simple">
+  <span class="spacer"></span>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+  <div class="role-buttons-container">
+    @for (role of roles; track role.id_role) {
+    <button mat-stroked-button class="role-button" (click)="selectRole(role.id_role)">
+      {{ role.name }}
+    </button>
+    } @empty {
+    <p class="no-roles">No hay roles para mostrar.</p>
+    }
+  </div>
+</div>
