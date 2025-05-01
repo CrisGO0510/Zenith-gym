@@ -1,6 +1,6 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee } from '../../../../shared/interfaces/employee.interface';
+import { Employee, FullEmployee } from '../../../../shared/interfaces/employee.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SendDataDialog } from '../../../../core/interfaces/send-data-dialog';
 import { Subscription } from 'rxjs';
@@ -35,19 +35,19 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
     this.employeeForm = this.buildForm(this.data.data);
   }
 
-  private buildForm(item: Partial<Employee> = {}): FormGroup {
+  private buildForm(item: Partial<FullEmployee> = {}): FormGroup {
     return this.formBuilder.group({
       userId: [item.userId, Validators.required],
       name: [item.name, Validators.required],
       lastname: [item.lastname, Validators.required],
       phone_number: [item.phone_number, Validators.required],
-      specialty: [item.specialty, Validators.required],
+      specialization: [item.specialization, Validators.required],
       birthday: [item.birthday, Validators.required],
       email: [item.email, Validators.required],
       employeeType: item.employeeType,
       employeeTypeId: [item.employeeTypeId, Validators.required],
       date_entry: [item.date_entry, Validators.required],
-      biography: [item.biography || ''],
+      bio: [item.bio || ''],
     });
   }
 
@@ -102,18 +102,13 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
     }
 
     const employeeData: Employee = {
-      userId: this.employeeForm.get('userId')?.value,
-      name: this.employeeForm.get('name')?.value,
-      lastname: this.employeeForm.get('lastname')?.value,
-      email: this.employeeForm.get('email')?.value,
-      phone_number: this.employeeForm.get('phone_number')?.value,
-      birthday: this.employeeForm.get('birthday')?.value,
-
-      biography: this.employeeForm.get('biography')?.value,
-      specialty: this.employeeForm.get('specialty')?.value,
+      bio: this.employeeForm.get('bio')?.value,
+      specialization: this.employeeForm.get('specialization')?.value,
       date_entry: this.employeeForm.get('date_entry')?.value,
-      employeeTypeId: this.employeeForm.get('employeeTypeId')?.value,
-      employeeType: this.employeeForm.get('employeeType')?.value,
+      TB_user_role: {
+        id_user: this.employeeForm.get('userId')?.value,
+        id_role: this.employeeForm.get('employeeTypeId')?.value,
+      },
     };
 
     this.dialogRef.close(employeeData);

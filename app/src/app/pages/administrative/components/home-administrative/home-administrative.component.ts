@@ -10,7 +10,7 @@ import { StorageService } from '../../../../core/services/storage/storage.servic
 import { StorageKey } from '../../../../core/services/storage/storage.model';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UsersRolesService } from '../../../../shared/services/users-roles.service';
+import { EmployeesService } from '../../../../shared/services/employees.service';
 
 @Component({
   selector: 'app-home-administrative',
@@ -36,7 +36,7 @@ export class HomeAdministrativeComponent implements OnInit {
   private storageService = inject(StorageService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
-  private usersRolesService = inject(UsersRolesService);
+  private employeesService = inject(EmployeesService);
 
   constructor() {}
 
@@ -70,12 +70,12 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   private applyFilter(employeeType: number | null): void {
-    this.dataSource.filterPredicate = (data: Employee, filter: string) => {
-      if (!filter || filter === 'null') return true;
-      return data.employeeType === filter;
-    };
+  //   this.dataSource.filterPredicate = (data: Employee, filter: string) => {
+  //     if (!filter || filter === 'null') return true;
+  //     return data.employeeType === filter;
+  //   };
 
-    this.dataSource.filter = employeeType?.toString() || 'null';
+  //   this.dataSource.filter = employeeType?.toString() || 'null';
   }
 
   openDialog(employee?: Employee): void {
