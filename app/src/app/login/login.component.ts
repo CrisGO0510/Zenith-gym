@@ -62,8 +62,6 @@ export class LoginComponent implements OnDestroy {
     this.subscription$.add(
       this.loginService.login(loginBody).subscribe({
         next: (response) => {
-          this.storageService.save(StorageKey.USER_SESSION, response);
-
           const dialogRef = this.dialog.open(DialogSelectRoleComponent, {
             width: '80%',
             data: {

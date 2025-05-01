@@ -53,7 +53,6 @@ export class ToolbarComponent implements OnDestroy, OnInit {
   }
 
   logout() {
-    this.storageService.remove(StorageKey.USER_SESSION);
     this.storageService.remove(StorageKey.CURRENT_ROLE);
 
     this.router.navigate(['/login']);

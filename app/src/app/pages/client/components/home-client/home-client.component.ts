@@ -67,7 +67,7 @@ export class HomeClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const user = this.storageService.read(StorageKey.USER_SESSION);
+    const user = this.storageService.read(StorageKey.CURRENT_ROLE);
   
     if (user) {
       this.user = user;
