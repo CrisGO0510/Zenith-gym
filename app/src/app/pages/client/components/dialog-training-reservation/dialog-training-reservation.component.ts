@@ -14,7 +14,7 @@ import {
   Routine,
 } from '../../../../shared/interfaces/routine.interface';
 import { RoutineService } from './dialog-training-reservation.services';
-import { ClientService } from '../../services/client.service';
+import { ClientService } from '../../../../shared/services/client.service';
 
 export interface SelectRoutineDialogData {
   selectedDate: Date;

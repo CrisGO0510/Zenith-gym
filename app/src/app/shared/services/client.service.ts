@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CrudService } from '../../../core/services/http/crud.service';
+import { CrudService } from '../../core/services/http/crud.service';
 import { HttpClient } from '@angular/common/http';
+import { MembershipClient } from '../interfaces/membership.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +24,8 @@ export class ClientService extends CrudService {
     return this.get(`${exerciseId}`);
   }
 
-  postCapacity(body: any) {
-    this.endpoint = 'session-capacity';
-    return this.post<any>(body);
+  createMembershipClient(body: MembershipClient): Observable<MembershipClient> {
+    this.endpoint = 'clients';
+    return this.post<MembershipClient>(body);
   }
-
 }

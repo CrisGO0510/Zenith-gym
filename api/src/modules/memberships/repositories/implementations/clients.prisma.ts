@@ -30,6 +30,15 @@ export class ClientsPrisma implements ClientsRepository {
       throw new BadRequestException('El campo id_user es obligatorio.');
     }
 
+    const parsedStart = new Date(start_date);
+    const parsedEnd = new Date(end_date);
+
+    if (isNaN(parsedStart.getTime()) || isNaN(parsedEnd.getTime())) {
+      throw new BadRequestException(
+        'Las fechas proporcionadas no son válidas.',
+      );
+    }
+
     const CLIENT_ROLE_ID = 1;
 
     // 1. Buscar o crear TB_user_role con id_role = 1 (cliente)

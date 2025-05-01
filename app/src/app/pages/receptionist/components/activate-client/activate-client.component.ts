@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MembershipClient } from '../../../../shared/interfaces/membership.interface';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -15,7 +15,7 @@ import { calculateEndDate } from '../../../../shared/helpers';
   templateUrl: './activate-client.component.html',
   styleUrl: './activate-client.component.scss',
 })
-export class ActivateClientComponent implements OnInit {
+export class ActivateClientComponent implements OnInit, OnDestroy {
   membershipForm!: FormGroup;
   private subscription$: Subscription = new Subscription();
   membershipOptions: TypeMembership[] = [];
@@ -33,7 +33,7 @@ export class ActivateClientComponent implements OnInit {
 
     this.subscription$.add(
       this.membershipForm
-        .get('membershipTypeId')
+        .get('id_membership')
         ?.valueChanges.subscribe((typeId) => {
           this.onMembershipTypeSelected(typeId);
         })
@@ -45,13 +45,13 @@ export class ActivateClientComponent implements OnInit {
       id_user: null,
       name: '',
       lastName: '',
-      membershipTypeId: 0,
+      id_membership: 0,
       membershipTypeName: '',
       membershipDescription: '',
       membershipPrice: '',
       membershipFrecuency: '',
-      createdAt: new Date(),
-      endAt: '',
+      start_date: new Date(),
+      end_date: '',
     });
   }
 
@@ -61,13 +61,19 @@ export class ActivateClientComponent implements OnInit {
 
   onSaveClick(): void {
     if (this.membershipForm.valid) {
-      const savedData: MembershipClient =
-        this.membershipForm.getRawValue();
-        
-      console.log('Guardando membresía:', savedData);
-      this.dialogRef.close({ savedMembership: savedData });
+      const { id_user, ...savedData } = this.membershipForm.getRawValue();
+
+      this.dialogRef.close({ id_user: parseInt(id_user), ...savedData });
     } else {
-      console.log('Formulario inválido');
+      this.snackBar.open(
+        'El formulario es inválido. Por favor, revise los campos.',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        }
+      );
       this.markFormGroupTouched(this.membershipForm);
     }
   }
@@ -85,7 +91,7 @@ export class ActivateClientComponent implements OnInit {
     const selected = this.membershipOptions.find((m) => m.id === typeId);
     if (!selected) return;
 
-    const startDate = this.membershipForm.get('createdAt')?.value || new Date();
+    const startDate = this.membershipForm.get('start_date')?.value || new Date();
     const endDate = calculateEndDate(
       new Date(startDate),
       selected.paymentFrequency
@@ -96,7 +102,7 @@ export class ActivateClientComponent implements OnInit {
       membershipDescription: selected.description,
       membershipPrice: selected.price,
       membershipFrecuency: selected.paymentFrequency,
-      endAt: endDate,
+      end_date: endDate,
     });
   }
 
@@ -146,8 +152,7 @@ export class ActivateClientComponent implements OnInit {
     );
   }
 
-  searchUserByDocument(): void {
-    const documentId = this.membershipForm.get('id_user_role')?.value;
-    console.log(`Simulando búsqueda de usuario con documento: ${documentId}`);
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }

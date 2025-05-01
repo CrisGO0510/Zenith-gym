@@ -11,7 +11,6 @@ import { UserServices } from '../../../../shared/services/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Role } from '../../../../core/services/role/role.interfaces';
 import { RoleService } from '../../../../core/services/role/role.service';
-import { id } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dialog-employee',

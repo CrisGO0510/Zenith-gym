@@ -15,7 +15,7 @@ import { DialogViewReservationComponent } from '../../../../shared/components/di
   styleUrl: './home-client.component.scss',
 })
 export class HomeClientComponent implements OnInit {
-  private suscription$: Subscription = new Subscription();
+  private subscription$: Subscription = new Subscription();
 
   user: any;
 
@@ -92,6 +92,6 @@ export class HomeClientComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.suscription$.unsubscribe();
+    this.subscription$.unsubscribe();
   }
 }

@@ -24,7 +24,7 @@ import { CurrentTokenRole } from '../../../../core/interfaces/current-token-role
   styleUrl: './home-administrative.component.scss',
 })
 export class HomeAdministrativeComponent implements OnInit {
-  private suscription$: Subscription = new Subscription();
+  private subscription$: Subscription = new Subscription();
   private currentUser: CurrentTokenRole | null = null;
 
   dataSource = new MatTableDataSource<FullEmployee>();
@@ -56,7 +56,7 @@ export class HomeAdministrativeComponent implements OnInit {
 
   private getEmployees(): void {
     this.dataSource.data = [];
-    this.suscription$.add(
+    this.subscription$.add(
       this.employeesService.getEmployees().subscribe({
         next: (response) => {
           if (response) {
@@ -84,7 +84,7 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   private getFullEmployee(employee: Employee): void {
-    this.suscription$.add(
+    this.subscription$.add(
       this.userService
         .getUserById(employee.TB_user_role.id_user)
         .subscribe((user) => {
@@ -143,7 +143,7 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   private setupFilters(): void {
-    this.suscription$.add(
+    this.subscription$.add(
       this.employeeTypeFilter.valueChanges.subscribe((value) => {
         this.applyFilter(value);
       })
@@ -169,7 +169,7 @@ export class HomeAdministrativeComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogEmployeeComponent, dialogConfig);
 
-    this.suscription$.add(
+    this.subscription$.add(
       dialogRef.afterClosed().subscribe((result: Employee) => {
         console.log('resul', result);
 
@@ -187,7 +187,7 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   createEmployee(employee: Employee): void {
-    this.suscription$.add(
+    this.subscription$.add(
       this.employeesService.createEmployee(employee).subscribe({
         next: (response) => {
           if (response) {
@@ -233,7 +233,7 @@ export class HomeAdministrativeComponent implements OnInit {
       return;
     }
 
-    this.suscription$.add(
+    this.subscription$.add(
       this.employeesService.updateEmployee(id, employeeData).subscribe({
         next: (response) => {
           if (response) {
@@ -269,7 +269,7 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   deleteEmployee(employeeId: number): void {
-    this.suscription$.add(
+    this.subscription$.add(
       this.employeesService.deleteEmployee(employeeId).subscribe({
         next: (response) => {
           if (response) {
@@ -307,6 +307,6 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.suscription$.unsubscribe();
+    this.subscription$.unsubscribe();
   }
 }

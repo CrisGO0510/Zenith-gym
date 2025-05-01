@@ -39,7 +39,7 @@
 
       <mat-form-field appearance="outline" class="grid-area-type">
         <mat-label>Tipo de membresía</mat-label>
-        <mat-select formControlName="membershipTypeId">
+        <mat-select formControlName="id_membership">
           <mat-option
             *ngFor="let option of membershipOptions"
             [value]="option.id"
@@ -54,7 +54,7 @@
         <input
           matInput
           [matDatepicker]="startPicker"
-          formControlName="createdAt"
+          formControlName="start_date"
           readonly
         />
         <mat-datepicker-toggle
@@ -68,7 +68,7 @@
 
       <mat-form-field appearance="outline" class="grid-area-enddate">
         <mat-label>Fecha de finalización</mat-label>
-        <input matInput [matDatepicker]="endPicker" formControlName="endAt" />
+        <input matInput [matDatepicker]="endPicker" formControlName="end_date" />
         <mat-datepicker-toggle
           disabled
           matIconSuffix

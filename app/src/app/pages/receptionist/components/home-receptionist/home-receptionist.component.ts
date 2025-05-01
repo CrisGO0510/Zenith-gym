@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarView } from 'angular-calendar';
 import { DialogFormClientComponent } from '../../../../shared/components/dialog-form-client/dialog-form-client.component';
 import { ActivateClientComponent } from '../activate-client/activate-client.component';
 import { DialogViewReservationComponent } from '../../../../shared/components/dialog-view-reservation/dialog-view-reservation.component';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { UserServices } from '../../../../shared/services/users.service';
+import { StorageKey } from '../../../../core/services/storage/storage.model';
+import { CurrentTokenRole } from '../../../../core/interfaces/current-token-role.interface';
+import { ClientService } from '../../../../shared/services/client.service';
+import { MembershipClient } from '../../../../shared/interfaces/membership.interface';
 
 @Component({
   selector: 'app-home-receptionist',
@@ -11,13 +20,43 @@ import { DialogViewReservationComponent } from '../../../../shared/components/di
   templateUrl: './home-receptionist.component.html',
   styleUrl: './home-receptionist.component.scss',
 })
-export class HomeReceptionistComponent {
+export class HomeReceptionistComponent implements OnDestroy, OnInit {
+  private subscription$: Subscription = new Subscription();
+  private currentUser: CurrentTokenRole | null = null;
+
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
   locale: string = 'es';
   weekStartsOn: number = 1;
 
-  constructor(private dialog: MatDialog) {}
+  private dialog = inject(MatDialog);
+  private storageService = inject(StorageService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private userService = inject(UserServices);
+  private clientService = inject(ClientService);
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.roleValidate();
+  }
+
+  private roleValidate() {
+    this.currentUser = this.storageService.read(StorageKey.CURRENT_ROLE);
+
+    if (this.currentUser?.id_role != 3) {
+      this.snackBar.open(
+        'No tienes permisos para acceder a esta página',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+        }
+      );
+      this.router.navigate(['/']);
+    }
+  }
 
   openAttendance() {
     const dialogRef = this.dialog.open(DialogViewReservationComponent, {
@@ -36,5 +75,46 @@ export class HomeReceptionistComponent {
     const dialogRef = this.dialog.open(ActivateClientComponent, {
       width: '80%',
     });
+
+    this.subscription$.add(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.handleClientActivation(result);
+          console.log('User activated:', result);
+        }
+      })
+    );
+  }
+  handleClientActivation(result: MembershipClient) {
+    this.subscription$.add(
+      this.clientService.createMembershipClient(result).subscribe({
+        next: (_) => {
+          this.snackBar.open(
+            'El cliente ha sido activado correctamente.',
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+            }
+          );
+        },
+        error: (error) => {
+          console.log('Error:', error);
+          this.snackBar.open(
+            `${error.error.message ?? 'Error al activar el cliente.'}`,
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+              panelClass: ['error-snackbar'],
+            }
+          );
+        },
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }

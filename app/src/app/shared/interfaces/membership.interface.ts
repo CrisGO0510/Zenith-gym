@@ -3,7 +3,7 @@ export interface MembershipClient {
   name: string;
   lastName: string;
   membershipType: string;
-  membershipTypeId: number;
-  createdAt: Date;
-  endAt: Date;
+  id_membership: number;
+  start_date: Date;
+  end_date: Date;
 }
