@@ -1,4 +1,4 @@
 export type UsersRolesBody = {
-  userId: number;
+  id_user: number;
   roleId: number;
 };

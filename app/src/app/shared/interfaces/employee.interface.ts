@@ -14,7 +14,7 @@ export interface Employee {
 }
 
 export interface FullEmployee extends User {
-  thirdPartyId?: number;
+  id_user_role?: number;
   bio: string;
   specialization: string;
   date_entry: Date;

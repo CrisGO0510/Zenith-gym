@@ -1,6 +1,9 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee, FullEmployee } from '../../../../shared/interfaces/employee.interface';
+import {
+  Employee,
+  FullEmployee,
+} from '../../../../shared/interfaces/employee.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SendDataDialog } from '../../../../core/interfaces/send-data-dialog';
 import { Subscription } from 'rxjs';
@@ -37,7 +40,7 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
 
   private buildForm(item: Partial<FullEmployee> = {}): FormGroup {
     return this.formBuilder.group({
-      userId: [item.userId, Validators.required],
+      id_user: [item.id_user, Validators.required],
       name: [item.name, Validators.required],
       lastname: [item.lastname, Validators.required],
       phone_number: [item.phone_number, Validators.required],
@@ -46,17 +49,17 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
       email: [item.email, Validators.required],
       employeeType: item.employeeType,
       employeeTypeId: [item.employeeTypeId, Validators.required],
-      date_entry: [item.date_entry, Validators.required],
+      date_entry: [item.date_entry || new Date(), Validators.required],
       bio: [item.bio || ''],
     });
   }
 
   searchUser() {
-    const userId = this.employeeForm.get('userId')?.value;
+    const id_user = this.employeeForm.get('id_user')?.value;
 
-    if (userId) {
+    if (id_user) {
       this.subscription$.add(
-        this.userServices.getUserById(userId).subscribe({
+        this.userServices.getUserById(id_user).subscribe({
           next: (user) => {
             if (user.length === 0) {
               this.snackBar.open(
@@ -106,7 +109,7 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
       specialization: this.employeeForm.get('specialization')?.value,
       date_entry: this.employeeForm.get('date_entry')?.value,
       TB_user_role: {
-        id_user: this.employeeForm.get('userId')?.value,
+        id_user: parseInt(this.employeeForm.get('id_user')?.value),
         id_role: this.employeeForm.get('employeeTypeId')?.value,
       },
     };

@@ -45,7 +45,7 @@ export interface EditUserDialogData {
 export class DialogFormClientComponent implements OnInit {
   userForm!: FormGroup;
   originalUser?: User = {
-    userId: 1,
+    id_user: 1,
     name: 'John',
     lastname: 'Doe',
     email: 'john.doe@example.com',
@@ -56,7 +56,7 @@ export class DialogFormClientComponent implements OnInit {
 
   private getEmptyUser(): User {
     return {
-      userId: 0,
+      id_user: 0,
       name: '',
       lastname: '',
       email: '',
@@ -73,7 +73,7 @@ export class DialogFormClientComponent implements OnInit {
 
   private buildForm(user: User): FormGroup {
     return this.fb.group({
-      userId: [{ value: user.userId, disabled: true }],
+      id_user: [{ value: user.id_user, disabled: true }],
       name: [
         user.name,
         [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],

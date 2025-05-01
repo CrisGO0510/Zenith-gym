@@ -15,7 +15,7 @@
           <mat-label>Documento</mat-label>
           <input
             matInput
-            formControlName="userId"
+            formControlName="id_user"
             (keyup.enter)="searchUser()"
           />
           <button
@@ -27,7 +27,7 @@
           >
             <mat-icon>search</mat-icon>
           </button>
-          @if (!employeeForm.get('userId')?.value) {
+          @if (!employeeForm.get('id_user')?.value) {
           <mat-error> Por favor, haga clic en la lupa para buscar. </mat-error>}
         </mat-form-field>
 
@@ -69,7 +69,7 @@
 
         <mat-form-field appearance="outline" class="grid-area-specialization">
           <mat-label>Especialidad</mat-label>
-          <input matInput formControlName="especialization" />
+          <input matInput formControlName="specialization" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-entry-date">

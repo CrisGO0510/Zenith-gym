@@ -1,6 +1,6 @@
 export interface MembershipClient {
   id: number;
-  thirdPartyId: number;
+  id_user_role: number;
   name: string;
   lastName: string;
   membershipType: string;

@@ -24,7 +24,7 @@ export class ActivateClientComponent implements OnInit {
   protected buildForm(): FormGroup {
     return this.formBuilder.group({
       id: null,
-      thirdPartyId: null,
+      id_user_role: null,
       name: '',
       lastName: '',
       membershipTypeId: 0,
@@ -59,7 +59,7 @@ export class ActivateClientComponent implements OnInit {
   }
 
   searchUserByDocument(): void {
-    const documentId = this.membershipForm.get('thirdPartyId')?.value;
+    const documentId = this.membershipForm.get('id_user_role')?.value;
     console.log(`Simulando búsqueda de usuario con documento: ${documentId}`);
   }
 }
