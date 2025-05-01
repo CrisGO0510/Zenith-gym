@@ -11,8 +11,9 @@ import {
 } from '@nestjs/common';
 import { EmployeesService } from '../services/employees.service';
 import { GetEmployeesDto } from '../dtos/get.employees.dto';
-import { CreateEmployeesDto } from '../dtos/create.employees.dto';
 import { UpdateEmployeesDto } from '../dtos/update.employees.dto';
+import { ApiBody } from '@nestjs/swagger';
+import { CreateEmployeesDto } from '../dtos/create.employees.dto';
 
 @Controller('employees')
 export class EmployeesController {
@@ -24,6 +25,7 @@ export class EmployeesController {
   }
 
   @Post('')
+  @ApiBody({ type: CreateEmployeesDto })
   public create(@Body() body: CreateEmployeesDto) {
     return this.employees.create(body);
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EmployeesRepository } from '../repositorios/employees.repository';
 import { GetEmployeesType } from '../types/get.employees.type';
 import { UpdateEmployeesType } from '../types/update.employees.type';
-import { CreateEmployeesDto } from '../types/create.employees.type';
+import { CreateEmployeesDto } from '../dtos/create.employees.dto';
 
 @Injectable()
 export class EmployeesService {
