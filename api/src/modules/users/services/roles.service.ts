@@ -12,6 +12,13 @@ export class RolesService {
     return this.roles.get(where);
   }
 
+  public getEmployees() {
+    return this.roles.get({
+      name: { not: 'Cliente' },
+    });
+  }
+  
+
   public create(data: CreateRolesType) {
     return this.roles.create(data);
   }

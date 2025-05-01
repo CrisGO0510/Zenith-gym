@@ -27,6 +27,11 @@ export class RolesController {
     return this.roles.get(query);
   }
 
+  @Get('/employees')
+  public getEmployees() {
+    return this.roles.getEmployees();
+  }
+
   @Post('')
   public create(@Body() body: CreateRolesDto) {
     return this.roles.create(body);
