@@ -87,9 +87,15 @@ export class HomeAdministrativeComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogEmployeeComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('resul', result);
-    });
+    this.suscription$.add(
+      dialogRef.afterClosed().subscribe((result: Employee) => {
+        console.log('resul', result);
+      })
+    );
+  }
+
+  createEmployee(employee: Employee): void {
+  
   }
 
   deleteEmployee(employeeId: number): void {}
