@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
-import { ReservationStatus } from '../../../../core/interfaces/reservation-status.enum';
-import { Reservation } from '../../../../core/interfaces/reservation.interface';
+import { ReservationStatus } from '../../../../shared/interfaces/reservation-status.enum';
+import { Reservation } from '../../../../shared/interfaces/reservation.interface';
 
 @Injectable({
   providedIn: 'root',

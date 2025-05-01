@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DialogEmployeeComponent } from '../dialog-employee/dialog-employee.component';
 import { Mode } from '../../../../core/interfaces/mode.enum';
-import { Employee } from '../../../../core/interfaces/employee.interface';
+import { Employee } from '../../../../shared/interfaces/employee.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { StorageService } from '../../../../core/services/storage/storage.service';

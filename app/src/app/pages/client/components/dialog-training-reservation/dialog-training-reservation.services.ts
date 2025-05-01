@@ -3,7 +3,7 @@ import { Observable, of, delay } from 'rxjs';
 import {
   Exercise,
   Routine,
-} from '../../../../core/interfaces/routine.interface';
+} from '../../../../shared/interfaces/routine.interface';
 
 @Injectable({
   providedIn: 'root',

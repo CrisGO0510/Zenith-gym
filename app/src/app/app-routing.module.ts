@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./login/login.module').then((m) => m.LoginModule),
+      import('./pages/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'singup',
     loadChildren: () =>
-      import('./singup/singup.module').then((m) => m.SingupModule),
+      import('./pages/singup/singup.module').then((m) => m.SingupModule),
   },
   {
     path: 'client',

@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { CrudService } from '../../core/services/http/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TypeMembership } from '../../shared/interfaces/membership-type.interface';
+import { LoginBody } from '../../core/interfaces/login-body';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MembershipsService extends CrudService {
-  endpoint = 'memberships';
+export class LoginService extends CrudService {
+  endpoint = 'auth/login';
 
   constructor(http: HttpClient) {
     super(http);
   }
 
-  getMemberships():Observable<TypeMembership[]> {
-    return this.get<TypeMembership[]>('');
+  login(credentials: LoginBody): Observable<LoginBody> {
+    return this.post<LoginBody>(credentials);
   }
 }

@@ -5,16 +5,20 @@ import { Role } from './role.interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RoleService extends CrudService {
-  endpoint = "roles";
+  endpoint = 'roles';
 
   constructor(http: HttpClient) {
     super(http);
   }
-  
-  getRoleById(id: number): Observable<Role[]>{
+
+  getRoles(): Observable<Role[]> {
+    return this.get<Role[]>('');
+  }
+
+  getRoleById(id: number): Observable<Role[]> {
     return this.get<Role[]>(`?id_role=${id}`);
   }
 }

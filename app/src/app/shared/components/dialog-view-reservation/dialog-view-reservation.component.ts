@@ -4,16 +4,16 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { Reservation } from '../../interfaces/reservation.interface';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SendDataDialog } from '../../interfaces/send-data-dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { SendDataDialog } from '../../../core/interfaces/send-data-dialog';
 import { ReservationStatus } from '../../interfaces/reservation-status.enum';
+import { Reservation } from '../../interfaces/reservation.interface';
 
 @Component({
   selector: 'app-dialog-view-reservation',

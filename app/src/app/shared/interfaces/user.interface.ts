@@ -4,7 +4,7 @@ export interface User {
   lastname: string;
   email?: string;
   password?: string;
-  phone?: string;
-  birthdate: Date;
+  phone_number?: string;
+  birthday: Date;
   restriction?: string;
 }

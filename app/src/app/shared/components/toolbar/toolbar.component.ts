@@ -2,10 +2,10 @@ import { Component, inject, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DialogFormClientComponent } from '../core/components/dialog-form-client/dialog-form-client.component';
-import { StorageService } from '../core/services/storage/storage.service';
-import { CurrentTokenRole } from '../core/interfaces/current-token-role.interface';
-import { StorageKey } from '../core/services/storage/storage.model';
+import { CurrentTokenRole } from '../../../core/interfaces/current-token-role.interface';
+import { StorageKey } from '../../../core/services/storage/storage.model';
+import { StorageService } from '../../../core/services/storage/storage.service';
+import { DialogFormClientComponent } from '../dialog-form-client/dialog-form-client.component';
 
 @Component({
   selector: 'app-toolbar',

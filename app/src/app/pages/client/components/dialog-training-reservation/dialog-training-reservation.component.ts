@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators';
 import {
   Exercise,
   Routine,
-} from '../../../../core/interfaces/routine.interface';
+} from '../../../../shared/interfaces/routine.interface';
 import { RoutineService } from './dialog-training-reservation.services';
 import { ClientService } from '../../services/client.service';
 

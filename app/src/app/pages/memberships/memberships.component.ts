@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembershipsService } from './memberships.service';
-import { TypeMembership } from '../../core/interfaces/membership-type.interface';
+import { TypeMembership } from '../../shared/interfaces/membership-type.interface';
 
 @Component({
   selector: 'app-memberships',

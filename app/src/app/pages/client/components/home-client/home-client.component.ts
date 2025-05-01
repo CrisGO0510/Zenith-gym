@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from '../../../../core/interfaces/client.interface';
-import { Reservation } from '../../../../core/interfaces/reservation.interface';
-import { DialogViewReservationComponent } from '../../../../core/components/dialog-view-reservation/dialog-view-reservation.component';
+import { Reservation } from '../../../../shared/interfaces/reservation.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Mode } from '../../../../core/interfaces/mode.enum';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { StorageKey } from '../../../../core/services/storage/storage.model';
 import { Router } from '@angular/router';
+import { DialogViewReservationComponent } from '../../../../shared/components/dialog-view-reservation/dialog-view-reservation.component';
 
 @Component({
   selector: 'app-home-client',

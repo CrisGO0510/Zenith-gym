@@ -1,5 +1,9 @@
 <main class="dialog-employee">
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="employeeForm"
+    (ngSubmit)="onSubmit()"
+    (keydown.enter)="$event.preventDefault()"
+  >
     @if (data.mode === 1){
     <h1 mat-dialog-title>Nuevo Empleado</h1>
     } @if (data.mode === 2){
@@ -9,12 +13,17 @@
       <div class="employee-details-grid">
         <mat-form-field appearance="outline" class="grid-area-doc">
           <mat-label>Documento</mat-label>
-          <input matInput formControlName="userId" />
+          <input
+            matInput
+            formControlName="userId"
+            (keyup.enter)="searchUser()"
+          />
           <button
             mat-icon-button
             matSuffix
             type="button"
             aria-label="Buscar documento"
+            (click)="searchUser()"
           >
             <mat-icon>search</mat-icon>
           </button>
@@ -22,41 +31,43 @@
 
         <mat-form-field appearance="outline" class="grid-area-name">
           <mat-label>Nombre</mat-label>
-          <input matInput formControlName="name" />
+          <input matInput formControlName="name" readonly />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-lastname">
           <mat-label>Apellidos</mat-label>
-          <input matInput formControlName="lastname" />
+          <input matInput formControlName="lastname" readonly />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-phone">
           <mat-label>Teléfono Movil</mat-label>
-          <input matInput formControlName="phone" type="tel" />
+          <input matInput formControlName="phone_number" type="tel" readonly />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-email">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" />
+          <input matInput formControlName="email" type="email" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="grid-area-birthday">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="birthdayPicker"
+            formControlName="birthday"
+            readonly
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="birthdayPicker"
+            readonly
+          ></mat-datepicker-toggle>
+          <mat-datepicker #birthdayPicker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-specialty">
           <mat-label>Especialidad</mat-label>
           <input matInput formControlName="especialty" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="grid-area-birthdate">
-          <mat-label>Fecha de Nacimiento</mat-label>
-          <input
-            matInput
-            [matDatepicker]="birthdatePicker"
-            formControlName="birthdate"
-          />
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="birthdatePicker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #birthdatePicker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="grid-area-entry-date">
@@ -76,9 +87,13 @@
         <mat-form-field appearance="outline" class="grid-area-employee-type">
           <mat-label>Tipo de Empleado</mat-label>
           <mat-select formControlName="employeeTypeId">
-            <mat-option [value]="0">{{
-              employeeForm.get("employeeType")?.value || "Seleccione tipo"
-            }}</mat-option>
+            <mat-option [value]="null">Seleccione tipo</mat-option>
+            <mat-option
+              *ngFor="let role of rolesOptions"
+              [value]="role.id_role"
+            >
+              {{ role.name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
 

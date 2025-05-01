@@ -50,8 +50,8 @@ export class DialogFormClientComponent implements OnInit {
     lastname: 'Doe',
     email: 'john.doe@example.com',
     password: 'hashedPassword123',
-    phone: '+541156789012',
-    birthdate: new Date('1990-01-15'),
+    phone_number: '+541156789012',
+    birthday: new Date('1990-01-15'),
     restriction: 'None',
   };
 
@@ -62,8 +62,8 @@ export class DialogFormClientComponent implements OnInit {
       lastname: '',
       email: '',
       password: '',
-      phone: '',
-      birthdate: new Date(),
+      phone_number: '',
+      birthday: new Date(),
       restriction: '',
     };
   }
@@ -84,13 +84,13 @@ export class DialogFormClientComponent implements OnInit {
         user.lastname,
         [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
       ],
-      phone: [
-        user.phone,
+      phone_number: [
+        user.phone_number,
         [Validators.required, Validators.pattern(/^\+?[0-9]{8,15}$/)],
       ],
       email: [user.email, [Validators.required, Validators.email]],
-      birthdate: [
-        user.birthdate ? new Date(user.birthdate) : null,
+      birthday: [
+        user.birthday ? new Date(user.birthday) : null,
         [Validators.required],
       ],
       restriction: [user.restriction || ''],

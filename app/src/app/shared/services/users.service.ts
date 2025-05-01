@@ -2,19 +2,23 @@ import { Injectable } from '@angular/core';
 import { CrudService } from '../../core/services/http/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TypeMembership } from '../../shared/interfaces/membership-type.interface';
+import { User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MembershipsService extends CrudService {
-  endpoint = 'memberships';
+export class UserServices extends CrudService {
+  endpoint = 'users';
 
   constructor(http: HttpClient) {
     super(http);
   }
 
-  getMemberships():Observable<TypeMembership[]> {
-    return this.get<TypeMembership[]>('');
+  getUsers() {
+    return this.get('');
+  }
+
+  getUserById(id: number): Observable<User[]> {
+    return this.get<User[]>(`?id_user=${id}`);
   }
 }

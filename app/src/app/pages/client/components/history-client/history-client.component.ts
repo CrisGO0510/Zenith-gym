@@ -6,11 +6,11 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { Reservation } from '../../../../core/interfaces/reservation.interface';
+import { Reservation } from '../../../../shared/interfaces/reservation.interface';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { Subscription } from 'rxjs';
 import { HistoryClientService } from './history-client.service';
-import { ReservationStatus } from '../../../../core/interfaces/reservation-status.enum';
+import { ReservationStatus } from '../../../../shared/interfaces/reservation-status.enum';
 
 export interface ChartDataPoint {
   name: Date;

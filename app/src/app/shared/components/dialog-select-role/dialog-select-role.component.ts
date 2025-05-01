@@ -5,17 +5,17 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { DialogEmployeeComponent } from '../../../pages/administrative/components/dialog-employee/dialog-employee.component';
-import { SendDataDialog } from '../../interfaces/send-data-dialog';
-import { TokenRole } from '../../interfaces/token-role.interface';
-import { Role } from '../../services/role/role.interfaces';
+import { SendDataDialog } from '../../../core/interfaces/send-data-dialog';
+import { TokenRole } from '../../../core/interfaces/token-role.interface';
+import { Role } from '../../../core/services/role/role.interfaces';
 import { Subscription } from 'rxjs';
-import { RoleService } from '../../services/role/role.service';
+import { RoleService } from '../../../core/services/role/role.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { StorageService } from '../../services/storage/storage.service';
-import { CurrentTokenRole } from '../../interfaces/current-token-role.interface';
-import { StorageKey } from '../../services/storage/storage.model';
+import { StorageService } from '../../../core/services/storage/storage.service';
+import { CurrentTokenRole } from '../../../core/interfaces/current-token-role.interface';
+import { StorageKey } from '../../../core/services/storage/storage.model';
 
 @Component({
   selector: 'app-dialog-select-role',

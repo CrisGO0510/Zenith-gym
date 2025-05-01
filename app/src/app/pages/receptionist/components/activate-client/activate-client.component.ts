@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MembershipClient } from '../../../../core/interfaces/membership.interface';
+import { MembershipClient } from '../../../../shared/interfaces/membership.interface';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

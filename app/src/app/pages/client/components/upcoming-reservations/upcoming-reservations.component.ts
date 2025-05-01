@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Reservation } from '../../../../core/interfaces/reservation.interface';
+import { Reservation } from '../../../../shared/interfaces/reservation.interface';
 
 @Component({
   selector: 'app-upcoming-reservations',

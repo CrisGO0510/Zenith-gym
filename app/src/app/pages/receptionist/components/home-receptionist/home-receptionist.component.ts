@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarView } from 'angular-calendar';
-import { DialogFormClientComponent } from '../../../../core/components/dialog-form-client/dialog-form-client.component';
+import { DialogFormClientComponent } from '../../../../shared/components/dialog-form-client/dialog-form-client.component';
 import { ActivateClientComponent } from '../activate-client/activate-client.component';
-import { DialogViewReservationComponent } from '../../../../core/components/dialog-view-reservation/dialog-view-reservation.component';
+import { DialogViewReservationComponent } from '../../../../shared/components/dialog-view-reservation/dialog-view-reservation.component';
 
 @Component({
   selector: 'app-home-receptionist',
