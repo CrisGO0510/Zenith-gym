@@ -1,95 +1,111 @@
-<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-  @if (data.mode === 1){
-  <h1 mat-dialog-title>Nuevo Empleado</h1>
-  }
+<main class="dialog-employee">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    @if (data.mode === 1){
+    <h1 mat-dialog-title>Nuevo Empleado</h1>
+    } @if (data.mode === 2){
+    <h1 mat-dialog-title>Editar Empleado</h1>
+    }
+    <div mat-dialog-content class="dialog-content-area">
+      <div class="employee-details-grid">
+        <mat-form-field appearance="outline" class="grid-area-doc">
+          <mat-label>Documento</mat-label>
+          <input matInput formControlName="userId" />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            aria-label="Buscar documento"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
 
-  @if (data.mode === 2){
-  <h1 mat-dialog-title>Editar Empleado</h1>
-  }
-  <div mat-dialog-content class="dialog-content-area">
-    <div class="employee-details-grid">
-      <mat-form-field appearance="outline" class="grid-area-doc">
-        <mat-label>Documento</mat-label>
-        <input matInput formControlName="userId" />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          aria-label="Buscar documento"
-        >
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-name">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-name">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-lastname">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastname" />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-lastname">
-        <mat-label>Apellidos</mat-label>
-        <input matInput formControlName="lastname" />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-phone">
+          <mat-label>Teléfono Movil</mat-label>
+          <input matInput formControlName="phone" type="tel" />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-phone">
-        <mat-label>Teléfono Movil</mat-label>
-        <input matInput formControlName="phone" type="tel" />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-email">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-email">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-specialty">
+          <mat-label>Especialidad</mat-label>
+          <input matInput formControlName="especialty" />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-specialty">
-        <mat-label>Especialidad</mat-label>
-        <input matInput formControlName="especialty" />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-birthdate">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="birthdatePicker"
+            formControlName="birthdate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="birthdatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #birthdatePicker></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-birthdate">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="birthdatePicker" formControlName="birthdate" />
-        <mat-datepicker-toggle matIconSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #birthdatePicker></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-entry-date">
+          <mat-label>Fecha de Ingreso</mat-label>
+          <input
+            matInput
+            [matDatepicker]="entryPicker"
+            formControlName="date_entry"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="entryPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #entryPicker></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-entry-date">
-        <mat-label>Fecha de Ingreso</mat-label>
-        <input matInput [matDatepicker]="entryPicker" formControlName="date_entry" />
-        <mat-datepicker-toggle matIconSuffix [for]="entryPicker"></mat-datepicker-toggle>
-        <mat-datepicker #entryPicker></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-employee-type">
+          <mat-label>Tipo de Empleado</mat-label>
+          <mat-select formControlName="employeeTypeId">
+            <mat-option [value]="0">{{
+              employeeForm.get("employeeType")?.value || "Seleccione tipo"
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="grid-area-employee-type">
-        <mat-label>Tipo de Empleado</mat-label>
-        <mat-select formControlName="employeeTypeId">
-          <mat-option [value]="0">{{ employeeForm.get('employeeType')?.value || 'Seleccione tipo' }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="grid-area-biography">
-        <mat-label>Biografía</mat-label>
-        <textarea matInput formControlName="biography" rows="3"></textarea>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="grid-area-biography">
+          <mat-label>Biografía</mat-label>
+          <textarea matInput formControlName="biography" rows="3"></textarea>
+        </mat-form-field>
+      </div>
     </div>
-  </div>
 
-  <div mat-dialog-actions class="dialog-actions" align="end">
-    <button
-      mat-stroked-button
-      type="button"
-      class="cancel-button"
-      (click)="closeDialog()"
-    >
-      Cancelar
-    </button>
-    <button
-      mat-flat-button
-      type="submit"
-      class="save-button"
-      [disabled]="employeeForm.invalid"
-    >
-      Guardar
-    </button>
-  </div>
-</form>
+    <div mat-dialog-actions class="dialog-actions" align="end">
+      <button
+        mat-stroked-button
+        type="button"
+        class="cancel-button"
+        (click)="closeDialog()"
+      >
+        Cancelar
+      </button>
+      <button
+        mat-flat-button
+        type="submit"
+        class="save-button"
+        [disabled]="employeeForm.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</main>

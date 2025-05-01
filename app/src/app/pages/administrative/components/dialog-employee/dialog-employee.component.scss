@@ -26,6 +26,11 @@ h1[mat-dialog-title] {
   border-bottom: 1px solid $input-border-color;
 }
 
+.dialog-employee {
+  background-color: $dialog-bg;
+  padding: 16px;
+}
+
 .dialog-content-area {
   background-color: $dialog-bg;
   color: $text-color;
