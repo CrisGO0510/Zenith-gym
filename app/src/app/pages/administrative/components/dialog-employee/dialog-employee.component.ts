@@ -11,6 +11,7 @@ import { UserServices } from '../../../../shared/services/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Role } from '../../../../core/services/role/role.interfaces';
 import { RoleService } from '../../../../core/services/role/role.service';
+import { id } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dialog-employee',
@@ -35,11 +36,14 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getRolesTypes();
+    console.log(this.data.data);
     this.employeeForm = this.buildForm(this.data.data);
   }
 
   private buildForm(item: Partial<FullEmployee> = {}): FormGroup {
     return this.formBuilder.group({
+      id: item.id,
+      id_user_role: item.id_user_role,
       id_user: [item.id_user, Validators.required],
       name: [item.name, Validators.required],
       lastname: [item.lastname, Validators.required],
@@ -105,10 +109,12 @@ export class DialogEmployeeComponent implements OnInit, OnDestroy {
     }
 
     const employeeData: Employee = {
+      id: this.employeeForm.get('id')?.value,
       bio: this.employeeForm.get('bio')?.value,
       specialization: this.employeeForm.get('specialization')?.value,
       date_entry: this.employeeForm.get('date_entry')?.value,
       TB_user_role: {
+        id_user_role: this.employeeForm.get('id_user_role')?.value,
         id_user: parseInt(this.employeeForm.get('id_user')?.value),
         id_role: this.employeeForm.get('employeeTypeId')?.value,
       },

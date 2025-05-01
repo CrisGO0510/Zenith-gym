@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmployeesService } from '../../../../shared/services/employees.service';
 import { UserServices } from '../../../../shared/services/users.service';
+import { CurrentTokenRole } from '../../../../core/interfaces/current-token-role.interface';
 
 @Component({
   selector: 'app-home-administrative',
@@ -24,6 +25,7 @@ import { UserServices } from '../../../../shared/services/users.service';
 })
 export class HomeAdministrativeComponent implements OnInit {
   private suscription$: Subscription = new Subscription();
+  private currentUser: CurrentTokenRole | null = null;
 
   dataSource = new MatTableDataSource<FullEmployee>();
   displayedColumns: string[] = [
@@ -31,6 +33,7 @@ export class HomeAdministrativeComponent implements OnInit {
     'name',
     'lastname',
     'employeeType',
+    'specialization',
     'actions',
   ];
 
@@ -60,16 +63,10 @@ export class HomeAdministrativeComponent implements OnInit {
             response.forEach((employee) => {
               this.getFullEmployee(employee);
             });
-          } else {
-            this.snackBar.open('Error al obtener los empleados', 'Cerrar', {
-              duration: 3000,
-              verticalPosition: 'top',
-            });
           }
         },
         error: (err) => {
           console.error('Error al obtener los empleados:', err);
-          console.log(err.error.message);
           this.snackBar.open(
             `${err.error.message ?? 'Error al obtener los empleados'}`,
             'Cerrar',
@@ -92,7 +89,10 @@ export class HomeAdministrativeComponent implements OnInit {
         .getUserById(employee.TB_user_role.id_user)
         .subscribe((user) => {
           //TODO: Optmizar esta parte, ya que se hace una consulta por cada empleado
-          if (user.length > 0) {
+          if (
+            user.length > 0 &&
+            user[0].id_user !== this.currentUser?.id_user
+          ) {
             const fullEmployee: FullEmployee = {
               id_user: user[0].id_user,
               name: user[0].name,
@@ -102,14 +102,17 @@ export class HomeAdministrativeComponent implements OnInit {
               birthday: user[0].birthday,
               restriction: user[0].restriction,
 
-              id_user_role: employee.id_user_role,
+              id: employee.id,
+              id_user_role: employee.TB_user_role.id_user_role,
               bio: employee.bio,
               specialization: employee.specialization,
               date_entry: employee.date_entry,
-              // TODO: Crear vista mas adelante
+              // Determinar el tipo de empleado basado en el id_role
               employeeType:
-                employee.TB_user_role.id_role == 1
+                employee.TB_user_role.id_role == 2
                   ? 'Administrador'
+                  : employee.TB_user_role.id_role == 3
+                  ? 'Recepcionista'
                   : 'Empleado',
               employeeTypeId: employee.TB_user_role.id_role,
             };
@@ -118,20 +121,15 @@ export class HomeAdministrativeComponent implements OnInit {
 
             this.dataSource.data = [...this.dataSource.data, fullEmployee];
             console.log(this.dataSource.data);
-          } else {
-            this.snackBar.open('Error al obtener el empleado', 'Cerrar', {
-              duration: 3000,
-              verticalPosition: 'top',
-            });
           }
         })
     );
   }
 
   private roleValidate() {
-    const user = this.storageService.read(StorageKey.CURRENT_ROLE);
+    this.currentUser = this.storageService.read(StorageKey.CURRENT_ROLE);
 
-    if (user?.id_role != 2) {
+    if (this.currentUser?.id_role != 2) {
       this.snackBar.open(
         'No tienes permisos para acceder a esta página',
         'Cerrar',
@@ -176,7 +174,7 @@ export class HomeAdministrativeComponent implements OnInit {
         console.log('resul', result);
 
         if (result) {
-          if (result.id_user_role) {
+          if (result.TB_user_role.id_user_role) {
             this.updateEmployee(result);
           } else {
             this.createEmployee(result);
@@ -225,20 +223,18 @@ export class HomeAdministrativeComponent implements OnInit {
   }
 
   updateEmployee(employee: Employee): void {
-    if (!employee.id) {
-      this.snackBar.open(
-        'ID de empleado no proporcionado para la actualización',
-        'Cerrar',
-        {
-          duration: 3000,
-          verticalPosition: 'top',
-        }
-      );
+    const { TB_user_role, id, ...employeeData } = employee;
+
+    if (!id) {
+      this.snackBar.open('Error al obtener el id del empleado', 'Cerrar', {
+        duration: 3000,
+        verticalPosition: 'top',
+      });
       return;
     }
 
     this.suscription$.add(
-      this.employeesService.updateEmployee(employee.id, employee).subscribe({
+      this.employeesService.updateEmployee(id, employeeData).subscribe({
         next: (response) => {
           if (response) {
             this.snackBar.open('Empleado actualizado con éxito', 'Cerrar', {
@@ -272,7 +268,43 @@ export class HomeAdministrativeComponent implements OnInit {
     );
   }
 
-  deleteEmployee(employeeId: number): void {}
+  deleteEmployee(employeeId: number): void {
+    this.suscription$.add(
+      this.employeesService.deleteEmployee(employeeId).subscribe({
+        next: (response) => {
+          if (response) {
+            this.snackBar.open('Empleado eliminado con éxito', 'Cerrar', {
+              duration: 3000,
+              verticalPosition: 'top',
+            });
+
+            console.log(response);
+
+            this.getEmployees();
+          } else {
+            this.snackBar.open('Error al eliminar el empleado', 'Cerrar', {
+              duration: 3000,
+              verticalPosition: 'top',
+            });
+          }
+        },
+        error: (err) => {
+          console.error('Error al eliminar el empleado:', err);
+          this.snackBar.open(
+            `${err.error.message ?? 'Error al eliminar el empleado'}`,
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+            }
+          );
+        },
+        complete: () => {
+          console.log('Eliminación de empleado completada');
+        },
+      })
+    );
+  }
 
   ngOnDestroy(): void {
     this.suscription$.unsubscribe();

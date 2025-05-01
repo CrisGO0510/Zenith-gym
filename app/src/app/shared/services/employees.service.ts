@@ -22,7 +22,14 @@ export class EmployeesService extends CrudService {
     return this.post<Employee>(employee);
   }
 
-  updateEmployee(id: number, employee: Employee): Observable<Employee> {
+  updateEmployee(
+    id: number,
+    employee: Omit<Employee, 'TB_user_role'>
+  ): Observable<Employee> {
     return this.patch<Employee>(id, employee);
+  }
+
+  deleteEmployee(id: number): Observable<any> {
+    return this.deleteById(id);
   }
 }

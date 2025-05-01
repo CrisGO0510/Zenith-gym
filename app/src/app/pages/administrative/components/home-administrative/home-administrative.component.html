@@ -34,6 +34,11 @@
         <td mat-cell *matCellDef="let emp">{{ emp.employeeType }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="specialization">
+        <th mat-header-cell *matHeaderCellDef>Especialidad</th>
+        <td mat-cell *matCellDef="let emp">{{ emp.specialization }}</td>
+      </ng-container>
+      
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Acciones</th>
         <td mat-cell *matCellDef="let emp">
@@ -49,7 +54,7 @@
             mat-icon-button
             color="warn"
             aria-label="Eliminar empleado"
-            (click)="deleteEmployee(emp.th)"
+            (click)="deleteEmployee(emp.id)"
           >
             <mat-icon>delete_outline</mat-icon>
           </button>
@@ -58,6 +63,13 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length" style="text-align: center;">
+          No hay empleados registrados.
+        </td>
+      </tr>
+      
     </table>
   </div>
 </div>

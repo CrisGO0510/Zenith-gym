@@ -2,7 +2,6 @@ import { User } from './user.interface';
 
 export interface Employee {
   id?: number;
-  id_user_role?: number;
   bio: string;
   specialization: string;
   date_entry: Date;
@@ -14,6 +13,7 @@ export interface Employee {
 }
 
 export interface FullEmployee extends User {
+  id?: number;
   id_user_role?: number;
   bio: string;
   specialization: string;
