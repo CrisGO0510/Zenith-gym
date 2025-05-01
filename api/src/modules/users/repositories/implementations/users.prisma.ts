@@ -8,11 +8,25 @@ import { UpdateUsersDto } from '../../dto/users/update.users.dto';
 export class UsersPrisma implements UsersRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  public async get(where: Prisma.TB_usersWhereInput): Promise<TB_users[]> {
-    return this.prisma.tB_users.findMany({
+  public async get(where: Prisma.TB_usersWhereInput): Promise<any[]> {
+    const users = await this.prisma.tB_users.findMany({
       where,
+      include: {
+        TB_restriction: true,
+      },
     });
+  
+    return users.map((user) => ({
+      id_user: user.id_user,
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      phone_number: user.phone_number,
+      birthday: user.birthday,
+      restriction: user.TB_restriction[0]?.description ?? null,
+    }));
   }
+  
 
   public async create(data: Prisma.TB_usersCreateInput): Promise<TB_users> {
     return this.prisma.tB_users.create({
