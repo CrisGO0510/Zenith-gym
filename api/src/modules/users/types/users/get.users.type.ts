@@ -1,3 +1,3 @@
 export type GetUsersType = {
-  email?: string;
+  id_user?: number;
 };

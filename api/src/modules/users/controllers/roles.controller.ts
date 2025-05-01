@@ -20,6 +20,10 @@ export class RolesController {
 
   @Get('')
   public get(@Query() query: GetRolesDto) {
+    if (query.id_role) {
+      query.id_role = Number(query.id_role);
+    }
+
     return this.roles.get(query);
   }
 

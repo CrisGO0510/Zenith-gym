@@ -6,5 +6,5 @@ export class GetUsersDto {
   @ApiProperty({
     required: false,
   })
-  email: string;
+  id_user: number;
 }

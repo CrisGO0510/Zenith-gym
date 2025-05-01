@@ -20,6 +20,10 @@ export class UsersController {
 
   @Get('')
   public get(@Query() query: GetUsersDto) {
+    if (query.id_user) {
+      query.id_user = Number(query.id_user);
+    }
+
     return this.users.get(query);
   }
 
