@@ -7,19 +7,9 @@ export class GetUsersRolesDto {
     required: false,
   })
   id_user: number;
-  @IsOptional()
-  @ApiProperty({
-    required: false,
-  })
-  id_role: number;
-  @IsOptional()
-  @ApiProperty({
-    required: false,
-  })
-  email: string;
-  @IsOptional()
-  @ApiProperty({
-    required: false,
-  })
-  password: string;
+  // @IsOptional()
+  // @ApiProperty({
+  //   required: false,
+  // })
+  // id_role: number;
 }

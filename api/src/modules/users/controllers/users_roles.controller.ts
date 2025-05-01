@@ -19,7 +19,11 @@ export class UsersRolesController {
   constructor(private readonly usersRoles: UsersRolesService) {}
 
   @Get('')
-  public get(@Query() query: Omit<GetUsersRolesDto | 'password', 'email'>) {
+  public get(@Query() query: GetUsersRolesDto) {
+    if (query.id_user) {
+      query.id_user = Number(query.id_user);
+    }
+    
     return this.usersRoles.get(query);
   }
 
