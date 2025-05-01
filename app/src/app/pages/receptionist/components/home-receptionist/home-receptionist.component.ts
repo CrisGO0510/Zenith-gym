@@ -13,6 +13,7 @@ import { StorageKey } from '../../../../core/services/storage/storage.model';
 import { CurrentTokenRole } from '../../../../core/interfaces/current-token-role.interface';
 import { ClientService } from '../../../../shared/services/client.service';
 import { MembershipClient } from '../../../../shared/interfaces/membership.interface';
+import { User } from '../../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-home-receptionist',
@@ -69,6 +70,45 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
     const dialogRef = this.dialog.open(DialogFormClientComponent, {
       width: '80%',
     });
+
+    this.subscription$.add(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.handleUserUpdate(result);
+        }
+      })
+    );
+  }
+
+  handleUserUpdate(result: User) {
+    const {id_user, ...userData} = result;
+    console.log(userData);
+    this.subscription$.add(
+      this.userService.updateUser(id_user, userData).subscribe({
+        next: (_) => {
+          this.snackBar.open(
+            'El cliente ha sido creado correctamente.',
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+            }
+          );
+        },
+        error: (error) => {
+          console.log('Error:', error);
+          this.snackBar.open(
+            `${error.error.message ?? 'Error al crear el cliente.'}`,
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+              panelClass: ['error-snackbar'],
+            }
+          );
+        },
+      })
+    );
   }
 
   activateUser() {
@@ -78,13 +118,11 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
 
     this.subscription$.add(
       dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.handleClientActivation(result);
-          console.log('User activated:', result);
-        }
+        if (result) this.handleClientActivation(result);
       })
     );
   }
+
   handleClientActivation(result: MembershipClient) {
     this.subscription$.add(
       this.clientService.createMembershipClient(result).subscribe({

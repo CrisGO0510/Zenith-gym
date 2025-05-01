@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 interface SignupForm {
   firstName: string;
   lastName: string;
-  birthDate: Date;
+  birthday: Date;
   document: string;
   phone: string;
   email: string;
@@ -46,7 +46,7 @@ export class SingupComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
       ],
-      birthDate: ['', [Validators.required]],
+      birthday: ['', [Validators.required]],
       document: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       phone: [
         '',

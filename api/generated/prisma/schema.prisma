@@ -25,15 +25,17 @@ enum reservationStatus {
 }
 
 model TB_users {
-  id_user          Int                @id @default(autoincrement())
-  name             String             @db.VarChar(64)
-  lastname         String             @db.VarChar(64)
-  email            String             @unique @db.VarChar(128)
-  password         String             @db.VarChar(255)
-  phone_number     String             @db.VarChar(16)
-  birthday         DateTime           @db.Date()
+  id_user      Int      @id @default(autoincrement())
+  name         String   @db.VarChar(64)
+  lastname     String   @db.VarChar(64)
+  email        String   @unique @db.VarChar(128)
+  password     String   @db.VarChar(255)
+  phone_number String   @db.VarChar(16)
+  birthday     DateTime @db.Date()
+
   TB_user_role     TB_user_role[]
   TB_notifications TB_notifications[]
+  TB_restriction   TB_restriction[]
 }
 
 model TB_role {
@@ -50,17 +52,16 @@ model TB_user_role {
 
   TB_users             TB_users               @relation(fields: [id_user], references: [id_user])
   TB_role              TB_role                @relation(fields: [id_role], references: [id_role])
-  TB_restriction       TB_restriction[]
   TB_employees         TB_employees[]
   TB_client_membership TB_client_membership[]
 }
 
 model TB_restriction {
   id_restriction Int    @id @default(autoincrement())
-  id_user_role   Int    @db.Integer()
+  id_user        Int    @unique @db.Integer()
   description    String @db.VarChar(1024)
 
-  TB_user_role TB_user_role @relation(fields: [id_user_role], references: [id_user_role])
+  TB_users TB_users @relation(fields: [id_user], references: [id_user])
 }
 
 model TB_employees {

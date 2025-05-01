@@ -1998,11 +1998,13 @@ export namespace Prisma {
   export type TB_usersCountOutputType = {
     TB_user_role: number
     TB_notifications: number
+    TB_restriction: number
   }
 
   export type TB_usersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_user_role?: boolean | TB_usersCountOutputTypeCountTB_user_roleArgs
     TB_notifications?: boolean | TB_usersCountOutputTypeCountTB_notificationsArgs
+    TB_restriction?: boolean | TB_usersCountOutputTypeCountTB_restrictionArgs
   }
 
   // Custom InputTypes
@@ -2028,6 +2030,13 @@ export namespace Prisma {
    */
   export type TB_usersCountOutputTypeCountTB_notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TB_notificationsWhereInput
+  }
+
+  /**
+   * TB_usersCountOutputType without action
+   */
+  export type TB_usersCountOutputTypeCountTB_restrictionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TB_restrictionWhereInput
   }
 
 
@@ -2067,13 +2076,11 @@ export namespace Prisma {
    */
 
   export type TB_user_roleCountOutputType = {
-    TB_restriction: number
     TB_employees: number
     TB_client_membership: number
   }
 
   export type TB_user_roleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_restriction?: boolean | TB_user_roleCountOutputTypeCountTB_restrictionArgs
     TB_employees?: boolean | TB_user_roleCountOutputTypeCountTB_employeesArgs
     TB_client_membership?: boolean | TB_user_roleCountOutputTypeCountTB_client_membershipArgs
   }
@@ -2087,13 +2094,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the TB_user_roleCountOutputType
      */
     select?: TB_user_roleCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TB_user_roleCountOutputType without action
-   */
-  export type TB_user_roleCountOutputTypeCountTB_restrictionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_restrictionWhereInput
   }
 
   /**
@@ -2526,6 +2526,7 @@ export namespace Prisma {
     birthday?: boolean
     TB_user_role?: boolean | TB_users$TB_user_roleArgs<ExtArgs>
     TB_notifications?: boolean | TB_users$TB_notificationsArgs<ExtArgs>
+    TB_restriction?: boolean | TB_users$TB_restrictionArgs<ExtArgs>
     _count?: boolean | TB_usersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_users"]>
 
@@ -2563,6 +2564,7 @@ export namespace Prisma {
   export type TB_usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_user_role?: boolean | TB_users$TB_user_roleArgs<ExtArgs>
     TB_notifications?: boolean | TB_users$TB_notificationsArgs<ExtArgs>
+    TB_restriction?: boolean | TB_users$TB_restrictionArgs<ExtArgs>
     _count?: boolean | TB_usersCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TB_usersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2573,6 +2575,7 @@ export namespace Prisma {
     objects: {
       TB_user_role: Prisma.$TB_user_rolePayload<ExtArgs>[]
       TB_notifications: Prisma.$TB_notificationsPayload<ExtArgs>[]
+      TB_restriction: Prisma.$TB_restrictionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_user: number
@@ -2978,6 +2981,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     TB_user_role<T extends TB_users$TB_user_roleArgs<ExtArgs> = {}>(args?: Subset<T, TB_users$TB_user_roleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_user_rolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     TB_notifications<T extends TB_users$TB_notificationsArgs<ExtArgs> = {}>(args?: Subset<T, TB_users$TB_notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    TB_restriction<T extends TB_users$TB_restrictionArgs<ExtArgs> = {}>(args?: Subset<T, TB_users$TB_restrictionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_restrictionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3447,6 +3451,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TB_notificationsScalarFieldEnum | TB_notificationsScalarFieldEnum[]
+  }
+
+  /**
+   * TB_users.TB_restriction
+   */
+  export type TB_users$TB_restrictionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TB_restriction
+     */
+    select?: TB_restrictionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TB_restriction
+     */
+    omit?: TB_restrictionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TB_restrictionInclude<ExtArgs> | null
+    where?: TB_restrictionWhereInput
+    orderBy?: TB_restrictionOrderByWithRelationInput | TB_restrictionOrderByWithRelationInput[]
+    cursor?: TB_restrictionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TB_restrictionScalarFieldEnum | TB_restrictionScalarFieldEnum[]
   }
 
   /**
@@ -4738,7 +4766,6 @@ export namespace Prisma {
     id_role?: boolean
     TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
     TB_role?: boolean | TB_roleDefaultArgs<ExtArgs>
-    TB_restriction?: boolean | TB_user_role$TB_restrictionArgs<ExtArgs>
     TB_employees?: boolean | TB_user_role$TB_employeesArgs<ExtArgs>
     TB_client_membership?: boolean | TB_user_role$TB_client_membershipArgs<ExtArgs>
     _count?: boolean | TB_user_roleCountOutputTypeDefaultArgs<ExtArgs>
@@ -4770,7 +4797,6 @@ export namespace Prisma {
   export type TB_user_roleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
     TB_role?: boolean | TB_roleDefaultArgs<ExtArgs>
-    TB_restriction?: boolean | TB_user_role$TB_restrictionArgs<ExtArgs>
     TB_employees?: boolean | TB_user_role$TB_employeesArgs<ExtArgs>
     TB_client_membership?: boolean | TB_user_role$TB_client_membershipArgs<ExtArgs>
     _count?: boolean | TB_user_roleCountOutputTypeDefaultArgs<ExtArgs>
@@ -4789,7 +4815,6 @@ export namespace Prisma {
     objects: {
       TB_users: Prisma.$TB_usersPayload<ExtArgs>
       TB_role: Prisma.$TB_rolePayload<ExtArgs>
-      TB_restriction: Prisma.$TB_restrictionPayload<ExtArgs>[]
       TB_employees: Prisma.$TB_employeesPayload<ExtArgs>[]
       TB_client_membership: Prisma.$TB_client_membershipPayload<ExtArgs>[]
     }
@@ -5193,7 +5218,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     TB_users<T extends TB_usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_usersDefaultArgs<ExtArgs>>): Prisma__TB_usersClient<$Result.GetResult<Prisma.$TB_usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     TB_role<T extends TB_roleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_roleDefaultArgs<ExtArgs>>): Prisma__TB_roleClient<$Result.GetResult<Prisma.$TB_rolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    TB_restriction<T extends TB_user_role$TB_restrictionArgs<ExtArgs> = {}>(args?: Subset<T, TB_user_role$TB_restrictionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_restrictionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     TB_employees<T extends TB_user_role$TB_employeesArgs<ExtArgs> = {}>(args?: Subset<T, TB_user_role$TB_employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_employeesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     TB_client_membership<T extends TB_user_role$TB_client_membershipArgs<ExtArgs> = {}>(args?: Subset<T, TB_user_role$TB_client_membershipArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_client_membershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -5624,30 +5648,6 @@ export namespace Prisma {
   }
 
   /**
-   * TB_user_role.TB_restriction
-   */
-  export type TB_user_role$TB_restrictionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_restriction
-     */
-    select?: TB_restrictionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_restriction
-     */
-    omit?: TB_restrictionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_restrictionInclude<ExtArgs> | null
-    where?: TB_restrictionWhereInput
-    orderBy?: TB_restrictionOrderByWithRelationInput | TB_restrictionOrderByWithRelationInput[]
-    cursor?: TB_restrictionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TB_restrictionScalarFieldEnum | TB_restrictionScalarFieldEnum[]
-  }
-
-  /**
    * TB_user_role.TB_employees
    */
   export type TB_user_role$TB_employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5728,29 +5728,29 @@ export namespace Prisma {
 
   export type TB_restrictionAvgAggregateOutputType = {
     id_restriction: number | null
-    id_user_role: number | null
+    id_user: number | null
   }
 
   export type TB_restrictionSumAggregateOutputType = {
     id_restriction: number | null
-    id_user_role: number | null
+    id_user: number | null
   }
 
   export type TB_restrictionMinAggregateOutputType = {
     id_restriction: number | null
-    id_user_role: number | null
+    id_user: number | null
     description: string | null
   }
 
   export type TB_restrictionMaxAggregateOutputType = {
     id_restriction: number | null
-    id_user_role: number | null
+    id_user: number | null
     description: string | null
   }
 
   export type TB_restrictionCountAggregateOutputType = {
     id_restriction: number
-    id_user_role: number
+    id_user: number
     description: number
     _all: number
   }
@@ -5758,29 +5758,29 @@ export namespace Prisma {
 
   export type TB_restrictionAvgAggregateInputType = {
     id_restriction?: true
-    id_user_role?: true
+    id_user?: true
   }
 
   export type TB_restrictionSumAggregateInputType = {
     id_restriction?: true
-    id_user_role?: true
+    id_user?: true
   }
 
   export type TB_restrictionMinAggregateInputType = {
     id_restriction?: true
-    id_user_role?: true
+    id_user?: true
     description?: true
   }
 
   export type TB_restrictionMaxAggregateInputType = {
     id_restriction?: true
-    id_user_role?: true
+    id_user?: true
     description?: true
   }
 
   export type TB_restrictionCountAggregateInputType = {
     id_restriction?: true
-    id_user_role?: true
+    id_user?: true
     description?: true
     _all?: true
   }
@@ -5873,7 +5873,7 @@ export namespace Prisma {
 
   export type TB_restrictionGroupByOutputType = {
     id_restriction: number
-    id_user_role: number
+    id_user: number
     description: string
     _count: TB_restrictionCountAggregateOutputType | null
     _avg: TB_restrictionAvgAggregateOutputType | null
@@ -5898,50 +5898,50 @@ export namespace Prisma {
 
   export type TB_restrictionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_restriction?: boolean
-    id_user_role?: boolean
+    id_user?: boolean
     description?: boolean
-    TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
+    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_restriction"]>
 
   export type TB_restrictionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_restriction?: boolean
-    id_user_role?: boolean
+    id_user?: boolean
     description?: boolean
-    TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
+    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_restriction"]>
 
   export type TB_restrictionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_restriction?: boolean
-    id_user_role?: boolean
+    id_user?: boolean
     description?: boolean
-    TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
+    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_restriction"]>
 
   export type TB_restrictionSelectScalar = {
     id_restriction?: boolean
-    id_user_role?: boolean
+    id_user?: boolean
     description?: boolean
   }
 
-  export type TB_restrictionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_restriction" | "id_user_role" | "description", ExtArgs["result"]["tB_restriction"]>
+  export type TB_restrictionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_restriction" | "id_user" | "description", ExtArgs["result"]["tB_restriction"]>
   export type TB_restrictionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
+    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
   }
   export type TB_restrictionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
+    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
   }
   export type TB_restrictionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
+    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
   }
 
   export type $TB_restrictionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TB_restriction"
     objects: {
-      TB_user_role: Prisma.$TB_user_rolePayload<ExtArgs>
+      TB_users: Prisma.$TB_usersPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id_restriction: number
-      id_user_role: number
+      id_user: number
       description: string
     }, ExtArgs["result"]["tB_restriction"]>
     composites: {}
@@ -6337,7 +6337,7 @@ export namespace Prisma {
    */
   export interface Prisma__TB_restrictionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    TB_user_role<T extends TB_user_roleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_user_roleDefaultArgs<ExtArgs>>): Prisma__TB_user_roleClient<$Result.GetResult<Prisma.$TB_user_rolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    TB_users<T extends TB_usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_usersDefaultArgs<ExtArgs>>): Prisma__TB_usersClient<$Result.GetResult<Prisma.$TB_usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6368,7 +6368,7 @@ export namespace Prisma {
    */
   interface TB_restrictionFieldRefs {
     readonly id_restriction: FieldRef<"TB_restriction", 'Int'>
-    readonly id_user_role: FieldRef<"TB_restriction", 'Int'>
+    readonly id_user: FieldRef<"TB_restriction", 'Int'>
     readonly description: FieldRef<"TB_restriction", 'String'>
   }
     
@@ -16819,7 +16819,7 @@ export namespace Prisma {
 
   export const TB_restrictionScalarFieldEnum: {
     id_restriction: 'id_restriction',
-    id_user_role: 'id_user_role',
+    id_user: 'id_user',
     description: 'description'
   };
 
@@ -17040,6 +17040,7 @@ export namespace Prisma {
     birthday?: DateTimeFilter<"TB_users"> | Date | string
     TB_user_role?: TB_user_roleListRelationFilter
     TB_notifications?: TB_notificationsListRelationFilter
+    TB_restriction?: TB_restrictionListRelationFilter
   }
 
   export type TB_usersOrderByWithRelationInput = {
@@ -17052,6 +17053,7 @@ export namespace Prisma {
     birthday?: SortOrder
     TB_user_role?: TB_user_roleOrderByRelationAggregateInput
     TB_notifications?: TB_notificationsOrderByRelationAggregateInput
+    TB_restriction?: TB_restrictionOrderByRelationAggregateInput
   }
 
   export type TB_usersWhereUniqueInput = Prisma.AtLeast<{
@@ -17067,6 +17069,7 @@ export namespace Prisma {
     birthday?: DateTimeFilter<"TB_users"> | Date | string
     TB_user_role?: TB_user_roleListRelationFilter
     TB_notifications?: TB_notificationsListRelationFilter
+    TB_restriction?: TB_restrictionListRelationFilter
   }, "id_user" | "email">
 
   export type TB_usersOrderByWithAggregationInput = {
@@ -17153,7 +17156,6 @@ export namespace Prisma {
     id_role?: IntFilter<"TB_user_role"> | number
     TB_users?: XOR<TB_usersScalarRelationFilter, TB_usersWhereInput>
     TB_role?: XOR<TB_roleScalarRelationFilter, TB_roleWhereInput>
-    TB_restriction?: TB_restrictionListRelationFilter
     TB_employees?: TB_employeesListRelationFilter
     TB_client_membership?: TB_client_membershipListRelationFilter
   }
@@ -17164,7 +17166,6 @@ export namespace Prisma {
     id_role?: SortOrder
     TB_users?: TB_usersOrderByWithRelationInput
     TB_role?: TB_roleOrderByWithRelationInput
-    TB_restriction?: TB_restrictionOrderByRelationAggregateInput
     TB_employees?: TB_employeesOrderByRelationAggregateInput
     TB_client_membership?: TB_client_membershipOrderByRelationAggregateInput
   }
@@ -17178,7 +17179,6 @@ export namespace Prisma {
     id_role?: IntFilter<"TB_user_role"> | number
     TB_users?: XOR<TB_usersScalarRelationFilter, TB_usersWhereInput>
     TB_role?: XOR<TB_roleScalarRelationFilter, TB_roleWhereInput>
-    TB_restriction?: TB_restrictionListRelationFilter
     TB_employees?: TB_employeesListRelationFilter
     TB_client_membership?: TB_client_membershipListRelationFilter
   }, "id_user_role">
@@ -17208,31 +17208,31 @@ export namespace Prisma {
     OR?: TB_restrictionWhereInput[]
     NOT?: TB_restrictionWhereInput | TB_restrictionWhereInput[]
     id_restriction?: IntFilter<"TB_restriction"> | number
-    id_user_role?: IntFilter<"TB_restriction"> | number
+    id_user?: IntFilter<"TB_restriction"> | number
     description?: StringFilter<"TB_restriction"> | string
-    TB_user_role?: XOR<TB_user_roleScalarRelationFilter, TB_user_roleWhereInput>
+    TB_users?: XOR<TB_usersScalarRelationFilter, TB_usersWhereInput>
   }
 
   export type TB_restrictionOrderByWithRelationInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
     description?: SortOrder
-    TB_user_role?: TB_user_roleOrderByWithRelationInput
+    TB_users?: TB_usersOrderByWithRelationInput
   }
 
   export type TB_restrictionWhereUniqueInput = Prisma.AtLeast<{
     id_restriction?: number
+    id_user?: number
     AND?: TB_restrictionWhereInput | TB_restrictionWhereInput[]
     OR?: TB_restrictionWhereInput[]
     NOT?: TB_restrictionWhereInput | TB_restrictionWhereInput[]
-    id_user_role?: IntFilter<"TB_restriction"> | number
     description?: StringFilter<"TB_restriction"> | string
-    TB_user_role?: XOR<TB_user_roleScalarRelationFilter, TB_user_roleWhereInput>
-  }, "id_restriction">
+    TB_users?: XOR<TB_usersScalarRelationFilter, TB_usersWhereInput>
+  }, "id_restriction" | "id_user">
 
   export type TB_restrictionOrderByWithAggregationInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
     description?: SortOrder
     _count?: TB_restrictionCountOrderByAggregateInput
     _avg?: TB_restrictionAvgOrderByAggregateInput
@@ -17246,7 +17246,7 @@ export namespace Prisma {
     OR?: TB_restrictionScalarWhereWithAggregatesInput[]
     NOT?: TB_restrictionScalarWhereWithAggregatesInput | TB_restrictionScalarWhereWithAggregatesInput[]
     id_restriction?: IntWithAggregatesFilter<"TB_restriction"> | number
-    id_user_role?: IntWithAggregatesFilter<"TB_restriction"> | number
+    id_user?: IntWithAggregatesFilter<"TB_restriction"> | number
     description?: StringWithAggregatesFilter<"TB_restriction"> | string
   }
 
@@ -17766,6 +17766,7 @@ export namespace Prisma {
     birthday: Date | string
     TB_user_role?: TB_user_roleCreateNestedManyWithoutTB_usersInput
     TB_notifications?: TB_notificationsCreateNestedManyWithoutTB_usersInput
+    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersUncheckedCreateInput = {
@@ -17778,6 +17779,7 @@ export namespace Prisma {
     birthday: Date | string
     TB_user_role?: TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput
     TB_notifications?: TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput
+    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersUpdateInput = {
@@ -17789,6 +17791,7 @@ export namespace Prisma {
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUpdateManyWithoutTB_usersNestedInput
     TB_notifications?: TB_notificationsUpdateManyWithoutTB_usersNestedInput
+    TB_restriction?: TB_restrictionUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_usersUncheckedUpdateInput = {
@@ -17801,6 +17804,7 @@ export namespace Prisma {
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUncheckedUpdateManyWithoutTB_usersNestedInput
     TB_notifications?: TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput
+    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_usersCreateManyInput = {
@@ -17878,7 +17882,6 @@ export namespace Prisma {
   export type TB_user_roleCreateInput = {
     TB_users: TB_usersCreateNestedOneWithoutTB_user_roleInput
     TB_role: TB_roleCreateNestedOneWithoutTB_user_roleInput
-    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipCreateNestedManyWithoutTB_user_roleInput
   }
@@ -17887,7 +17890,6 @@ export namespace Prisma {
     id_user_role?: number
     id_user: number
     id_role: number
-    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipUncheckedCreateNestedManyWithoutTB_user_roleInput
   }
@@ -17895,7 +17897,6 @@ export namespace Prisma {
   export type TB_user_roleUpdateInput = {
     TB_users?: TB_usersUpdateOneRequiredWithoutTB_user_roleNestedInput
     TB_role?: TB_roleUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_restriction?: TB_restrictionUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUpdateManyWithoutTB_user_roleNestedInput
   }
@@ -17904,7 +17905,6 @@ export namespace Prisma {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_user?: IntFieldUpdateOperationsInput | number
     id_role?: IntFieldUpdateOperationsInput | number
-    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUncheckedUpdateManyWithoutTB_user_roleNestedInput
   }
@@ -17927,29 +17927,29 @@ export namespace Prisma {
 
   export type TB_restrictionCreateInput = {
     description: string
-    TB_user_role: TB_user_roleCreateNestedOneWithoutTB_restrictionInput
+    TB_users: TB_usersCreateNestedOneWithoutTB_restrictionInput
   }
 
   export type TB_restrictionUncheckedCreateInput = {
     id_restriction?: number
-    id_user_role: number
+    id_user: number
     description: string
   }
 
   export type TB_restrictionUpdateInput = {
     description?: StringFieldUpdateOperationsInput | string
-    TB_user_role?: TB_user_roleUpdateOneRequiredWithoutTB_restrictionNestedInput
+    TB_users?: TB_usersUpdateOneRequiredWithoutTB_restrictionNestedInput
   }
 
   export type TB_restrictionUncheckedUpdateInput = {
     id_restriction?: IntFieldUpdateOperationsInput | number
-    id_user_role?: IntFieldUpdateOperationsInput | number
+    id_user?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type TB_restrictionCreateManyInput = {
     id_restriction?: number
-    id_user_role: number
+    id_user: number
     description: string
   }
 
@@ -17959,7 +17959,7 @@ export namespace Prisma {
 
   export type TB_restrictionUncheckedUpdateManyInput = {
     id_restriction?: IntFieldUpdateOperationsInput | number
-    id_user_role?: IntFieldUpdateOperationsInput | number
+    id_user?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
   }
 
@@ -18466,11 +18466,21 @@ export namespace Prisma {
     none?: TB_notificationsWhereInput
   }
 
+  export type TB_restrictionListRelationFilter = {
+    every?: TB_restrictionWhereInput
+    some?: TB_restrictionWhereInput
+    none?: TB_restrictionWhereInput
+  }
+
   export type TB_user_roleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type TB_notificationsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TB_restrictionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18596,12 +18606,6 @@ export namespace Prisma {
     isNot?: TB_roleWhereInput
   }
 
-  export type TB_restrictionListRelationFilter = {
-    every?: TB_restrictionWhereInput
-    some?: TB_restrictionWhereInput
-    none?: TB_restrictionWhereInput
-  }
-
   export type TB_employeesListRelationFilter = {
     every?: TB_employeesWhereInput
     some?: TB_employeesWhereInput
@@ -18612,10 +18616,6 @@ export namespace Prisma {
     every?: TB_client_membershipWhereInput
     some?: TB_client_membershipWhereInput
     none?: TB_client_membershipWhereInput
-  }
-
-  export type TB_restrictionOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type TB_employeesOrderByRelationAggregateInput = {
@@ -18656,37 +18656,37 @@ export namespace Prisma {
     id_role?: SortOrder
   }
 
-  export type TB_user_roleScalarRelationFilter = {
-    is?: TB_user_roleWhereInput
-    isNot?: TB_user_roleWhereInput
-  }
-
   export type TB_restrictionCountOrderByAggregateInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
     description?: SortOrder
   }
 
   export type TB_restrictionAvgOrderByAggregateInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
   }
 
   export type TB_restrictionMaxOrderByAggregateInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
     description?: SortOrder
   }
 
   export type TB_restrictionMinOrderByAggregateInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
     description?: SortOrder
   }
 
   export type TB_restrictionSumOrderByAggregateInput = {
     id_restriction?: SortOrder
-    id_user_role?: SortOrder
+    id_user?: SortOrder
+  }
+
+  export type TB_user_roleScalarRelationFilter = {
+    is?: TB_user_roleWhereInput
+    isNot?: TB_user_roleWhereInput
   }
 
   export type TB_session_capacityListRelationFilter = {
@@ -19120,6 +19120,13 @@ export namespace Prisma {
     connect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
   }
 
+  export type TB_restrictionCreateNestedManyWithoutTB_usersInput = {
+    create?: XOR<TB_restrictionCreateWithoutTB_usersInput, TB_restrictionUncheckedCreateWithoutTB_usersInput> | TB_restrictionCreateWithoutTB_usersInput[] | TB_restrictionUncheckedCreateWithoutTB_usersInput[]
+    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_usersInput | TB_restrictionCreateOrConnectWithoutTB_usersInput[]
+    createMany?: TB_restrictionCreateManyTB_usersInputEnvelope
+    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+  }
+
   export type TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput = {
     create?: XOR<TB_user_roleCreateWithoutTB_usersInput, TB_user_roleUncheckedCreateWithoutTB_usersInput> | TB_user_roleCreateWithoutTB_usersInput[] | TB_user_roleUncheckedCreateWithoutTB_usersInput[]
     connectOrCreate?: TB_user_roleCreateOrConnectWithoutTB_usersInput | TB_user_roleCreateOrConnectWithoutTB_usersInput[]
@@ -19132,6 +19139,13 @@ export namespace Prisma {
     connectOrCreate?: TB_notificationsCreateOrConnectWithoutTB_usersInput | TB_notificationsCreateOrConnectWithoutTB_usersInput[]
     createMany?: TB_notificationsCreateManyTB_usersInputEnvelope
     connect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
+  }
+
+  export type TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput = {
+    create?: XOR<TB_restrictionCreateWithoutTB_usersInput, TB_restrictionUncheckedCreateWithoutTB_usersInput> | TB_restrictionCreateWithoutTB_usersInput[] | TB_restrictionUncheckedCreateWithoutTB_usersInput[]
+    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_usersInput | TB_restrictionCreateOrConnectWithoutTB_usersInput[]
+    createMany?: TB_restrictionCreateManyTB_usersInputEnvelope
+    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -19170,6 +19184,20 @@ export namespace Prisma {
     deleteMany?: TB_notificationsScalarWhereInput | TB_notificationsScalarWhereInput[]
   }
 
+  export type TB_restrictionUpdateManyWithoutTB_usersNestedInput = {
+    create?: XOR<TB_restrictionCreateWithoutTB_usersInput, TB_restrictionUncheckedCreateWithoutTB_usersInput> | TB_restrictionCreateWithoutTB_usersInput[] | TB_restrictionUncheckedCreateWithoutTB_usersInput[]
+    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_usersInput | TB_restrictionCreateOrConnectWithoutTB_usersInput[]
+    upsert?: TB_restrictionUpsertWithWhereUniqueWithoutTB_usersInput | TB_restrictionUpsertWithWhereUniqueWithoutTB_usersInput[]
+    createMany?: TB_restrictionCreateManyTB_usersInputEnvelope
+    set?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    disconnect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    delete?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    update?: TB_restrictionUpdateWithWhereUniqueWithoutTB_usersInput | TB_restrictionUpdateWithWhereUniqueWithoutTB_usersInput[]
+    updateMany?: TB_restrictionUpdateManyWithWhereWithoutTB_usersInput | TB_restrictionUpdateManyWithWhereWithoutTB_usersInput[]
+    deleteMany?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -19204,6 +19232,20 @@ export namespace Prisma {
     update?: TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput | TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput[]
     updateMany?: TB_notificationsUpdateManyWithWhereWithoutTB_usersInput | TB_notificationsUpdateManyWithWhereWithoutTB_usersInput[]
     deleteMany?: TB_notificationsScalarWhereInput | TB_notificationsScalarWhereInput[]
+  }
+
+  export type TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput = {
+    create?: XOR<TB_restrictionCreateWithoutTB_usersInput, TB_restrictionUncheckedCreateWithoutTB_usersInput> | TB_restrictionCreateWithoutTB_usersInput[] | TB_restrictionUncheckedCreateWithoutTB_usersInput[]
+    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_usersInput | TB_restrictionCreateOrConnectWithoutTB_usersInput[]
+    upsert?: TB_restrictionUpsertWithWhereUniqueWithoutTB_usersInput | TB_restrictionUpsertWithWhereUniqueWithoutTB_usersInput[]
+    createMany?: TB_restrictionCreateManyTB_usersInputEnvelope
+    set?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    disconnect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    delete?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
+    update?: TB_restrictionUpdateWithWhereUniqueWithoutTB_usersInput | TB_restrictionUpdateWithWhereUniqueWithoutTB_usersInput[]
+    updateMany?: TB_restrictionUpdateManyWithWhereWithoutTB_usersInput | TB_restrictionUpdateManyWithWhereWithoutTB_usersInput[]
+    deleteMany?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
   }
 
   export type TB_user_roleCreateNestedManyWithoutTB_roleInput = {
@@ -19260,13 +19302,6 @@ export namespace Prisma {
     connect?: TB_roleWhereUniqueInput
   }
 
-  export type TB_restrictionCreateNestedManyWithoutTB_user_roleInput = {
-    create?: XOR<TB_restrictionCreateWithoutTB_user_roleInput, TB_restrictionUncheckedCreateWithoutTB_user_roleInput> | TB_restrictionCreateWithoutTB_user_roleInput[] | TB_restrictionUncheckedCreateWithoutTB_user_roleInput[]
-    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_user_roleInput | TB_restrictionCreateOrConnectWithoutTB_user_roleInput[]
-    createMany?: TB_restrictionCreateManyTB_user_roleInputEnvelope
-    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-  }
-
   export type TB_employeesCreateNestedManyWithoutTB_user_roleInput = {
     create?: XOR<TB_employeesCreateWithoutTB_user_roleInput, TB_employeesUncheckedCreateWithoutTB_user_roleInput> | TB_employeesCreateWithoutTB_user_roleInput[] | TB_employeesUncheckedCreateWithoutTB_user_roleInput[]
     connectOrCreate?: TB_employeesCreateOrConnectWithoutTB_user_roleInput | TB_employeesCreateOrConnectWithoutTB_user_roleInput[]
@@ -19279,13 +19314,6 @@ export namespace Prisma {
     connectOrCreate?: TB_client_membershipCreateOrConnectWithoutTB_user_roleInput | TB_client_membershipCreateOrConnectWithoutTB_user_roleInput[]
     createMany?: TB_client_membershipCreateManyTB_user_roleInputEnvelope
     connect?: TB_client_membershipWhereUniqueInput | TB_client_membershipWhereUniqueInput[]
-  }
-
-  export type TB_restrictionUncheckedCreateNestedManyWithoutTB_user_roleInput = {
-    create?: XOR<TB_restrictionCreateWithoutTB_user_roleInput, TB_restrictionUncheckedCreateWithoutTB_user_roleInput> | TB_restrictionCreateWithoutTB_user_roleInput[] | TB_restrictionUncheckedCreateWithoutTB_user_roleInput[]
-    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_user_roleInput | TB_restrictionCreateOrConnectWithoutTB_user_roleInput[]
-    createMany?: TB_restrictionCreateManyTB_user_roleInputEnvelope
-    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
   }
 
   export type TB_employeesUncheckedCreateNestedManyWithoutTB_user_roleInput = {
@@ -19318,20 +19346,6 @@ export namespace Prisma {
     update?: XOR<XOR<TB_roleUpdateToOneWithWhereWithoutTB_user_roleInput, TB_roleUpdateWithoutTB_user_roleInput>, TB_roleUncheckedUpdateWithoutTB_user_roleInput>
   }
 
-  export type TB_restrictionUpdateManyWithoutTB_user_roleNestedInput = {
-    create?: XOR<TB_restrictionCreateWithoutTB_user_roleInput, TB_restrictionUncheckedCreateWithoutTB_user_roleInput> | TB_restrictionCreateWithoutTB_user_roleInput[] | TB_restrictionUncheckedCreateWithoutTB_user_roleInput[]
-    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_user_roleInput | TB_restrictionCreateOrConnectWithoutTB_user_roleInput[]
-    upsert?: TB_restrictionUpsertWithWhereUniqueWithoutTB_user_roleInput | TB_restrictionUpsertWithWhereUniqueWithoutTB_user_roleInput[]
-    createMany?: TB_restrictionCreateManyTB_user_roleInputEnvelope
-    set?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    disconnect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    delete?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    update?: TB_restrictionUpdateWithWhereUniqueWithoutTB_user_roleInput | TB_restrictionUpdateWithWhereUniqueWithoutTB_user_roleInput[]
-    updateMany?: TB_restrictionUpdateManyWithWhereWithoutTB_user_roleInput | TB_restrictionUpdateManyWithWhereWithoutTB_user_roleInput[]
-    deleteMany?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
-  }
-
   export type TB_employeesUpdateManyWithoutTB_user_roleNestedInput = {
     create?: XOR<TB_employeesCreateWithoutTB_user_roleInput, TB_employeesUncheckedCreateWithoutTB_user_roleInput> | TB_employeesCreateWithoutTB_user_roleInput[] | TB_employeesUncheckedCreateWithoutTB_user_roleInput[]
     connectOrCreate?: TB_employeesCreateOrConnectWithoutTB_user_roleInput | TB_employeesCreateOrConnectWithoutTB_user_roleInput[]
@@ -19358,20 +19372,6 @@ export namespace Prisma {
     update?: TB_client_membershipUpdateWithWhereUniqueWithoutTB_user_roleInput | TB_client_membershipUpdateWithWhereUniqueWithoutTB_user_roleInput[]
     updateMany?: TB_client_membershipUpdateManyWithWhereWithoutTB_user_roleInput | TB_client_membershipUpdateManyWithWhereWithoutTB_user_roleInput[]
     deleteMany?: TB_client_membershipScalarWhereInput | TB_client_membershipScalarWhereInput[]
-  }
-
-  export type TB_restrictionUncheckedUpdateManyWithoutTB_user_roleNestedInput = {
-    create?: XOR<TB_restrictionCreateWithoutTB_user_roleInput, TB_restrictionUncheckedCreateWithoutTB_user_roleInput> | TB_restrictionCreateWithoutTB_user_roleInput[] | TB_restrictionUncheckedCreateWithoutTB_user_roleInput[]
-    connectOrCreate?: TB_restrictionCreateOrConnectWithoutTB_user_roleInput | TB_restrictionCreateOrConnectWithoutTB_user_roleInput[]
-    upsert?: TB_restrictionUpsertWithWhereUniqueWithoutTB_user_roleInput | TB_restrictionUpsertWithWhereUniqueWithoutTB_user_roleInput[]
-    createMany?: TB_restrictionCreateManyTB_user_roleInputEnvelope
-    set?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    disconnect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    delete?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    connect?: TB_restrictionWhereUniqueInput | TB_restrictionWhereUniqueInput[]
-    update?: TB_restrictionUpdateWithWhereUniqueWithoutTB_user_roleInput | TB_restrictionUpdateWithWhereUniqueWithoutTB_user_roleInput[]
-    updateMany?: TB_restrictionUpdateManyWithWhereWithoutTB_user_roleInput | TB_restrictionUpdateManyWithWhereWithoutTB_user_roleInput[]
-    deleteMany?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
   }
 
   export type TB_employeesUncheckedUpdateManyWithoutTB_user_roleNestedInput = {
@@ -19402,18 +19402,18 @@ export namespace Prisma {
     deleteMany?: TB_client_membershipScalarWhereInput | TB_client_membershipScalarWhereInput[]
   }
 
-  export type TB_user_roleCreateNestedOneWithoutTB_restrictionInput = {
-    create?: XOR<TB_user_roleCreateWithoutTB_restrictionInput, TB_user_roleUncheckedCreateWithoutTB_restrictionInput>
-    connectOrCreate?: TB_user_roleCreateOrConnectWithoutTB_restrictionInput
-    connect?: TB_user_roleWhereUniqueInput
+  export type TB_usersCreateNestedOneWithoutTB_restrictionInput = {
+    create?: XOR<TB_usersCreateWithoutTB_restrictionInput, TB_usersUncheckedCreateWithoutTB_restrictionInput>
+    connectOrCreate?: TB_usersCreateOrConnectWithoutTB_restrictionInput
+    connect?: TB_usersWhereUniqueInput
   }
 
-  export type TB_user_roleUpdateOneRequiredWithoutTB_restrictionNestedInput = {
-    create?: XOR<TB_user_roleCreateWithoutTB_restrictionInput, TB_user_roleUncheckedCreateWithoutTB_restrictionInput>
-    connectOrCreate?: TB_user_roleCreateOrConnectWithoutTB_restrictionInput
-    upsert?: TB_user_roleUpsertWithoutTB_restrictionInput
-    connect?: TB_user_roleWhereUniqueInput
-    update?: XOR<XOR<TB_user_roleUpdateToOneWithWhereWithoutTB_restrictionInput, TB_user_roleUpdateWithoutTB_restrictionInput>, TB_user_roleUncheckedUpdateWithoutTB_restrictionInput>
+  export type TB_usersUpdateOneRequiredWithoutTB_restrictionNestedInput = {
+    create?: XOR<TB_usersCreateWithoutTB_restrictionInput, TB_usersUncheckedCreateWithoutTB_restrictionInput>
+    connectOrCreate?: TB_usersCreateOrConnectWithoutTB_restrictionInput
+    upsert?: TB_usersUpsertWithoutTB_restrictionInput
+    connect?: TB_usersWhereUniqueInput
+    update?: XOR<XOR<TB_usersUpdateToOneWithWhereWithoutTB_restrictionInput, TB_usersUpdateWithoutTB_restrictionInput>, TB_usersUncheckedUpdateWithoutTB_restrictionInput>
   }
 
   export type TB_user_roleCreateNestedOneWithoutTB_employeesInput = {
@@ -20012,7 +20012,6 @@ export namespace Prisma {
 
   export type TB_user_roleCreateWithoutTB_usersInput = {
     TB_role: TB_roleCreateNestedOneWithoutTB_user_roleInput
-    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipCreateNestedManyWithoutTB_user_roleInput
   }
@@ -20020,7 +20019,6 @@ export namespace Prisma {
   export type TB_user_roleUncheckedCreateWithoutTB_usersInput = {
     id_user_role?: number
     id_role: number
-    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipUncheckedCreateNestedManyWithoutTB_user_roleInput
   }
@@ -20053,6 +20051,25 @@ export namespace Prisma {
 
   export type TB_notificationsCreateManyTB_usersInputEnvelope = {
     data: TB_notificationsCreateManyTB_usersInput | TB_notificationsCreateManyTB_usersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TB_restrictionCreateWithoutTB_usersInput = {
+    description: string
+  }
+
+  export type TB_restrictionUncheckedCreateWithoutTB_usersInput = {
+    id_restriction?: number
+    description: string
+  }
+
+  export type TB_restrictionCreateOrConnectWithoutTB_usersInput = {
+    where: TB_restrictionWhereUniqueInput
+    create: XOR<TB_restrictionCreateWithoutTB_usersInput, TB_restrictionUncheckedCreateWithoutTB_usersInput>
+  }
+
+  export type TB_restrictionCreateManyTB_usersInputEnvelope = {
+    data: TB_restrictionCreateManyTB_usersInput | TB_restrictionCreateManyTB_usersInput[]
     skipDuplicates?: boolean
   }
 
@@ -20107,9 +20124,33 @@ export namespace Prisma {
     sent_date?: DateTimeFilter<"TB_notifications"> | Date | string
   }
 
+  export type TB_restrictionUpsertWithWhereUniqueWithoutTB_usersInput = {
+    where: TB_restrictionWhereUniqueInput
+    update: XOR<TB_restrictionUpdateWithoutTB_usersInput, TB_restrictionUncheckedUpdateWithoutTB_usersInput>
+    create: XOR<TB_restrictionCreateWithoutTB_usersInput, TB_restrictionUncheckedCreateWithoutTB_usersInput>
+  }
+
+  export type TB_restrictionUpdateWithWhereUniqueWithoutTB_usersInput = {
+    where: TB_restrictionWhereUniqueInput
+    data: XOR<TB_restrictionUpdateWithoutTB_usersInput, TB_restrictionUncheckedUpdateWithoutTB_usersInput>
+  }
+
+  export type TB_restrictionUpdateManyWithWhereWithoutTB_usersInput = {
+    where: TB_restrictionScalarWhereInput
+    data: XOR<TB_restrictionUpdateManyMutationInput, TB_restrictionUncheckedUpdateManyWithoutTB_usersInput>
+  }
+
+  export type TB_restrictionScalarWhereInput = {
+    AND?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
+    OR?: TB_restrictionScalarWhereInput[]
+    NOT?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
+    id_restriction?: IntFilter<"TB_restriction"> | number
+    id_user?: IntFilter<"TB_restriction"> | number
+    description?: StringFilter<"TB_restriction"> | string
+  }
+
   export type TB_user_roleCreateWithoutTB_roleInput = {
     TB_users: TB_usersCreateNestedOneWithoutTB_user_roleInput
-    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipCreateNestedManyWithoutTB_user_roleInput
   }
@@ -20117,7 +20158,6 @@ export namespace Prisma {
   export type TB_user_roleUncheckedCreateWithoutTB_roleInput = {
     id_user_role?: number
     id_user: number
-    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipUncheckedCreateNestedManyWithoutTB_user_roleInput
   }
@@ -20156,6 +20196,7 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_notifications?: TB_notificationsCreateNestedManyWithoutTB_usersInput
+    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersUncheckedCreateWithoutTB_user_roleInput = {
@@ -20167,6 +20208,7 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_notifications?: TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput
+    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersCreateOrConnectWithoutTB_user_roleInput = {
@@ -20188,25 +20230,6 @@ export namespace Prisma {
   export type TB_roleCreateOrConnectWithoutTB_user_roleInput = {
     where: TB_roleWhereUniqueInput
     create: XOR<TB_roleCreateWithoutTB_user_roleInput, TB_roleUncheckedCreateWithoutTB_user_roleInput>
-  }
-
-  export type TB_restrictionCreateWithoutTB_user_roleInput = {
-    description: string
-  }
-
-  export type TB_restrictionUncheckedCreateWithoutTB_user_roleInput = {
-    id_restriction?: number
-    description: string
-  }
-
-  export type TB_restrictionCreateOrConnectWithoutTB_user_roleInput = {
-    where: TB_restrictionWhereUniqueInput
-    create: XOR<TB_restrictionCreateWithoutTB_user_roleInput, TB_restrictionUncheckedCreateWithoutTB_user_roleInput>
-  }
-
-  export type TB_restrictionCreateManyTB_user_roleInputEnvelope = {
-    data: TB_restrictionCreateManyTB_user_roleInput | TB_restrictionCreateManyTB_user_roleInput[]
-    skipDuplicates?: boolean
   }
 
   export type TB_employeesCreateWithoutTB_user_roleInput = {
@@ -20278,6 +20301,7 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_notifications?: TB_notificationsUpdateManyWithoutTB_usersNestedInput
+    TB_restriction?: TB_restrictionUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_usersUncheckedUpdateWithoutTB_user_roleInput = {
@@ -20289,6 +20313,7 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_notifications?: TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput
+    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_roleUpsertWithoutTB_user_roleInput = {
@@ -20311,31 +20336,6 @@ export namespace Prisma {
     id_role?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TB_restrictionUpsertWithWhereUniqueWithoutTB_user_roleInput = {
-    where: TB_restrictionWhereUniqueInput
-    update: XOR<TB_restrictionUpdateWithoutTB_user_roleInput, TB_restrictionUncheckedUpdateWithoutTB_user_roleInput>
-    create: XOR<TB_restrictionCreateWithoutTB_user_roleInput, TB_restrictionUncheckedCreateWithoutTB_user_roleInput>
-  }
-
-  export type TB_restrictionUpdateWithWhereUniqueWithoutTB_user_roleInput = {
-    where: TB_restrictionWhereUniqueInput
-    data: XOR<TB_restrictionUpdateWithoutTB_user_roleInput, TB_restrictionUncheckedUpdateWithoutTB_user_roleInput>
-  }
-
-  export type TB_restrictionUpdateManyWithWhereWithoutTB_user_roleInput = {
-    where: TB_restrictionScalarWhereInput
-    data: XOR<TB_restrictionUpdateManyMutationInput, TB_restrictionUncheckedUpdateManyWithoutTB_user_roleInput>
-  }
-
-  export type TB_restrictionScalarWhereInput = {
-    AND?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
-    OR?: TB_restrictionScalarWhereInput[]
-    NOT?: TB_restrictionScalarWhereInput | TB_restrictionScalarWhereInput[]
-    id_restriction?: IntFilter<"TB_restriction"> | number
-    id_user_role?: IntFilter<"TB_restriction"> | number
-    description?: StringFilter<"TB_restriction"> | string
   }
 
   export type TB_employeesUpsertWithWhereUniqueWithoutTB_user_roleInput = {
@@ -20392,56 +20392,71 @@ export namespace Prisma {
     end_date?: DateTimeFilter<"TB_client_membership"> | Date | string
   }
 
-  export type TB_user_roleCreateWithoutTB_restrictionInput = {
-    TB_users: TB_usersCreateNestedOneWithoutTB_user_roleInput
-    TB_role: TB_roleCreateNestedOneWithoutTB_user_roleInput
-    TB_employees?: TB_employeesCreateNestedManyWithoutTB_user_roleInput
-    TB_client_membership?: TB_client_membershipCreateNestedManyWithoutTB_user_roleInput
+  export type TB_usersCreateWithoutTB_restrictionInput = {
+    name: string
+    lastname: string
+    email: string
+    password: string
+    phone_number: string
+    birthday: Date | string
+    TB_user_role?: TB_user_roleCreateNestedManyWithoutTB_usersInput
+    TB_notifications?: TB_notificationsCreateNestedManyWithoutTB_usersInput
   }
 
-  export type TB_user_roleUncheckedCreateWithoutTB_restrictionInput = {
-    id_user_role?: number
-    id_user: number
-    id_role: number
-    TB_employees?: TB_employeesUncheckedCreateNestedManyWithoutTB_user_roleInput
-    TB_client_membership?: TB_client_membershipUncheckedCreateNestedManyWithoutTB_user_roleInput
+  export type TB_usersUncheckedCreateWithoutTB_restrictionInput = {
+    id_user?: number
+    name: string
+    lastname: string
+    email: string
+    password: string
+    phone_number: string
+    birthday: Date | string
+    TB_user_role?: TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput
+    TB_notifications?: TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
-  export type TB_user_roleCreateOrConnectWithoutTB_restrictionInput = {
-    where: TB_user_roleWhereUniqueInput
-    create: XOR<TB_user_roleCreateWithoutTB_restrictionInput, TB_user_roleUncheckedCreateWithoutTB_restrictionInput>
+  export type TB_usersCreateOrConnectWithoutTB_restrictionInput = {
+    where: TB_usersWhereUniqueInput
+    create: XOR<TB_usersCreateWithoutTB_restrictionInput, TB_usersUncheckedCreateWithoutTB_restrictionInput>
   }
 
-  export type TB_user_roleUpsertWithoutTB_restrictionInput = {
-    update: XOR<TB_user_roleUpdateWithoutTB_restrictionInput, TB_user_roleUncheckedUpdateWithoutTB_restrictionInput>
-    create: XOR<TB_user_roleCreateWithoutTB_restrictionInput, TB_user_roleUncheckedCreateWithoutTB_restrictionInput>
-    where?: TB_user_roleWhereInput
+  export type TB_usersUpsertWithoutTB_restrictionInput = {
+    update: XOR<TB_usersUpdateWithoutTB_restrictionInput, TB_usersUncheckedUpdateWithoutTB_restrictionInput>
+    create: XOR<TB_usersCreateWithoutTB_restrictionInput, TB_usersUncheckedCreateWithoutTB_restrictionInput>
+    where?: TB_usersWhereInput
   }
 
-  export type TB_user_roleUpdateToOneWithWhereWithoutTB_restrictionInput = {
-    where?: TB_user_roleWhereInput
-    data: XOR<TB_user_roleUpdateWithoutTB_restrictionInput, TB_user_roleUncheckedUpdateWithoutTB_restrictionInput>
+  export type TB_usersUpdateToOneWithWhereWithoutTB_restrictionInput = {
+    where?: TB_usersWhereInput
+    data: XOR<TB_usersUpdateWithoutTB_restrictionInput, TB_usersUncheckedUpdateWithoutTB_restrictionInput>
   }
 
-  export type TB_user_roleUpdateWithoutTB_restrictionInput = {
-    TB_users?: TB_usersUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_role?: TB_roleUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_employees?: TB_employeesUpdateManyWithoutTB_user_roleNestedInput
-    TB_client_membership?: TB_client_membershipUpdateManyWithoutTB_user_roleNestedInput
+  export type TB_usersUpdateWithoutTB_restrictionInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    TB_user_role?: TB_user_roleUpdateManyWithoutTB_usersNestedInput
+    TB_notifications?: TB_notificationsUpdateManyWithoutTB_usersNestedInput
   }
 
-  export type TB_user_roleUncheckedUpdateWithoutTB_restrictionInput = {
-    id_user_role?: IntFieldUpdateOperationsInput | number
+  export type TB_usersUncheckedUpdateWithoutTB_restrictionInput = {
     id_user?: IntFieldUpdateOperationsInput | number
-    id_role?: IntFieldUpdateOperationsInput | number
-    TB_employees?: TB_employeesUncheckedUpdateManyWithoutTB_user_roleNestedInput
-    TB_client_membership?: TB_client_membershipUncheckedUpdateManyWithoutTB_user_roleNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    TB_user_role?: TB_user_roleUncheckedUpdateManyWithoutTB_usersNestedInput
+    TB_notifications?: TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_user_roleCreateWithoutTB_employeesInput = {
     TB_users: TB_usersCreateNestedOneWithoutTB_user_roleInput
     TB_role: TB_roleCreateNestedOneWithoutTB_user_roleInput
-    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipCreateNestedManyWithoutTB_user_roleInput
   }
 
@@ -20449,7 +20464,6 @@ export namespace Prisma {
     id_user_role?: number
     id_user: number
     id_role: number
-    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_client_membership?: TB_client_membershipUncheckedCreateNestedManyWithoutTB_user_roleInput
   }
 
@@ -20495,7 +20509,6 @@ export namespace Prisma {
   export type TB_user_roleUpdateWithoutTB_employeesInput = {
     TB_users?: TB_usersUpdateOneRequiredWithoutTB_user_roleNestedInput
     TB_role?: TB_roleUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_restriction?: TB_restrictionUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUpdateManyWithoutTB_user_roleNestedInput
   }
 
@@ -20503,7 +20516,6 @@ export namespace Prisma {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_user?: IntFieldUpdateOperationsInput | number
     id_role?: IntFieldUpdateOperationsInput | number
-    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUncheckedUpdateManyWithoutTB_user_roleNestedInput
   }
 
@@ -20577,7 +20589,6 @@ export namespace Prisma {
   export type TB_user_roleCreateWithoutTB_client_membershipInput = {
     TB_users: TB_usersCreateNestedOneWithoutTB_user_roleInput
     TB_role: TB_roleCreateNestedOneWithoutTB_user_roleInput
-    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesCreateNestedManyWithoutTB_user_roleInput
   }
 
@@ -20585,7 +20596,6 @@ export namespace Prisma {
     id_user_role?: number
     id_user: number
     id_role: number
-    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_user_roleInput
     TB_employees?: TB_employeesUncheckedCreateNestedManyWithoutTB_user_roleInput
   }
 
@@ -20651,7 +20661,6 @@ export namespace Prisma {
   export type TB_user_roleUpdateWithoutTB_client_membershipInput = {
     TB_users?: TB_usersUpdateOneRequiredWithoutTB_user_roleNestedInput
     TB_role?: TB_roleUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_restriction?: TB_restrictionUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUpdateManyWithoutTB_user_roleNestedInput
   }
 
@@ -20659,7 +20668,6 @@ export namespace Prisma {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_user?: IntFieldUpdateOperationsInput | number
     id_role?: IntFieldUpdateOperationsInput | number
-    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUncheckedUpdateManyWithoutTB_user_roleNestedInput
   }
 
@@ -21149,6 +21157,7 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_user_role?: TB_user_roleCreateNestedManyWithoutTB_usersInput
+    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersUncheckedCreateWithoutTB_notificationsInput = {
@@ -21160,6 +21169,7 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_user_role?: TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput
+    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersCreateOrConnectWithoutTB_notificationsInput = {
@@ -21186,6 +21196,7 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUpdateManyWithoutTB_usersNestedInput
+    TB_restriction?: TB_restrictionUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_usersUncheckedUpdateWithoutTB_notificationsInput = {
@@ -21197,6 +21208,7 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUncheckedUpdateManyWithoutTB_usersNestedInput
+    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_user_roleCreateManyTB_usersInput = {
@@ -21210,9 +21222,13 @@ export namespace Prisma {
     sent_date: Date | string
   }
 
+  export type TB_restrictionCreateManyTB_usersInput = {
+    id_restriction?: number
+    description: string
+  }
+
   export type TB_user_roleUpdateWithoutTB_usersInput = {
     TB_role?: TB_roleUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_restriction?: TB_restrictionUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUpdateManyWithoutTB_user_roleNestedInput
   }
@@ -21220,7 +21236,6 @@ export namespace Prisma {
   export type TB_user_roleUncheckedUpdateWithoutTB_usersInput = {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_role?: IntFieldUpdateOperationsInput | number
-    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUncheckedUpdateManyWithoutTB_user_roleNestedInput
   }
@@ -21247,6 +21262,20 @@ export namespace Prisma {
     sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TB_restrictionUpdateWithoutTB_usersInput = {
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TB_restrictionUncheckedUpdateWithoutTB_usersInput = {
+    id_restriction?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TB_restrictionUncheckedUpdateManyWithoutTB_usersInput = {
+    id_restriction?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
   export type TB_user_roleCreateManyTB_roleInput = {
     id_user_role?: number
     id_user: number
@@ -21254,7 +21283,6 @@ export namespace Prisma {
 
   export type TB_user_roleUpdateWithoutTB_roleInput = {
     TB_users?: TB_usersUpdateOneRequiredWithoutTB_user_roleNestedInput
-    TB_restriction?: TB_restrictionUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUpdateManyWithoutTB_user_roleNestedInput
   }
@@ -21262,7 +21290,6 @@ export namespace Prisma {
   export type TB_user_roleUncheckedUpdateWithoutTB_roleInput = {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_user?: IntFieldUpdateOperationsInput | number
-    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_employees?: TB_employeesUncheckedUpdateManyWithoutTB_user_roleNestedInput
     TB_client_membership?: TB_client_membershipUncheckedUpdateManyWithoutTB_user_roleNestedInput
   }
@@ -21270,11 +21297,6 @@ export namespace Prisma {
   export type TB_user_roleUncheckedUpdateManyWithoutTB_roleInput = {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_user?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TB_restrictionCreateManyTB_user_roleInput = {
-    id_restriction?: number
-    description: string
   }
 
   export type TB_employeesCreateManyTB_user_roleInput = {
@@ -21289,20 +21311,6 @@ export namespace Prisma {
     id_membership: number
     start_date: Date | string
     end_date: Date | string
-  }
-
-  export type TB_restrictionUpdateWithoutTB_user_roleInput = {
-    description?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TB_restrictionUncheckedUpdateWithoutTB_user_roleInput = {
-    id_restriction?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TB_restrictionUncheckedUpdateManyWithoutTB_user_roleInput = {
-    id_restriction?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type TB_employeesUpdateWithoutTB_user_roleInput = {

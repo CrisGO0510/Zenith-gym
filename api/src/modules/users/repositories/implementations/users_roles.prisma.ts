@@ -13,7 +13,6 @@ export class UsersRolesPrisma implements UsersRolesRepository {
       include: {
         TB_users: true,
         TB_role: true,
-        TB_restriction: true,
         TB_employees: true,
         TB_client_membership: true,
       },

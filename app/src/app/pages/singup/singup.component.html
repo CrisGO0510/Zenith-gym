@@ -41,10 +41,10 @@
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
+          <input matInput [matDatepicker]="picker" formControlName="birthday" required>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-          @if (signupForm.get('birthDate')?.errors?.['required'] && signupForm.get('birthDate')?.touched) {
+          @if (signupForm.get('birthday')?.errors?.['required'] && signupForm.get('birthday')?.touched) {
             <mat-error>La fecha de nacimiento es obligatoria</mat-error>
           }
         </mat-form-field>

@@ -144,7 +144,7 @@ exports.Prisma.TB_user_roleScalarFieldEnum = {
 
 exports.Prisma.TB_restrictionScalarFieldEnum = {
   id_restriction: 'id_restriction',
-  id_user_role: 'id_user_role',
+  id_user: 'id_user',
   description: 'description'
 };
 

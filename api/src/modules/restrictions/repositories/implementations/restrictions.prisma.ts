@@ -13,7 +13,7 @@ export class RestrictionsPrisma implements RestrictionsRepository {
     return this.prisma.tB_restriction.findMany({
       where,
       include: {
-        TB_user_role: true,
+        TB_users: true,
       },
     });
   }

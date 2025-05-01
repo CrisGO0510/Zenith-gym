@@ -37,4 +37,10 @@ export class UpdateUsersDto {
     required: false,
   })
   birthday?: Date;
+
+  @IsOptional()
+  @ApiProperty({
+    required: false,
+  })
+  restriction?: string;
 }

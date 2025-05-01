@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -18,11 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { User } from '../../interfaces/user.interface';
-
-export interface EditUserDialogData {
-  user: User;
-}
+import { Subscription } from 'rxjs';
+import { UserServices } from '../../services/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dialog-form-client',
@@ -42,79 +40,53 @@ export interface EditUserDialogData {
   templateUrl: './dialog-form-client.component.html',
   styleUrl: './dialog-form-client.component.scss',
 })
-export class DialogFormClientComponent implements OnInit {
+export class DialogFormClientComponent implements OnInit, OnDestroy {
+  private subscription$: Subscription = new Subscription();
   userForm!: FormGroup;
-  originalUser?: User = {
-    id_user: 1,
-    name: 'John',
-    lastname: 'Doe',
-    email: 'john.doe@example.com',
-    phone_number: '+541156789012',
-    birthday: new Date('1990-01-15'),
-    restriction: 'None',
-  };
 
-  private getEmptyUser(): User {
-    return {
-      id_user: 0,
-      name: '',
-      lastname: '',
-      email: '',
-      phone_number: '',
-      birthday: new Date(),
-      restriction: '',
-    };
-  }
+  private fb = inject(FormBuilder);
+  private userServices = inject(UserServices);
+  private snackBar = inject(MatSnackBar);
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogFormClientComponent>,
-    private fb: FormBuilder,
-  ) {}
-
-  private buildForm(user: User): FormGroup {
-    return this.fb.group({
-      id_user: [{ value: user.id_user, disabled: true }],
-      name: [
-        user.name,
-        [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
-      ],
-      lastname: [
-        user.lastname,
-        [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
-      ],
-      phone_number: [
-        user.phone_number,
-        [Validators.required, Validators.pattern(/^\+?[0-9]{8,15}$/)],
-      ],
-      email: [user.email, [Validators.required, Validators.email]],
-      birthday: [
-        user.birthday ? new Date(user.birthday) : null,
-        [Validators.required],
-      ],
-      restriction: [user.restriction || ''],
-    });
-  }
+  constructor(public dialogRef: MatDialogRef<DialogFormClientComponent>) {}
 
   ngOnInit(): void {
-    this.userForm = this.buildForm(this.originalUser ?? this.getEmptyUser());
+    this.userForm = this.buildForm();
+  }
+
+  private buildForm(): FormGroup {
+    return this.fb.group({
+      id_user: null,
+      name: null,
+      lastname: null,
+      email: null,
+      phone_number: null,
+      birthday: null,
+      restriction: null,
+    });
   }
 
   onCancelClick(): void {
     this.dialogRef.close();
   }
 
-  onSaveClick(): void {
-    if (this.userForm.valid) {
-      const updatedUserData: User = {
-        ...this.originalUser,
-        ...this.userForm.getRawValue(),
-      };
-      this.dialogRef.close({ updatedUser: updatedUserData });
-    } else {
+  onSubmit() {
+    if (this.userForm.invalid) {
       this.markFormGroupTouched(this.userForm);
+      this.snackBar.open(
+        'Por favor, completa todos los campos requeridos.',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        }
+      );
+      return;
     }
+    
+    this.dialogRef.close(this.userForm.value);
   }
-
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
@@ -122,5 +94,45 @@ export class DialogFormClientComponent implements OnInit {
         this.markFormGroupTouched(control);
       }
     });
+  }
+
+  searchUser() {
+    const id_user = this.userForm.get('id_user')?.value;
+
+    if (id_user) {
+      this.subscription$.add(
+        this.userServices.getUserById(id_user).subscribe({
+          next: (user) => {
+            if (user.length === 0) {
+              this.snackBar.open(
+                'No se encontró el usuario con el ID proporcionado.',
+                'Cerrar',
+                {
+                  duration: 3000,
+                  verticalPosition: 'top',
+                  panelClass: ['error-snackbar'],
+                }
+              );
+              return;
+            }
+
+            this.userForm.patchValue({
+              name: user[0].name,
+              lastname: user[0].lastname,
+              phone_number: user[0].phone_number,
+              email: user[0].email,
+              birthday: user[0].birthday,
+            });
+          },
+          error: (err) => {
+            console.error('Error fetching user:', err);
+          },
+        })
+      );
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }

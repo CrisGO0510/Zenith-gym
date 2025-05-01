@@ -1,107 +1,100 @@
-<form [formGroup]="userForm" (ngSubmit)="onSaveClick()">
+<form
+  [formGroup]="userForm"
+  (ngSubmit)="onSubmit()"
+  (keydown.enter)="$event.preventDefault()"
+>
   <h1 mat-dialog-title>Editar Usuario</h1>
 
   <div mat-dialog-content class="dialog-content-area">
     <div class="user-details-grid">
       <mat-form-field appearance="outline" class="grid-area-doc">
         <mat-label>Documento</mat-label>
-
-        <input matInput formControlName="id_user" />
-
+        <input
+          matInput
+          formControlName="id_user"
+          (keyup.enter)="searchUser()"
+        />
         <button
           mat-icon-button
           matSuffix
           type="button"
           aria-label="Buscar documento"
+          (click)="searchUser()"
         >
           <mat-icon>search</mat-icon>
         </button>
+        @if (!userForm.get('id_user')?.value) {
+        <mat-error> Por favor, haga clic en la lupa para buscar. </mat-error>}
       </mat-form-field>
+
       <mat-form-field appearance="outline" class="grid-area-name">
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="name" required />
-        @if (
-          userForm.get("name")?.errors?.["required"] &&
-          userForm.get("name")?.touched
-        ) {
-          <mat-error>El nombre es obligatorio</mat-error>
-        }
-        @if (
-          userForm.get("name")?.errors?.["pattern"] &&
-          userForm.get("name")?.touched
-        ) {
-          <mat-error>El nombre solo puede contener letras y espacios</mat-error>
+        @if ( userForm.get("name")?.errors?.["required"] &&
+        userForm.get("name")?.touched ) {
+        <mat-error>El nombre es obligatorio</mat-error>
+        } @if ( userForm.get("name")?.errors?.["pattern"] &&
+        userForm.get("name")?.touched ) {
+        <mat-error>El nombre solo puede contener letras y espacios</mat-error>
         }
       </mat-form-field>
       <mat-form-field appearance="outline" class="grid-area-lastname">
         <mat-label>Apellidos</mat-label>
         <input matInput formControlName="lastname" required />
-        @if (
-          userForm.get("lastname")?.errors?.["required"] &&
-          userForm.get("lastname")?.touched
-        ) {
-          <mat-error>Los apellidos son obligatorios</mat-error>
-        }
-        @if (
-          userForm.get("lastname")?.errors?.["pattern"] &&
-          userForm.get("lastname")?.touched
-        ) {
-          <mat-error
-            >Los apellidos solo pueden contener letras y espacios</mat-error
-          >
+        @if ( userForm.get("lastname")?.errors?.["required"] &&
+        userForm.get("lastname")?.touched ) {
+        <mat-error>Los apellidos son obligatorios</mat-error>
+        } @if ( userForm.get("lastname")?.errors?.["pattern"] &&
+        userForm.get("lastname")?.touched ) {
+        <mat-error
+          >Los apellidos solo pueden contener letras y espacios</mat-error
+        >
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="grid-area-phone">
         <mat-label>Teléfono Movil</mat-label>
-        <input matInput formControlName="phone" type="tel" required />
-        @if (
-          userForm.get("phone")?.errors?.["required"] &&
-          userForm.get("phone")?.touched
-        ) {
-          <mat-error>El teléfono es obligatorio</mat-error>
-        }
-        @if (
-          userForm.get("phone")?.errors?.["pattern"] &&
-          userForm.get("phone")?.touched
-        ) {
-          <mat-error>Ingrese un número de teléfono válido</mat-error>
+        <input matInput formControlName="phone_number" type="tel" required />
+        @if ( userForm.get("phone_number")?.errors?.["required"] &&
+        userForm.get("phone_number")?.touched ) {
+        <mat-error>El teléfono es obligatorio</mat-error>
+        } @if ( userForm.get("phone_number")?.errors?.["pattern"] &&
+        userForm.get("phone_number")?.touched ) {
+        <mat-error>Ingrese un número de teléfono válido</mat-error>
         }
       </mat-form-field>
       <mat-form-field appearance="outline" class="grid-area-email">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" type="email" required />
-        @if (
-          userForm.get("email")?.errors?.["required"] &&
-          userForm.get("email")?.touched
-        ) {
-          <mat-error>El email es obligatorio</mat-error>
-        }
-        @if (
-          userForm.get("email")?.errors?.["email"] &&
-          userForm.get("email")?.touched
-        ) {
-          <mat-error>Introduce un email válido</mat-error>
+        @if ( userForm.get("email")?.errors?.["required"] &&
+        userForm.get("email")?.touched ) {
+        <mat-error>El email es obligatorio</mat-error>
+        } @if ( userForm.get("email")?.errors?.["email"] &&
+        userForm.get("email")?.touched ) {
+        <mat-error>Introduce un email válido</mat-error>
         }
       </mat-form-field>
-      <mat-form-field appearance="outline" class="grid-area-birthdate">
+      <mat-form-field appearance="outline" class="grid-area-birthday">
         <mat-label>Fecha de Nacimiento</mat-label>
         <input
           matInput
           [matDatepicker]="picker"
-          formControlName="birthdate"
+          formControlName="birthday"
+          readonly
           required
         />
         <mat-datepicker-toggle
           matIconSuffix
+          disabled
           [for]="picker"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        @if (
-          userForm.get("birthdate")?.errors?.["required"] &&
-          userForm.get("birthdate")?.touched
-        ) {
-          <mat-error>La fecha de nacimiento es obligatoria</mat-error>
+        @if ( userForm.get("birthday")?.errors?.["required"] &&
+        userForm.get("birthday")?.touched ) {
+        <mat-error
+          >La fecha de nacimiento es obligatoria, usar la lupa para traer el
+          dato</mat-error
+        >
         }
       </mat-form-field>
 

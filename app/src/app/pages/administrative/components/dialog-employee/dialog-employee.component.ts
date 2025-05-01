@@ -19,8 +19,8 @@ import { RoleService } from '../../../../core/services/role/role.service';
   styleUrl: './dialog-employee.component.scss',
 })
 export class DialogEmployeeComponent implements OnInit, OnDestroy {
-  employeeForm!: FormGroup;
   private subscription$: Subscription = new Subscription();
+  employeeForm!: FormGroup;
   rolesOptions: Role[] = [];
 
   private formBuilder = inject(FormBuilder);

@@ -1,7 +1,8 @@
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { UsersRepository } from '../users.repository';
 import { Prisma, TB_users } from 'generated/prisma';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { UpdateUsersDto } from '../../dto/users/update.users.dto';
 
 @Injectable()
 export class UsersPrisma implements UsersRepository {
@@ -21,13 +22,30 @@ export class UsersPrisma implements UsersRepository {
 
   public async update(
     where: Prisma.TB_usersWhereUniqueInput,
-    data: Prisma.TB_usersUpdateInput,
+    data: UpdateUsersDto,
   ): Promise<TB_users> {
-    return this.prisma.tB_users.update({
+    const { restriction, ...userData } = data;
+  
+    const updatedUser = await this.prisma.tB_users.update({
       where,
-      data,
+      data: userData,
     });
+  
+    if (restriction) {
+      await this.prisma.tB_restriction.upsert({
+        where: { id_user: updatedUser.id_user },
+        update: { description: restriction },
+        create: {
+          id_user: updatedUser.id_user,
+          description: restriction,
+        },
+      });
+    }
+  
+    return updatedUser;
   }
+  
+  
 
   public async delete(
     where: Prisma.TB_usersWhereUniqueInput,
