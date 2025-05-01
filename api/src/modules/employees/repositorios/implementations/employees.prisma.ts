@@ -1,7 +1,7 @@
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { EmployeesRepository } from '../employees.repository';
 import { Prisma, TB_employees } from 'generated/prisma';
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateEmployeesDto } from '../../dtos/create.employees.dto';
 
 @Injectable()
@@ -19,9 +19,7 @@ export class EmployeesPrisma implements EmployeesRepository {
     });
   }
 
-  public async create(
-    data: CreateEmployeesDto
-  ): Promise<TB_employees> {
+  public async create(data: CreateEmployeesDto): Promise<TB_employees> {
     // 1. Verificar si ya existe user-role
     const existingRole = await this.prisma.tB_user_role.findFirst({
       where: {
@@ -29,7 +27,7 @@ export class EmployeesPrisma implements EmployeesRepository {
         id_role: data.employeeTypeId,
       },
     });
-  
+
     // 2. Usar el existente o crear uno nuevo
     const userRole = existingRole
       ? existingRole
@@ -39,8 +37,21 @@ export class EmployeesPrisma implements EmployeesRepository {
             id_role: data.employeeTypeId,
           },
         });
-  
-    // 3. Crear el empleado con id_user_role generado
+
+    //  3. Verificar si ya existe un empleado con ese id_user_role
+    const existingEmployee = await this.prisma.tB_employees.findUnique({
+      where: {
+        id_user_role: userRole.id_user_role,
+      },
+    });
+
+    if (existingEmployee) {
+      throw new ConflictException(
+        'El usuario ya tiene un registro de empleado para ese rol.',
+      );
+    }
+
+    // 4. Crear el empleado
     return this.prisma.tB_employees.create({
       data: {
         id_user_role: userRole.id_user_role,
@@ -50,7 +61,6 @@ export class EmployeesPrisma implements EmployeesRepository {
       },
     });
   }
-  
 
   public async update(
     where: Prisma.TB_employeesWhereUniqueInput,

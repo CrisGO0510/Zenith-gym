@@ -17275,16 +17275,16 @@ export namespace Prisma {
 
   export type TB_employeesWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    id_user_role?: number
     AND?: TB_employeesWhereInput | TB_employeesWhereInput[]
     OR?: TB_employeesWhereInput[]
     NOT?: TB_employeesWhereInput | TB_employeesWhereInput[]
-    id_user_role?: IntFilter<"TB_employees"> | number
     bio?: StringFilter<"TB_employees"> | string
     specialization?: StringFilter<"TB_employees"> | string
     date_entry?: DateTimeFilter<"TB_employees"> | Date | string
     TB_user_role?: XOR<TB_user_roleScalarRelationFilter, TB_user_roleWhereInput>
     TB_session_capacity?: TB_session_capacityListRelationFilter
-  }, "id">
+  }, "id" | "id_user_role">
 
   export type TB_employeesOrderByWithAggregationInput = {
     id?: SortOrder

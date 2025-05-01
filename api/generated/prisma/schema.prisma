@@ -65,7 +65,7 @@ model TB_restriction {
 
 model TB_employees {
   id             Int      @id @default(autoincrement())
-  id_user_role   Int      @db.Integer()
+  id_user_role   Int      @unique @db.Integer()
   bio            String   @db.VarChar(1024)
   specialization String   @db.VarChar(128)
   date_entry     DateTime @db.Date()
