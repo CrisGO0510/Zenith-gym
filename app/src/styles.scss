@@ -118,3 +118,15 @@ input:-webkit-autofill:active {
 
   transition: background-color 5000s ease-in-out 0s;
 }
+
+$text-color: #e0e0e0;
+$input-bg: #424242;
+$input-text-color: $text-color;
+$readonly-input-bg: $input-bg;
+
+input[readonly],
+textarea[readonly] {
+  background-color: $readonly-input-bg;
+  color: $input-text-color;
+  cursor: not-allowed;
+}
