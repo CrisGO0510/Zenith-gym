@@ -1,5 +1,5 @@
 export type CreateClientsType = {
-  id_user_role: number
+  id_user: number
   id_membership: number
   start_date: Date
   end_date: Date
