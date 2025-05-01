@@ -1,7 +1,7 @@
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { UsersRolesRepository } from '../users_roles.repository';
 import { Prisma, TB_user_role } from 'generated/prisma';
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersRolesPrisma implements UsersRolesRepository {
@@ -38,7 +38,7 @@ export class UsersRolesPrisma implements UsersRolesRepository {
         });
       }
 
-      const group = map.get(r.id_user)!; // ✅ uso seguro con !
+      const group = map.get(r.id_user)!; 
       group.id_user_role.push(r.id_user_role);
       group.id_role.push(r.id_role);
     }
@@ -50,10 +50,26 @@ export class UsersRolesPrisma implements UsersRolesRepository {
   public async create(
     data: Prisma.TB_user_roleUncheckedCreateInput,
   ): Promise<TB_user_role> {
+    const existing = await this.prisma.tB_user_role.findFirst({
+      where: {
+        id_user: data.id_user,
+        id_role: data.id_role,
+      },
+    });
+  
+    if (existing) {
+      throw new ConflictException('Ya existe esta relación de usuario y rol');
+    }
+  
+    // Crear solo si no existe
     return this.prisma.tB_user_role.create({
-      data,
+      data: {
+        id_user: data.id_user,
+        id_role: data.id_role,
+      },
     });
   }
+
 
   public async update(
     where: Prisma.TB_user_roleWhereUniqueInput,
