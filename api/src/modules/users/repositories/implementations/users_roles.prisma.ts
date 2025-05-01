@@ -2,38 +2,48 @@ import { PrismaService } from 'src/core/prisma/prisma.service';
 import { UsersRolesRepository } from '../users_roles.repository';
 import { Prisma, TB_user_role } from 'generated/prisma';
 import { Injectable } from '@nestjs/common';
-import { from } from 'rxjs';
 
 @Injectable()
 export class UsersRolesPrisma implements UsersRolesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  public get(where: Prisma.TB_user_roleWhereInput): any {
-    return from(
-      this.prisma.tB_user_role.findMany({
-        where,
-        include: {
-          TB_users: true,
-          TB_role: true,
-          TB_restriction: true,
-          TB_employees: true,
-          TB_client_membership: true,
-        },
-      }).then((results) => {
-        if (!results || results.length === 0) {
-          return null;
-        }
-  
-        const user = results[0];
-  
-        return {
-          id_user: user.id_user,
-          id_user_role: results.map(r => r.id_user_role),
-          id_role: results.map(r => r.id_role),
-          password: user.TB_users.password,
-        };
-      })
-    );
+  public async get(where: Prisma.TB_user_roleWhereInput): Promise<any[]> {
+    const results = await this.prisma.tB_user_role.findMany({
+      where,
+      include: {
+        TB_users: true,
+        TB_role: true,
+        TB_restriction: true,
+        TB_employees: true,
+        TB_client_membership: true,
+      },
+    });
+
+    if (!results || results.length === 0) return [];
+
+    const map = new Map<number, {
+      id_user: number;
+      id_user_role: number[];
+      id_role: number[];
+      password: string;
+    }>();
+
+    for (const r of results) {
+      if (!map.has(r.id_user)) {
+        map.set(r.id_user, {
+          id_user: r.id_user,
+          id_user_role: [],
+          id_role: [],
+          password: r.TB_users.password,
+        });
+      }
+
+      const group = map.get(r.id_user)!; // ✅ uso seguro con !
+      group.id_user_role.push(r.id_user_role);
+      group.id_role.push(r.id_role);
+    }
+
+    return Array.from(map.values());
   }
   
 

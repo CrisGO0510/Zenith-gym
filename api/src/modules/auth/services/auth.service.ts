@@ -12,14 +12,13 @@ export class AuthService {
 
   async login(where: Partial<GetUsersRolesType>) {
 
-    //TODO: Quitar el any
     const user = (await this.usersRole.get({ id_user: where['id_user'] }))[0] as any;
 
     if (!user) {
       throw new NotFoundException();
     }
     
-    if (user.TB_users.password !== where['password']) {
+    if (user.password !== where['password']) {
       throw new ForbiddenException('Invalid password');
     }
     
