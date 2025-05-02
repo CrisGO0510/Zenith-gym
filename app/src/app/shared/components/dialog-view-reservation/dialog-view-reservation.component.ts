@@ -60,7 +60,7 @@ export class DialogViewReservationComponent implements OnInit {
       // Campos opcionales para visualización (no enviados al backend directamente)
       routineName: [{ value: item.TB_routines?.name ?? '', disabled: true }],
       routineDescription: [{ value: item.TB_routines?.description ?? '', disabled: true }],
-      clientId: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null, disabled: this.data.mode !== 2 }],
+      clientId: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null, disabled: true}],
       clientName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '', disabled: true }],
       clientLastName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '', disabled: true }],
     });
@@ -78,7 +78,18 @@ export class DialogViewReservationComponent implements OnInit {
   }
 
   onSubmit() {
-    throw new Error('Method not implemented.');
+    if (this.reservationForm.invalid) {
+      this.snackBar.open('Por favor, completa todos los campos requeridos.', 'Cerrar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar'],
+      });
+      return;
+    }
+
+    const formData = this.reservationForm.value;
+    console.log(formData);
+    this.dialogRef.close(formData);
   }
 
   private normalizeStatus(rawStatus: string | undefined): string {
@@ -92,37 +103,36 @@ export class DialogViewReservationComponent implements OnInit {
   }
 
   searchUser() {
-    const id_user = this.reservationForm.get('clientId')?.value;
-    console.log('id_user', id_user);
+    // const id_user = this.reservationForm.get('clientId')?.value;
 
-    if (id_user) {
-      this.subscription$.add(
-        this.userServices.getUserById(id_user).subscribe({
-          next: (user) => {
-            if (user.length === 0) {
-              this.snackBar.open(
-                'No se encontró el usuario con el ID proporcionado.',
-                'Cerrar',
-                {
-                  duration: 3000,
-                  verticalPosition: 'top',
-                  panelClass: ['error-snackbar'],
-                }
-              );
-              return;
-            }
+    // if (id_user) {
+    //   this.subscription$.add(
+    //     this.userServices.getUserById(id_user).subscribe({
+    //       next: (user) => {
+    //         if (user.length === 0) {
+    //           this.snackBar.open(
+    //             'No se encontró el usuario con el ID proporcionado.',
+    //             'Cerrar',
+    //             {
+    //               duration: 3000,
+    //               verticalPosition: 'top',
+    //               panelClass: ['error-snackbar'],
+    //             }
+    //           );
+    //           return;
+    //         }
 
-            this.reservationForm.patchValue({
-              clientName: user[0].name,
-              clientLastName: user[0].lastname,
-            });
-          },
-          error: (err) => {
-            console.error('Error fetching user:', err);
-          },
-        })
-      );
-    }
+    //         this.reservationForm.patchValue({
+    //           clientName: user[0].name,
+    //           clientLastName: user[0].lastname,
+    //         });
+    //       },
+    //       error: (err) => {
+    //         console.error('Error fetching user:', err);
+    //       },
+    //     })
+    //   );
+    // }
   }
 
   onDestroy() {

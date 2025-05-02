@@ -15,6 +15,7 @@ import { ClientService } from '../../../../shared/services/client.service';
 import { MembershipClient } from '../../../../shared/interfaces/membership.interface';
 import { User } from '../../../../shared/interfaces/user.interface';
 import { Mode } from '../../../../core/interfaces/mode.enum';
+import { DialogUpdateReservationComponent } from '../../../../shared/components/dialog-update-reservation/dialog-update-reservation.component';
 
 @Component({
   selector: 'app-home-receptionist',
@@ -61,8 +62,7 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
   }
 
   openAttendance() {
-    const dialogRef = this.dialog.open(DialogViewReservationComponent, {
-      //TODO: CAMBIAR DIALOG
+    const dialogRef = this.dialog.open(DialogUpdateReservationComponent, {
       width: '80%',
       data: { data: {}, mode: Mode.update },
     });

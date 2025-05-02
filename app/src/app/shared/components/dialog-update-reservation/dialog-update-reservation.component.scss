@@ -1,0 +1,117 @@
+@use "@angular/material" as mat;
+@use "sass:color";
+
+$dialog-bg: #2d2d2d;
+$text-color: #bdbdbd;
+$label-color: #bdbdbd;
+$input-bg: #424242;
+$input-border-color: #616161;
+$input-text-color: $text-color;
+$focused-border-color: #90caf9;
+$error-color: #ef9a9a;
+
+.dialog-select-reservation {
+  background-color: $dialog-bg;
+  color: $text-color;
+  padding: 24px;
+  min-width: 500px;
+
+  h1[mat-dialog-title] {
+    color: $text-color;
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid $input-border-color;
+    padding-bottom: 12px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    background-color: $input-bg;
+
+    .mat-mdc-input-element {
+      color: $input-text-color;
+      caret-color: $input-text-color;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      color: $error-color;
+    }
+
+    .mat-mdc-select-value {
+      color: $input-text-color !important;
+    }
+
+    .mdc-notched-outline > * {
+      border-color: $input-border-color !important;
+    }
+
+    &.mat-focused .mdc-notched-outline > * {
+      border-color: $focused-border-color !important;
+      border-width: 2px !important;
+    }
+
+    mat-error {
+      font-size: 0.75rem;
+      color: $error-color;
+    }
+  }
+
+  .reservation-list {
+    margin-top: 20px;
+    background-color: $input-bg;
+    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    max-height: 250px;
+    overflow-y: auto;
+
+    mat-list-option {
+      color: $text-color;
+
+      &.mat-selected {
+        background-color: rgba($focused-border-color, 0.1);
+        border-left: 3px solid $focused-border-color;
+      }
+    }
+  }
+
+  .selected-id {
+    margin-top: 16px;
+    color: $focused-border-color;
+    font-weight: 500;
+  }
+
+  .no-data {
+    margin-top: 16px;
+    color: $label-color;
+    font-style: italic;
+  }
+
+  [mat-dialog-actions] {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid $input-border-color;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    button {
+      color: $text-color;
+      border-color: $focused-border-color;
+
+      &.mat-flat-button {
+        background-color: $focused-border-color;
+        color: #fff;
+
+        &:hover {
+          background-color: $focused-border-color;
+        }
+
+        &[disabled] {
+          background-color: rgba($focused-border-color, 0.5);
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+  }
+}

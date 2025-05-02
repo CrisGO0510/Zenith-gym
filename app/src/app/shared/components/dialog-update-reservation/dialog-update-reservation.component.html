@@ -1,0 +1,58 @@
+<div class="dialog-select-reservation">
+
+<h1 mat-dialog-title>Seleccionar Reserva</h1>
+
+  <div mat-dialog-content>
+    <!-- Buscador por documento -->
+    <form [formGroup]="searchForm" (ngSubmit)="searchUser()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Documento</mat-label>
+        <input
+          matInput
+          formControlName="clientId"
+          (keyup.enter)="searchUser()"
+          placeholder="Ingrese documento y presione Enter"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          aria-label="Buscar documento"
+          (click)="searchUser()"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-error *ngIf="searchForm.get('clientId')?.hasError('required')">
+          El documento es obligatorio
+        </mat-error>
+        <mat-error *ngIf="searchForm.get('clientId')?.hasError('min')">
+          Documento inválido
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <!-- Lista de reservas -->
+    <div *ngIf="reservations.length > 0" class="reservation-list">
+      <mat-selection-list
+        [multiple]="false"
+        (selectionChange)="onSelect($event)"
+      >
+        <mat-list-option *ngFor="let r of reservations" [value]="r">
+          {{ r.TB_routines.name }} —
+          {{ r.start_time | date: 'short' }} —
+          Estado: {{ r.status }}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+
+    <!-- Mostrar ID seleccionado -->
+    <p *ngIf="selectedReservationId !== null" class="selected-id">
+      <strong>ID seleccionado:</strong> {{ selectedReservationId }}
+    </p>
+    <p *ngIf="reservations.length === 0" class="no-data">
+      No se encontraron reservas para este documento.
+    </p>
+  </div>
+
+  <div mat-dialog-actions align="end"></div>
+</div>

@@ -47,6 +47,11 @@ export class ClientService extends CrudService {
     return this.post<unknown>(body);
   }
 
+  updateReservation(id: number, body: Partial<Reservation>): Observable<unknown> {
+    this.endpoint = 'reservations';
+    return this.patch<unknown>(id, body);
+  }
+
   cancelReservation(id: number): Observable<Reservation> {
     this.endpoint = 'reservations';
     return this.patch<Reservation>(id, { status: ReservationStatus.CANCELLED });
