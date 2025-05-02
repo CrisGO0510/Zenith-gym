@@ -5,6 +5,7 @@ import { MembershipClient } from '../interfaces/membership.interface';
 import { Observable } from 'rxjs';
 import { Routine } from '../interfaces/routine.interface';
 import { Reservation } from '../interfaces/reservation.interface';
+import { ReservationStatus } from '../interfaces/reservation-status.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,11 @@ export class ClientService extends CrudService {
 
   getReservations(id_user: number): Observable<Reservation[]> {
     this.endpoint = 'reservations';
-    return this.get<Reservation[]>(`?id_user=${id_user}`);
+    return this.get<Reservation[]>(`pending?id_user=${id_user}`);
+  }
+
+  cancelReservation(id: number): Observable<Reservation> {
+    this.endpoint = 'reservations';
+    return this.patch<Reservation>(id, { status: ReservationStatus.CANCELLED });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
@@ -14,6 +14,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { SendDataDialog } from '../../../core/interfaces/send-data-dialog';
 import { ReservationStatus } from '../../interfaces/reservation-status.enum';
 import { Reservation } from '../../interfaces/reservation.interface';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserServices } from '../../services/users.service';
 
 @Component({
   selector: 'app-dialog-view-reservation',
@@ -33,12 +36,16 @@ import { Reservation } from '../../interfaces/reservation.interface';
 })
 export class DialogViewReservationComponent implements OnInit {
   reservationForm: FormGroup = new FormGroup({});
-  reservationStatusOptions: { value: ReservationStatus; label: string }[] = [];
+  reservationStatusOptions: { value: string; label: ReservationStatus }[] = [];
+  private subscription$: Subscription = new Subscription();
+
+  private formBuilder = inject(FormBuilder);
+  private userServices = inject(UserServices);
+  private snackBar = inject(MatSnackBar);
 
   constructor(
     public dialogRef: MatDialogRef<DialogViewReservationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SendDataDialog<Partial<Reservation>>,
-    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: SendDataDialog<Partial<Reservation>>
   ) {}
 
   protected buildForm(item: Partial<Reservation> = {}): FormGroup {
@@ -46,30 +53,78 @@ export class DialogViewReservationComponent implements OnInit {
       id: item.id ?? null,
       id_client_membership: item.id_client_membership ?? null,
       id_routine: item.id_routine ?? null,
-      start_time: item.start_time ?? '',
-      end_time: item.end_time ?? '',
-      status: item.status ?? 'pendiente',
-  
+      start_time: [{ value: item.start_time ?? '', disabled: this.data.mode !== 2 }],
+      end_time: [{ value: item.end_time ?? '', disabled: this.data.mode !== 2 }],
+      status: [{ value: this.normalizeStatus(item.status), disabled: this.data.mode !== 2 }],
+
       // Campos opcionales para visualización (no enviados al backend directamente)
-      routineName: item.TB_routines?.name ?? '',
-      routineDescription: item.TB_routines?.description ?? '',
-      clientName: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '',
-      clientLastName: item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '',
+      routineName: [{ value: item.TB_routines?.name ?? '', disabled: true }],
+      routineDescription: [{ value: item.TB_routines?.description ?? '', disabled: true }],
+      clientId: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null, disabled: true }],
+      clientName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '', disabled: true }],
+      clientLastName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '', disabled: true }],
     });
   }
-  
 
   ngOnInit(): void {
-    this.reservationStatusOptions = Object.values(ReservationStatus)
-      .filter((value): value is ReservationStatus => typeof value === 'number')
-      .map((status) => ({
-        value: status,
-        label: ReservationStatus.toLabel(status),
-      }));
+    this.reservationStatusOptions = Object.entries(ReservationStatus).map(
+      ([value, label]) => ({
+        value,
+        label,
+      })
+    );
+
     this.reservationForm = this.buildForm(this.data.data);
   }
 
-  closeDialog(): void {
-    this.dialogRef.close();
+  onSubmit() {
+    throw new Error('Method not implemented.');
+  }
+
+  private normalizeStatus(rawStatus: string | undefined): string {
+    if (!rawStatus) return 'PENDING';
+
+    const match = Object.entries(ReservationStatus).find(
+      ([key, label]) => label.toLowerCase() === rawStatus.toLowerCase()
+    );
+
+    return match ? match[0] : 'PENDING';
+  }
+
+  searchUser() {
+    const id_user = this.reservationForm.get('id_user')?.value;
+
+    if (id_user) {
+      this.subscription$.add(
+        this.userServices.getUserById(id_user).subscribe({
+          next: (user) => {
+            if (user.length === 0) {
+              this.snackBar.open(
+                'No se encontró el usuario con el ID proporcionado.',
+                'Cerrar',
+                {
+                  duration: 3000,
+                  verticalPosition: 'top',
+                  panelClass: ['error-snackbar'],
+                }
+              );
+              return;
+            }
+
+            this.reservationForm.patchValue({
+              clientName: user[0].name,
+              clientLastName: user[0].lastname,
+            });
+          },
+          error: (err) => {
+            console.error('Error fetching user:', err);
+          },
+        })
+      );
+    }
+  }
+
+  onDestroy() {
+    this.subscription$.unsubscribe();
   }
 }

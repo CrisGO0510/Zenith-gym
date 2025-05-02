@@ -1,4 +1,5 @@
 import { Client } from "./client.interface";
+import { ReservationStatus } from "./reservation-status.enum";
 import { Routine } from "./routine.interface";
 
 export interface Reservation {
@@ -7,7 +8,7 @@ export interface Reservation {
   id_routine: number;
   start_time: Date;
   end_time: Date;
-  status: string;
+  status: ReservationStatus;
   TB_routines: Routine;
   TB_client_membership: Client;
 }

@@ -63,6 +63,58 @@ export class ReservationsPrisma implements ReservationsRepository {
       );
   }
 
+  async getPending(
+    where: Prisma.TB_reservationsWhereInput & { id_user?: number | string },
+  ): Promise<(TB_reservations & { end_time: Date })[]> {
+    const { id_user, ...rest } = where;
+
+    return this.prisma.tB_reservations
+      .findMany({
+        where: {
+          ...rest,
+          status: 'pendiente',
+          TB_client_membership: id_user
+            ? {
+                TB_user_role: {
+                  id_user:
+                    typeof id_user === 'string'
+                      ? parseInt(id_user, 10)
+                      : id_user,
+                },
+              }
+            : undefined,
+        },
+        include: {
+          TB_routines: {
+            include: {
+              TB_routine_exercise: {
+                include: {
+                  TB_exercises: true,
+                },
+              },
+            },
+          },
+          TB_client_membership: {
+            include: {
+              TB_user_role: {
+                include: {
+                  TB_users: true,
+                },
+              },
+            },
+          },
+        },
+      })
+      .then((reservations) =>
+        reservations.map((res) => {
+          const duration = res.TB_routines?.estimatedDuration ?? 0;
+          const end_time = new Date(res.start_time);
+          end_time.setMinutes(end_time.getMinutes() + duration);
+          return { ...res, end_time };
+        }),
+      );
+  }
+
   async create(
     data: Prisma.TB_reservationsUncheckedCreateInput,
   ): Promise<TB_reservations> {

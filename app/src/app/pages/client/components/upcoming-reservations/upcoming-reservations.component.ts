@@ -12,7 +12,7 @@ export class UpcomingReservationsComponent {
 
   @Output() viewReservation = new EventEmitter<Reservation>();
 
-  @Output() deleteReservation = new EventEmitter<number>();
+  @Output() cancelReservation = new EventEmitter<number>();
 
   constructor() {}
 
@@ -25,7 +25,6 @@ export class UpcomingReservationsComponent {
   }
 
   onDeleteClick(id: number): void {
-    console.log('Delete reservation:', id);
-    this.deleteReservation.emit(id);
+    this.cancelReservation.emit(id);
   }
 }

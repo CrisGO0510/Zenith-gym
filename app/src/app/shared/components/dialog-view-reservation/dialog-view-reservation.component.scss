@@ -1,20 +1,20 @@
 @use "@angular/material" as mat;
 
-$dialog-bg: #333;
+$dialog-bg: #2a2a2a;
 $text-color: #e0e0e0;
 $label-color: #bdbdbd;
-$input-bg: #424242;
-$input-border-color: #616161;
+$input-bg: #3b3b3b;
+$input-border-color: #505050;
 $input-text-color: $text-color;
-
-:host {
-}
+$accent-color: #90caf9;
 
 h1[mat-dialog-title] {
   color: $text-color;
   margin: 0;
   padding: 24px;
+  font-size: 1.25rem;
   background-color: $dialog-bg;
+  border-bottom: 1px solid $input-border-color;
 }
 
 .dialog-content {
@@ -33,75 +33,67 @@ h1[mat-dialog-title] {
 .details-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  grid-column-gap: 20px;
-  grid-row-gap: 15px;
+  grid-gap: 15px 20px;
+  margin-top: 16px;
 
-  .grid-area-10 {
-    grid-area: 3 / 2 / 6 / 4;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .grid-item {
-    width: 100%;
-  }
-
+  .grid-item,
   .full-width {
     width: 100%;
   }
 
-  mat-form-field.readonly-field {
-    ::ng-deep .mat-mdc-form-field-subscript-wrapper {
-      display: none;
-    }
+  .description-field {
+    grid-column: 1 / -1;
+  }
 
-    ::ng-deep .mdc-notched-outline > * {
-      border-color: $input-border-color !important;
-    }
+  mat-form-field {
+    &.readonly-field {
+      ::ng-deep .mat-mdc-input-element[readonly],
+      ::ng-deep textarea[readonly].mat-mdc-input-element {
+        background-color: $input-bg;
+        color: $input-text-color;
+        border-radius: 4px;
+        padding: 6px 8px;
+        cursor: default;
+        box-shadow: none;
+      }
 
-    &.mat-focused ::ng-deep .mdc-notched-outline > * {
-      border-width: 1px !important;
-    }
+      ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
 
-    .mat-mdc-input-element[readonly],
-    textarea[readonly].mat-mdc-input-element {
-      color: $input-text-color !important;
-      background-color: $input-bg !important;
-      border-radius: 4px;
-      cursor: default !important;
-      margin-top: -4px;
-      padding: 4px 8px;
+      ::ng-deep .mdc-notched-outline > * {
+        border-color: $input-border-color !important;
+      }
 
-      &:-webkit-autofill {
-        -webkit-text-fill-color: $input-text-color !important;
-        box-shadow: 0 0 0 1000px $input-bg inset !important;
+      &.mat-focused ::ng-deep .mdc-notched-outline > * {
+        border-width: 1px !important;
+      }
+
+      ::ng-deep .mat-mdc-floating-label,
+      ::ng-deep .mdc-floating-label {
+        color: $label-color !important;
+        background-color: $dialog-bg;
+        padding: 0 4px;
+      }
+
+      textarea[readonly].mat-mdc-input-element {
+        resize: none;
+        overflow: auto;
       }
     }
 
-    textarea[readonly].mat-mdc-input-element {
-      resize: none;
-      overflow: auto;
-      padding-top: 8px;
-      padding-bottom: 8px;
+    .mat-mdc-select {
+      color: $text-color;
     }
 
-    .mdc-floating-label,
-    .mat-mdc-floating-label,
-    .mat-label {
+    .mat-mdc-select-value {
+      color: $text-color !important;
+    }
+
+    .mat-mdc-select-disabled {
       color: $label-color !important;
-      background-color: $dialog-bg !important;
-      padding: 0 4px;
-      margin-top: -1px;
+      background-color: $input-bg;
+      cursor: not-allowed;
     }
-
-    &.mat-focused .mdc-floating-label,
-    &.mat-focused .mat-mdc-floating-label {
-      color: $label-color !important;
-    }
-  }
-
-  .description-field {
-    grid-area: 3 / 2 / 6 / 4;
   }
 }

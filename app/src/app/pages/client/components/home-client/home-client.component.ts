@@ -88,8 +88,29 @@ export class HomeClientComponent implements OnInit, OnDestroy {
 
     this.dialog.open(DialogViewReservationComponent, {
       width: '80%',
-      data: { reservation: reservation, mode: Mode.update },
+      data: { data: reservation, mode: Mode.read },
     });
+  }
+
+  cancelReservation(id: number) {
+    this.subscription$.add(
+      this.clientService.cancelReservation(id).subscribe({
+        next: () => {
+          this.snackBar.open('Reserva cancelada', 'Cerrar', {
+            duration: 3000,
+            verticalPosition: 'top',
+          });
+          this.getReservations();
+        },
+        error: (error) => {
+          console.error('Error canceling reservation:', error);
+          this.snackBar.open('Error al cancelar la reserva', 'Cerrar', {
+            duration: 3000,
+            verticalPosition: 'top',
+          });
+        },
+      })
+    );
   }
 
   ngOnDestroy(): void {

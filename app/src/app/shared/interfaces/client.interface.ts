@@ -1,7 +1,7 @@
 import { UsersRoles } from "./user-roles-body.type";
 
 export interface Client {
-  clientId: number;
+  id_user: number;
   id_user_role: number;
   membershipId: number;
   startDate: Date;

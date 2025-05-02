@@ -1,16 +1,38 @@
+@if (data.mode === 2){
+<h1 mat-dialog-title>Registrar Asistencia</h1>
+} @else {
 <h1 mat-dialog-title>Detalles de la Reserva</h1>
+}
 
 <div mat-dialog-content class="dialog-content">
-  <form [formGroup]="reservationForm">
+  <form
+    [formGroup]="reservationForm"
+    (ngSubmit)="onSubmit()"
+    (keydown.enter)="$event.preventDefault()"
+  >
     <div class="details-grid">
-      <mat-form-field appearance="outline" class="grid-item readonly-field">
+      <mat-form-field appearance="outline" class="grid-area-doc">
         <mat-label>Documento</mat-label>
-        <input matInput formControlName="clientId" readonly />
+        <input
+          matInput
+          formControlName="clientId"
+          (keyup.enter)="searchUser()"
+          [readonly]="data.mode !== 2"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          aria-label="Buscar documento"
+          (click)="searchUser()"
+          [disabled]="data.mode !== 2"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+        @if (!reservationForm.get('clientId')?.value) {
+        <mat-error> Por favor, haga clic en la lupa para buscar. </mat-error>}
       </mat-form-field>
-      <mat-form-field appearance="outline" class="grid-item readonly-field">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="clientName" readonly />
-      </mat-form-field>
+
       <mat-form-field appearance="outline" class="grid-item readonly-field">
         <mat-label>Apellidos</mat-label>
         <input matInput formControlName="clientLastName" readonly />
@@ -20,38 +42,24 @@
         <mat-label>Nombre de la rutina</mat-label>
         <input matInput formControlName="routineName" readonly />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="grid-item readonly-field">
-        <mat-label>Nombre Instructor</mat-label>
-        <input matInput formControlName="instructorName" readonly />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="grid-item readonly-field">
-        <mat-label>Apellido Instructor</mat-label>
-        <input matInput formControlName="instructorLastName" readonly />
-      </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width readonly-field">
         <mat-label>Hora de inicio</mat-label>
-        <input matInput formControlName="startDate" readonly />
+        <input matInput formControlName="start_time" readonly />
       </mat-form-field>
+
       <mat-form-field appearance="outline" class="full-width readonly-field">
         <mat-label>Hora de Finalización</mat-label>
-        <input matInput formControlName="endDate" readonly />
+        <input matInput formControlName="end_time" readonly />
       </mat-form-field>
+
       <mat-form-field appearance="outline" class="grid-area-9">
         <mat-label>Estado de la reserva</mat-label>
-
-        <mat-select formControlName="reservationStatusId">
+        <mat-select formControlName="status" [disabled]="data.mode !== 2">
           @for (option of reservationStatusOptions; track option.value) {
-            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          <mat-option [value]="option.value">{{ option.label }}</mat-option>
           }
         </mat-select>
-
-        @if (
-          reservationForm.get("reservationStatusId")?.hasError("required") &&
-          reservationForm.get("reservationStatusId")?.touched
-        ) {
-          <mat-error>Debe seleccionar un estado</mat-error>
-        }
       </mat-form-field>
 
       <mat-form-field
@@ -73,5 +81,7 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-stroked-button (click)="closeDialog()">Cerrar</button>
+  @if (data.mode === 2) {
+  <button mat-button (click)="onSubmit()">Registrar</button>
+  }
 </div>

@@ -19,21 +19,25 @@ export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
   @Get('')
-  get(
-    @Query() query: GetReservationsDto,
-  ): Promise<TB_reservations[]> {
+  get(@Query() query: GetReservationsDto): Promise<TB_reservations[]> {
     return this.reservationsService.get(query);
   }
 
+  @Get('pending')
+  getPending(@Query() query: GetReservationsDto): Promise<TB_reservations[]> {
+    return this.reservationsService.getPending(query);
+  }
+
   @Post('')
-  create(
-    @Body() body: CreateReservationDto,
-  ): Promise<TB_reservations> {
+  create(@Body() body: CreateReservationDto): Promise<TB_reservations> {
     return this.reservationsService.create(body);
   }
 
   @Patch(':id')
-  public update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateReservationDto) {
+  public update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateReservationDto,
+  ) {
     return this.reservationsService.update({ id }, body);
   }
 }

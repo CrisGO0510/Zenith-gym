@@ -127,7 +127,7 @@ export class HistoryClientComponent implements OnInit, OnDestroy {
   }
 
   yAxisTickFormatting(val: number): string {
-    return ReservationStatus.toLabel(val as ReservationStatus);
+    return ReservationStatus.ABSENT; //TODO CORREGIR LUEGO
   }
   xAxisTickFormatting(val: Date | string): string {
     try {

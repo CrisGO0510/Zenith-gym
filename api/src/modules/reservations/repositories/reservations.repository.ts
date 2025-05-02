@@ -5,6 +5,10 @@ export abstract class ReservationsRepository {
     where: Prisma.TB_reservationsWhereInput,
   ): Promise<TB_reservations[]>;
 
+  abstract getPending(
+    where: Prisma.TB_reservationsWhereInput,
+  ): Promise<TB_reservations[]>;
+
   abstract create(
     data: Prisma.TB_reservationsUncheckedCreateInput,
   ): Promise<TB_reservations>;

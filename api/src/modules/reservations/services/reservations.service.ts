@@ -9,6 +9,10 @@ export class ReservationsService {
     return this.reservations.get(where);
   }
 
+  public getPending(where: any) {
+    return this.reservations.getPending(where);
+  }
+
   public create(data: any) {
     return this.reservations.create(data);
   }
