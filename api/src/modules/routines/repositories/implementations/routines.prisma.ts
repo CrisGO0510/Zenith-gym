@@ -18,7 +18,6 @@ export class RoutinesPrisma implements RoutinesRepository {
             TB_exercises: true,
           },
         },
-        TB_session_capacity: true,
       },
     });
   }

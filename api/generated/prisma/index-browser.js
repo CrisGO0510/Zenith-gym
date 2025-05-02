@@ -176,7 +176,8 @@ exports.Prisma.TB_routinesScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  estimatedDuration: 'estimatedDuration'
+  estimatedDuration: 'estimatedDuration',
+  capacity: 'capacity'
 };
 
 exports.Prisma.TB_exercisesScalarFieldEnum = {
@@ -192,26 +193,12 @@ exports.Prisma.TB_routine_exerciseScalarFieldEnum = {
   id_exercise: 'id_exercise'
 };
 
-exports.Prisma.TB_session_capacityScalarFieldEnum = {
-  id: 'id',
-  id_routine: 'id_routine',
-  id_instructor: 'id_instructor',
-  capacity: 'capacity'
-};
-
 exports.Prisma.TB_reservationsScalarFieldEnum = {
   id: 'id',
   id_client_membership: 'id_client_membership',
-  id_session_capacity: 'id_session_capacity',
+  id_routine: 'id_routine',
   start_time: 'start_time',
   status: 'status'
-};
-
-exports.Prisma.TB_notificationsScalarFieldEnum = {
-  id: 'id',
-  id_user: 'id_user',
-  message: 'message',
-  sent_date: 'sent_date'
 };
 
 exports.Prisma.SortOrder = {
@@ -250,9 +237,7 @@ exports.Prisma.ModelName = {
   TB_routines: 'TB_routines',
   TB_exercises: 'TB_exercises',
   TB_routine_exercise: 'TB_routine_exercise',
-  TB_session_capacity: 'TB_session_capacity',
-  TB_reservations: 'TB_reservations',
-  TB_notifications: 'TB_notifications'
+  TB_reservations: 'TB_reservations'
 };
 
 /**

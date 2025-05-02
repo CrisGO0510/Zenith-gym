@@ -6,9 +6,16 @@ import { EmployeesModule } from './employees/employees.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { RestrictionsModule } from './restrictions/restrictions.module';
 import { RoutinesModule } from './routines/routines.module';
-import { SessionsModule } from './sessions/sessions.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, MembershipsModule, EmployeesModule, NotificationsModule, RestrictionsModule, RoutinesModule, SessionsModule],
+  imports: [
+    AuthModule,
+    UsersModule,
+    MembershipsModule,
+    EmployeesModule,
+    NotificationsModule,
+    RestrictionsModule,
+    RoutinesModule,
+  ],
 })
 export class ModulesModule {}

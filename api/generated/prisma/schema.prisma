@@ -33,9 +33,9 @@ model TB_users {
   phone_number String   @db.VarChar(16)
   birthday     DateTime @db.Date()
 
-  TB_user_role     TB_user_role[]
-  TB_notifications TB_notifications[]
-  TB_restriction   TB_restriction[]
+  TB_user_role   TB_user_role[]
+  //TB_notifications TB_notifications[]
+  TB_restriction TB_restriction[]
 }
 
 model TB_role {
@@ -71,8 +71,7 @@ model TB_employees {
   specialization String   @db.VarChar(128)
   date_entry     DateTime @db.Date()
 
-  TB_user_role        TB_user_role          @relation(fields: [id_user_role], references: [id_user_role])
-  TB_session_capacity TB_session_capacity[]
+  TB_user_role TB_user_role @relation(fields: [id_user_role], references: [id_user_role])
 }
 
 model TB_memberships {
@@ -97,12 +96,14 @@ model TB_client_membership {
 }
 
 model TB_routines {
-  id                  Int                   @id @default(autoincrement())
-  name                String                @unique @db.VarChar(64)
-  description         String                @db.VarChar(1024)
-  estimatedDuration   Int                   @db.Integer()
+  id                Int    @id @default(autoincrement())
+  name              String @unique @db.VarChar(64)
+  description       String @db.VarChar(1024)
+  estimatedDuration Int    @db.Integer()
+  capacity          Int    @default(10) @db.Integer()
+
   TB_routine_exercise TB_routine_exercise[]
-  TB_session_capacity TB_session_capacity[]
+  TB_reservations     TB_reservations[]
 }
 
 model TB_exercises {
@@ -122,33 +123,22 @@ model TB_routine_exercise {
   TB_exercises TB_exercises @relation(fields: [id_exercise], references: [id])
 }
 
-model TB_session_capacity {
-  id            Int @id @default(autoincrement())
-  id_routine    Int @db.Integer()
-  id_instructor Int @db.Integer()
-  capacity      Int @db.Integer()
-
-  TB_routines     TB_routines       @relation(fields: [id_routine], references: [id])
-  TB_employees    TB_employees      @relation(fields: [id_instructor], references: [id])
-  TB_reservations TB_reservations[]
-}
-
 model TB_reservations {
   id                   Int               @id @default(autoincrement())
   id_client_membership Int               @db.Integer()
-  id_session_capacity  Int               @db.Integer()
+  id_routine           Int               @db.Integer()
   start_time           DateTime          @db.Date()
   status               reservationStatus
 
   TB_client_membership TB_client_membership @relation(fields: [id_client_membership], references: [id])
-  TB_session_capacity  TB_session_capacity  @relation(fields: [id_session_capacity], references: [id])
+  TB_routines          TB_routines          @relation(fields: [id_routine], references: [id])
 }
 
-model TB_notifications {
-  id        Int      @id @default(autoincrement())
-  id_user   Int      @db.Integer()
-  message   String   @db.VarChar(64)
-  sent_date DateTime @db.Date()
-
-  TB_users TB_users @relation(fields: [id_user], references: [id_user])
-}
+//model TB_notifications {
+//  id               Int                  @id @default(autoincrement())
+//  id_user          Int                  @db.Integer()
+//  message          String               @db.VarChar(64)
+//  sent_date        DateTime             @db.Date()
+//
+//  TB_users         TB_users             @relation(fields: [id_user], references: [id_user])
+//}

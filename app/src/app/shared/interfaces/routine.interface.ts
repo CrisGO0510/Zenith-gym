@@ -17,5 +17,6 @@ export interface Routine {
   name: string;
   description: string;
   estimatedDuration: number;
+  capacity: number;
   TB_routine_exercise: RoutineExercise[];
 }

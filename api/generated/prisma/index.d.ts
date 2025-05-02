@@ -64,20 +64,10 @@ export type TB_exercises = $Result.DefaultSelection<Prisma.$TB_exercisesPayload>
  */
 export type TB_routine_exercise = $Result.DefaultSelection<Prisma.$TB_routine_exercisePayload>
 /**
- * Model TB_session_capacity
- * 
- */
-export type TB_session_capacity = $Result.DefaultSelection<Prisma.$TB_session_capacityPayload>
-/**
  * Model TB_reservations
  * 
  */
 export type TB_reservations = $Result.DefaultSelection<Prisma.$TB_reservationsPayload>
-/**
- * Model TB_notifications
- * 
- */
-export type TB_notifications = $Result.DefaultSelection<Prisma.$TB_notificationsPayload>
 
 /**
  * Enums
@@ -340,16 +330,6 @@ export class PrismaClient<
   get tB_routine_exercise(): Prisma.TB_routine_exerciseDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.tB_session_capacity`: Exposes CRUD operations for the **TB_session_capacity** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TB_session_capacities
-    * const tB_session_capacities = await prisma.tB_session_capacity.findMany()
-    * ```
-    */
-  get tB_session_capacity(): Prisma.TB_session_capacityDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.tB_reservations`: Exposes CRUD operations for the **TB_reservations** model.
     * Example usage:
     * ```ts
@@ -358,16 +338,6 @@ export class PrismaClient<
     * ```
     */
   get tB_reservations(): Prisma.TB_reservationsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.tB_notifications`: Exposes CRUD operations for the **TB_notifications** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TB_notifications
-    * const tB_notifications = await prisma.tB_notifications.findMany()
-    * ```
-    */
-  get tB_notifications(): Prisma.TB_notificationsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -818,9 +788,7 @@ export namespace Prisma {
     TB_routines: 'TB_routines',
     TB_exercises: 'TB_exercises',
     TB_routine_exercise: 'TB_routine_exercise',
-    TB_session_capacity: 'TB_session_capacity',
-    TB_reservations: 'TB_reservations',
-    TB_notifications: 'TB_notifications'
+    TB_reservations: 'TB_reservations'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -839,7 +807,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tB_users" | "tB_role" | "tB_user_role" | "tB_restriction" | "tB_employees" | "tB_memberships" | "tB_client_membership" | "tB_routines" | "tB_exercises" | "tB_routine_exercise" | "tB_session_capacity" | "tB_reservations" | "tB_notifications"
+      modelProps: "tB_users" | "tB_role" | "tB_user_role" | "tB_restriction" | "tB_employees" | "tB_memberships" | "tB_client_membership" | "tB_routines" | "tB_exercises" | "tB_routine_exercise" | "tB_reservations"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1583,80 +1551,6 @@ export namespace Prisma {
           }
         }
       }
-      TB_session_capacity: {
-        payload: Prisma.$TB_session_capacityPayload<ExtArgs>
-        fields: Prisma.TB_session_capacityFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TB_session_capacityFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TB_session_capacityFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>
-          }
-          findFirst: {
-            args: Prisma.TB_session_capacityFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TB_session_capacityFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>
-          }
-          findMany: {
-            args: Prisma.TB_session_capacityFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>[]
-          }
-          create: {
-            args: Prisma.TB_session_capacityCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>
-          }
-          createMany: {
-            args: Prisma.TB_session_capacityCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TB_session_capacityCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>[]
-          }
-          delete: {
-            args: Prisma.TB_session_capacityDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>
-          }
-          update: {
-            args: Prisma.TB_session_capacityUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>
-          }
-          deleteMany: {
-            args: Prisma.TB_session_capacityDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TB_session_capacityUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TB_session_capacityUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>[]
-          }
-          upsert: {
-            args: Prisma.TB_session_capacityUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_session_capacityPayload>
-          }
-          aggregate: {
-            args: Prisma.TB_session_capacityAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTB_session_capacity>
-          }
-          groupBy: {
-            args: Prisma.TB_session_capacityGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TB_session_capacityGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TB_session_capacityCountArgs<ExtArgs>
-            result: $Utils.Optional<TB_session_capacityCountAggregateOutputType> | number
-          }
-        }
-      }
       TB_reservations: {
         payload: Prisma.$TB_reservationsPayload<ExtArgs>
         fields: Prisma.TB_reservationsFieldRefs
@@ -1728,80 +1622,6 @@ export namespace Prisma {
           count: {
             args: Prisma.TB_reservationsCountArgs<ExtArgs>
             result: $Utils.Optional<TB_reservationsCountAggregateOutputType> | number
-          }
-        }
-      }
-      TB_notifications: {
-        payload: Prisma.$TB_notificationsPayload<ExtArgs>
-        fields: Prisma.TB_notificationsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TB_notificationsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TB_notificationsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>
-          }
-          findFirst: {
-            args: Prisma.TB_notificationsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TB_notificationsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>
-          }
-          findMany: {
-            args: Prisma.TB_notificationsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>[]
-          }
-          create: {
-            args: Prisma.TB_notificationsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>
-          }
-          createMany: {
-            args: Prisma.TB_notificationsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TB_notificationsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>[]
-          }
-          delete: {
-            args: Prisma.TB_notificationsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>
-          }
-          update: {
-            args: Prisma.TB_notificationsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>
-          }
-          deleteMany: {
-            args: Prisma.TB_notificationsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TB_notificationsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TB_notificationsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>[]
-          }
-          upsert: {
-            args: Prisma.TB_notificationsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TB_notificationsPayload>
-          }
-          aggregate: {
-            args: Prisma.TB_notificationsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTB_notifications>
-          }
-          groupBy: {
-            args: Prisma.TB_notificationsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TB_notificationsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TB_notificationsCountArgs<ExtArgs>
-            result: $Utils.Optional<TB_notificationsCountAggregateOutputType> | number
           }
         }
       }
@@ -1899,9 +1719,7 @@ export namespace Prisma {
     tB_routines?: TB_routinesOmit
     tB_exercises?: TB_exercisesOmit
     tB_routine_exercise?: TB_routine_exerciseOmit
-    tB_session_capacity?: TB_session_capacityOmit
     tB_reservations?: TB_reservationsOmit
-    tB_notifications?: TB_notificationsOmit
   }
 
   /* Types for Logging */
@@ -1997,13 +1815,11 @@ export namespace Prisma {
 
   export type TB_usersCountOutputType = {
     TB_user_role: number
-    TB_notifications: number
     TB_restriction: number
   }
 
   export type TB_usersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_user_role?: boolean | TB_usersCountOutputTypeCountTB_user_roleArgs
-    TB_notifications?: boolean | TB_usersCountOutputTypeCountTB_notificationsArgs
     TB_restriction?: boolean | TB_usersCountOutputTypeCountTB_restrictionArgs
   }
 
@@ -2023,13 +1839,6 @@ export namespace Prisma {
    */
   export type TB_usersCountOutputTypeCountTB_user_roleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TB_user_roleWhereInput
-  }
-
-  /**
-   * TB_usersCountOutputType without action
-   */
-  export type TB_usersCountOutputTypeCountTB_notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_notificationsWhereInput
   }
 
   /**
@@ -2112,37 +1921,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type TB_employeesCountOutputType
-   */
-
-  export type TB_employeesCountOutputType = {
-    TB_session_capacity: number
-  }
-
-  export type TB_employeesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_session_capacity?: boolean | TB_employeesCountOutputTypeCountTB_session_capacityArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * TB_employeesCountOutputType without action
-   */
-  export type TB_employeesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_employeesCountOutputType
-     */
-    select?: TB_employeesCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TB_employeesCountOutputType without action
-   */
-  export type TB_employeesCountOutputTypeCountTB_session_capacityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_session_capacityWhereInput
-  }
-
-
-  /**
    * Count Type TB_membershipsCountOutputType
    */
 
@@ -2210,12 +1988,12 @@ export namespace Prisma {
 
   export type TB_routinesCountOutputType = {
     TB_routine_exercise: number
-    TB_session_capacity: number
+    TB_reservations: number
   }
 
   export type TB_routinesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_routine_exercise?: boolean | TB_routinesCountOutputTypeCountTB_routine_exerciseArgs
-    TB_session_capacity?: boolean | TB_routinesCountOutputTypeCountTB_session_capacityArgs
+    TB_reservations?: boolean | TB_routinesCountOutputTypeCountTB_reservationsArgs
   }
 
   // Custom InputTypes
@@ -2239,8 +2017,8 @@ export namespace Prisma {
   /**
    * TB_routinesCountOutputType without action
    */
-  export type TB_routinesCountOutputTypeCountTB_session_capacityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_session_capacityWhereInput
+  export type TB_routinesCountOutputTypeCountTB_reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TB_reservationsWhereInput
   }
 
 
@@ -2272,37 +2050,6 @@ export namespace Prisma {
    */
   export type TB_exercisesCountOutputTypeCountTB_routine_exerciseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TB_routine_exerciseWhereInput
-  }
-
-
-  /**
-   * Count Type TB_session_capacityCountOutputType
-   */
-
-  export type TB_session_capacityCountOutputType = {
-    TB_reservations: number
-  }
-
-  export type TB_session_capacityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_reservations?: boolean | TB_session_capacityCountOutputTypeCountTB_reservationsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * TB_session_capacityCountOutputType without action
-   */
-  export type TB_session_capacityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacityCountOutputType
-     */
-    select?: TB_session_capacityCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TB_session_capacityCountOutputType without action
-   */
-  export type TB_session_capacityCountOutputTypeCountTB_reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_reservationsWhereInput
   }
 
 
@@ -2525,7 +2272,6 @@ export namespace Prisma {
     phone_number?: boolean
     birthday?: boolean
     TB_user_role?: boolean | TB_users$TB_user_roleArgs<ExtArgs>
-    TB_notifications?: boolean | TB_users$TB_notificationsArgs<ExtArgs>
     TB_restriction?: boolean | TB_users$TB_restrictionArgs<ExtArgs>
     _count?: boolean | TB_usersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_users"]>
@@ -2563,7 +2309,6 @@ export namespace Prisma {
   export type TB_usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_user" | "name" | "lastname" | "email" | "password" | "phone_number" | "birthday", ExtArgs["result"]["tB_users"]>
   export type TB_usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_user_role?: boolean | TB_users$TB_user_roleArgs<ExtArgs>
-    TB_notifications?: boolean | TB_users$TB_notificationsArgs<ExtArgs>
     TB_restriction?: boolean | TB_users$TB_restrictionArgs<ExtArgs>
     _count?: boolean | TB_usersCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2574,7 +2319,6 @@ export namespace Prisma {
     name: "TB_users"
     objects: {
       TB_user_role: Prisma.$TB_user_rolePayload<ExtArgs>[]
-      TB_notifications: Prisma.$TB_notificationsPayload<ExtArgs>[]
       TB_restriction: Prisma.$TB_restrictionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2980,7 +2724,6 @@ export namespace Prisma {
   export interface Prisma__TB_usersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     TB_user_role<T extends TB_users$TB_user_roleArgs<ExtArgs> = {}>(args?: Subset<T, TB_users$TB_user_roleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_user_rolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    TB_notifications<T extends TB_users$TB_notificationsArgs<ExtArgs> = {}>(args?: Subset<T, TB_users$TB_notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     TB_restriction<T extends TB_users$TB_restrictionArgs<ExtArgs> = {}>(args?: Subset<T, TB_users$TB_restrictionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_restrictionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3427,30 +3170,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TB_user_roleScalarFieldEnum | TB_user_roleScalarFieldEnum[]
-  }
-
-  /**
-   * TB_users.TB_notifications
-   */
-  export type TB_users$TB_notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    where?: TB_notificationsWhereInput
-    orderBy?: TB_notificationsOrderByWithRelationInput | TB_notificationsOrderByWithRelationInput[]
-    cursor?: TB_notificationsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TB_notificationsScalarFieldEnum | TB_notificationsScalarFieldEnum[]
   }
 
   /**
@@ -6987,8 +6706,6 @@ export namespace Prisma {
     specialization?: boolean
     date_entry?: boolean
     TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_employees$TB_session_capacityArgs<ExtArgs>
-    _count?: boolean | TB_employeesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_employees"]>
 
   export type TB_employeesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7020,8 +6737,6 @@ export namespace Prisma {
   export type TB_employeesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_user_role" | "bio" | "specialization" | "date_entry", ExtArgs["result"]["tB_employees"]>
   export type TB_employeesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_employees$TB_session_capacityArgs<ExtArgs>
-    _count?: boolean | TB_employeesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TB_employeesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_user_role?: boolean | TB_user_roleDefaultArgs<ExtArgs>
@@ -7034,7 +6749,6 @@ export namespace Prisma {
     name: "TB_employees"
     objects: {
       TB_user_role: Prisma.$TB_user_rolePayload<ExtArgs>
-      TB_session_capacity: Prisma.$TB_session_capacityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -7437,7 +7151,6 @@ export namespace Prisma {
   export interface Prisma__TB_employeesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     TB_user_role<T extends TB_user_roleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_user_roleDefaultArgs<ExtArgs>>): Prisma__TB_user_roleClient<$Result.GetResult<Prisma.$TB_user_rolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    TB_session_capacity<T extends TB_employees$TB_session_capacityArgs<ExtArgs> = {}>(args?: Subset<T, TB_employees$TB_session_capacityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7865,30 +7578,6 @@ export namespace Prisma {
      * Limit how many TB_employees to delete.
      */
     limit?: number
-  }
-
-  /**
-   * TB_employees.TB_session_capacity
-   */
-  export type TB_employees$TB_session_capacityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    where?: TB_session_capacityWhereInput
-    orderBy?: TB_session_capacityOrderByWithRelationInput | TB_session_capacityOrderByWithRelationInput[]
-    cursor?: TB_session_capacityWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TB_session_capacityScalarFieldEnum | TB_session_capacityScalarFieldEnum[]
   }
 
   /**
@@ -10171,11 +9860,13 @@ export namespace Prisma {
   export type TB_routinesAvgAggregateOutputType = {
     id: number | null
     estimatedDuration: number | null
+    capacity: number | null
   }
 
   export type TB_routinesSumAggregateOutputType = {
     id: number | null
     estimatedDuration: number | null
+    capacity: number | null
   }
 
   export type TB_routinesMinAggregateOutputType = {
@@ -10183,6 +9874,7 @@ export namespace Prisma {
     name: string | null
     description: string | null
     estimatedDuration: number | null
+    capacity: number | null
   }
 
   export type TB_routinesMaxAggregateOutputType = {
@@ -10190,6 +9882,7 @@ export namespace Prisma {
     name: string | null
     description: string | null
     estimatedDuration: number | null
+    capacity: number | null
   }
 
   export type TB_routinesCountAggregateOutputType = {
@@ -10197,6 +9890,7 @@ export namespace Prisma {
     name: number
     description: number
     estimatedDuration: number
+    capacity: number
     _all: number
   }
 
@@ -10204,11 +9898,13 @@ export namespace Prisma {
   export type TB_routinesAvgAggregateInputType = {
     id?: true
     estimatedDuration?: true
+    capacity?: true
   }
 
   export type TB_routinesSumAggregateInputType = {
     id?: true
     estimatedDuration?: true
+    capacity?: true
   }
 
   export type TB_routinesMinAggregateInputType = {
@@ -10216,6 +9912,7 @@ export namespace Prisma {
     name?: true
     description?: true
     estimatedDuration?: true
+    capacity?: true
   }
 
   export type TB_routinesMaxAggregateInputType = {
@@ -10223,6 +9920,7 @@ export namespace Prisma {
     name?: true
     description?: true
     estimatedDuration?: true
+    capacity?: true
   }
 
   export type TB_routinesCountAggregateInputType = {
@@ -10230,6 +9928,7 @@ export namespace Prisma {
     name?: true
     description?: true
     estimatedDuration?: true
+    capacity?: true
     _all?: true
   }
 
@@ -10324,6 +10023,7 @@ export namespace Prisma {
     name: string
     description: string
     estimatedDuration: number
+    capacity: number
     _count: TB_routinesCountAggregateOutputType | null
     _avg: TB_routinesAvgAggregateOutputType | null
     _sum: TB_routinesSumAggregateOutputType | null
@@ -10350,8 +10050,9 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     estimatedDuration?: boolean
+    capacity?: boolean
     TB_routine_exercise?: boolean | TB_routines$TB_routine_exerciseArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_routines$TB_session_capacityArgs<ExtArgs>
+    TB_reservations?: boolean | TB_routines$TB_reservationsArgs<ExtArgs>
     _count?: boolean | TB_routinesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_routines"]>
 
@@ -10360,6 +10061,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     estimatedDuration?: boolean
+    capacity?: boolean
   }, ExtArgs["result"]["tB_routines"]>
 
   export type TB_routinesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10367,6 +10069,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     estimatedDuration?: boolean
+    capacity?: boolean
   }, ExtArgs["result"]["tB_routines"]>
 
   export type TB_routinesSelectScalar = {
@@ -10374,12 +10077,13 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     estimatedDuration?: boolean
+    capacity?: boolean
   }
 
-  export type TB_routinesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "estimatedDuration", ExtArgs["result"]["tB_routines"]>
+  export type TB_routinesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "estimatedDuration" | "capacity", ExtArgs["result"]["tB_routines"]>
   export type TB_routinesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_routine_exercise?: boolean | TB_routines$TB_routine_exerciseArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_routines$TB_session_capacityArgs<ExtArgs>
+    TB_reservations?: boolean | TB_routines$TB_reservationsArgs<ExtArgs>
     _count?: boolean | TB_routinesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TB_routinesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -10389,13 +10093,14 @@ export namespace Prisma {
     name: "TB_routines"
     objects: {
       TB_routine_exercise: Prisma.$TB_routine_exercisePayload<ExtArgs>[]
-      TB_session_capacity: Prisma.$TB_session_capacityPayload<ExtArgs>[]
+      TB_reservations: Prisma.$TB_reservationsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
       description: string
       estimatedDuration: number
+      capacity: number
     }, ExtArgs["result"]["tB_routines"]>
     composites: {}
   }
@@ -10791,7 +10496,7 @@ export namespace Prisma {
   export interface Prisma__TB_routinesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     TB_routine_exercise<T extends TB_routines$TB_routine_exerciseArgs<ExtArgs> = {}>(args?: Subset<T, TB_routines$TB_routine_exerciseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_routine_exercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    TB_session_capacity<T extends TB_routines$TB_session_capacityArgs<ExtArgs> = {}>(args?: Subset<T, TB_routines$TB_session_capacityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    TB_reservations<T extends TB_routines$TB_reservationsArgs<ExtArgs> = {}>(args?: Subset<T, TB_routines$TB_reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_reservationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10825,6 +10530,7 @@ export namespace Prisma {
     readonly name: FieldRef<"TB_routines", 'String'>
     readonly description: FieldRef<"TB_routines", 'String'>
     readonly estimatedDuration: FieldRef<"TB_routines", 'Int'>
+    readonly capacity: FieldRef<"TB_routines", 'Int'>
   }
     
 
@@ -11237,27 +10943,27 @@ export namespace Prisma {
   }
 
   /**
-   * TB_routines.TB_session_capacity
+   * TB_routines.TB_reservations
    */
-  export type TB_routines$TB_session_capacityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TB_routines$TB_reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TB_session_capacity
+     * Select specific fields to fetch from the TB_reservations
      */
-    select?: TB_session_capacitySelect<ExtArgs> | null
+    select?: TB_reservationsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TB_session_capacity
+     * Omit specific fields from the TB_reservations
      */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
+    omit?: TB_reservationsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    where?: TB_session_capacityWhereInput
-    orderBy?: TB_session_capacityOrderByWithRelationInput | TB_session_capacityOrderByWithRelationInput[]
-    cursor?: TB_session_capacityWhereUniqueInput
+    include?: TB_reservationsInclude<ExtArgs> | null
+    where?: TB_reservationsWhereInput
+    orderBy?: TB_reservationsOrderByWithRelationInput | TB_reservationsOrderByWithRelationInput[]
+    cursor?: TB_reservationsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: TB_session_capacityScalarFieldEnum | TB_session_capacityScalarFieldEnum[]
+    distinct?: TB_reservationsScalarFieldEnum | TB_reservationsScalarFieldEnum[]
   }
 
   /**
@@ -13453,1135 +13159,6 @@ export namespace Prisma {
 
 
   /**
-   * Model TB_session_capacity
-   */
-
-  export type AggregateTB_session_capacity = {
-    _count: TB_session_capacityCountAggregateOutputType | null
-    _avg: TB_session_capacityAvgAggregateOutputType | null
-    _sum: TB_session_capacitySumAggregateOutputType | null
-    _min: TB_session_capacityMinAggregateOutputType | null
-    _max: TB_session_capacityMaxAggregateOutputType | null
-  }
-
-  export type TB_session_capacityAvgAggregateOutputType = {
-    id: number | null
-    id_routine: number | null
-    id_instructor: number | null
-    capacity: number | null
-  }
-
-  export type TB_session_capacitySumAggregateOutputType = {
-    id: number | null
-    id_routine: number | null
-    id_instructor: number | null
-    capacity: number | null
-  }
-
-  export type TB_session_capacityMinAggregateOutputType = {
-    id: number | null
-    id_routine: number | null
-    id_instructor: number | null
-    capacity: number | null
-  }
-
-  export type TB_session_capacityMaxAggregateOutputType = {
-    id: number | null
-    id_routine: number | null
-    id_instructor: number | null
-    capacity: number | null
-  }
-
-  export type TB_session_capacityCountAggregateOutputType = {
-    id: number
-    id_routine: number
-    id_instructor: number
-    capacity: number
-    _all: number
-  }
-
-
-  export type TB_session_capacityAvgAggregateInputType = {
-    id?: true
-    id_routine?: true
-    id_instructor?: true
-    capacity?: true
-  }
-
-  export type TB_session_capacitySumAggregateInputType = {
-    id?: true
-    id_routine?: true
-    id_instructor?: true
-    capacity?: true
-  }
-
-  export type TB_session_capacityMinAggregateInputType = {
-    id?: true
-    id_routine?: true
-    id_instructor?: true
-    capacity?: true
-  }
-
-  export type TB_session_capacityMaxAggregateInputType = {
-    id?: true
-    id_routine?: true
-    id_instructor?: true
-    capacity?: true
-  }
-
-  export type TB_session_capacityCountAggregateInputType = {
-    id?: true
-    id_routine?: true
-    id_instructor?: true
-    capacity?: true
-    _all?: true
-  }
-
-  export type TB_session_capacityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TB_session_capacity to aggregate.
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_session_capacities to fetch.
-     */
-    orderBy?: TB_session_capacityOrderByWithRelationInput | TB_session_capacityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TB_session_capacityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_session_capacities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_session_capacities.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TB_session_capacities
-    **/
-    _count?: true | TB_session_capacityCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TB_session_capacityAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TB_session_capacitySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TB_session_capacityMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TB_session_capacityMaxAggregateInputType
-  }
-
-  export type GetTB_session_capacityAggregateType<T extends TB_session_capacityAggregateArgs> = {
-        [P in keyof T & keyof AggregateTB_session_capacity]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTB_session_capacity[P]>
-      : GetScalarType<T[P], AggregateTB_session_capacity[P]>
-  }
-
-
-
-
-  export type TB_session_capacityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_session_capacityWhereInput
-    orderBy?: TB_session_capacityOrderByWithAggregationInput | TB_session_capacityOrderByWithAggregationInput[]
-    by: TB_session_capacityScalarFieldEnum[] | TB_session_capacityScalarFieldEnum
-    having?: TB_session_capacityScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TB_session_capacityCountAggregateInputType | true
-    _avg?: TB_session_capacityAvgAggregateInputType
-    _sum?: TB_session_capacitySumAggregateInputType
-    _min?: TB_session_capacityMinAggregateInputType
-    _max?: TB_session_capacityMaxAggregateInputType
-  }
-
-  export type TB_session_capacityGroupByOutputType = {
-    id: number
-    id_routine: number
-    id_instructor: number
-    capacity: number
-    _count: TB_session_capacityCountAggregateOutputType | null
-    _avg: TB_session_capacityAvgAggregateOutputType | null
-    _sum: TB_session_capacitySumAggregateOutputType | null
-    _min: TB_session_capacityMinAggregateOutputType | null
-    _max: TB_session_capacityMaxAggregateOutputType | null
-  }
-
-  type GetTB_session_capacityGroupByPayload<T extends TB_session_capacityGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TB_session_capacityGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TB_session_capacityGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TB_session_capacityGroupByOutputType[P]>
-            : GetScalarType<T[P], TB_session_capacityGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TB_session_capacitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_routine?: boolean
-    id_instructor?: boolean
-    capacity?: boolean
-    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
-    TB_employees?: boolean | TB_employeesDefaultArgs<ExtArgs>
-    TB_reservations?: boolean | TB_session_capacity$TB_reservationsArgs<ExtArgs>
-    _count?: boolean | TB_session_capacityCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tB_session_capacity"]>
-
-  export type TB_session_capacitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_routine?: boolean
-    id_instructor?: boolean
-    capacity?: boolean
-    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
-    TB_employees?: boolean | TB_employeesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tB_session_capacity"]>
-
-  export type TB_session_capacitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_routine?: boolean
-    id_instructor?: boolean
-    capacity?: boolean
-    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
-    TB_employees?: boolean | TB_employeesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tB_session_capacity"]>
-
-  export type TB_session_capacitySelectScalar = {
-    id?: boolean
-    id_routine?: boolean
-    id_instructor?: boolean
-    capacity?: boolean
-  }
-
-  export type TB_session_capacityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_routine" | "id_instructor" | "capacity", ExtArgs["result"]["tB_session_capacity"]>
-  export type TB_session_capacityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
-    TB_employees?: boolean | TB_employeesDefaultArgs<ExtArgs>
-    TB_reservations?: boolean | TB_session_capacity$TB_reservationsArgs<ExtArgs>
-    _count?: boolean | TB_session_capacityCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type TB_session_capacityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
-    TB_employees?: boolean | TB_employeesDefaultArgs<ExtArgs>
-  }
-  export type TB_session_capacityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
-    TB_employees?: boolean | TB_employeesDefaultArgs<ExtArgs>
-  }
-
-  export type $TB_session_capacityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TB_session_capacity"
-    objects: {
-      TB_routines: Prisma.$TB_routinesPayload<ExtArgs>
-      TB_employees: Prisma.$TB_employeesPayload<ExtArgs>
-      TB_reservations: Prisma.$TB_reservationsPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      id_routine: number
-      id_instructor: number
-      capacity: number
-    }, ExtArgs["result"]["tB_session_capacity"]>
-    composites: {}
-  }
-
-  type TB_session_capacityGetPayload<S extends boolean | null | undefined | TB_session_capacityDefaultArgs> = $Result.GetResult<Prisma.$TB_session_capacityPayload, S>
-
-  type TB_session_capacityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TB_session_capacityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TB_session_capacityCountAggregateInputType | true
-    }
-
-  export interface TB_session_capacityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TB_session_capacity'], meta: { name: 'TB_session_capacity' } }
-    /**
-     * Find zero or one TB_session_capacity that matches the filter.
-     * @param {TB_session_capacityFindUniqueArgs} args - Arguments to find a TB_session_capacity
-     * @example
-     * // Get one TB_session_capacity
-     * const tB_session_capacity = await prisma.tB_session_capacity.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TB_session_capacityFindUniqueArgs>(args: SelectSubset<T, TB_session_capacityFindUniqueArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TB_session_capacity that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TB_session_capacityFindUniqueOrThrowArgs} args - Arguments to find a TB_session_capacity
-     * @example
-     * // Get one TB_session_capacity
-     * const tB_session_capacity = await prisma.tB_session_capacity.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TB_session_capacityFindUniqueOrThrowArgs>(args: SelectSubset<T, TB_session_capacityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TB_session_capacity that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityFindFirstArgs} args - Arguments to find a TB_session_capacity
-     * @example
-     * // Get one TB_session_capacity
-     * const tB_session_capacity = await prisma.tB_session_capacity.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TB_session_capacityFindFirstArgs>(args?: SelectSubset<T, TB_session_capacityFindFirstArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TB_session_capacity that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityFindFirstOrThrowArgs} args - Arguments to find a TB_session_capacity
-     * @example
-     * // Get one TB_session_capacity
-     * const tB_session_capacity = await prisma.tB_session_capacity.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TB_session_capacityFindFirstOrThrowArgs>(args?: SelectSubset<T, TB_session_capacityFindFirstOrThrowArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TB_session_capacities that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TB_session_capacities
-     * const tB_session_capacities = await prisma.tB_session_capacity.findMany()
-     * 
-     * // Get first 10 TB_session_capacities
-     * const tB_session_capacities = await prisma.tB_session_capacity.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const tB_session_capacityWithIdOnly = await prisma.tB_session_capacity.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TB_session_capacityFindManyArgs>(args?: SelectSubset<T, TB_session_capacityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TB_session_capacity.
-     * @param {TB_session_capacityCreateArgs} args - Arguments to create a TB_session_capacity.
-     * @example
-     * // Create one TB_session_capacity
-     * const TB_session_capacity = await prisma.tB_session_capacity.create({
-     *   data: {
-     *     // ... data to create a TB_session_capacity
-     *   }
-     * })
-     * 
-     */
-    create<T extends TB_session_capacityCreateArgs>(args: SelectSubset<T, TB_session_capacityCreateArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TB_session_capacities.
-     * @param {TB_session_capacityCreateManyArgs} args - Arguments to create many TB_session_capacities.
-     * @example
-     * // Create many TB_session_capacities
-     * const tB_session_capacity = await prisma.tB_session_capacity.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TB_session_capacityCreateManyArgs>(args?: SelectSubset<T, TB_session_capacityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TB_session_capacities and returns the data saved in the database.
-     * @param {TB_session_capacityCreateManyAndReturnArgs} args - Arguments to create many TB_session_capacities.
-     * @example
-     * // Create many TB_session_capacities
-     * const tB_session_capacity = await prisma.tB_session_capacity.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TB_session_capacities and only return the `id`
-     * const tB_session_capacityWithIdOnly = await prisma.tB_session_capacity.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TB_session_capacityCreateManyAndReturnArgs>(args?: SelectSubset<T, TB_session_capacityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TB_session_capacity.
-     * @param {TB_session_capacityDeleteArgs} args - Arguments to delete one TB_session_capacity.
-     * @example
-     * // Delete one TB_session_capacity
-     * const TB_session_capacity = await prisma.tB_session_capacity.delete({
-     *   where: {
-     *     // ... filter to delete one TB_session_capacity
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TB_session_capacityDeleteArgs>(args: SelectSubset<T, TB_session_capacityDeleteArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TB_session_capacity.
-     * @param {TB_session_capacityUpdateArgs} args - Arguments to update one TB_session_capacity.
-     * @example
-     * // Update one TB_session_capacity
-     * const tB_session_capacity = await prisma.tB_session_capacity.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TB_session_capacityUpdateArgs>(args: SelectSubset<T, TB_session_capacityUpdateArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TB_session_capacities.
-     * @param {TB_session_capacityDeleteManyArgs} args - Arguments to filter TB_session_capacities to delete.
-     * @example
-     * // Delete a few TB_session_capacities
-     * const { count } = await prisma.tB_session_capacity.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TB_session_capacityDeleteManyArgs>(args?: SelectSubset<T, TB_session_capacityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TB_session_capacities.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TB_session_capacities
-     * const tB_session_capacity = await prisma.tB_session_capacity.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TB_session_capacityUpdateManyArgs>(args: SelectSubset<T, TB_session_capacityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TB_session_capacities and returns the data updated in the database.
-     * @param {TB_session_capacityUpdateManyAndReturnArgs} args - Arguments to update many TB_session_capacities.
-     * @example
-     * // Update many TB_session_capacities
-     * const tB_session_capacity = await prisma.tB_session_capacity.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TB_session_capacities and only return the `id`
-     * const tB_session_capacityWithIdOnly = await prisma.tB_session_capacity.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TB_session_capacityUpdateManyAndReturnArgs>(args: SelectSubset<T, TB_session_capacityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TB_session_capacity.
-     * @param {TB_session_capacityUpsertArgs} args - Arguments to update or create a TB_session_capacity.
-     * @example
-     * // Update or create a TB_session_capacity
-     * const tB_session_capacity = await prisma.tB_session_capacity.upsert({
-     *   create: {
-     *     // ... data to create a TB_session_capacity
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TB_session_capacity we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TB_session_capacityUpsertArgs>(args: SelectSubset<T, TB_session_capacityUpsertArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TB_session_capacities.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityCountArgs} args - Arguments to filter TB_session_capacities to count.
-     * @example
-     * // Count the number of TB_session_capacities
-     * const count = await prisma.tB_session_capacity.count({
-     *   where: {
-     *     // ... the filter for the TB_session_capacities we want to count
-     *   }
-     * })
-    **/
-    count<T extends TB_session_capacityCountArgs>(
-      args?: Subset<T, TB_session_capacityCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TB_session_capacityCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TB_session_capacity.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TB_session_capacityAggregateArgs>(args: Subset<T, TB_session_capacityAggregateArgs>): Prisma.PrismaPromise<GetTB_session_capacityAggregateType<T>>
-
-    /**
-     * Group by TB_session_capacity.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_session_capacityGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TB_session_capacityGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TB_session_capacityGroupByArgs['orderBy'] }
-        : { orderBy?: TB_session_capacityGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TB_session_capacityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTB_session_capacityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TB_session_capacity model
-   */
-  readonly fields: TB_session_capacityFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TB_session_capacity.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TB_session_capacityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    TB_routines<T extends TB_routinesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_routinesDefaultArgs<ExtArgs>>): Prisma__TB_routinesClient<$Result.GetResult<Prisma.$TB_routinesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    TB_employees<T extends TB_employeesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_employeesDefaultArgs<ExtArgs>>): Prisma__TB_employeesClient<$Result.GetResult<Prisma.$TB_employeesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    TB_reservations<T extends TB_session_capacity$TB_reservationsArgs<ExtArgs> = {}>(args?: Subset<T, TB_session_capacity$TB_reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_reservationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TB_session_capacity model
-   */
-  interface TB_session_capacityFieldRefs {
-    readonly id: FieldRef<"TB_session_capacity", 'Int'>
-    readonly id_routine: FieldRef<"TB_session_capacity", 'Int'>
-    readonly id_instructor: FieldRef<"TB_session_capacity", 'Int'>
-    readonly capacity: FieldRef<"TB_session_capacity", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TB_session_capacity findUnique
-   */
-  export type TB_session_capacityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_session_capacity to fetch.
-     */
-    where: TB_session_capacityWhereUniqueInput
-  }
-
-  /**
-   * TB_session_capacity findUniqueOrThrow
-   */
-  export type TB_session_capacityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_session_capacity to fetch.
-     */
-    where: TB_session_capacityWhereUniqueInput
-  }
-
-  /**
-   * TB_session_capacity findFirst
-   */
-  export type TB_session_capacityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_session_capacity to fetch.
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_session_capacities to fetch.
-     */
-    orderBy?: TB_session_capacityOrderByWithRelationInput | TB_session_capacityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TB_session_capacities.
-     */
-    cursor?: TB_session_capacityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_session_capacities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_session_capacities.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TB_session_capacities.
-     */
-    distinct?: TB_session_capacityScalarFieldEnum | TB_session_capacityScalarFieldEnum[]
-  }
-
-  /**
-   * TB_session_capacity findFirstOrThrow
-   */
-  export type TB_session_capacityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_session_capacity to fetch.
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_session_capacities to fetch.
-     */
-    orderBy?: TB_session_capacityOrderByWithRelationInput | TB_session_capacityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TB_session_capacities.
-     */
-    cursor?: TB_session_capacityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_session_capacities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_session_capacities.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TB_session_capacities.
-     */
-    distinct?: TB_session_capacityScalarFieldEnum | TB_session_capacityScalarFieldEnum[]
-  }
-
-  /**
-   * TB_session_capacity findMany
-   */
-  export type TB_session_capacityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_session_capacities to fetch.
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_session_capacities to fetch.
-     */
-    orderBy?: TB_session_capacityOrderByWithRelationInput | TB_session_capacityOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TB_session_capacities.
-     */
-    cursor?: TB_session_capacityWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_session_capacities from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_session_capacities.
-     */
-    skip?: number
-    distinct?: TB_session_capacityScalarFieldEnum | TB_session_capacityScalarFieldEnum[]
-  }
-
-  /**
-   * TB_session_capacity create
-   */
-  export type TB_session_capacityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TB_session_capacity.
-     */
-    data: XOR<TB_session_capacityCreateInput, TB_session_capacityUncheckedCreateInput>
-  }
-
-  /**
-   * TB_session_capacity createMany
-   */
-  export type TB_session_capacityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TB_session_capacities.
-     */
-    data: TB_session_capacityCreateManyInput | TB_session_capacityCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TB_session_capacity createManyAndReturn
-   */
-  export type TB_session_capacityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * The data used to create many TB_session_capacities.
-     */
-    data: TB_session_capacityCreateManyInput | TB_session_capacityCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TB_session_capacity update
-   */
-  export type TB_session_capacityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TB_session_capacity.
-     */
-    data: XOR<TB_session_capacityUpdateInput, TB_session_capacityUncheckedUpdateInput>
-    /**
-     * Choose, which TB_session_capacity to update.
-     */
-    where: TB_session_capacityWhereUniqueInput
-  }
-
-  /**
-   * TB_session_capacity updateMany
-   */
-  export type TB_session_capacityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TB_session_capacities.
-     */
-    data: XOR<TB_session_capacityUpdateManyMutationInput, TB_session_capacityUncheckedUpdateManyInput>
-    /**
-     * Filter which TB_session_capacities to update
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * Limit how many TB_session_capacities to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TB_session_capacity updateManyAndReturn
-   */
-  export type TB_session_capacityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * The data used to update TB_session_capacities.
-     */
-    data: XOR<TB_session_capacityUpdateManyMutationInput, TB_session_capacityUncheckedUpdateManyInput>
-    /**
-     * Filter which TB_session_capacities to update
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * Limit how many TB_session_capacities to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TB_session_capacity upsert
-   */
-  export type TB_session_capacityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TB_session_capacity to update in case it exists.
-     */
-    where: TB_session_capacityWhereUniqueInput
-    /**
-     * In case the TB_session_capacity found by the `where` argument doesn't exist, create a new TB_session_capacity with this data.
-     */
-    create: XOR<TB_session_capacityCreateInput, TB_session_capacityUncheckedCreateInput>
-    /**
-     * In case the TB_session_capacity was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TB_session_capacityUpdateInput, TB_session_capacityUncheckedUpdateInput>
-  }
-
-  /**
-   * TB_session_capacity delete
-   */
-  export type TB_session_capacityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-    /**
-     * Filter which TB_session_capacity to delete.
-     */
-    where: TB_session_capacityWhereUniqueInput
-  }
-
-  /**
-   * TB_session_capacity deleteMany
-   */
-  export type TB_session_capacityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TB_session_capacities to delete
-     */
-    where?: TB_session_capacityWhereInput
-    /**
-     * Limit how many TB_session_capacities to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TB_session_capacity.TB_reservations
-   */
-  export type TB_session_capacity$TB_reservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_reservations
-     */
-    select?: TB_reservationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_reservations
-     */
-    omit?: TB_reservationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_reservationsInclude<ExtArgs> | null
-    where?: TB_reservationsWhereInput
-    orderBy?: TB_reservationsOrderByWithRelationInput | TB_reservationsOrderByWithRelationInput[]
-    cursor?: TB_reservationsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TB_reservationsScalarFieldEnum | TB_reservationsScalarFieldEnum[]
-  }
-
-  /**
-   * TB_session_capacity without action
-   */
-  export type TB_session_capacityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_session_capacity
-     */
-    select?: TB_session_capacitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_session_capacity
-     */
-    omit?: TB_session_capacityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_session_capacityInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model TB_reservations
    */
 
@@ -14596,19 +13173,19 @@ export namespace Prisma {
   export type TB_reservationsAvgAggregateOutputType = {
     id: number | null
     id_client_membership: number | null
-    id_session_capacity: number | null
+    id_routine: number | null
   }
 
   export type TB_reservationsSumAggregateOutputType = {
     id: number | null
     id_client_membership: number | null
-    id_session_capacity: number | null
+    id_routine: number | null
   }
 
   export type TB_reservationsMinAggregateOutputType = {
     id: number | null
     id_client_membership: number | null
-    id_session_capacity: number | null
+    id_routine: number | null
     start_time: Date | null
     status: $Enums.reservationStatus | null
   }
@@ -14616,7 +13193,7 @@ export namespace Prisma {
   export type TB_reservationsMaxAggregateOutputType = {
     id: number | null
     id_client_membership: number | null
-    id_session_capacity: number | null
+    id_routine: number | null
     start_time: Date | null
     status: $Enums.reservationStatus | null
   }
@@ -14624,7 +13201,7 @@ export namespace Prisma {
   export type TB_reservationsCountAggregateOutputType = {
     id: number
     id_client_membership: number
-    id_session_capacity: number
+    id_routine: number
     start_time: number
     status: number
     _all: number
@@ -14634,19 +13211,19 @@ export namespace Prisma {
   export type TB_reservationsAvgAggregateInputType = {
     id?: true
     id_client_membership?: true
-    id_session_capacity?: true
+    id_routine?: true
   }
 
   export type TB_reservationsSumAggregateInputType = {
     id?: true
     id_client_membership?: true
-    id_session_capacity?: true
+    id_routine?: true
   }
 
   export type TB_reservationsMinAggregateInputType = {
     id?: true
     id_client_membership?: true
-    id_session_capacity?: true
+    id_routine?: true
     start_time?: true
     status?: true
   }
@@ -14654,7 +13231,7 @@ export namespace Prisma {
   export type TB_reservationsMaxAggregateInputType = {
     id?: true
     id_client_membership?: true
-    id_session_capacity?: true
+    id_routine?: true
     start_time?: true
     status?: true
   }
@@ -14662,7 +13239,7 @@ export namespace Prisma {
   export type TB_reservationsCountAggregateInputType = {
     id?: true
     id_client_membership?: true
-    id_session_capacity?: true
+    id_routine?: true
     start_time?: true
     status?: true
     _all?: true
@@ -14757,7 +13334,7 @@ export namespace Prisma {
   export type TB_reservationsGroupByOutputType = {
     id: number
     id_client_membership: number
-    id_session_capacity: number
+    id_routine: number
     start_time: Date
     status: $Enums.reservationStatus
     _count: TB_reservationsCountAggregateOutputType | null
@@ -14784,65 +13361,65 @@ export namespace Prisma {
   export type TB_reservationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     id_client_membership?: boolean
-    id_session_capacity?: boolean
+    id_routine?: boolean
     start_time?: boolean
     status?: boolean
     TB_client_membership?: boolean | TB_client_membershipDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_session_capacityDefaultArgs<ExtArgs>
+    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_reservations"]>
 
   export type TB_reservationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     id_client_membership?: boolean
-    id_session_capacity?: boolean
+    id_routine?: boolean
     start_time?: boolean
     status?: boolean
     TB_client_membership?: boolean | TB_client_membershipDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_session_capacityDefaultArgs<ExtArgs>
+    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_reservations"]>
 
   export type TB_reservationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     id_client_membership?: boolean
-    id_session_capacity?: boolean
+    id_routine?: boolean
     start_time?: boolean
     status?: boolean
     TB_client_membership?: boolean | TB_client_membershipDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_session_capacityDefaultArgs<ExtArgs>
+    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tB_reservations"]>
 
   export type TB_reservationsSelectScalar = {
     id?: boolean
     id_client_membership?: boolean
-    id_session_capacity?: boolean
+    id_routine?: boolean
     start_time?: boolean
     status?: boolean
   }
 
-  export type TB_reservationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_client_membership" | "id_session_capacity" | "start_time" | "status", ExtArgs["result"]["tB_reservations"]>
+  export type TB_reservationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_client_membership" | "id_routine" | "start_time" | "status", ExtArgs["result"]["tB_reservations"]>
   export type TB_reservationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_client_membership?: boolean | TB_client_membershipDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_session_capacityDefaultArgs<ExtArgs>
+    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
   }
   export type TB_reservationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_client_membership?: boolean | TB_client_membershipDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_session_capacityDefaultArgs<ExtArgs>
+    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
   }
   export type TB_reservationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     TB_client_membership?: boolean | TB_client_membershipDefaultArgs<ExtArgs>
-    TB_session_capacity?: boolean | TB_session_capacityDefaultArgs<ExtArgs>
+    TB_routines?: boolean | TB_routinesDefaultArgs<ExtArgs>
   }
 
   export type $TB_reservationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TB_reservations"
     objects: {
       TB_client_membership: Prisma.$TB_client_membershipPayload<ExtArgs>
-      TB_session_capacity: Prisma.$TB_session_capacityPayload<ExtArgs>
+      TB_routines: Prisma.$TB_routinesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       id_client_membership: number
-      id_session_capacity: number
+      id_routine: number
       start_time: Date
       status: $Enums.reservationStatus
     }, ExtArgs["result"]["tB_reservations"]>
@@ -15240,7 +13817,7 @@ export namespace Prisma {
   export interface Prisma__TB_reservationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     TB_client_membership<T extends TB_client_membershipDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_client_membershipDefaultArgs<ExtArgs>>): Prisma__TB_client_membershipClient<$Result.GetResult<Prisma.$TB_client_membershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    TB_session_capacity<T extends TB_session_capacityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_session_capacityDefaultArgs<ExtArgs>>): Prisma__TB_session_capacityClient<$Result.GetResult<Prisma.$TB_session_capacityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    TB_routines<T extends TB_routinesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_routinesDefaultArgs<ExtArgs>>): Prisma__TB_routinesClient<$Result.GetResult<Prisma.$TB_routinesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15272,7 +13849,7 @@ export namespace Prisma {
   interface TB_reservationsFieldRefs {
     readonly id: FieldRef<"TB_reservations", 'Int'>
     readonly id_client_membership: FieldRef<"TB_reservations", 'Int'>
-    readonly id_session_capacity: FieldRef<"TB_reservations", 'Int'>
+    readonly id_routine: FieldRef<"TB_reservations", 'Int'>
     readonly start_time: FieldRef<"TB_reservations", 'DateTime'>
     readonly status: FieldRef<"TB_reservations", 'reservationStatus'>
   }
@@ -15690,1089 +14267,6 @@ export namespace Prisma {
 
 
   /**
-   * Model TB_notifications
-   */
-
-  export type AggregateTB_notifications = {
-    _count: TB_notificationsCountAggregateOutputType | null
-    _avg: TB_notificationsAvgAggregateOutputType | null
-    _sum: TB_notificationsSumAggregateOutputType | null
-    _min: TB_notificationsMinAggregateOutputType | null
-    _max: TB_notificationsMaxAggregateOutputType | null
-  }
-
-  export type TB_notificationsAvgAggregateOutputType = {
-    id: number | null
-    id_user: number | null
-  }
-
-  export type TB_notificationsSumAggregateOutputType = {
-    id: number | null
-    id_user: number | null
-  }
-
-  export type TB_notificationsMinAggregateOutputType = {
-    id: number | null
-    id_user: number | null
-    message: string | null
-    sent_date: Date | null
-  }
-
-  export type TB_notificationsMaxAggregateOutputType = {
-    id: number | null
-    id_user: number | null
-    message: string | null
-    sent_date: Date | null
-  }
-
-  export type TB_notificationsCountAggregateOutputType = {
-    id: number
-    id_user: number
-    message: number
-    sent_date: number
-    _all: number
-  }
-
-
-  export type TB_notificationsAvgAggregateInputType = {
-    id?: true
-    id_user?: true
-  }
-
-  export type TB_notificationsSumAggregateInputType = {
-    id?: true
-    id_user?: true
-  }
-
-  export type TB_notificationsMinAggregateInputType = {
-    id?: true
-    id_user?: true
-    message?: true
-    sent_date?: true
-  }
-
-  export type TB_notificationsMaxAggregateInputType = {
-    id?: true
-    id_user?: true
-    message?: true
-    sent_date?: true
-  }
-
-  export type TB_notificationsCountAggregateInputType = {
-    id?: true
-    id_user?: true
-    message?: true
-    sent_date?: true
-    _all?: true
-  }
-
-  export type TB_notificationsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TB_notifications to aggregate.
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_notifications to fetch.
-     */
-    orderBy?: TB_notificationsOrderByWithRelationInput | TB_notificationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TB_notificationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_notifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_notifications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TB_notifications
-    **/
-    _count?: true | TB_notificationsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TB_notificationsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TB_notificationsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TB_notificationsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TB_notificationsMaxAggregateInputType
-  }
-
-  export type GetTB_notificationsAggregateType<T extends TB_notificationsAggregateArgs> = {
-        [P in keyof T & keyof AggregateTB_notifications]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTB_notifications[P]>
-      : GetScalarType<T[P], AggregateTB_notifications[P]>
-  }
-
-
-
-
-  export type TB_notificationsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TB_notificationsWhereInput
-    orderBy?: TB_notificationsOrderByWithAggregationInput | TB_notificationsOrderByWithAggregationInput[]
-    by: TB_notificationsScalarFieldEnum[] | TB_notificationsScalarFieldEnum
-    having?: TB_notificationsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TB_notificationsCountAggregateInputType | true
-    _avg?: TB_notificationsAvgAggregateInputType
-    _sum?: TB_notificationsSumAggregateInputType
-    _min?: TB_notificationsMinAggregateInputType
-    _max?: TB_notificationsMaxAggregateInputType
-  }
-
-  export type TB_notificationsGroupByOutputType = {
-    id: number
-    id_user: number
-    message: string
-    sent_date: Date
-    _count: TB_notificationsCountAggregateOutputType | null
-    _avg: TB_notificationsAvgAggregateOutputType | null
-    _sum: TB_notificationsSumAggregateOutputType | null
-    _min: TB_notificationsMinAggregateOutputType | null
-    _max: TB_notificationsMaxAggregateOutputType | null
-  }
-
-  type GetTB_notificationsGroupByPayload<T extends TB_notificationsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TB_notificationsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TB_notificationsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TB_notificationsGroupByOutputType[P]>
-            : GetScalarType<T[P], TB_notificationsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TB_notificationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_user?: boolean
-    message?: boolean
-    sent_date?: boolean
-    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tB_notifications"]>
-
-  export type TB_notificationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_user?: boolean
-    message?: boolean
-    sent_date?: boolean
-    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tB_notifications"]>
-
-  export type TB_notificationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_user?: boolean
-    message?: boolean
-    sent_date?: boolean
-    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["tB_notifications"]>
-
-  export type TB_notificationsSelectScalar = {
-    id?: boolean
-    id_user?: boolean
-    message?: boolean
-    sent_date?: boolean
-  }
-
-  export type TB_notificationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_user" | "message" | "sent_date", ExtArgs["result"]["tB_notifications"]>
-  export type TB_notificationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
-  }
-  export type TB_notificationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
-  }
-  export type TB_notificationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    TB_users?: boolean | TB_usersDefaultArgs<ExtArgs>
-  }
-
-  export type $TB_notificationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TB_notifications"
-    objects: {
-      TB_users: Prisma.$TB_usersPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      id_user: number
-      message: string
-      sent_date: Date
-    }, ExtArgs["result"]["tB_notifications"]>
-    composites: {}
-  }
-
-  type TB_notificationsGetPayload<S extends boolean | null | undefined | TB_notificationsDefaultArgs> = $Result.GetResult<Prisma.$TB_notificationsPayload, S>
-
-  type TB_notificationsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TB_notificationsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TB_notificationsCountAggregateInputType | true
-    }
-
-  export interface TB_notificationsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TB_notifications'], meta: { name: 'TB_notifications' } }
-    /**
-     * Find zero or one TB_notifications that matches the filter.
-     * @param {TB_notificationsFindUniqueArgs} args - Arguments to find a TB_notifications
-     * @example
-     * // Get one TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TB_notificationsFindUniqueArgs>(args: SelectSubset<T, TB_notificationsFindUniqueArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TB_notifications that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TB_notificationsFindUniqueOrThrowArgs} args - Arguments to find a TB_notifications
-     * @example
-     * // Get one TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TB_notificationsFindUniqueOrThrowArgs>(args: SelectSubset<T, TB_notificationsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TB_notifications that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsFindFirstArgs} args - Arguments to find a TB_notifications
-     * @example
-     * // Get one TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TB_notificationsFindFirstArgs>(args?: SelectSubset<T, TB_notificationsFindFirstArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TB_notifications that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsFindFirstOrThrowArgs} args - Arguments to find a TB_notifications
-     * @example
-     * // Get one TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TB_notificationsFindFirstOrThrowArgs>(args?: SelectSubset<T, TB_notificationsFindFirstOrThrowArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TB_notifications that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.findMany()
-     * 
-     * // Get first 10 TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const tB_notificationsWithIdOnly = await prisma.tB_notifications.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TB_notificationsFindManyArgs>(args?: SelectSubset<T, TB_notificationsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TB_notifications.
-     * @param {TB_notificationsCreateArgs} args - Arguments to create a TB_notifications.
-     * @example
-     * // Create one TB_notifications
-     * const TB_notifications = await prisma.tB_notifications.create({
-     *   data: {
-     *     // ... data to create a TB_notifications
-     *   }
-     * })
-     * 
-     */
-    create<T extends TB_notificationsCreateArgs>(args: SelectSubset<T, TB_notificationsCreateArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TB_notifications.
-     * @param {TB_notificationsCreateManyArgs} args - Arguments to create many TB_notifications.
-     * @example
-     * // Create many TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TB_notificationsCreateManyArgs>(args?: SelectSubset<T, TB_notificationsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TB_notifications and returns the data saved in the database.
-     * @param {TB_notificationsCreateManyAndReturnArgs} args - Arguments to create many TB_notifications.
-     * @example
-     * // Create many TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TB_notifications and only return the `id`
-     * const tB_notificationsWithIdOnly = await prisma.tB_notifications.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TB_notificationsCreateManyAndReturnArgs>(args?: SelectSubset<T, TB_notificationsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TB_notifications.
-     * @param {TB_notificationsDeleteArgs} args - Arguments to delete one TB_notifications.
-     * @example
-     * // Delete one TB_notifications
-     * const TB_notifications = await prisma.tB_notifications.delete({
-     *   where: {
-     *     // ... filter to delete one TB_notifications
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TB_notificationsDeleteArgs>(args: SelectSubset<T, TB_notificationsDeleteArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TB_notifications.
-     * @param {TB_notificationsUpdateArgs} args - Arguments to update one TB_notifications.
-     * @example
-     * // Update one TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TB_notificationsUpdateArgs>(args: SelectSubset<T, TB_notificationsUpdateArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TB_notifications.
-     * @param {TB_notificationsDeleteManyArgs} args - Arguments to filter TB_notifications to delete.
-     * @example
-     * // Delete a few TB_notifications
-     * const { count } = await prisma.tB_notifications.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TB_notificationsDeleteManyArgs>(args?: SelectSubset<T, TB_notificationsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TB_notifications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TB_notificationsUpdateManyArgs>(args: SelectSubset<T, TB_notificationsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TB_notifications and returns the data updated in the database.
-     * @param {TB_notificationsUpdateManyAndReturnArgs} args - Arguments to update many TB_notifications.
-     * @example
-     * // Update many TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TB_notifications and only return the `id`
-     * const tB_notificationsWithIdOnly = await prisma.tB_notifications.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TB_notificationsUpdateManyAndReturnArgs>(args: SelectSubset<T, TB_notificationsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TB_notifications.
-     * @param {TB_notificationsUpsertArgs} args - Arguments to update or create a TB_notifications.
-     * @example
-     * // Update or create a TB_notifications
-     * const tB_notifications = await prisma.tB_notifications.upsert({
-     *   create: {
-     *     // ... data to create a TB_notifications
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TB_notifications we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TB_notificationsUpsertArgs>(args: SelectSubset<T, TB_notificationsUpsertArgs<ExtArgs>>): Prisma__TB_notificationsClient<$Result.GetResult<Prisma.$TB_notificationsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TB_notifications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsCountArgs} args - Arguments to filter TB_notifications to count.
-     * @example
-     * // Count the number of TB_notifications
-     * const count = await prisma.tB_notifications.count({
-     *   where: {
-     *     // ... the filter for the TB_notifications we want to count
-     *   }
-     * })
-    **/
-    count<T extends TB_notificationsCountArgs>(
-      args?: Subset<T, TB_notificationsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TB_notificationsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TB_notifications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TB_notificationsAggregateArgs>(args: Subset<T, TB_notificationsAggregateArgs>): Prisma.PrismaPromise<GetTB_notificationsAggregateType<T>>
-
-    /**
-     * Group by TB_notifications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TB_notificationsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TB_notificationsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TB_notificationsGroupByArgs['orderBy'] }
-        : { orderBy?: TB_notificationsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TB_notificationsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTB_notificationsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TB_notifications model
-   */
-  readonly fields: TB_notificationsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TB_notifications.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TB_notificationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    TB_users<T extends TB_usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TB_usersDefaultArgs<ExtArgs>>): Prisma__TB_usersClient<$Result.GetResult<Prisma.$TB_usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TB_notifications model
-   */
-  interface TB_notificationsFieldRefs {
-    readonly id: FieldRef<"TB_notifications", 'Int'>
-    readonly id_user: FieldRef<"TB_notifications", 'Int'>
-    readonly message: FieldRef<"TB_notifications", 'String'>
-    readonly sent_date: FieldRef<"TB_notifications", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TB_notifications findUnique
-   */
-  export type TB_notificationsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_notifications to fetch.
-     */
-    where: TB_notificationsWhereUniqueInput
-  }
-
-  /**
-   * TB_notifications findUniqueOrThrow
-   */
-  export type TB_notificationsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_notifications to fetch.
-     */
-    where: TB_notificationsWhereUniqueInput
-  }
-
-  /**
-   * TB_notifications findFirst
-   */
-  export type TB_notificationsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_notifications to fetch.
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_notifications to fetch.
-     */
-    orderBy?: TB_notificationsOrderByWithRelationInput | TB_notificationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TB_notifications.
-     */
-    cursor?: TB_notificationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_notifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_notifications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TB_notifications.
-     */
-    distinct?: TB_notificationsScalarFieldEnum | TB_notificationsScalarFieldEnum[]
-  }
-
-  /**
-   * TB_notifications findFirstOrThrow
-   */
-  export type TB_notificationsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_notifications to fetch.
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_notifications to fetch.
-     */
-    orderBy?: TB_notificationsOrderByWithRelationInput | TB_notificationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TB_notifications.
-     */
-    cursor?: TB_notificationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_notifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_notifications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TB_notifications.
-     */
-    distinct?: TB_notificationsScalarFieldEnum | TB_notificationsScalarFieldEnum[]
-  }
-
-  /**
-   * TB_notifications findMany
-   */
-  export type TB_notificationsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * Filter, which TB_notifications to fetch.
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TB_notifications to fetch.
-     */
-    orderBy?: TB_notificationsOrderByWithRelationInput | TB_notificationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TB_notifications.
-     */
-    cursor?: TB_notificationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TB_notifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TB_notifications.
-     */
-    skip?: number
-    distinct?: TB_notificationsScalarFieldEnum | TB_notificationsScalarFieldEnum[]
-  }
-
-  /**
-   * TB_notifications create
-   */
-  export type TB_notificationsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TB_notifications.
-     */
-    data: XOR<TB_notificationsCreateInput, TB_notificationsUncheckedCreateInput>
-  }
-
-  /**
-   * TB_notifications createMany
-   */
-  export type TB_notificationsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TB_notifications.
-     */
-    data: TB_notificationsCreateManyInput | TB_notificationsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TB_notifications createManyAndReturn
-   */
-  export type TB_notificationsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * The data used to create many TB_notifications.
-     */
-    data: TB_notificationsCreateManyInput | TB_notificationsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TB_notifications update
-   */
-  export type TB_notificationsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TB_notifications.
-     */
-    data: XOR<TB_notificationsUpdateInput, TB_notificationsUncheckedUpdateInput>
-    /**
-     * Choose, which TB_notifications to update.
-     */
-    where: TB_notificationsWhereUniqueInput
-  }
-
-  /**
-   * TB_notifications updateMany
-   */
-  export type TB_notificationsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TB_notifications.
-     */
-    data: XOR<TB_notificationsUpdateManyMutationInput, TB_notificationsUncheckedUpdateManyInput>
-    /**
-     * Filter which TB_notifications to update
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * Limit how many TB_notifications to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TB_notifications updateManyAndReturn
-   */
-  export type TB_notificationsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * The data used to update TB_notifications.
-     */
-    data: XOR<TB_notificationsUpdateManyMutationInput, TB_notificationsUncheckedUpdateManyInput>
-    /**
-     * Filter which TB_notifications to update
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * Limit how many TB_notifications to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TB_notifications upsert
-   */
-  export type TB_notificationsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TB_notifications to update in case it exists.
-     */
-    where: TB_notificationsWhereUniqueInput
-    /**
-     * In case the TB_notifications found by the `where` argument doesn't exist, create a new TB_notifications with this data.
-     */
-    create: XOR<TB_notificationsCreateInput, TB_notificationsUncheckedCreateInput>
-    /**
-     * In case the TB_notifications was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TB_notificationsUpdateInput, TB_notificationsUncheckedUpdateInput>
-  }
-
-  /**
-   * TB_notifications delete
-   */
-  export type TB_notificationsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-    /**
-     * Filter which TB_notifications to delete.
-     */
-    where: TB_notificationsWhereUniqueInput
-  }
-
-  /**
-   * TB_notifications deleteMany
-   */
-  export type TB_notificationsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TB_notifications to delete
-     */
-    where?: TB_notificationsWhereInput
-    /**
-     * Limit how many TB_notifications to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TB_notifications without action
-   */
-  export type TB_notificationsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TB_notifications
-     */
-    select?: TB_notificationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TB_notifications
-     */
-    omit?: TB_notificationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TB_notificationsInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -16863,7 +14357,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
-    estimatedDuration: 'estimatedDuration'
+    estimatedDuration: 'estimatedDuration',
+    capacity: 'capacity'
   };
 
   export type TB_routinesScalarFieldEnum = (typeof TB_routinesScalarFieldEnum)[keyof typeof TB_routinesScalarFieldEnum]
@@ -16888,35 +14383,15 @@ export namespace Prisma {
   export type TB_routine_exerciseScalarFieldEnum = (typeof TB_routine_exerciseScalarFieldEnum)[keyof typeof TB_routine_exerciseScalarFieldEnum]
 
 
-  export const TB_session_capacityScalarFieldEnum: {
-    id: 'id',
-    id_routine: 'id_routine',
-    id_instructor: 'id_instructor',
-    capacity: 'capacity'
-  };
-
-  export type TB_session_capacityScalarFieldEnum = (typeof TB_session_capacityScalarFieldEnum)[keyof typeof TB_session_capacityScalarFieldEnum]
-
-
   export const TB_reservationsScalarFieldEnum: {
     id: 'id',
     id_client_membership: 'id_client_membership',
-    id_session_capacity: 'id_session_capacity',
+    id_routine: 'id_routine',
     start_time: 'start_time',
     status: 'status'
   };
 
   export type TB_reservationsScalarFieldEnum = (typeof TB_reservationsScalarFieldEnum)[keyof typeof TB_reservationsScalarFieldEnum]
-
-
-  export const TB_notificationsScalarFieldEnum: {
-    id: 'id',
-    id_user: 'id_user',
-    message: 'message',
-    sent_date: 'sent_date'
-  };
-
-  export type TB_notificationsScalarFieldEnum = (typeof TB_notificationsScalarFieldEnum)[keyof typeof TB_notificationsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -17039,7 +14514,6 @@ export namespace Prisma {
     phone_number?: StringFilter<"TB_users"> | string
     birthday?: DateTimeFilter<"TB_users"> | Date | string
     TB_user_role?: TB_user_roleListRelationFilter
-    TB_notifications?: TB_notificationsListRelationFilter
     TB_restriction?: TB_restrictionListRelationFilter
   }
 
@@ -17052,7 +14526,6 @@ export namespace Prisma {
     phone_number?: SortOrder
     birthday?: SortOrder
     TB_user_role?: TB_user_roleOrderByRelationAggregateInput
-    TB_notifications?: TB_notificationsOrderByRelationAggregateInput
     TB_restriction?: TB_restrictionOrderByRelationAggregateInput
   }
 
@@ -17068,7 +14541,6 @@ export namespace Prisma {
     phone_number?: StringFilter<"TB_users"> | string
     birthday?: DateTimeFilter<"TB_users"> | Date | string
     TB_user_role?: TB_user_roleListRelationFilter
-    TB_notifications?: TB_notificationsListRelationFilter
     TB_restriction?: TB_restrictionListRelationFilter
   }, "id_user" | "email">
 
@@ -17260,7 +14732,6 @@ export namespace Prisma {
     specialization?: StringFilter<"TB_employees"> | string
     date_entry?: DateTimeFilter<"TB_employees"> | Date | string
     TB_user_role?: XOR<TB_user_roleScalarRelationFilter, TB_user_roleWhereInput>
-    TB_session_capacity?: TB_session_capacityListRelationFilter
   }
 
   export type TB_employeesOrderByWithRelationInput = {
@@ -17270,7 +14741,6 @@ export namespace Prisma {
     specialization?: SortOrder
     date_entry?: SortOrder
     TB_user_role?: TB_user_roleOrderByWithRelationInput
-    TB_session_capacity?: TB_session_capacityOrderByRelationAggregateInput
   }
 
   export type TB_employeesWhereUniqueInput = Prisma.AtLeast<{
@@ -17283,7 +14753,6 @@ export namespace Prisma {
     specialization?: StringFilter<"TB_employees"> | string
     date_entry?: DateTimeFilter<"TB_employees"> | Date | string
     TB_user_role?: XOR<TB_user_roleScalarRelationFilter, TB_user_roleWhereInput>
-    TB_session_capacity?: TB_session_capacityListRelationFilter
   }, "id" | "id_user_role">
 
   export type TB_employeesOrderByWithAggregationInput = {
@@ -17438,8 +14907,9 @@ export namespace Prisma {
     name?: StringFilter<"TB_routines"> | string
     description?: StringFilter<"TB_routines"> | string
     estimatedDuration?: IntFilter<"TB_routines"> | number
+    capacity?: IntFilter<"TB_routines"> | number
     TB_routine_exercise?: TB_routine_exerciseListRelationFilter
-    TB_session_capacity?: TB_session_capacityListRelationFilter
+    TB_reservations?: TB_reservationsListRelationFilter
   }
 
   export type TB_routinesOrderByWithRelationInput = {
@@ -17447,8 +14917,9 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
     TB_routine_exercise?: TB_routine_exerciseOrderByRelationAggregateInput
-    TB_session_capacity?: TB_session_capacityOrderByRelationAggregateInput
+    TB_reservations?: TB_reservationsOrderByRelationAggregateInput
   }
 
   export type TB_routinesWhereUniqueInput = Prisma.AtLeast<{
@@ -17459,8 +14930,9 @@ export namespace Prisma {
     NOT?: TB_routinesWhereInput | TB_routinesWhereInput[]
     description?: StringFilter<"TB_routines"> | string
     estimatedDuration?: IntFilter<"TB_routines"> | number
+    capacity?: IntFilter<"TB_routines"> | number
     TB_routine_exercise?: TB_routine_exerciseListRelationFilter
-    TB_session_capacity?: TB_session_capacityListRelationFilter
+    TB_reservations?: TB_reservationsListRelationFilter
   }, "id" | "name">
 
   export type TB_routinesOrderByWithAggregationInput = {
@@ -17468,6 +14940,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
     _count?: TB_routinesCountOrderByAggregateInput
     _avg?: TB_routinesAvgOrderByAggregateInput
     _max?: TB_routinesMaxOrderByAggregateInput
@@ -17483,6 +14956,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"TB_routines"> | string
     description?: StringWithAggregatesFilter<"TB_routines"> | string
     estimatedDuration?: IntWithAggregatesFilter<"TB_routines"> | number
+    capacity?: IntWithAggregatesFilter<"TB_routines"> | number
   }
 
   export type TB_exercisesWhereInput = {
@@ -17587,85 +15061,27 @@ export namespace Prisma {
     id_exercise?: IntWithAggregatesFilter<"TB_routine_exercise"> | number
   }
 
-  export type TB_session_capacityWhereInput = {
-    AND?: TB_session_capacityWhereInput | TB_session_capacityWhereInput[]
-    OR?: TB_session_capacityWhereInput[]
-    NOT?: TB_session_capacityWhereInput | TB_session_capacityWhereInput[]
-    id?: IntFilter<"TB_session_capacity"> | number
-    id_routine?: IntFilter<"TB_session_capacity"> | number
-    id_instructor?: IntFilter<"TB_session_capacity"> | number
-    capacity?: IntFilter<"TB_session_capacity"> | number
-    TB_routines?: XOR<TB_routinesScalarRelationFilter, TB_routinesWhereInput>
-    TB_employees?: XOR<TB_employeesScalarRelationFilter, TB_employeesWhereInput>
-    TB_reservations?: TB_reservationsListRelationFilter
-  }
-
-  export type TB_session_capacityOrderByWithRelationInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-    TB_routines?: TB_routinesOrderByWithRelationInput
-    TB_employees?: TB_employeesOrderByWithRelationInput
-    TB_reservations?: TB_reservationsOrderByRelationAggregateInput
-  }
-
-  export type TB_session_capacityWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: TB_session_capacityWhereInput | TB_session_capacityWhereInput[]
-    OR?: TB_session_capacityWhereInput[]
-    NOT?: TB_session_capacityWhereInput | TB_session_capacityWhereInput[]
-    id_routine?: IntFilter<"TB_session_capacity"> | number
-    id_instructor?: IntFilter<"TB_session_capacity"> | number
-    capacity?: IntFilter<"TB_session_capacity"> | number
-    TB_routines?: XOR<TB_routinesScalarRelationFilter, TB_routinesWhereInput>
-    TB_employees?: XOR<TB_employeesScalarRelationFilter, TB_employeesWhereInput>
-    TB_reservations?: TB_reservationsListRelationFilter
-  }, "id">
-
-  export type TB_session_capacityOrderByWithAggregationInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-    _count?: TB_session_capacityCountOrderByAggregateInput
-    _avg?: TB_session_capacityAvgOrderByAggregateInput
-    _max?: TB_session_capacityMaxOrderByAggregateInput
-    _min?: TB_session_capacityMinOrderByAggregateInput
-    _sum?: TB_session_capacitySumOrderByAggregateInput
-  }
-
-  export type TB_session_capacityScalarWhereWithAggregatesInput = {
-    AND?: TB_session_capacityScalarWhereWithAggregatesInput | TB_session_capacityScalarWhereWithAggregatesInput[]
-    OR?: TB_session_capacityScalarWhereWithAggregatesInput[]
-    NOT?: TB_session_capacityScalarWhereWithAggregatesInput | TB_session_capacityScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"TB_session_capacity"> | number
-    id_routine?: IntWithAggregatesFilter<"TB_session_capacity"> | number
-    id_instructor?: IntWithAggregatesFilter<"TB_session_capacity"> | number
-    capacity?: IntWithAggregatesFilter<"TB_session_capacity"> | number
-  }
-
   export type TB_reservationsWhereInput = {
     AND?: TB_reservationsWhereInput | TB_reservationsWhereInput[]
     OR?: TB_reservationsWhereInput[]
     NOT?: TB_reservationsWhereInput | TB_reservationsWhereInput[]
     id?: IntFilter<"TB_reservations"> | number
     id_client_membership?: IntFilter<"TB_reservations"> | number
-    id_session_capacity?: IntFilter<"TB_reservations"> | number
+    id_routine?: IntFilter<"TB_reservations"> | number
     start_time?: DateTimeFilter<"TB_reservations"> | Date | string
     status?: EnumreservationStatusFilter<"TB_reservations"> | $Enums.reservationStatus
     TB_client_membership?: XOR<TB_client_membershipScalarRelationFilter, TB_client_membershipWhereInput>
-    TB_session_capacity?: XOR<TB_session_capacityScalarRelationFilter, TB_session_capacityWhereInput>
+    TB_routines?: XOR<TB_routinesScalarRelationFilter, TB_routinesWhereInput>
   }
 
   export type TB_reservationsOrderByWithRelationInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
     start_time?: SortOrder
     status?: SortOrder
     TB_client_membership?: TB_client_membershipOrderByWithRelationInput
-    TB_session_capacity?: TB_session_capacityOrderByWithRelationInput
+    TB_routines?: TB_routinesOrderByWithRelationInput
   }
 
   export type TB_reservationsWhereUniqueInput = Prisma.AtLeast<{
@@ -17674,17 +15090,17 @@ export namespace Prisma {
     OR?: TB_reservationsWhereInput[]
     NOT?: TB_reservationsWhereInput | TB_reservationsWhereInput[]
     id_client_membership?: IntFilter<"TB_reservations"> | number
-    id_session_capacity?: IntFilter<"TB_reservations"> | number
+    id_routine?: IntFilter<"TB_reservations"> | number
     start_time?: DateTimeFilter<"TB_reservations"> | Date | string
     status?: EnumreservationStatusFilter<"TB_reservations"> | $Enums.reservationStatus
     TB_client_membership?: XOR<TB_client_membershipScalarRelationFilter, TB_client_membershipWhereInput>
-    TB_session_capacity?: XOR<TB_session_capacityScalarRelationFilter, TB_session_capacityWhereInput>
+    TB_routines?: XOR<TB_routinesScalarRelationFilter, TB_routinesWhereInput>
   }, "id">
 
   export type TB_reservationsOrderByWithAggregationInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
     start_time?: SortOrder
     status?: SortOrder
     _count?: TB_reservationsCountOrderByAggregateInput
@@ -17700,61 +15116,9 @@ export namespace Prisma {
     NOT?: TB_reservationsScalarWhereWithAggregatesInput | TB_reservationsScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"TB_reservations"> | number
     id_client_membership?: IntWithAggregatesFilter<"TB_reservations"> | number
-    id_session_capacity?: IntWithAggregatesFilter<"TB_reservations"> | number
+    id_routine?: IntWithAggregatesFilter<"TB_reservations"> | number
     start_time?: DateTimeWithAggregatesFilter<"TB_reservations"> | Date | string
     status?: EnumreservationStatusWithAggregatesFilter<"TB_reservations"> | $Enums.reservationStatus
-  }
-
-  export type TB_notificationsWhereInput = {
-    AND?: TB_notificationsWhereInput | TB_notificationsWhereInput[]
-    OR?: TB_notificationsWhereInput[]
-    NOT?: TB_notificationsWhereInput | TB_notificationsWhereInput[]
-    id?: IntFilter<"TB_notifications"> | number
-    id_user?: IntFilter<"TB_notifications"> | number
-    message?: StringFilter<"TB_notifications"> | string
-    sent_date?: DateTimeFilter<"TB_notifications"> | Date | string
-    TB_users?: XOR<TB_usersScalarRelationFilter, TB_usersWhereInput>
-  }
-
-  export type TB_notificationsOrderByWithRelationInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-    message?: SortOrder
-    sent_date?: SortOrder
-    TB_users?: TB_usersOrderByWithRelationInput
-  }
-
-  export type TB_notificationsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: TB_notificationsWhereInput | TB_notificationsWhereInput[]
-    OR?: TB_notificationsWhereInput[]
-    NOT?: TB_notificationsWhereInput | TB_notificationsWhereInput[]
-    id_user?: IntFilter<"TB_notifications"> | number
-    message?: StringFilter<"TB_notifications"> | string
-    sent_date?: DateTimeFilter<"TB_notifications"> | Date | string
-    TB_users?: XOR<TB_usersScalarRelationFilter, TB_usersWhereInput>
-  }, "id">
-
-  export type TB_notificationsOrderByWithAggregationInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-    message?: SortOrder
-    sent_date?: SortOrder
-    _count?: TB_notificationsCountOrderByAggregateInput
-    _avg?: TB_notificationsAvgOrderByAggregateInput
-    _max?: TB_notificationsMaxOrderByAggregateInput
-    _min?: TB_notificationsMinOrderByAggregateInput
-    _sum?: TB_notificationsSumOrderByAggregateInput
-  }
-
-  export type TB_notificationsScalarWhereWithAggregatesInput = {
-    AND?: TB_notificationsScalarWhereWithAggregatesInput | TB_notificationsScalarWhereWithAggregatesInput[]
-    OR?: TB_notificationsScalarWhereWithAggregatesInput[]
-    NOT?: TB_notificationsScalarWhereWithAggregatesInput | TB_notificationsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"TB_notifications"> | number
-    id_user?: IntWithAggregatesFilter<"TB_notifications"> | number
-    message?: StringWithAggregatesFilter<"TB_notifications"> | string
-    sent_date?: DateTimeWithAggregatesFilter<"TB_notifications"> | Date | string
   }
 
   export type TB_usersCreateInput = {
@@ -17765,7 +15129,6 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_user_role?: TB_user_roleCreateNestedManyWithoutTB_usersInput
-    TB_notifications?: TB_notificationsCreateNestedManyWithoutTB_usersInput
     TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_usersInput
   }
 
@@ -17778,7 +15141,6 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_user_role?: TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput
-    TB_notifications?: TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput
     TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
@@ -17790,7 +15152,6 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUpdateManyWithoutTB_usersNestedInput
-    TB_notifications?: TB_notificationsUpdateManyWithoutTB_usersNestedInput
     TB_restriction?: TB_restrictionUpdateManyWithoutTB_usersNestedInput
   }
 
@@ -17803,7 +15164,6 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUncheckedUpdateManyWithoutTB_usersNestedInput
-    TB_notifications?: TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput
     TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
@@ -17968,7 +15328,6 @@ export namespace Prisma {
     specialization: string
     date_entry: Date | string
     TB_user_role: TB_user_roleCreateNestedOneWithoutTB_employeesInput
-    TB_session_capacity?: TB_session_capacityCreateNestedManyWithoutTB_employeesInput
   }
 
   export type TB_employeesUncheckedCreateInput = {
@@ -17977,7 +15336,6 @@ export namespace Prisma {
     bio: string
     specialization: string
     date_entry: Date | string
-    TB_session_capacity?: TB_session_capacityUncheckedCreateNestedManyWithoutTB_employeesInput
   }
 
   export type TB_employeesUpdateInput = {
@@ -17985,7 +15343,6 @@ export namespace Prisma {
     specialization?: StringFieldUpdateOperationsInput | string
     date_entry?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUpdateOneRequiredWithoutTB_employeesNestedInput
-    TB_session_capacity?: TB_session_capacityUpdateManyWithoutTB_employeesNestedInput
   }
 
   export type TB_employeesUncheckedUpdateInput = {
@@ -17994,7 +15351,6 @@ export namespace Prisma {
     bio?: StringFieldUpdateOperationsInput | string
     specialization?: StringFieldUpdateOperationsInput | string
     date_entry?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_session_capacity?: TB_session_capacityUncheckedUpdateManyWithoutTB_employeesNestedInput
   }
 
   export type TB_employeesCreateManyInput = {
@@ -18135,8 +15491,9 @@ export namespace Prisma {
     name: string
     description: string
     estimatedDuration: number
+    capacity?: number
     TB_routine_exercise?: TB_routine_exerciseCreateNestedManyWithoutTB_routinesInput
-    TB_session_capacity?: TB_session_capacityCreateNestedManyWithoutTB_routinesInput
+    TB_reservations?: TB_reservationsCreateNestedManyWithoutTB_routinesInput
   }
 
   export type TB_routinesUncheckedCreateInput = {
@@ -18144,16 +15501,18 @@ export namespace Prisma {
     name: string
     description: string
     estimatedDuration: number
+    capacity?: number
     TB_routine_exercise?: TB_routine_exerciseUncheckedCreateNestedManyWithoutTB_routinesInput
-    TB_session_capacity?: TB_session_capacityUncheckedCreateNestedManyWithoutTB_routinesInput
+    TB_reservations?: TB_reservationsUncheckedCreateNestedManyWithoutTB_routinesInput
   }
 
   export type TB_routinesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     estimatedDuration?: IntFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
     TB_routine_exercise?: TB_routine_exerciseUpdateManyWithoutTB_routinesNestedInput
-    TB_session_capacity?: TB_session_capacityUpdateManyWithoutTB_routinesNestedInput
+    TB_reservations?: TB_reservationsUpdateManyWithoutTB_routinesNestedInput
   }
 
   export type TB_routinesUncheckedUpdateInput = {
@@ -18161,8 +15520,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     estimatedDuration?: IntFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
     TB_routine_exercise?: TB_routine_exerciseUncheckedUpdateManyWithoutTB_routinesNestedInput
-    TB_session_capacity?: TB_session_capacityUncheckedUpdateManyWithoutTB_routinesNestedInput
+    TB_reservations?: TB_reservationsUncheckedUpdateManyWithoutTB_routinesNestedInput
   }
 
   export type TB_routinesCreateManyInput = {
@@ -18170,12 +15530,14 @@ export namespace Prisma {
     name: string
     description: string
     estimatedDuration: number
+    capacity?: number
   }
 
   export type TB_routinesUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     estimatedDuration?: IntFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
   }
 
   export type TB_routinesUncheckedUpdateManyInput = {
@@ -18183,6 +15545,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     estimatedDuration?: IntFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
   }
 
   export type TB_exercisesCreateInput = {
@@ -18273,65 +15636,17 @@ export namespace Prisma {
     id_exercise?: IntFieldUpdateOperationsInput | number
   }
 
-  export type TB_session_capacityCreateInput = {
-    capacity: number
-    TB_routines: TB_routinesCreateNestedOneWithoutTB_session_capacityInput
-    TB_employees: TB_employeesCreateNestedOneWithoutTB_session_capacityInput
-    TB_reservations?: TB_reservationsCreateNestedManyWithoutTB_session_capacityInput
-  }
-
-  export type TB_session_capacityUncheckedCreateInput = {
-    id?: number
-    id_routine: number
-    id_instructor: number
-    capacity: number
-    TB_reservations?: TB_reservationsUncheckedCreateNestedManyWithoutTB_session_capacityInput
-  }
-
-  export type TB_session_capacityUpdateInput = {
-    capacity?: IntFieldUpdateOperationsInput | number
-    TB_routines?: TB_routinesUpdateOneRequiredWithoutTB_session_capacityNestedInput
-    TB_employees?: TB_employeesUpdateOneRequiredWithoutTB_session_capacityNestedInput
-    TB_reservations?: TB_reservationsUpdateManyWithoutTB_session_capacityNestedInput
-  }
-
-  export type TB_session_capacityUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_routine?: IntFieldUpdateOperationsInput | number
-    id_instructor?: IntFieldUpdateOperationsInput | number
-    capacity?: IntFieldUpdateOperationsInput | number
-    TB_reservations?: TB_reservationsUncheckedUpdateManyWithoutTB_session_capacityNestedInput
-  }
-
-  export type TB_session_capacityCreateManyInput = {
-    id?: number
-    id_routine: number
-    id_instructor: number
-    capacity: number
-  }
-
-  export type TB_session_capacityUpdateManyMutationInput = {
-    capacity?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TB_session_capacityUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_routine?: IntFieldUpdateOperationsInput | number
-    id_instructor?: IntFieldUpdateOperationsInput | number
-    capacity?: IntFieldUpdateOperationsInput | number
-  }
-
   export type TB_reservationsCreateInput = {
     start_time: Date | string
     status: $Enums.reservationStatus
     TB_client_membership: TB_client_membershipCreateNestedOneWithoutTB_reservationsInput
-    TB_session_capacity: TB_session_capacityCreateNestedOneWithoutTB_reservationsInput
+    TB_routines: TB_routinesCreateNestedOneWithoutTB_reservationsInput
   }
 
   export type TB_reservationsUncheckedCreateInput = {
     id?: number
     id_client_membership: number
-    id_session_capacity: number
+    id_routine: number
     start_time: Date | string
     status: $Enums.reservationStatus
   }
@@ -18340,13 +15655,13 @@ export namespace Prisma {
     start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
     TB_client_membership?: TB_client_membershipUpdateOneRequiredWithoutTB_reservationsNestedInput
-    TB_session_capacity?: TB_session_capacityUpdateOneRequiredWithoutTB_reservationsNestedInput
+    TB_routines?: TB_routinesUpdateOneRequiredWithoutTB_reservationsNestedInput
   }
 
   export type TB_reservationsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     id_client_membership?: IntFieldUpdateOperationsInput | number
-    id_session_capacity?: IntFieldUpdateOperationsInput | number
+    id_routine?: IntFieldUpdateOperationsInput | number
     start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
   }
@@ -18354,7 +15669,7 @@ export namespace Prisma {
   export type TB_reservationsCreateManyInput = {
     id?: number
     id_client_membership: number
-    id_session_capacity: number
+    id_routine: number
     start_time: Date | string
     status: $Enums.reservationStatus
   }
@@ -18367,54 +15682,9 @@ export namespace Prisma {
   export type TB_reservationsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     id_client_membership?: IntFieldUpdateOperationsInput | number
-    id_session_capacity?: IntFieldUpdateOperationsInput | number
+    id_routine?: IntFieldUpdateOperationsInput | number
     start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
-  }
-
-  export type TB_notificationsCreateInput = {
-    message: string
-    sent_date: Date | string
-    TB_users: TB_usersCreateNestedOneWithoutTB_notificationsInput
-  }
-
-  export type TB_notificationsUncheckedCreateInput = {
-    id?: number
-    id_user: number
-    message: string
-    sent_date: Date | string
-  }
-
-  export type TB_notificationsUpdateInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_users?: TB_usersUpdateOneRequiredWithoutTB_notificationsNestedInput
-  }
-
-  export type TB_notificationsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_user?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TB_notificationsCreateManyInput = {
-    id?: number
-    id_user: number
-    message: string
-    sent_date: Date | string
-  }
-
-  export type TB_notificationsUpdateManyMutationInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TB_notificationsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_user?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -18460,12 +15730,6 @@ export namespace Prisma {
     none?: TB_user_roleWhereInput
   }
 
-  export type TB_notificationsListRelationFilter = {
-    every?: TB_notificationsWhereInput
-    some?: TB_notificationsWhereInput
-    none?: TB_notificationsWhereInput
-  }
-
   export type TB_restrictionListRelationFilter = {
     every?: TB_restrictionWhereInput
     some?: TB_restrictionWhereInput
@@ -18473,10 +15737,6 @@ export namespace Prisma {
   }
 
   export type TB_user_roleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TB_notificationsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18689,16 +15949,6 @@ export namespace Prisma {
     isNot?: TB_user_roleWhereInput
   }
 
-  export type TB_session_capacityListRelationFilter = {
-    every?: TB_session_capacityWhereInput
-    some?: TB_session_capacityWhereInput
-    none?: TB_session_capacityWhereInput
-  }
-
-  export type TB_session_capacityOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type TB_employeesCountOrderByAggregateInput = {
     id?: SortOrder
     id_user_role?: SortOrder
@@ -18877,11 +16127,13 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
   }
 
   export type TB_routinesAvgOrderByAggregateInput = {
     id?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
   }
 
   export type TB_routinesMaxOrderByAggregateInput = {
@@ -18889,6 +16141,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
   }
 
   export type TB_routinesMinOrderByAggregateInput = {
@@ -18896,11 +16149,13 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
   }
 
   export type TB_routinesSumOrderByAggregateInput = {
     id?: SortOrder
     estimatedDuration?: SortOrder
+    capacity?: SortOrder
   }
 
   export type TB_exercisesCountOrderByAggregateInput = {
@@ -18972,46 +16227,6 @@ export namespace Prisma {
     id_exercise?: SortOrder
   }
 
-  export type TB_employeesScalarRelationFilter = {
-    is?: TB_employeesWhereInput
-    isNot?: TB_employeesWhereInput
-  }
-
-  export type TB_session_capacityCountOrderByAggregateInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-  }
-
-  export type TB_session_capacityAvgOrderByAggregateInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-  }
-
-  export type TB_session_capacityMaxOrderByAggregateInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-  }
-
-  export type TB_session_capacityMinOrderByAggregateInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-  }
-
-  export type TB_session_capacitySumOrderByAggregateInput = {
-    id?: SortOrder
-    id_routine?: SortOrder
-    id_instructor?: SortOrder
-    capacity?: SortOrder
-  }
-
   export type EnumreservationStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.reservationStatus | EnumreservationStatusFieldRefInput<$PrismaModel>
     in?: $Enums.reservationStatus[] | ListEnumreservationStatusFieldRefInput<$PrismaModel>
@@ -19024,15 +16239,10 @@ export namespace Prisma {
     isNot?: TB_client_membershipWhereInput
   }
 
-  export type TB_session_capacityScalarRelationFilter = {
-    is?: TB_session_capacityWhereInput
-    isNot?: TB_session_capacityWhereInput
-  }
-
   export type TB_reservationsCountOrderByAggregateInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
     start_time?: SortOrder
     status?: SortOrder
   }
@@ -19040,13 +16250,13 @@ export namespace Prisma {
   export type TB_reservationsAvgOrderByAggregateInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
   }
 
   export type TB_reservationsMaxOrderByAggregateInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
     start_time?: SortOrder
     status?: SortOrder
   }
@@ -19054,7 +16264,7 @@ export namespace Prisma {
   export type TB_reservationsMinOrderByAggregateInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
     start_time?: SortOrder
     status?: SortOrder
   }
@@ -19062,7 +16272,7 @@ export namespace Prisma {
   export type TB_reservationsSumOrderByAggregateInput = {
     id?: SortOrder
     id_client_membership?: SortOrder
-    id_session_capacity?: SortOrder
+    id_routine?: SortOrder
   }
 
   export type EnumreservationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -19075,49 +16285,11 @@ export namespace Prisma {
     _max?: NestedEnumreservationStatusFilter<$PrismaModel>
   }
 
-  export type TB_notificationsCountOrderByAggregateInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-    message?: SortOrder
-    sent_date?: SortOrder
-  }
-
-  export type TB_notificationsAvgOrderByAggregateInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-  }
-
-  export type TB_notificationsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-    message?: SortOrder
-    sent_date?: SortOrder
-  }
-
-  export type TB_notificationsMinOrderByAggregateInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-    message?: SortOrder
-    sent_date?: SortOrder
-  }
-
-  export type TB_notificationsSumOrderByAggregateInput = {
-    id?: SortOrder
-    id_user?: SortOrder
-  }
-
   export type TB_user_roleCreateNestedManyWithoutTB_usersInput = {
     create?: XOR<TB_user_roleCreateWithoutTB_usersInput, TB_user_roleUncheckedCreateWithoutTB_usersInput> | TB_user_roleCreateWithoutTB_usersInput[] | TB_user_roleUncheckedCreateWithoutTB_usersInput[]
     connectOrCreate?: TB_user_roleCreateOrConnectWithoutTB_usersInput | TB_user_roleCreateOrConnectWithoutTB_usersInput[]
     createMany?: TB_user_roleCreateManyTB_usersInputEnvelope
     connect?: TB_user_roleWhereUniqueInput | TB_user_roleWhereUniqueInput[]
-  }
-
-  export type TB_notificationsCreateNestedManyWithoutTB_usersInput = {
-    create?: XOR<TB_notificationsCreateWithoutTB_usersInput, TB_notificationsUncheckedCreateWithoutTB_usersInput> | TB_notificationsCreateWithoutTB_usersInput[] | TB_notificationsUncheckedCreateWithoutTB_usersInput[]
-    connectOrCreate?: TB_notificationsCreateOrConnectWithoutTB_usersInput | TB_notificationsCreateOrConnectWithoutTB_usersInput[]
-    createMany?: TB_notificationsCreateManyTB_usersInputEnvelope
-    connect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
   }
 
   export type TB_restrictionCreateNestedManyWithoutTB_usersInput = {
@@ -19132,13 +16304,6 @@ export namespace Prisma {
     connectOrCreate?: TB_user_roleCreateOrConnectWithoutTB_usersInput | TB_user_roleCreateOrConnectWithoutTB_usersInput[]
     createMany?: TB_user_roleCreateManyTB_usersInputEnvelope
     connect?: TB_user_roleWhereUniqueInput | TB_user_roleWhereUniqueInput[]
-  }
-
-  export type TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput = {
-    create?: XOR<TB_notificationsCreateWithoutTB_usersInput, TB_notificationsUncheckedCreateWithoutTB_usersInput> | TB_notificationsCreateWithoutTB_usersInput[] | TB_notificationsUncheckedCreateWithoutTB_usersInput[]
-    connectOrCreate?: TB_notificationsCreateOrConnectWithoutTB_usersInput | TB_notificationsCreateOrConnectWithoutTB_usersInput[]
-    createMany?: TB_notificationsCreateManyTB_usersInputEnvelope
-    connect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
   }
 
   export type TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput = {
@@ -19168,20 +16333,6 @@ export namespace Prisma {
     update?: TB_user_roleUpdateWithWhereUniqueWithoutTB_usersInput | TB_user_roleUpdateWithWhereUniqueWithoutTB_usersInput[]
     updateMany?: TB_user_roleUpdateManyWithWhereWithoutTB_usersInput | TB_user_roleUpdateManyWithWhereWithoutTB_usersInput[]
     deleteMany?: TB_user_roleScalarWhereInput | TB_user_roleScalarWhereInput[]
-  }
-
-  export type TB_notificationsUpdateManyWithoutTB_usersNestedInput = {
-    create?: XOR<TB_notificationsCreateWithoutTB_usersInput, TB_notificationsUncheckedCreateWithoutTB_usersInput> | TB_notificationsCreateWithoutTB_usersInput[] | TB_notificationsUncheckedCreateWithoutTB_usersInput[]
-    connectOrCreate?: TB_notificationsCreateOrConnectWithoutTB_usersInput | TB_notificationsCreateOrConnectWithoutTB_usersInput[]
-    upsert?: TB_notificationsUpsertWithWhereUniqueWithoutTB_usersInput | TB_notificationsUpsertWithWhereUniqueWithoutTB_usersInput[]
-    createMany?: TB_notificationsCreateManyTB_usersInputEnvelope
-    set?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    disconnect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    delete?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    connect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    update?: TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput | TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput[]
-    updateMany?: TB_notificationsUpdateManyWithWhereWithoutTB_usersInput | TB_notificationsUpdateManyWithWhereWithoutTB_usersInput[]
-    deleteMany?: TB_notificationsScalarWhereInput | TB_notificationsScalarWhereInput[]
   }
 
   export type TB_restrictionUpdateManyWithoutTB_usersNestedInput = {
@@ -19218,20 +16369,6 @@ export namespace Prisma {
     update?: TB_user_roleUpdateWithWhereUniqueWithoutTB_usersInput | TB_user_roleUpdateWithWhereUniqueWithoutTB_usersInput[]
     updateMany?: TB_user_roleUpdateManyWithWhereWithoutTB_usersInput | TB_user_roleUpdateManyWithWhereWithoutTB_usersInput[]
     deleteMany?: TB_user_roleScalarWhereInput | TB_user_roleScalarWhereInput[]
-  }
-
-  export type TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput = {
-    create?: XOR<TB_notificationsCreateWithoutTB_usersInput, TB_notificationsUncheckedCreateWithoutTB_usersInput> | TB_notificationsCreateWithoutTB_usersInput[] | TB_notificationsUncheckedCreateWithoutTB_usersInput[]
-    connectOrCreate?: TB_notificationsCreateOrConnectWithoutTB_usersInput | TB_notificationsCreateOrConnectWithoutTB_usersInput[]
-    upsert?: TB_notificationsUpsertWithWhereUniqueWithoutTB_usersInput | TB_notificationsUpsertWithWhereUniqueWithoutTB_usersInput[]
-    createMany?: TB_notificationsCreateManyTB_usersInputEnvelope
-    set?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    disconnect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    delete?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    connect?: TB_notificationsWhereUniqueInput | TB_notificationsWhereUniqueInput[]
-    update?: TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput | TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput[]
-    updateMany?: TB_notificationsUpdateManyWithWhereWithoutTB_usersInput | TB_notificationsUpdateManyWithWhereWithoutTB_usersInput[]
-    deleteMany?: TB_notificationsScalarWhereInput | TB_notificationsScalarWhereInput[]
   }
 
   export type TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput = {
@@ -19422,54 +16559,12 @@ export namespace Prisma {
     connect?: TB_user_roleWhereUniqueInput
   }
 
-  export type TB_session_capacityCreateNestedManyWithoutTB_employeesInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_employeesInput, TB_session_capacityUncheckedCreateWithoutTB_employeesInput> | TB_session_capacityCreateWithoutTB_employeesInput[] | TB_session_capacityUncheckedCreateWithoutTB_employeesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_employeesInput | TB_session_capacityCreateOrConnectWithoutTB_employeesInput[]
-    createMany?: TB_session_capacityCreateManyTB_employeesInputEnvelope
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-  }
-
-  export type TB_session_capacityUncheckedCreateNestedManyWithoutTB_employeesInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_employeesInput, TB_session_capacityUncheckedCreateWithoutTB_employeesInput> | TB_session_capacityCreateWithoutTB_employeesInput[] | TB_session_capacityUncheckedCreateWithoutTB_employeesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_employeesInput | TB_session_capacityCreateOrConnectWithoutTB_employeesInput[]
-    createMany?: TB_session_capacityCreateManyTB_employeesInputEnvelope
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-  }
-
   export type TB_user_roleUpdateOneRequiredWithoutTB_employeesNestedInput = {
     create?: XOR<TB_user_roleCreateWithoutTB_employeesInput, TB_user_roleUncheckedCreateWithoutTB_employeesInput>
     connectOrCreate?: TB_user_roleCreateOrConnectWithoutTB_employeesInput
     upsert?: TB_user_roleUpsertWithoutTB_employeesInput
     connect?: TB_user_roleWhereUniqueInput
     update?: XOR<XOR<TB_user_roleUpdateToOneWithWhereWithoutTB_employeesInput, TB_user_roleUpdateWithoutTB_employeesInput>, TB_user_roleUncheckedUpdateWithoutTB_employeesInput>
-  }
-
-  export type TB_session_capacityUpdateManyWithoutTB_employeesNestedInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_employeesInput, TB_session_capacityUncheckedCreateWithoutTB_employeesInput> | TB_session_capacityCreateWithoutTB_employeesInput[] | TB_session_capacityUncheckedCreateWithoutTB_employeesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_employeesInput | TB_session_capacityCreateOrConnectWithoutTB_employeesInput[]
-    upsert?: TB_session_capacityUpsertWithWhereUniqueWithoutTB_employeesInput | TB_session_capacityUpsertWithWhereUniqueWithoutTB_employeesInput[]
-    createMany?: TB_session_capacityCreateManyTB_employeesInputEnvelope
-    set?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    disconnect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    delete?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    update?: TB_session_capacityUpdateWithWhereUniqueWithoutTB_employeesInput | TB_session_capacityUpdateWithWhereUniqueWithoutTB_employeesInput[]
-    updateMany?: TB_session_capacityUpdateManyWithWhereWithoutTB_employeesInput | TB_session_capacityUpdateManyWithWhereWithoutTB_employeesInput[]
-    deleteMany?: TB_session_capacityScalarWhereInput | TB_session_capacityScalarWhereInput[]
-  }
-
-  export type TB_session_capacityUncheckedUpdateManyWithoutTB_employeesNestedInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_employeesInput, TB_session_capacityUncheckedCreateWithoutTB_employeesInput> | TB_session_capacityCreateWithoutTB_employeesInput[] | TB_session_capacityUncheckedCreateWithoutTB_employeesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_employeesInput | TB_session_capacityCreateOrConnectWithoutTB_employeesInput[]
-    upsert?: TB_session_capacityUpsertWithWhereUniqueWithoutTB_employeesInput | TB_session_capacityUpsertWithWhereUniqueWithoutTB_employeesInput[]
-    createMany?: TB_session_capacityCreateManyTB_employeesInputEnvelope
-    set?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    disconnect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    delete?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    update?: TB_session_capacityUpdateWithWhereUniqueWithoutTB_employeesInput | TB_session_capacityUpdateWithWhereUniqueWithoutTB_employeesInput[]
-    updateMany?: TB_session_capacityUpdateManyWithWhereWithoutTB_employeesInput | TB_session_capacityUpdateManyWithWhereWithoutTB_employeesInput[]
-    deleteMany?: TB_session_capacityScalarWhereInput | TB_session_capacityScalarWhereInput[]
   }
 
   export type TB_client_membershipCreateNestedManyWithoutTB_membershipsInput = {
@@ -19603,11 +16698,11 @@ export namespace Prisma {
     connect?: TB_routine_exerciseWhereUniqueInput | TB_routine_exerciseWhereUniqueInput[]
   }
 
-  export type TB_session_capacityCreateNestedManyWithoutTB_routinesInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_routinesInput, TB_session_capacityUncheckedCreateWithoutTB_routinesInput> | TB_session_capacityCreateWithoutTB_routinesInput[] | TB_session_capacityUncheckedCreateWithoutTB_routinesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_routinesInput | TB_session_capacityCreateOrConnectWithoutTB_routinesInput[]
-    createMany?: TB_session_capacityCreateManyTB_routinesInputEnvelope
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
+  export type TB_reservationsCreateNestedManyWithoutTB_routinesInput = {
+    create?: XOR<TB_reservationsCreateWithoutTB_routinesInput, TB_reservationsUncheckedCreateWithoutTB_routinesInput> | TB_reservationsCreateWithoutTB_routinesInput[] | TB_reservationsUncheckedCreateWithoutTB_routinesInput[]
+    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_routinesInput | TB_reservationsCreateOrConnectWithoutTB_routinesInput[]
+    createMany?: TB_reservationsCreateManyTB_routinesInputEnvelope
+    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
   }
 
   export type TB_routine_exerciseUncheckedCreateNestedManyWithoutTB_routinesInput = {
@@ -19617,11 +16712,11 @@ export namespace Prisma {
     connect?: TB_routine_exerciseWhereUniqueInput | TB_routine_exerciseWhereUniqueInput[]
   }
 
-  export type TB_session_capacityUncheckedCreateNestedManyWithoutTB_routinesInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_routinesInput, TB_session_capacityUncheckedCreateWithoutTB_routinesInput> | TB_session_capacityCreateWithoutTB_routinesInput[] | TB_session_capacityUncheckedCreateWithoutTB_routinesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_routinesInput | TB_session_capacityCreateOrConnectWithoutTB_routinesInput[]
-    createMany?: TB_session_capacityCreateManyTB_routinesInputEnvelope
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
+  export type TB_reservationsUncheckedCreateNestedManyWithoutTB_routinesInput = {
+    create?: XOR<TB_reservationsCreateWithoutTB_routinesInput, TB_reservationsUncheckedCreateWithoutTB_routinesInput> | TB_reservationsCreateWithoutTB_routinesInput[] | TB_reservationsUncheckedCreateWithoutTB_routinesInput[]
+    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_routinesInput | TB_reservationsCreateOrConnectWithoutTB_routinesInput[]
+    createMany?: TB_reservationsCreateManyTB_routinesInputEnvelope
+    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
   }
 
   export type TB_routine_exerciseUpdateManyWithoutTB_routinesNestedInput = {
@@ -19638,18 +16733,18 @@ export namespace Prisma {
     deleteMany?: TB_routine_exerciseScalarWhereInput | TB_routine_exerciseScalarWhereInput[]
   }
 
-  export type TB_session_capacityUpdateManyWithoutTB_routinesNestedInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_routinesInput, TB_session_capacityUncheckedCreateWithoutTB_routinesInput> | TB_session_capacityCreateWithoutTB_routinesInput[] | TB_session_capacityUncheckedCreateWithoutTB_routinesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_routinesInput | TB_session_capacityCreateOrConnectWithoutTB_routinesInput[]
-    upsert?: TB_session_capacityUpsertWithWhereUniqueWithoutTB_routinesInput | TB_session_capacityUpsertWithWhereUniqueWithoutTB_routinesInput[]
-    createMany?: TB_session_capacityCreateManyTB_routinesInputEnvelope
-    set?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    disconnect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    delete?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    update?: TB_session_capacityUpdateWithWhereUniqueWithoutTB_routinesInput | TB_session_capacityUpdateWithWhereUniqueWithoutTB_routinesInput[]
-    updateMany?: TB_session_capacityUpdateManyWithWhereWithoutTB_routinesInput | TB_session_capacityUpdateManyWithWhereWithoutTB_routinesInput[]
-    deleteMany?: TB_session_capacityScalarWhereInput | TB_session_capacityScalarWhereInput[]
+  export type TB_reservationsUpdateManyWithoutTB_routinesNestedInput = {
+    create?: XOR<TB_reservationsCreateWithoutTB_routinesInput, TB_reservationsUncheckedCreateWithoutTB_routinesInput> | TB_reservationsCreateWithoutTB_routinesInput[] | TB_reservationsUncheckedCreateWithoutTB_routinesInput[]
+    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_routinesInput | TB_reservationsCreateOrConnectWithoutTB_routinesInput[]
+    upsert?: TB_reservationsUpsertWithWhereUniqueWithoutTB_routinesInput | TB_reservationsUpsertWithWhereUniqueWithoutTB_routinesInput[]
+    createMany?: TB_reservationsCreateManyTB_routinesInputEnvelope
+    set?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    disconnect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    delete?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    update?: TB_reservationsUpdateWithWhereUniqueWithoutTB_routinesInput | TB_reservationsUpdateWithWhereUniqueWithoutTB_routinesInput[]
+    updateMany?: TB_reservationsUpdateManyWithWhereWithoutTB_routinesInput | TB_reservationsUpdateManyWithWhereWithoutTB_routinesInput[]
+    deleteMany?: TB_reservationsScalarWhereInput | TB_reservationsScalarWhereInput[]
   }
 
   export type TB_routine_exerciseUncheckedUpdateManyWithoutTB_routinesNestedInput = {
@@ -19666,18 +16761,18 @@ export namespace Prisma {
     deleteMany?: TB_routine_exerciseScalarWhereInput | TB_routine_exerciseScalarWhereInput[]
   }
 
-  export type TB_session_capacityUncheckedUpdateManyWithoutTB_routinesNestedInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_routinesInput, TB_session_capacityUncheckedCreateWithoutTB_routinesInput> | TB_session_capacityCreateWithoutTB_routinesInput[] | TB_session_capacityUncheckedCreateWithoutTB_routinesInput[]
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_routinesInput | TB_session_capacityCreateOrConnectWithoutTB_routinesInput[]
-    upsert?: TB_session_capacityUpsertWithWhereUniqueWithoutTB_routinesInput | TB_session_capacityUpsertWithWhereUniqueWithoutTB_routinesInput[]
-    createMany?: TB_session_capacityCreateManyTB_routinesInputEnvelope
-    set?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    disconnect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    delete?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    connect?: TB_session_capacityWhereUniqueInput | TB_session_capacityWhereUniqueInput[]
-    update?: TB_session_capacityUpdateWithWhereUniqueWithoutTB_routinesInput | TB_session_capacityUpdateWithWhereUniqueWithoutTB_routinesInput[]
-    updateMany?: TB_session_capacityUpdateManyWithWhereWithoutTB_routinesInput | TB_session_capacityUpdateManyWithWhereWithoutTB_routinesInput[]
-    deleteMany?: TB_session_capacityScalarWhereInput | TB_session_capacityScalarWhereInput[]
+  export type TB_reservationsUncheckedUpdateManyWithoutTB_routinesNestedInput = {
+    create?: XOR<TB_reservationsCreateWithoutTB_routinesInput, TB_reservationsUncheckedCreateWithoutTB_routinesInput> | TB_reservationsCreateWithoutTB_routinesInput[] | TB_reservationsUncheckedCreateWithoutTB_routinesInput[]
+    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_routinesInput | TB_reservationsCreateOrConnectWithoutTB_routinesInput[]
+    upsert?: TB_reservationsUpsertWithWhereUniqueWithoutTB_routinesInput | TB_reservationsUpsertWithWhereUniqueWithoutTB_routinesInput[]
+    createMany?: TB_reservationsCreateManyTB_routinesInputEnvelope
+    set?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    disconnect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    delete?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
+    update?: TB_reservationsUpdateWithWhereUniqueWithoutTB_routinesInput | TB_reservationsUpdateWithWhereUniqueWithoutTB_routinesInput[]
+    updateMany?: TB_reservationsUpdateManyWithWhereWithoutTB_routinesInput | TB_reservationsUpdateManyWithWhereWithoutTB_routinesInput[]
+    deleteMany?: TB_reservationsScalarWhereInput | TB_reservationsScalarWhereInput[]
   }
 
   export type TB_routine_exerciseCreateNestedManyWithoutTB_exercisesInput = {
@@ -19750,86 +16845,16 @@ export namespace Prisma {
     update?: XOR<XOR<TB_exercisesUpdateToOneWithWhereWithoutTB_routine_exerciseInput, TB_exercisesUpdateWithoutTB_routine_exerciseInput>, TB_exercisesUncheckedUpdateWithoutTB_routine_exerciseInput>
   }
 
-  export type TB_routinesCreateNestedOneWithoutTB_session_capacityInput = {
-    create?: XOR<TB_routinesCreateWithoutTB_session_capacityInput, TB_routinesUncheckedCreateWithoutTB_session_capacityInput>
-    connectOrCreate?: TB_routinesCreateOrConnectWithoutTB_session_capacityInput
-    connect?: TB_routinesWhereUniqueInput
-  }
-
-  export type TB_employeesCreateNestedOneWithoutTB_session_capacityInput = {
-    create?: XOR<TB_employeesCreateWithoutTB_session_capacityInput, TB_employeesUncheckedCreateWithoutTB_session_capacityInput>
-    connectOrCreate?: TB_employeesCreateOrConnectWithoutTB_session_capacityInput
-    connect?: TB_employeesWhereUniqueInput
-  }
-
-  export type TB_reservationsCreateNestedManyWithoutTB_session_capacityInput = {
-    create?: XOR<TB_reservationsCreateWithoutTB_session_capacityInput, TB_reservationsUncheckedCreateWithoutTB_session_capacityInput> | TB_reservationsCreateWithoutTB_session_capacityInput[] | TB_reservationsUncheckedCreateWithoutTB_session_capacityInput[]
-    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_session_capacityInput | TB_reservationsCreateOrConnectWithoutTB_session_capacityInput[]
-    createMany?: TB_reservationsCreateManyTB_session_capacityInputEnvelope
-    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-  }
-
-  export type TB_reservationsUncheckedCreateNestedManyWithoutTB_session_capacityInput = {
-    create?: XOR<TB_reservationsCreateWithoutTB_session_capacityInput, TB_reservationsUncheckedCreateWithoutTB_session_capacityInput> | TB_reservationsCreateWithoutTB_session_capacityInput[] | TB_reservationsUncheckedCreateWithoutTB_session_capacityInput[]
-    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_session_capacityInput | TB_reservationsCreateOrConnectWithoutTB_session_capacityInput[]
-    createMany?: TB_reservationsCreateManyTB_session_capacityInputEnvelope
-    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-  }
-
-  export type TB_routinesUpdateOneRequiredWithoutTB_session_capacityNestedInput = {
-    create?: XOR<TB_routinesCreateWithoutTB_session_capacityInput, TB_routinesUncheckedCreateWithoutTB_session_capacityInput>
-    connectOrCreate?: TB_routinesCreateOrConnectWithoutTB_session_capacityInput
-    upsert?: TB_routinesUpsertWithoutTB_session_capacityInput
-    connect?: TB_routinesWhereUniqueInput
-    update?: XOR<XOR<TB_routinesUpdateToOneWithWhereWithoutTB_session_capacityInput, TB_routinesUpdateWithoutTB_session_capacityInput>, TB_routinesUncheckedUpdateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_employeesUpdateOneRequiredWithoutTB_session_capacityNestedInput = {
-    create?: XOR<TB_employeesCreateWithoutTB_session_capacityInput, TB_employeesUncheckedCreateWithoutTB_session_capacityInput>
-    connectOrCreate?: TB_employeesCreateOrConnectWithoutTB_session_capacityInput
-    upsert?: TB_employeesUpsertWithoutTB_session_capacityInput
-    connect?: TB_employeesWhereUniqueInput
-    update?: XOR<XOR<TB_employeesUpdateToOneWithWhereWithoutTB_session_capacityInput, TB_employeesUpdateWithoutTB_session_capacityInput>, TB_employeesUncheckedUpdateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_reservationsUpdateManyWithoutTB_session_capacityNestedInput = {
-    create?: XOR<TB_reservationsCreateWithoutTB_session_capacityInput, TB_reservationsUncheckedCreateWithoutTB_session_capacityInput> | TB_reservationsCreateWithoutTB_session_capacityInput[] | TB_reservationsUncheckedCreateWithoutTB_session_capacityInput[]
-    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_session_capacityInput | TB_reservationsCreateOrConnectWithoutTB_session_capacityInput[]
-    upsert?: TB_reservationsUpsertWithWhereUniqueWithoutTB_session_capacityInput | TB_reservationsUpsertWithWhereUniqueWithoutTB_session_capacityInput[]
-    createMany?: TB_reservationsCreateManyTB_session_capacityInputEnvelope
-    set?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    disconnect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    delete?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    update?: TB_reservationsUpdateWithWhereUniqueWithoutTB_session_capacityInput | TB_reservationsUpdateWithWhereUniqueWithoutTB_session_capacityInput[]
-    updateMany?: TB_reservationsUpdateManyWithWhereWithoutTB_session_capacityInput | TB_reservationsUpdateManyWithWhereWithoutTB_session_capacityInput[]
-    deleteMany?: TB_reservationsScalarWhereInput | TB_reservationsScalarWhereInput[]
-  }
-
-  export type TB_reservationsUncheckedUpdateManyWithoutTB_session_capacityNestedInput = {
-    create?: XOR<TB_reservationsCreateWithoutTB_session_capacityInput, TB_reservationsUncheckedCreateWithoutTB_session_capacityInput> | TB_reservationsCreateWithoutTB_session_capacityInput[] | TB_reservationsUncheckedCreateWithoutTB_session_capacityInput[]
-    connectOrCreate?: TB_reservationsCreateOrConnectWithoutTB_session_capacityInput | TB_reservationsCreateOrConnectWithoutTB_session_capacityInput[]
-    upsert?: TB_reservationsUpsertWithWhereUniqueWithoutTB_session_capacityInput | TB_reservationsUpsertWithWhereUniqueWithoutTB_session_capacityInput[]
-    createMany?: TB_reservationsCreateManyTB_session_capacityInputEnvelope
-    set?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    disconnect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    delete?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    connect?: TB_reservationsWhereUniqueInput | TB_reservationsWhereUniqueInput[]
-    update?: TB_reservationsUpdateWithWhereUniqueWithoutTB_session_capacityInput | TB_reservationsUpdateWithWhereUniqueWithoutTB_session_capacityInput[]
-    updateMany?: TB_reservationsUpdateManyWithWhereWithoutTB_session_capacityInput | TB_reservationsUpdateManyWithWhereWithoutTB_session_capacityInput[]
-    deleteMany?: TB_reservationsScalarWhereInput | TB_reservationsScalarWhereInput[]
-  }
-
   export type TB_client_membershipCreateNestedOneWithoutTB_reservationsInput = {
     create?: XOR<TB_client_membershipCreateWithoutTB_reservationsInput, TB_client_membershipUncheckedCreateWithoutTB_reservationsInput>
     connectOrCreate?: TB_client_membershipCreateOrConnectWithoutTB_reservationsInput
     connect?: TB_client_membershipWhereUniqueInput
   }
 
-  export type TB_session_capacityCreateNestedOneWithoutTB_reservationsInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_reservationsInput, TB_session_capacityUncheckedCreateWithoutTB_reservationsInput>
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_reservationsInput
-    connect?: TB_session_capacityWhereUniqueInput
+  export type TB_routinesCreateNestedOneWithoutTB_reservationsInput = {
+    create?: XOR<TB_routinesCreateWithoutTB_reservationsInput, TB_routinesUncheckedCreateWithoutTB_reservationsInput>
+    connectOrCreate?: TB_routinesCreateOrConnectWithoutTB_reservationsInput
+    connect?: TB_routinesWhereUniqueInput
   }
 
   export type EnumreservationStatusFieldUpdateOperationsInput = {
@@ -19844,26 +16869,12 @@ export namespace Prisma {
     update?: XOR<XOR<TB_client_membershipUpdateToOneWithWhereWithoutTB_reservationsInput, TB_client_membershipUpdateWithoutTB_reservationsInput>, TB_client_membershipUncheckedUpdateWithoutTB_reservationsInput>
   }
 
-  export type TB_session_capacityUpdateOneRequiredWithoutTB_reservationsNestedInput = {
-    create?: XOR<TB_session_capacityCreateWithoutTB_reservationsInput, TB_session_capacityUncheckedCreateWithoutTB_reservationsInput>
-    connectOrCreate?: TB_session_capacityCreateOrConnectWithoutTB_reservationsInput
-    upsert?: TB_session_capacityUpsertWithoutTB_reservationsInput
-    connect?: TB_session_capacityWhereUniqueInput
-    update?: XOR<XOR<TB_session_capacityUpdateToOneWithWhereWithoutTB_reservationsInput, TB_session_capacityUpdateWithoutTB_reservationsInput>, TB_session_capacityUncheckedUpdateWithoutTB_reservationsInput>
-  }
-
-  export type TB_usersCreateNestedOneWithoutTB_notificationsInput = {
-    create?: XOR<TB_usersCreateWithoutTB_notificationsInput, TB_usersUncheckedCreateWithoutTB_notificationsInput>
-    connectOrCreate?: TB_usersCreateOrConnectWithoutTB_notificationsInput
-    connect?: TB_usersWhereUniqueInput
-  }
-
-  export type TB_usersUpdateOneRequiredWithoutTB_notificationsNestedInput = {
-    create?: XOR<TB_usersCreateWithoutTB_notificationsInput, TB_usersUncheckedCreateWithoutTB_notificationsInput>
-    connectOrCreate?: TB_usersCreateOrConnectWithoutTB_notificationsInput
-    upsert?: TB_usersUpsertWithoutTB_notificationsInput
-    connect?: TB_usersWhereUniqueInput
-    update?: XOR<XOR<TB_usersUpdateToOneWithWhereWithoutTB_notificationsInput, TB_usersUpdateWithoutTB_notificationsInput>, TB_usersUncheckedUpdateWithoutTB_notificationsInput>
+  export type TB_routinesUpdateOneRequiredWithoutTB_reservationsNestedInput = {
+    create?: XOR<TB_routinesCreateWithoutTB_reservationsInput, TB_routinesUncheckedCreateWithoutTB_reservationsInput>
+    connectOrCreate?: TB_routinesCreateOrConnectWithoutTB_reservationsInput
+    upsert?: TB_routinesUpsertWithoutTB_reservationsInput
+    connect?: TB_routinesWhereUniqueInput
+    update?: XOR<XOR<TB_routinesUpdateToOneWithWhereWithoutTB_reservationsInput, TB_routinesUpdateWithoutTB_reservationsInput>, TB_routinesUncheckedUpdateWithoutTB_reservationsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -20033,27 +17044,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TB_notificationsCreateWithoutTB_usersInput = {
-    message: string
-    sent_date: Date | string
-  }
-
-  export type TB_notificationsUncheckedCreateWithoutTB_usersInput = {
-    id?: number
-    message: string
-    sent_date: Date | string
-  }
-
-  export type TB_notificationsCreateOrConnectWithoutTB_usersInput = {
-    where: TB_notificationsWhereUniqueInput
-    create: XOR<TB_notificationsCreateWithoutTB_usersInput, TB_notificationsUncheckedCreateWithoutTB_usersInput>
-  }
-
-  export type TB_notificationsCreateManyTB_usersInputEnvelope = {
-    data: TB_notificationsCreateManyTB_usersInput | TB_notificationsCreateManyTB_usersInput[]
-    skipDuplicates?: boolean
-  }
-
   export type TB_restrictionCreateWithoutTB_usersInput = {
     description: string
   }
@@ -20096,32 +17086,6 @@ export namespace Prisma {
     id_user_role?: IntFilter<"TB_user_role"> | number
     id_user?: IntFilter<"TB_user_role"> | number
     id_role?: IntFilter<"TB_user_role"> | number
-  }
-
-  export type TB_notificationsUpsertWithWhereUniqueWithoutTB_usersInput = {
-    where: TB_notificationsWhereUniqueInput
-    update: XOR<TB_notificationsUpdateWithoutTB_usersInput, TB_notificationsUncheckedUpdateWithoutTB_usersInput>
-    create: XOR<TB_notificationsCreateWithoutTB_usersInput, TB_notificationsUncheckedCreateWithoutTB_usersInput>
-  }
-
-  export type TB_notificationsUpdateWithWhereUniqueWithoutTB_usersInput = {
-    where: TB_notificationsWhereUniqueInput
-    data: XOR<TB_notificationsUpdateWithoutTB_usersInput, TB_notificationsUncheckedUpdateWithoutTB_usersInput>
-  }
-
-  export type TB_notificationsUpdateManyWithWhereWithoutTB_usersInput = {
-    where: TB_notificationsScalarWhereInput
-    data: XOR<TB_notificationsUpdateManyMutationInput, TB_notificationsUncheckedUpdateManyWithoutTB_usersInput>
-  }
-
-  export type TB_notificationsScalarWhereInput = {
-    AND?: TB_notificationsScalarWhereInput | TB_notificationsScalarWhereInput[]
-    OR?: TB_notificationsScalarWhereInput[]
-    NOT?: TB_notificationsScalarWhereInput | TB_notificationsScalarWhereInput[]
-    id?: IntFilter<"TB_notifications"> | number
-    id_user?: IntFilter<"TB_notifications"> | number
-    message?: StringFilter<"TB_notifications"> | string
-    sent_date?: DateTimeFilter<"TB_notifications"> | Date | string
   }
 
   export type TB_restrictionUpsertWithWhereUniqueWithoutTB_usersInput = {
@@ -20195,7 +17159,6 @@ export namespace Prisma {
     password: string
     phone_number: string
     birthday: Date | string
-    TB_notifications?: TB_notificationsCreateNestedManyWithoutTB_usersInput
     TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_usersInput
   }
 
@@ -20207,7 +17170,6 @@ export namespace Prisma {
     password: string
     phone_number: string
     birthday: Date | string
-    TB_notifications?: TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput
     TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
@@ -20236,7 +17198,6 @@ export namespace Prisma {
     bio: string
     specialization: string
     date_entry: Date | string
-    TB_session_capacity?: TB_session_capacityCreateNestedManyWithoutTB_employeesInput
   }
 
   export type TB_employeesUncheckedCreateWithoutTB_user_roleInput = {
@@ -20244,7 +17205,6 @@ export namespace Prisma {
     bio: string
     specialization: string
     date_entry: Date | string
-    TB_session_capacity?: TB_session_capacityUncheckedCreateNestedManyWithoutTB_employeesInput
   }
 
   export type TB_employeesCreateOrConnectWithoutTB_user_roleInput = {
@@ -20300,7 +17260,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_notifications?: TB_notificationsUpdateManyWithoutTB_usersNestedInput
     TB_restriction?: TB_restrictionUpdateManyWithoutTB_usersNestedInput
   }
 
@@ -20312,7 +17271,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_notifications?: TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput
     TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
@@ -20400,7 +17358,6 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_user_role?: TB_user_roleCreateNestedManyWithoutTB_usersInput
-    TB_notifications?: TB_notificationsCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersUncheckedCreateWithoutTB_restrictionInput = {
@@ -20412,7 +17369,6 @@ export namespace Prisma {
     phone_number: string
     birthday: Date | string
     TB_user_role?: TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput
-    TB_notifications?: TB_notificationsUncheckedCreateNestedManyWithoutTB_usersInput
   }
 
   export type TB_usersCreateOrConnectWithoutTB_restrictionInput = {
@@ -20439,7 +17395,6 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUpdateManyWithoutTB_usersNestedInput
-    TB_notifications?: TB_notificationsUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_usersUncheckedUpdateWithoutTB_restrictionInput = {
@@ -20451,7 +17406,6 @@ export namespace Prisma {
     phone_number?: StringFieldUpdateOperationsInput | string
     birthday?: DateTimeFieldUpdateOperationsInput | Date | string
     TB_user_role?: TB_user_roleUncheckedUpdateManyWithoutTB_usersNestedInput
-    TB_notifications?: TB_notificationsUncheckedUpdateManyWithoutTB_usersNestedInput
   }
 
   export type TB_user_roleCreateWithoutTB_employeesInput = {
@@ -20470,29 +17424,6 @@ export namespace Prisma {
   export type TB_user_roleCreateOrConnectWithoutTB_employeesInput = {
     where: TB_user_roleWhereUniqueInput
     create: XOR<TB_user_roleCreateWithoutTB_employeesInput, TB_user_roleUncheckedCreateWithoutTB_employeesInput>
-  }
-
-  export type TB_session_capacityCreateWithoutTB_employeesInput = {
-    capacity: number
-    TB_routines: TB_routinesCreateNestedOneWithoutTB_session_capacityInput
-    TB_reservations?: TB_reservationsCreateNestedManyWithoutTB_session_capacityInput
-  }
-
-  export type TB_session_capacityUncheckedCreateWithoutTB_employeesInput = {
-    id?: number
-    id_routine: number
-    capacity: number
-    TB_reservations?: TB_reservationsUncheckedCreateNestedManyWithoutTB_session_capacityInput
-  }
-
-  export type TB_session_capacityCreateOrConnectWithoutTB_employeesInput = {
-    where: TB_session_capacityWhereUniqueInput
-    create: XOR<TB_session_capacityCreateWithoutTB_employeesInput, TB_session_capacityUncheckedCreateWithoutTB_employeesInput>
-  }
-
-  export type TB_session_capacityCreateManyTB_employeesInputEnvelope = {
-    data: TB_session_capacityCreateManyTB_employeesInput | TB_session_capacityCreateManyTB_employeesInput[]
-    skipDuplicates?: boolean
   }
 
   export type TB_user_roleUpsertWithoutTB_employeesInput = {
@@ -20517,32 +17448,6 @@ export namespace Prisma {
     id_user?: IntFieldUpdateOperationsInput | number
     id_role?: IntFieldUpdateOperationsInput | number
     TB_client_membership?: TB_client_membershipUncheckedUpdateManyWithoutTB_user_roleNestedInput
-  }
-
-  export type TB_session_capacityUpsertWithWhereUniqueWithoutTB_employeesInput = {
-    where: TB_session_capacityWhereUniqueInput
-    update: XOR<TB_session_capacityUpdateWithoutTB_employeesInput, TB_session_capacityUncheckedUpdateWithoutTB_employeesInput>
-    create: XOR<TB_session_capacityCreateWithoutTB_employeesInput, TB_session_capacityUncheckedCreateWithoutTB_employeesInput>
-  }
-
-  export type TB_session_capacityUpdateWithWhereUniqueWithoutTB_employeesInput = {
-    where: TB_session_capacityWhereUniqueInput
-    data: XOR<TB_session_capacityUpdateWithoutTB_employeesInput, TB_session_capacityUncheckedUpdateWithoutTB_employeesInput>
-  }
-
-  export type TB_session_capacityUpdateManyWithWhereWithoutTB_employeesInput = {
-    where: TB_session_capacityScalarWhereInput
-    data: XOR<TB_session_capacityUpdateManyMutationInput, TB_session_capacityUncheckedUpdateManyWithoutTB_employeesInput>
-  }
-
-  export type TB_session_capacityScalarWhereInput = {
-    AND?: TB_session_capacityScalarWhereInput | TB_session_capacityScalarWhereInput[]
-    OR?: TB_session_capacityScalarWhereInput[]
-    NOT?: TB_session_capacityScalarWhereInput | TB_session_capacityScalarWhereInput[]
-    id?: IntFilter<"TB_session_capacity"> | number
-    id_routine?: IntFilter<"TB_session_capacity"> | number
-    id_instructor?: IntFilter<"TB_session_capacity"> | number
-    capacity?: IntFilter<"TB_session_capacity"> | number
   }
 
   export type TB_client_membershipCreateWithoutTB_membershipsInput = {
@@ -20627,12 +17532,12 @@ export namespace Prisma {
   export type TB_reservationsCreateWithoutTB_client_membershipInput = {
     start_time: Date | string
     status: $Enums.reservationStatus
-    TB_session_capacity: TB_session_capacityCreateNestedOneWithoutTB_reservationsInput
+    TB_routines: TB_routinesCreateNestedOneWithoutTB_reservationsInput
   }
 
   export type TB_reservationsUncheckedCreateWithoutTB_client_membershipInput = {
     id?: number
-    id_session_capacity: number
+    id_routine: number
     start_time: Date | string
     status: $Enums.reservationStatus
   }
@@ -20719,7 +17624,7 @@ export namespace Prisma {
     NOT?: TB_reservationsScalarWhereInput | TB_reservationsScalarWhereInput[]
     id?: IntFilter<"TB_reservations"> | number
     id_client_membership?: IntFilter<"TB_reservations"> | number
-    id_session_capacity?: IntFilter<"TB_reservations"> | number
+    id_routine?: IntFilter<"TB_reservations"> | number
     start_time?: DateTimeFilter<"TB_reservations"> | Date | string
     status?: EnumreservationStatusFilter<"TB_reservations"> | $Enums.reservationStatus
   }
@@ -20743,26 +17648,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TB_session_capacityCreateWithoutTB_routinesInput = {
-    capacity: number
-    TB_employees: TB_employeesCreateNestedOneWithoutTB_session_capacityInput
-    TB_reservations?: TB_reservationsCreateNestedManyWithoutTB_session_capacityInput
+  export type TB_reservationsCreateWithoutTB_routinesInput = {
+    start_time: Date | string
+    status: $Enums.reservationStatus
+    TB_client_membership: TB_client_membershipCreateNestedOneWithoutTB_reservationsInput
   }
 
-  export type TB_session_capacityUncheckedCreateWithoutTB_routinesInput = {
+  export type TB_reservationsUncheckedCreateWithoutTB_routinesInput = {
     id?: number
-    id_instructor: number
-    capacity: number
-    TB_reservations?: TB_reservationsUncheckedCreateNestedManyWithoutTB_session_capacityInput
+    id_client_membership: number
+    start_time: Date | string
+    status: $Enums.reservationStatus
   }
 
-  export type TB_session_capacityCreateOrConnectWithoutTB_routinesInput = {
-    where: TB_session_capacityWhereUniqueInput
-    create: XOR<TB_session_capacityCreateWithoutTB_routinesInput, TB_session_capacityUncheckedCreateWithoutTB_routinesInput>
+  export type TB_reservationsCreateOrConnectWithoutTB_routinesInput = {
+    where: TB_reservationsWhereUniqueInput
+    create: XOR<TB_reservationsCreateWithoutTB_routinesInput, TB_reservationsUncheckedCreateWithoutTB_routinesInput>
   }
 
-  export type TB_session_capacityCreateManyTB_routinesInputEnvelope = {
-    data: TB_session_capacityCreateManyTB_routinesInput | TB_session_capacityCreateManyTB_routinesInput[]
+  export type TB_reservationsCreateManyTB_routinesInputEnvelope = {
+    data: TB_reservationsCreateManyTB_routinesInput | TB_reservationsCreateManyTB_routinesInput[]
     skipDuplicates?: boolean
   }
 
@@ -20791,20 +17696,20 @@ export namespace Prisma {
     id_exercise?: IntFilter<"TB_routine_exercise"> | number
   }
 
-  export type TB_session_capacityUpsertWithWhereUniqueWithoutTB_routinesInput = {
-    where: TB_session_capacityWhereUniqueInput
-    update: XOR<TB_session_capacityUpdateWithoutTB_routinesInput, TB_session_capacityUncheckedUpdateWithoutTB_routinesInput>
-    create: XOR<TB_session_capacityCreateWithoutTB_routinesInput, TB_session_capacityUncheckedCreateWithoutTB_routinesInput>
+  export type TB_reservationsUpsertWithWhereUniqueWithoutTB_routinesInput = {
+    where: TB_reservationsWhereUniqueInput
+    update: XOR<TB_reservationsUpdateWithoutTB_routinesInput, TB_reservationsUncheckedUpdateWithoutTB_routinesInput>
+    create: XOR<TB_reservationsCreateWithoutTB_routinesInput, TB_reservationsUncheckedCreateWithoutTB_routinesInput>
   }
 
-  export type TB_session_capacityUpdateWithWhereUniqueWithoutTB_routinesInput = {
-    where: TB_session_capacityWhereUniqueInput
-    data: XOR<TB_session_capacityUpdateWithoutTB_routinesInput, TB_session_capacityUncheckedUpdateWithoutTB_routinesInput>
+  export type TB_reservationsUpdateWithWhereUniqueWithoutTB_routinesInput = {
+    where: TB_reservationsWhereUniqueInput
+    data: XOR<TB_reservationsUpdateWithoutTB_routinesInput, TB_reservationsUncheckedUpdateWithoutTB_routinesInput>
   }
 
-  export type TB_session_capacityUpdateManyWithWhereWithoutTB_routinesInput = {
-    where: TB_session_capacityScalarWhereInput
-    data: XOR<TB_session_capacityUpdateManyMutationInput, TB_session_capacityUncheckedUpdateManyWithoutTB_routinesInput>
+  export type TB_reservationsUpdateManyWithWhereWithoutTB_routinesInput = {
+    where: TB_reservationsScalarWhereInput
+    data: XOR<TB_reservationsUpdateManyMutationInput, TB_reservationsUncheckedUpdateManyWithoutTB_routinesInput>
   }
 
   export type TB_routine_exerciseCreateWithoutTB_exercisesInput = {
@@ -20846,7 +17751,8 @@ export namespace Prisma {
     name: string
     description: string
     estimatedDuration: number
-    TB_session_capacity?: TB_session_capacityCreateNestedManyWithoutTB_routinesInput
+    capacity?: number
+    TB_reservations?: TB_reservationsCreateNestedManyWithoutTB_routinesInput
   }
 
   export type TB_routinesUncheckedCreateWithoutTB_routine_exerciseInput = {
@@ -20854,7 +17760,8 @@ export namespace Prisma {
     name: string
     description: string
     estimatedDuration: number
-    TB_session_capacity?: TB_session_capacityUncheckedCreateNestedManyWithoutTB_routinesInput
+    capacity?: number
+    TB_reservations?: TB_reservationsUncheckedCreateNestedManyWithoutTB_routinesInput
   }
 
   export type TB_routinesCreateOrConnectWithoutTB_routine_exerciseInput = {
@@ -20895,7 +17802,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     estimatedDuration?: IntFieldUpdateOperationsInput | number
-    TB_session_capacity?: TB_session_capacityUpdateManyWithoutTB_routinesNestedInput
+    capacity?: IntFieldUpdateOperationsInput | number
+    TB_reservations?: TB_reservationsUpdateManyWithoutTB_routinesNestedInput
   }
 
   export type TB_routinesUncheckedUpdateWithoutTB_routine_exerciseInput = {
@@ -20903,7 +17811,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     estimatedDuration?: IntFieldUpdateOperationsInput | number
-    TB_session_capacity?: TB_session_capacityUncheckedUpdateManyWithoutTB_routinesNestedInput
+    capacity?: IntFieldUpdateOperationsInput | number
+    TB_reservations?: TB_reservationsUncheckedUpdateManyWithoutTB_routinesNestedInput
   }
 
   export type TB_exercisesUpsertWithoutTB_routine_exerciseInput = {
@@ -20930,137 +17839,6 @@ export namespace Prisma {
     muscle_group?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TB_routinesCreateWithoutTB_session_capacityInput = {
-    name: string
-    description: string
-    estimatedDuration: number
-    TB_routine_exercise?: TB_routine_exerciseCreateNestedManyWithoutTB_routinesInput
-  }
-
-  export type TB_routinesUncheckedCreateWithoutTB_session_capacityInput = {
-    id?: number
-    name: string
-    description: string
-    estimatedDuration: number
-    TB_routine_exercise?: TB_routine_exerciseUncheckedCreateNestedManyWithoutTB_routinesInput
-  }
-
-  export type TB_routinesCreateOrConnectWithoutTB_session_capacityInput = {
-    where: TB_routinesWhereUniqueInput
-    create: XOR<TB_routinesCreateWithoutTB_session_capacityInput, TB_routinesUncheckedCreateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_employeesCreateWithoutTB_session_capacityInput = {
-    bio: string
-    specialization: string
-    date_entry: Date | string
-    TB_user_role: TB_user_roleCreateNestedOneWithoutTB_employeesInput
-  }
-
-  export type TB_employeesUncheckedCreateWithoutTB_session_capacityInput = {
-    id?: number
-    id_user_role: number
-    bio: string
-    specialization: string
-    date_entry: Date | string
-  }
-
-  export type TB_employeesCreateOrConnectWithoutTB_session_capacityInput = {
-    where: TB_employeesWhereUniqueInput
-    create: XOR<TB_employeesCreateWithoutTB_session_capacityInput, TB_employeesUncheckedCreateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_reservationsCreateWithoutTB_session_capacityInput = {
-    start_time: Date | string
-    status: $Enums.reservationStatus
-    TB_client_membership: TB_client_membershipCreateNestedOneWithoutTB_reservationsInput
-  }
-
-  export type TB_reservationsUncheckedCreateWithoutTB_session_capacityInput = {
-    id?: number
-    id_client_membership: number
-    start_time: Date | string
-    status: $Enums.reservationStatus
-  }
-
-  export type TB_reservationsCreateOrConnectWithoutTB_session_capacityInput = {
-    where: TB_reservationsWhereUniqueInput
-    create: XOR<TB_reservationsCreateWithoutTB_session_capacityInput, TB_reservationsUncheckedCreateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_reservationsCreateManyTB_session_capacityInputEnvelope = {
-    data: TB_reservationsCreateManyTB_session_capacityInput | TB_reservationsCreateManyTB_session_capacityInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TB_routinesUpsertWithoutTB_session_capacityInput = {
-    update: XOR<TB_routinesUpdateWithoutTB_session_capacityInput, TB_routinesUncheckedUpdateWithoutTB_session_capacityInput>
-    create: XOR<TB_routinesCreateWithoutTB_session_capacityInput, TB_routinesUncheckedCreateWithoutTB_session_capacityInput>
-    where?: TB_routinesWhereInput
-  }
-
-  export type TB_routinesUpdateToOneWithWhereWithoutTB_session_capacityInput = {
-    where?: TB_routinesWhereInput
-    data: XOR<TB_routinesUpdateWithoutTB_session_capacityInput, TB_routinesUncheckedUpdateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_routinesUpdateWithoutTB_session_capacityInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    estimatedDuration?: IntFieldUpdateOperationsInput | number
-    TB_routine_exercise?: TB_routine_exerciseUpdateManyWithoutTB_routinesNestedInput
-  }
-
-  export type TB_routinesUncheckedUpdateWithoutTB_session_capacityInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    estimatedDuration?: IntFieldUpdateOperationsInput | number
-    TB_routine_exercise?: TB_routine_exerciseUncheckedUpdateManyWithoutTB_routinesNestedInput
-  }
-
-  export type TB_employeesUpsertWithoutTB_session_capacityInput = {
-    update: XOR<TB_employeesUpdateWithoutTB_session_capacityInput, TB_employeesUncheckedUpdateWithoutTB_session_capacityInput>
-    create: XOR<TB_employeesCreateWithoutTB_session_capacityInput, TB_employeesUncheckedCreateWithoutTB_session_capacityInput>
-    where?: TB_employeesWhereInput
-  }
-
-  export type TB_employeesUpdateToOneWithWhereWithoutTB_session_capacityInput = {
-    where?: TB_employeesWhereInput
-    data: XOR<TB_employeesUpdateWithoutTB_session_capacityInput, TB_employeesUncheckedUpdateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_employeesUpdateWithoutTB_session_capacityInput = {
-    bio?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    date_entry?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_user_role?: TB_user_roleUpdateOneRequiredWithoutTB_employeesNestedInput
-  }
-
-  export type TB_employeesUncheckedUpdateWithoutTB_session_capacityInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_user_role?: IntFieldUpdateOperationsInput | number
-    bio?: StringFieldUpdateOperationsInput | string
-    specialization?: StringFieldUpdateOperationsInput | string
-    date_entry?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TB_reservationsUpsertWithWhereUniqueWithoutTB_session_capacityInput = {
-    where: TB_reservationsWhereUniqueInput
-    update: XOR<TB_reservationsUpdateWithoutTB_session_capacityInput, TB_reservationsUncheckedUpdateWithoutTB_session_capacityInput>
-    create: XOR<TB_reservationsCreateWithoutTB_session_capacityInput, TB_reservationsUncheckedCreateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_reservationsUpdateWithWhereUniqueWithoutTB_session_capacityInput = {
-    where: TB_reservationsWhereUniqueInput
-    data: XOR<TB_reservationsUpdateWithoutTB_session_capacityInput, TB_reservationsUncheckedUpdateWithoutTB_session_capacityInput>
-  }
-
-  export type TB_reservationsUpdateManyWithWhereWithoutTB_session_capacityInput = {
-    where: TB_reservationsScalarWhereInput
-    data: XOR<TB_reservationsUpdateManyMutationInput, TB_reservationsUncheckedUpdateManyWithoutTB_session_capacityInput>
-  }
-
   export type TB_client_membershipCreateWithoutTB_reservationsInput = {
     start_date: Date | string
     end_date: Date | string
@@ -21081,22 +17859,26 @@ export namespace Prisma {
     create: XOR<TB_client_membershipCreateWithoutTB_reservationsInput, TB_client_membershipUncheckedCreateWithoutTB_reservationsInput>
   }
 
-  export type TB_session_capacityCreateWithoutTB_reservationsInput = {
-    capacity: number
-    TB_routines: TB_routinesCreateNestedOneWithoutTB_session_capacityInput
-    TB_employees: TB_employeesCreateNestedOneWithoutTB_session_capacityInput
+  export type TB_routinesCreateWithoutTB_reservationsInput = {
+    name: string
+    description: string
+    estimatedDuration: number
+    capacity?: number
+    TB_routine_exercise?: TB_routine_exerciseCreateNestedManyWithoutTB_routinesInput
   }
 
-  export type TB_session_capacityUncheckedCreateWithoutTB_reservationsInput = {
+  export type TB_routinesUncheckedCreateWithoutTB_reservationsInput = {
     id?: number
-    id_routine: number
-    id_instructor: number
-    capacity: number
+    name: string
+    description: string
+    estimatedDuration: number
+    capacity?: number
+    TB_routine_exercise?: TB_routine_exerciseUncheckedCreateNestedManyWithoutTB_routinesInput
   }
 
-  export type TB_session_capacityCreateOrConnectWithoutTB_reservationsInput = {
-    where: TB_session_capacityWhereUniqueInput
-    create: XOR<TB_session_capacityCreateWithoutTB_reservationsInput, TB_session_capacityUncheckedCreateWithoutTB_reservationsInput>
+  export type TB_routinesCreateOrConnectWithoutTB_reservationsInput = {
+    where: TB_routinesWhereUniqueInput
+    create: XOR<TB_routinesCreateWithoutTB_reservationsInput, TB_routinesUncheckedCreateWithoutTB_reservationsInput>
   }
 
   export type TB_client_membershipUpsertWithoutTB_reservationsInput = {
@@ -21125,101 +17907,37 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TB_session_capacityUpsertWithoutTB_reservationsInput = {
-    update: XOR<TB_session_capacityUpdateWithoutTB_reservationsInput, TB_session_capacityUncheckedUpdateWithoutTB_reservationsInput>
-    create: XOR<TB_session_capacityCreateWithoutTB_reservationsInput, TB_session_capacityUncheckedCreateWithoutTB_reservationsInput>
-    where?: TB_session_capacityWhereInput
+  export type TB_routinesUpsertWithoutTB_reservationsInput = {
+    update: XOR<TB_routinesUpdateWithoutTB_reservationsInput, TB_routinesUncheckedUpdateWithoutTB_reservationsInput>
+    create: XOR<TB_routinesCreateWithoutTB_reservationsInput, TB_routinesUncheckedCreateWithoutTB_reservationsInput>
+    where?: TB_routinesWhereInput
   }
 
-  export type TB_session_capacityUpdateToOneWithWhereWithoutTB_reservationsInput = {
-    where?: TB_session_capacityWhereInput
-    data: XOR<TB_session_capacityUpdateWithoutTB_reservationsInput, TB_session_capacityUncheckedUpdateWithoutTB_reservationsInput>
+  export type TB_routinesUpdateToOneWithWhereWithoutTB_reservationsInput = {
+    where?: TB_routinesWhereInput
+    data: XOR<TB_routinesUpdateWithoutTB_reservationsInput, TB_routinesUncheckedUpdateWithoutTB_reservationsInput>
   }
 
-  export type TB_session_capacityUpdateWithoutTB_reservationsInput = {
+  export type TB_routinesUpdateWithoutTB_reservationsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    estimatedDuration?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    TB_routines?: TB_routinesUpdateOneRequiredWithoutTB_session_capacityNestedInput
-    TB_employees?: TB_employeesUpdateOneRequiredWithoutTB_session_capacityNestedInput
+    TB_routine_exercise?: TB_routine_exerciseUpdateManyWithoutTB_routinesNestedInput
   }
 
-  export type TB_session_capacityUncheckedUpdateWithoutTB_reservationsInput = {
+  export type TB_routinesUncheckedUpdateWithoutTB_reservationsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_routine?: IntFieldUpdateOperationsInput | number
-    id_instructor?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    estimatedDuration?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TB_usersCreateWithoutTB_notificationsInput = {
-    name: string
-    lastname: string
-    email: string
-    password: string
-    phone_number: string
-    birthday: Date | string
-    TB_user_role?: TB_user_roleCreateNestedManyWithoutTB_usersInput
-    TB_restriction?: TB_restrictionCreateNestedManyWithoutTB_usersInput
-  }
-
-  export type TB_usersUncheckedCreateWithoutTB_notificationsInput = {
-    id_user?: number
-    name: string
-    lastname: string
-    email: string
-    password: string
-    phone_number: string
-    birthday: Date | string
-    TB_user_role?: TB_user_roleUncheckedCreateNestedManyWithoutTB_usersInput
-    TB_restriction?: TB_restrictionUncheckedCreateNestedManyWithoutTB_usersInput
-  }
-
-  export type TB_usersCreateOrConnectWithoutTB_notificationsInput = {
-    where: TB_usersWhereUniqueInput
-    create: XOR<TB_usersCreateWithoutTB_notificationsInput, TB_usersUncheckedCreateWithoutTB_notificationsInput>
-  }
-
-  export type TB_usersUpsertWithoutTB_notificationsInput = {
-    update: XOR<TB_usersUpdateWithoutTB_notificationsInput, TB_usersUncheckedUpdateWithoutTB_notificationsInput>
-    create: XOR<TB_usersCreateWithoutTB_notificationsInput, TB_usersUncheckedCreateWithoutTB_notificationsInput>
-    where?: TB_usersWhereInput
-  }
-
-  export type TB_usersUpdateToOneWithWhereWithoutTB_notificationsInput = {
-    where?: TB_usersWhereInput
-    data: XOR<TB_usersUpdateWithoutTB_notificationsInput, TB_usersUncheckedUpdateWithoutTB_notificationsInput>
-  }
-
-  export type TB_usersUpdateWithoutTB_notificationsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone_number?: StringFieldUpdateOperationsInput | string
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_user_role?: TB_user_roleUpdateManyWithoutTB_usersNestedInput
-    TB_restriction?: TB_restrictionUpdateManyWithoutTB_usersNestedInput
-  }
-
-  export type TB_usersUncheckedUpdateWithoutTB_notificationsInput = {
-    id_user?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    phone_number?: StringFieldUpdateOperationsInput | string
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_user_role?: TB_user_roleUncheckedUpdateManyWithoutTB_usersNestedInput
-    TB_restriction?: TB_restrictionUncheckedUpdateManyWithoutTB_usersNestedInput
+    TB_routine_exercise?: TB_routine_exerciseUncheckedUpdateManyWithoutTB_routinesNestedInput
   }
 
   export type TB_user_roleCreateManyTB_usersInput = {
     id_user_role?: number
     id_role: number
-  }
-
-  export type TB_notificationsCreateManyTB_usersInput = {
-    id?: number
-    message: string
-    sent_date: Date | string
   }
 
   export type TB_restrictionCreateManyTB_usersInput = {
@@ -21243,23 +17961,6 @@ export namespace Prisma {
   export type TB_user_roleUncheckedUpdateManyWithoutTB_usersInput = {
     id_user_role?: IntFieldUpdateOperationsInput | number
     id_role?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TB_notificationsUpdateWithoutTB_usersInput = {
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TB_notificationsUncheckedUpdateWithoutTB_usersInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TB_notificationsUncheckedUpdateManyWithoutTB_usersInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    sent_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TB_restrictionUpdateWithoutTB_usersInput = {
@@ -21317,7 +18018,6 @@ export namespace Prisma {
     bio?: StringFieldUpdateOperationsInput | string
     specialization?: StringFieldUpdateOperationsInput | string
     date_entry?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_session_capacity?: TB_session_capacityUpdateManyWithoutTB_employeesNestedInput
   }
 
   export type TB_employeesUncheckedUpdateWithoutTB_user_roleInput = {
@@ -21325,7 +18025,6 @@ export namespace Prisma {
     bio?: StringFieldUpdateOperationsInput | string
     specialization?: StringFieldUpdateOperationsInput | string
     date_entry?: DateTimeFieldUpdateOperationsInput | Date | string
-    TB_session_capacity?: TB_session_capacityUncheckedUpdateManyWithoutTB_employeesNestedInput
   }
 
   export type TB_employeesUncheckedUpdateManyWithoutTB_user_roleInput = {
@@ -21355,31 +18054,6 @@ export namespace Prisma {
     id_membership?: IntFieldUpdateOperationsInput | number
     start_date?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TB_session_capacityCreateManyTB_employeesInput = {
-    id?: number
-    id_routine: number
-    capacity: number
-  }
-
-  export type TB_session_capacityUpdateWithoutTB_employeesInput = {
-    capacity?: IntFieldUpdateOperationsInput | number
-    TB_routines?: TB_routinesUpdateOneRequiredWithoutTB_session_capacityNestedInput
-    TB_reservations?: TB_reservationsUpdateManyWithoutTB_session_capacityNestedInput
-  }
-
-  export type TB_session_capacityUncheckedUpdateWithoutTB_employeesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_routine?: IntFieldUpdateOperationsInput | number
-    capacity?: IntFieldUpdateOperationsInput | number
-    TB_reservations?: TB_reservationsUncheckedUpdateManyWithoutTB_session_capacityNestedInput
-  }
-
-  export type TB_session_capacityUncheckedUpdateManyWithoutTB_employeesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_routine?: IntFieldUpdateOperationsInput | number
-    capacity?: IntFieldUpdateOperationsInput | number
   }
 
   export type TB_client_membershipCreateManyTB_membershipsInput = {
@@ -21413,7 +18087,7 @@ export namespace Prisma {
 
   export type TB_reservationsCreateManyTB_client_membershipInput = {
     id?: number
-    id_session_capacity: number
+    id_routine: number
     start_time: Date | string
     status: $Enums.reservationStatus
   }
@@ -21421,19 +18095,19 @@ export namespace Prisma {
   export type TB_reservationsUpdateWithoutTB_client_membershipInput = {
     start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
-    TB_session_capacity?: TB_session_capacityUpdateOneRequiredWithoutTB_reservationsNestedInput
+    TB_routines?: TB_routinesUpdateOneRequiredWithoutTB_reservationsNestedInput
   }
 
   export type TB_reservationsUncheckedUpdateWithoutTB_client_membershipInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_session_capacity?: IntFieldUpdateOperationsInput | number
+    id_routine?: IntFieldUpdateOperationsInput | number
     start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
   }
 
   export type TB_reservationsUncheckedUpdateManyWithoutTB_client_membershipInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_session_capacity?: IntFieldUpdateOperationsInput | number
+    id_routine?: IntFieldUpdateOperationsInput | number
     start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
   }
@@ -21443,10 +18117,11 @@ export namespace Prisma {
     id_exercise: number
   }
 
-  export type TB_session_capacityCreateManyTB_routinesInput = {
+  export type TB_reservationsCreateManyTB_routinesInput = {
     id?: number
-    id_instructor: number
-    capacity: number
+    id_client_membership: number
+    start_time: Date | string
+    status: $Enums.reservationStatus
   }
 
   export type TB_routine_exerciseUpdateWithoutTB_routinesInput = {
@@ -21463,23 +18138,24 @@ export namespace Prisma {
     id_exercise?: IntFieldUpdateOperationsInput | number
   }
 
-  export type TB_session_capacityUpdateWithoutTB_routinesInput = {
-    capacity?: IntFieldUpdateOperationsInput | number
-    TB_employees?: TB_employeesUpdateOneRequiredWithoutTB_session_capacityNestedInput
-    TB_reservations?: TB_reservationsUpdateManyWithoutTB_session_capacityNestedInput
+  export type TB_reservationsUpdateWithoutTB_routinesInput = {
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
+    TB_client_membership?: TB_client_membershipUpdateOneRequiredWithoutTB_reservationsNestedInput
   }
 
-  export type TB_session_capacityUncheckedUpdateWithoutTB_routinesInput = {
+  export type TB_reservationsUncheckedUpdateWithoutTB_routinesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_instructor?: IntFieldUpdateOperationsInput | number
-    capacity?: IntFieldUpdateOperationsInput | number
-    TB_reservations?: TB_reservationsUncheckedUpdateManyWithoutTB_session_capacityNestedInput
+    id_client_membership?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
   }
 
-  export type TB_session_capacityUncheckedUpdateManyWithoutTB_routinesInput = {
+  export type TB_reservationsUncheckedUpdateManyWithoutTB_routinesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_instructor?: IntFieldUpdateOperationsInput | number
-    capacity?: IntFieldUpdateOperationsInput | number
+    id_client_membership?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
   }
 
   export type TB_routine_exerciseCreateManyTB_exercisesInput = {
@@ -21499,33 +18175,6 @@ export namespace Prisma {
   export type TB_routine_exerciseUncheckedUpdateManyWithoutTB_exercisesInput = {
     id?: IntFieldUpdateOperationsInput | number
     id_routine?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TB_reservationsCreateManyTB_session_capacityInput = {
-    id?: number
-    id_client_membership: number
-    start_time: Date | string
-    status: $Enums.reservationStatus
-  }
-
-  export type TB_reservationsUpdateWithoutTB_session_capacityInput = {
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
-    TB_client_membership?: TB_client_membershipUpdateOneRequiredWithoutTB_reservationsNestedInput
-  }
-
-  export type TB_reservationsUncheckedUpdateWithoutTB_session_capacityInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_client_membership?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
-  }
-
-  export type TB_reservationsUncheckedUpdateManyWithoutTB_session_capacityInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    id_client_membership?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumreservationStatusFieldUpdateOperationsInput | $Enums.reservationStatus
   }
 
 
