@@ -16,6 +16,7 @@ import { MembershipClient } from '../../../../shared/interfaces/membership.inter
 import { User } from '../../../../shared/interfaces/user.interface';
 import { Mode } from '../../../../core/interfaces/mode.enum';
 import { DialogUpdateReservationComponent } from '../../../../shared/components/dialog-update-reservation/dialog-update-reservation.component';
+import { Reservation } from '../../../../shared/interfaces/reservation.interface';
 
 @Component({
   selector: 'app-home-receptionist',
@@ -69,6 +70,7 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
 
     this.subscription$.add(
       dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
         if (result) {
           this.handleAttendanceUpdate(result);
         }
@@ -76,8 +78,48 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
     );
   }
 
-  handleAttendanceUpdate(result: Partial<MembershipClient>) {
-    console.log('result', result);
+  handleAttendanceUpdate(result: Partial<Reservation>) {
+    if (!result) {
+      this.snackBar.open('No se seleccionó ninguna reserva.', 'Cerrar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar'],
+      });
+      return;
+    }
+
+    if (!result.id) {
+      this.snackBar.open('No se encontró el ID de la reserva.', 'Cerrar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar'],
+      });
+      return;
+    }
+
+    const { id, end_time, ...reservationData } = result;
+
+    this.clientService.updateReservation(id, reservationData).subscribe({
+      next: () => {
+        this.snackBar.open('Reserva actualizada con éxito.', 'Cerrar', {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
+      },
+      error: (err) => {
+        console.error('Error updating reservation', err);
+        this.snackBar.open(
+          'Error al actualizar la reserva. Inténtalo de nuevo.',
+          'Cerrar',
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar'],
+          }
+        );
+      },
+    });
   }
 
   openUser() {

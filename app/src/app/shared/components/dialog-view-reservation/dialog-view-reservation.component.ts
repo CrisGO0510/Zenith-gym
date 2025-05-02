@@ -115,7 +115,6 @@ export class DialogViewReservationComponent implements OnInit {
     }
 
     const formData = this.reservationForm.value;
-    console.log(formData);
     this.dialogRef.close(formData);
   }
 

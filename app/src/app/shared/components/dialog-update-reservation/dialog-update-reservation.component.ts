@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { Subscription } from 'rxjs';
 import { Reservation } from '../../interfaces/reservation.interface';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DialogViewReservationComponent } from '../dialog-view-reservation/dialog-view-reservation.component';
 import { Mode } from '../../../core/interfaces/mode.enum';
 import {
@@ -45,7 +45,7 @@ export class DialogUpdateReservationComponent implements OnInit, OnDestroy {
   private snackBar = inject(MatSnackBar);
   private clientService = inject(ClientService);
 
-  constructor() {}
+  constructor(public dialogRef: MatDialogRef<DialogViewReservationComponent>) {}
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
@@ -78,63 +78,19 @@ export class DialogUpdateReservationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const dialogRef = this.dialog.open(DialogViewReservationComponent, {
+    const dialogViewRef = this.dialog.open(DialogViewReservationComponent, {
       width: '80%',
       data: { data: reservation, mode: Mode.update },
     });
 
     this.subscription$.add(
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogViewRef.afterClosed().subscribe((result) => {
         if (result) {
-          this.handleAttendanceUpdate(result);
+          console.log(result);
+          this.dialogRef.close(result);
         }
       })
     );
-  }
-
-  handleAttendanceUpdate(result: Partial<Reservation>) {
-    if (!result) {
-      this.snackBar.open('No se seleccionó ninguna reserva.', 'Cerrar', {
-        duration: 3000,
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar'],
-      });
-      return;
-    }
-
-    if (!result.id) {
-      this.snackBar.open('No se encontró el ID de la reserva.', 'Cerrar', {
-        duration: 3000,
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar'],
-      });
-      return;
-    }
-
-    const { id, end_time, ...reservationData } = result;
-
-    this.clientService.updateReservation(id, reservationData).subscribe({
-      next: () => {
-        this.snackBar.open('Reserva actualizada con éxito.', 'Cerrar', {
-          duration: 3000,
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
-        this.searchUser();
-      },
-      error: (err) => {
-        console.error('Error updating reservation', err);
-        this.snackBar.open(
-          'Error al actualizar la reserva. Inténtalo de nuevo.',
-          'Cerrar',
-          {
-            duration: 3000,
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar'],
-          }
-        );
-      },
-    });
   }
 
   ngOnDestroy(): void {
