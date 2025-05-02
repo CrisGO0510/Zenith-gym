@@ -37,6 +37,11 @@ export class ClientService extends CrudService {
     return this.get<Reservation[]>(`pending?id_user=${id_user}`);
   }
 
+  getAllReservations(id_user: number): Observable<Reservation[]> {
+    this.endpoint = 'reservations';
+    return this.get<Reservation[]>(`?id_user=${id_user}`);
+  }
+
   createReservation(body: ReservationCreate): Observable<unknown> {
     this.endpoint = 'reservations';
     return this.post<unknown>(body);

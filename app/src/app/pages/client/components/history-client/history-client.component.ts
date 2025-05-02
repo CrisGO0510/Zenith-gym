@@ -5,12 +5,15 @@ import {
   OnInit,
   signal,
   WritableSignal,
+  inject,
 } from '@angular/core';
+import { ClientService } from '../../../../shared/services/client.service';
+import { StorageService } from '../../../../core/services/storage/storage.service';
+import { StorageKey } from '../../../../core/services/storage/storage.model';
 import { Reservation } from '../../../../shared/interfaces/reservation.interface';
+import { ReservationStatus } from '../../../../shared/interfaces/reservation-status.enum';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { Subscription } from 'rxjs';
-import { HistoryClientService } from './history-client.service';
-import { ReservationStatus } from '../../../../shared/interfaces/reservation-status.enum';
 
 export interface ChartDataPoint {
   name: Date;
@@ -28,23 +31,27 @@ export interface AttendanceData {
   standalone: false,
 })
 export class HistoryClientComponent implements OnInit, OnDestroy {
+  private clientService = inject(ClientService);
+  private storage = inject(StorageService);
+
+  private subscription$ = new Subscription();
+
   reservations: WritableSignal<Reservation[]> = signal([]);
   isLoading: WritableSignal<boolean> = signal(false);
   error: WritableSignal<string | null> = signal(null);
 
+  // Gráfico
   chartData: { name: string; series: ChartDataPoint[] }[] = [];
   view: [number, number] = [900, 358];
-  legend: boolean = false;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Fecha';
-  yAxisLabel: string = 'Estado de Reserva';
-  timeline: boolean = true;
-  autoScale: boolean = true;
+  legend = false;
+  xAxis = true;
+  yAxis = true;
+  showXAxisLabel = true;
+  showYAxisLabel = true;
+  xAxisLabel = 'Fecha';
+  yAxisLabel = 'Estado';
+  timeline = true;
+  autoScale = true;
   colorScheme: Color = {
     name: 'statusColors',
     selectable: true,
@@ -52,101 +59,121 @@ export class HistoryClientComponent implements OnInit, OnDestroy {
     domain: ['#9E9E9E', '#4CAF50', '#F44336', '#FFC107'],
   };
 
+  // Tabla
   tableData: AttendanceData[] = [];
-  displayedColumns: string[] = ['date', 'status'];
+  displayedColumns = ['date', 'status'];
 
-  private historySubscription: Subscription = new Subscription();
-
-  constructor(private historyClientService: HistoryClientService) {}
+  // Mapeo de estados a índice (coincide con el dominio de colors)
+  private statusOrder: ReservationStatus[] = [
+    ReservationStatus.ABSENT,
+    ReservationStatus.COMPLETED,
+    ReservationStatus.CANCELLED,
+    ReservationStatus.PENDING,
+  ];
 
   ngOnInit(): void {
     this.loadHistory();
   }
 
-  ngOnDestroy(): void {
-    this.historySubscription?.unsubscribe();
-  }
-
-  loadHistory(): void {
+  private loadHistory(): void {
     this.isLoading.set(true);
     this.error.set(null);
     this.reservations.set([]);
-    this.chartData = [];
-    this.tableData = [];
 
-    const clientId = 123;
+    // Obtener id_user de la sesión (ajusta según tu implementación de StorageService)
+    const session = this.storage.read(StorageKey.CURRENT_ROLE) as any;
+    const id_user = session?.id_user;
+    if (!id_user) {
+      this.error.set('Usuario no autenticado');
+      this.isLoading.set(false);
+      return;
+    }
 
-    this.historySubscription.add(
-      this.historyClientService.getReservationHistory(clientId).subscribe({
-        next: (reservations) => {
-          this.reservations.set(reservations);
+    this.subscription$.add(
+      this.clientService.getAllReservations(id_user).subscribe({
+        next: (res) => {
+          this.reservations.set(res);
+          console.log(this.reservations());
           this.processChartData();
           this.processTableData();
-        },
-        error: (err) => {
-          console.error('Error al cargar historial:', err);
-          this.error.set('Error al cargar historial');
-        },
-        complete: () => {
           this.isLoading.set(false);
         },
-      }),
+        error: (err) => {
+          console.error(err);
+          this.error.set('Error al cargar el historial');
+          this.isLoading.set(false);
+        },
+      })
     );
   }
 
   processChartData(): void {
     const currentReservations = this.reservations();
+  
     if (!currentReservations || currentReservations.length === 0) {
       this.chartData = [];
       return;
     }
-
-    const sortedReservations = [...currentReservations].sort(
-      (a, b) => a.start_time.getTime() - b.end_time.getTime(),
-    );
-    const seriesData: ChartDataPoint[] = sortedReservations.map((res) => ({
-      name: new Date(res.start_time),
-      value: 0, //TODO CORREGIR LUEGO
+  
+    // Agrupar por fecha (sin hora)
+    const grouped = new Map<string, number>();
+  
+    currentReservations.forEach((res) => {
+      const dateStr = new Date(res.start_time).toISOString().split('T')[0]; // YYYY-MM-DD
+      const index = this.statusOrder.indexOf(res.status as ReservationStatus);
+      const current = grouped.get(dateStr) ?? 0;
+      grouped.set(dateStr, current + (index >= 0 ? index : 0));
+    });
+  
+    // Convertir a formato de ngx-charts
+    const series = Array.from(grouped.entries()).map(([dateStr, value]) => ({
+      name: new Date(dateStr),
+      value,
     }));
-    this.chartData = [{ name: 'Historial', series: seriesData }];
+  
+    this.chartData = [
+      {
+        name: 'Historial de asistencia',
+        series,
+      },
+    ];
   }
-
-  processTableData(): void {
-    const currentReservations = this.reservations();
-    if (!currentReservations || currentReservations.length === 0) {
+  
+  private processTableData(): void {
+    const data = this.reservations();
+    if (data.length === 0) {
       this.tableData = [];
       return;
     }
-    const sortedReservations = [...currentReservations].sort(
-      (a, b) => b.start_time.getTime() - a.start_time.getTime(),
+
+    // Ordenar descendente
+    const sorted = [...data].sort(
+      (a, b) =>
+        new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
     );
-    this.tableData = sortedReservations.map((res) => ({
-      date: new Date(res.start_time),
-      status: res.status
+
+    this.tableData = sorted.map((r) => ({
+      date: new Date(r.start_time),
+      status: r.status,
     }));
   }
 
-  yAxisTickFormatting(val: number): string {
-    return ReservationStatus.ABSENT; //TODO CORREGIR LUEGO
-  }
-  xAxisTickFormatting(val: Date | string): string {
-    try {
-      const dateVal = typeof val === 'string' ? new Date(val) : val;
-      const day = dateVal.getDate().toString().padStart(2, '0');
-      const month = (dateVal.getMonth() + 1).toString().padStart(2, '0');
-      return `${day}/${month}`;
-    } catch (e) {
-      return '';
-    }
-  }
+  yAxisTickFormatting = (val: number): string => {
+    return this.statusOrder[val] ?? '';
+  };
 
-  onSelect(data: any): void {
-    /* ... */
-  }
-  onActivate(data: any): void {
-    /* ... */
-  }
-  onDeactivate(data: any): void {
-    /* ... */
+  public xAxisTickFormatting = (val: Date | string): string => {
+    const date = typeof val === 'string' ? new Date(val) : val;
+    const d = date.getDate().toString().padStart(2, '0');
+    const m = (date.getMonth() + 1).toString().padStart(2, '0');
+    return `${d}/${m}`;
+  };
+
+  onSelect(event: any): void {}
+  onActivate(event: any): void {}
+  onDeactivate(event: any): void {}
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }
