@@ -3,6 +3,7 @@ import { CrudService } from '../../core/services/http/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { MembershipClient } from '../interfaces/membership.interface';
 import { Observable } from 'rxjs';
+import { Routine } from '../interfaces/routine.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +15,9 @@ export class ClientService extends CrudService {
     super(http);
   }
 
-  getRoutines() {
+  getRoutines(): Observable<Routine[]> {
     this.endpoint = 'routines';
-    return this.get<any>('');
-  }
-
-  getExerciseById(exerciseId: number) {
-    this.endpoint = 'exercises';
-    return this.get(`${exerciseId}`);
+    return this.get<Routine[]>('');
   }
 
   createMembershipClient(body: MembershipClient): Observable<MembershipClient> {

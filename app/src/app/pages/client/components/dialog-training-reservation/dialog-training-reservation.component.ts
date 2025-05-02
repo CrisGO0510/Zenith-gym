@@ -5,16 +5,16 @@ import {
   ChangeDetectionStrategy,
   signal,
   WritableSignal,
+  inject,
+  computed,
 } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { finalize } from 'rxjs/operators';
 import {
-  Exercise,
   Routine,
+  Exercise,
 } from '../../../../shared/interfaces/routine.interface';
-import { RoutineService } from './dialog-training-reservation.services';
 import { ClientService } from '../../../../shared/services/client.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface SelectRoutineDialogData {
   selectedDate: Date;
@@ -31,18 +31,18 @@ export interface SelectRoutineDialogResult {
   templateUrl: './dialog-training-reservation.component.html',
   styleUrl: './dialog-training-reservation.component.scss',
 })
+
 export class DialogTrainingReservationComponent implements OnInit {
   selectedRoutine: WritableSignal<Routine | null> = signal(null);
-  isLoading: WritableSignal<boolean> = signal(true);
-  error: WritableSignal<string | null> = signal(null);
+  routines: Routine[] = [];
   selectedDate: Date;
-  routines: any[] = [];
+
+  private clientService = inject(ClientService);
+  private snackbar = inject(MatSnackBar);
 
   constructor(
-    public dialogRef: MatDialogRef<DialogTrainingReservationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SelectRoutineDialogData,
-    private routineService: RoutineService,
-    private clientService: ClientService
+    private dialogRef: MatDialogRef<DialogTrainingReservationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: SelectRoutineDialogData
   ) {
     this.selectedDate = data.selectedDate;
   }
@@ -51,37 +51,51 @@ export class DialogTrainingReservationComponent implements OnInit {
     this.loadRoutines();
   }
 
-  loadRoutines(): void {
+  private loadRoutines(): void {
     this.clientService.getRoutines().subscribe({
       next: (response) => {
         this.routines = response;
-        console.log('Routines:', this.routines);
       },
-      error: (error) => {
-        this.error.set('Error loading routines');
-        this.isLoading.set(false);
+      error: (err) => {
+        console.error(err);
+        this.snackbar.open(
+          'Error al cargar las rutinas. Por favor, inténtelo de nuevo más tarde.',
+          'Cerrar',
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar'],
+          }
+        );
       },
-    })
+    });
   }
 
   selectRoutine(routine: Routine): void {
     this.selectedRoutine.set(routine);
-
-    console.log(this.selectedRoutine());
   }
 
   confirmSelection(): void {
-    const routineToConfirm = this.selectedRoutine();
-    if (routineToConfirm) {
-      const result: SelectRoutineDialogResult = {
-        selectedRoutineId: routineToConfirm.id,
-        selectedDate: this.selectedDate,
-      };
-
-      this.dialogRef.close(result);
-    } else {
-      this.error.set('Please select a routine before confirming.');
+    const routine = this.selectedRoutine();
+    if (!routine) {
+      this.snackbar.open(
+        'Por favor, seleccione una rutina antes de continuar.',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        }
+      );
+      return;
     }
+
+    const result: SelectRoutineDialogResult = {
+      selectedRoutineId: routine.id,
+      selectedDate: this.selectedDate,
+    };
+
+    this.dialogRef.close(result);
   }
 
   closeDialog(): void {

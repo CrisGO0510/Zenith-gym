@@ -13,6 +13,7 @@
 <div mat-dialog-content class="dialog-content">
   @if (true) {
     <div class="content-layout">
+      <!-- Rutinas disponibles -->
       <div class="routines-list-container">
         <h3>Rutinas disponibles</h3>
         @if (routines.length > 0) {
@@ -31,6 +32,7 @@
         }
       </div>
 
+      <!-- Detalles de rutina -->
       <div class="routine-details-container">
         <h3>Descripción de la rutina</h3>
         <div class="details-box">
@@ -41,15 +43,15 @@
               <h4>Ejercicios:</h4>
               <ul class="exercise-list">
                 @for (
-                  exercise of selectedRoutine()?.exercises;
+                  item of selectedRoutine()?.TB_routine_exercise;
                   track trackExerciseById
                 ) {
                   <li>
                     <div class="exercise-name">
-                      <span>+ {{ exercise.name }}</span>
+                      <span>+ {{ item.TB_exercises.name }}</span>
                     </div>
                     <div class="exercise-description">
-                      <span>- {{ exercise.description }}</span>
+                      <span>- {{ item.TB_exercises.description }}</span>
                     </div>
                   </li>
                 } @empty {
@@ -82,4 +84,3 @@
 <div mat-dialog-actions align="end">
   <button mat-button (click)="closeDialog()">Cancelar</button>
 </div>
--->
