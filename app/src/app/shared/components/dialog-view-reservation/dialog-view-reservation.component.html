@@ -17,7 +17,7 @@
           matInput
           formControlName="clientId"
           (keyup.enter)="searchUser()"
-          [readonly]="data.mode !== 2"
+          [readonly]="data.mode != 2"
         />
         <button
           mat-icon-button
@@ -25,7 +25,7 @@
           type="button"
           aria-label="Buscar documento"
           (click)="searchUser()"
-          [disabled]="data.mode !== 2"
+          [disabled]="data.mode != 2"
         >
           <mat-icon>search</mat-icon>
         </button>

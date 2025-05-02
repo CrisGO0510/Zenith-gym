@@ -14,6 +14,7 @@ import { CurrentTokenRole } from '../../../../core/interfaces/current-token-role
 import { ClientService } from '../../../../shared/services/client.service';
 import { MembershipClient } from '../../../../shared/interfaces/membership.interface';
 import { User } from '../../../../shared/interfaces/user.interface';
+import { Mode } from '../../../../core/interfaces/mode.enum';
 
 @Component({
   selector: 'app-home-receptionist',
@@ -60,10 +61,22 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
   }
 
   openAttendance() {
-    const dialogRef = this.dialog.open(DialogViewReservationComponent, {
+    const dialogRef = this.dialog.open(DialogViewReservationComponent, {//TODO: CAMBIAR DIALOG
       width: '80%',
-      data: {},
+      data: { data: {}, mode: Mode.update },
     });
+
+    this.subscription$.add(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.handleAttendanceUpdate(result);
+        }
+      })
+    );
+  }
+
+  handleAttendanceUpdate(result: Partial<MembershipClient>) {
+    console.log('result', result);
   }
 
   openUser() {
@@ -81,7 +94,7 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
   }
 
   handleUserUpdate(result: User) {
-    const {id_user, ...userData} = result;
+    const { id_user, ...userData } = result;
     console.log(userData);
     this.subscription$.add(
       this.userService.updateUser(id_user, userData).subscribe({

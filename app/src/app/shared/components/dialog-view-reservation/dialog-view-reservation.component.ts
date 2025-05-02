@@ -60,7 +60,7 @@ export class DialogViewReservationComponent implements OnInit {
       // Campos opcionales para visualización (no enviados al backend directamente)
       routineName: [{ value: item.TB_routines?.name ?? '', disabled: true }],
       routineDescription: [{ value: item.TB_routines?.description ?? '', disabled: true }],
-      clientId: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null, disabled: true }],
+      clientId: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null, disabled: this.data.mode !== 2 }],
       clientName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '', disabled: true }],
       clientLastName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '', disabled: true }],
     });
@@ -92,7 +92,8 @@ export class DialogViewReservationComponent implements OnInit {
   }
 
   searchUser() {
-    const id_user = this.reservationForm.get('id_user')?.value;
+    const id_user = this.reservationForm.get('clientId')?.value;
+    console.log('id_user', id_user);
 
     if (id_user) {
       this.subscription$.add(
