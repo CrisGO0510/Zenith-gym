@@ -13,10 +13,15 @@ export class ClientsPrisma implements ClientsRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   public async get(
-    where: Prisma.TB_client_membershipWhereInput,
+    where: Prisma.TB_client_membershipWhereInput = {},
   ): Promise<TB_client_membership[]> {
     return this.prisma.tB_client_membership.findMany({
-      where,
+      where: {
+        ...where,
+        end_date: {
+          gt: new Date(),
+        },
+      },
       include: {
         TB_user_role: true,
       },

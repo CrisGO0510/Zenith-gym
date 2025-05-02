@@ -20,6 +20,7 @@ import { ClientService } from '../../../../shared/services/client.service';
 export class HomeClientComponent implements OnInit, OnDestroy {
   private subscription$: Subscription = new Subscription();
   private currentUser: CurrentTokenRole | null = null;
+  id_client_membership: number = 0;
 
   reservations: Reservation[] = [];
 
@@ -53,7 +54,6 @@ export class HomeClientComponent implements OnInit, OnDestroy {
       this.clientService.getReservations(this.currentUser.id_user).subscribe({
         next: (reservations) => {
           this.reservations = reservations;
-          console.log('Reservations:', this.reservations);
         },
         error: (error) => {
           console.error('Error fetching reservations:', error);
@@ -64,6 +64,12 @@ export class HomeClientComponent implements OnInit, OnDestroy {
 
   private roleValidate() {
     this.currentUser = this.storageService.read(StorageKey.CURRENT_ROLE);
+
+    if (!this.currentUser) {
+      console.error('No tienes permisos para acceder a esta página.');
+      this.router.navigate(['/']);
+      return;
+    }
 
     if (this.currentUser?.id_role != 1) {
       this.snackBar.open(
@@ -76,6 +82,40 @@ export class HomeClientComponent implements OnInit, OnDestroy {
       );
       this.router.navigate(['/']);
     }
+
+    this.subscription$.add(
+      this.clientService
+        .getClientById(this.currentUser.id_user_role)
+        .subscribe({
+          next: (client) => {
+            if (client.length === 0) {
+              this.snackBar.open(
+                'Su membresía ha caducado, por favor contáctese con el recepcionista',
+                'Cerrar',
+                {
+                  duration: 3000,
+                  verticalPosition: 'top',
+                }
+              );
+              this.router.navigate(['/']);
+              return;
+            }
+
+            this.id_client_membership = client[0].id;
+          },
+          error: (error) => {
+            console.error('Error fetching client:', error);
+            this.snackBar.open(
+              'Su membresía ha caducado, por favor contáctese con el recepcionista',
+              'Cerrar',
+              {
+                duration: 3000,
+                verticalPosition: 'top',
+              }
+            );
+          },
+        })
+    );
   }
 
   viewReservation(reservation: Reservation): void {

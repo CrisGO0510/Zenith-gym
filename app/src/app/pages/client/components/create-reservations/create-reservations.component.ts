@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarView } from 'angular-calendar';
 import { DialogTrainingReservationComponent } from '../dialog-training-reservation/dialog-training-reservation.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { ClientService } from '../../../../shared/services/client.service';
+import {
+  Reservation,
+  ReservationCreate,
+} from '../../../../shared/interfaces/reservation.interface';
+import { ReservationStatus } from '../../../../shared/interfaces/reservation-status.enum';
 
 @Component({
   selector: 'app-create-reservations',
@@ -12,14 +18,20 @@ import { Subscription } from 'rxjs';
   styleUrl: './create-reservations.component.scss',
 })
 export class CreateReservationsComponent {
+  @Input() id_client_membership!: number;
+
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   events = [];
   weekStartsOn: number = 1;
-  private subscription$: Subscription = new Subscription();
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar) {}
+  private subscription$: Subscription = new Subscription();
+  private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+  private clientService = inject(ClientService);
+
+  constructor() {}
 
   private isValidReservationTime(date: Date): boolean {
     const now = new Date();
@@ -54,6 +66,39 @@ export class CreateReservationsComponent {
     this.subscription$.add(
       dialogRef.afterClosed().subscribe((result) => {
         console.log('El diálogo se cerró', result);
+        if (result) {
+          this.createReservation(result);
+        } else {
+          console.log('No se seleccionó ninguna reserva');
+        }
+      })
+    );
+  }
+
+  createReservation(reservation: any) {
+    const body: ReservationCreate = {
+      id_client_membership: this.id_client_membership,
+      id_routine: reservation.selectedRoutineId,
+      start_time: reservation.selectedDate,
+      status: ReservationStatus.PENDING,
+    };
+
+    this.subscription$.add(
+      this.clientService.createReservation(body).subscribe({
+        next: () => {
+          this.snackBar.open('Reserva creada', 'Cerrar', {
+            duration: 3000,
+            verticalPosition: 'top',
+          });
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error('Error al crear la reserva:', error);
+          this.snackBar.open('Error al crear la reserva', 'Cerrar', {
+            duration: 3000,
+            verticalPosition: 'top',
+          });
+        },
       })
     );
   }

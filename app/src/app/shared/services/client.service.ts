@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MembershipClient } from '../interfaces/membership.interface';
 import { Observable } from 'rxjs';
 import { Routine } from '../interfaces/routine.interface';
-import { Reservation } from '../interfaces/reservation.interface';
+import { Reservation, ReservationCreate } from '../interfaces/reservation.interface';
 import { ReservationStatus } from '../interfaces/reservation-status.enum';
 
 @Injectable({
@@ -22,9 +22,9 @@ export class ClientService extends CrudService {
     return this.get<Routine[]>('');
   }
 
-  getClientById(id: number): Observable<MembershipClient> {
+  getClientById(id_user_role: number): Observable<MembershipClient[]> {
     this.endpoint = `clients`;
-    return this.get<MembershipClient>(`?id_user=${id}`);
+    return this.get<MembershipClient[]>(`?id_user_role=${id_user_role}`);
   }
 
   createMembershipClient(body: MembershipClient): Observable<MembershipClient> {
@@ -35,6 +35,11 @@ export class ClientService extends CrudService {
   getReservations(id_user: number): Observable<Reservation[]> {
     this.endpoint = 'reservations';
     return this.get<Reservation[]>(`pending?id_user=${id_user}`);
+  }
+
+  createReservation(body: ReservationCreate): Observable<unknown> {
+    this.endpoint = 'reservations';
+    return this.post<unknown>(body);
   }
 
   cancelReservation(id: number): Observable<Reservation> {
