@@ -1,14 +1,24 @@
+import {
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { id } from '@swimlane/ngx-charts';
+import { User } from '../../shared/interfaces/user.interface';
+import { UserServices } from '../../shared/services/users.service';
 
 interface SignupForm {
   firstName: string;
@@ -18,7 +28,6 @@ interface SignupForm {
   phone: string;
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 @Component({
@@ -27,74 +36,126 @@ interface SignupForm {
   templateUrl: './singup.component.html',
   styleUrl: './singup.component.scss',
 })
-export class SingupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   hidePassword: WritableSignal<boolean> = signal(true);
   hideConfirmPassword: WritableSignal<boolean> = signal(true);
-  signupForm: FormGroup;
-  passwordMismatch: boolean = true;
+  signupForm!: FormGroup;
+  private subscription$: Subscription = new Subscription();
 
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-  ) {
-    this.signupForm = this.fb.group({
-      firstName: [
-        '',
-        [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
-      ],
-      lastName: [
-        '',
-        [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
-      ],
-      birthday: ['', [Validators.required]],
-      document: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      phone: [
-        '',
-        [Validators.required, Validators.pattern(/^\+?[0-9]{8,15}$/)],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.pattern(/^[a-zA-Z0-9]*$/),
+  private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  private fb = inject(FormBuilder);
+  private userService = inject(UserServices);
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.signupForm = this.fb.group(
+      {
+        firstName: [
+          '',
+          [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
         ],
-      ],
-      confirmPassword: ['', [Validators.required]],
-    });
+        lastName: [
+          '',
+          [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
+        ],
+        birthday: ['', [Validators.required]],
+        document: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+        phone: [
+          '',
+          [Validators.required, Validators.pattern(/^\+?[0-9]{8,15}$/)],
+        ],
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.pattern(/^[a-zA-Z0-9]*$/),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: this.passwordsMatchValidator }
+    );
   }
 
-  ngOnInit(): void {}
-
-  navigateTo(path: string): void {
-    this.router.navigate([path]);
+  private passwordsMatchValidator(
+    group: AbstractControl
+  ): ValidationErrors | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  passwordMismatchValidator(): void {
-    const password = this.signupForm.get('password');
-    const confirmPassword = this.signupForm.get('confirmPassword');
-
-    if (password?.value !== confirmPassword?.value) {
-      this.passwordMismatch = true;
-      this.signupForm
-        .get('confirmPassword')
-        ?.setErrors({ passwordMismatch: true });
-    } else {
-      this.passwordMismatch = false;
-      this.signupForm.get('confirmPassword')?.setErrors(null);
-    }
+  get confirmPasswordError(): boolean {
+    return (
+      this.signupForm.hasError('passwordMismatch') &&
+      !!this.signupForm.get('confirmPassword')?.touched
+    );
   }
 
   submitForm(): void {
-    this.passwordMismatchValidator();
+    const password = this.signupForm.get('password')?.value;
+    const confirmPassword = this.signupForm.get('confirmPassword')?.value;
+    const passwordMismatch = password !== confirmPassword;
+
+    if (passwordMismatch) {
+      this.snackBar.open('Las contraseñas son distintas', 'Close', {
+        duration: 3000,
+      });
+      return;
+    }
     if (this.signupForm.valid) {
-      const { confirmPassword, ...formData } = this.signupForm.value;
-      const signupData: SignupForm = formData;
-      console.log('Form submitted:', signupData);
+      const { confirmPassword, ...signupData } = this.signupForm.value;
+      this.createUser(signupData as SignupForm);
     } else {
       this.markFormGroupTouched(this.signupForm);
     }
+  }
+
+  createUser(signupData: SignupForm): void {
+    const userData: User = {
+      id_user: parseInt(signupData.document),
+      name: signupData.firstName,
+      lastname: signupData.lastName,
+      email: signupData.email,
+      phone_number: signupData.phone,
+      birthday: signupData.birthday,
+      password: signupData.password,
+    };
+
+    this.subscription$.add(
+      this.userService.createUser(userData).subscribe({
+        next: (response) => {
+          this.snackBar.open(
+            'Usuario creado correctamente, un asesor se comunicará con usted pronto',
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+            }
+          );
+          this.navigateTo('/login');
+        },
+        error: (error) => {
+          console.error('Error creating user:', error);
+          this.snackBar.open(
+            'Error al crear el usuario, por favor intente nuevamente',
+            'Cerrar',
+            {
+              duration: 3000,
+              verticalPosition: 'top',
+            }
+          );
+        },
+      })
+    );
+  }
+
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
   }
 
   private markFormGroupTouched(formGroup: FormGroup): void {
@@ -104,5 +165,9 @@ export class SingupComponent implements OnInit {
         this.markFormGroupTouched(control);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }

@@ -25,4 +25,8 @@ export class UserServices extends CrudService {
   updateUser(id: number, body: Omit<User, 'id_user'>): Observable<User> {
     return this.patch<User>(`${id}`, body);
   }
+
+  createUser(body: User): Observable<User> {
+    return this.post<User>(body);
+  }
 }

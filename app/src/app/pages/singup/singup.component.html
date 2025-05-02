@@ -115,7 +115,8 @@
           <button mat-icon-button class="button" matSuffix (click)="hideConfirmPassword.set(!hideConfirmPassword())" type="button">
             <mat-icon>{{ hideConfirmPassword() ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
-          @if (passwordMismatch) {
+          
+          @if (signupForm.get('confirmPassword')?.errors?.['required'] && signupForm.get('confirmPassword')?.touched) {
             <mat-error>Las contraseñas no coinciden</mat-error>
           }
 

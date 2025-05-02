@@ -6,4 +6,5 @@ export interface User {
   phone_number?: string;
   birthday: Date;
   restriction?: string;
+  password?: string;
 }
