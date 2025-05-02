@@ -43,22 +43,21 @@ export class DialogViewReservationComponent implements OnInit {
 
   protected buildForm(item: Partial<Reservation> = {}): FormGroup {
     return this.formBuilder.group({
-      id: item.id,
-      clientId: item.clientId,
-      clientName: item.clientName,
-      clientLastName: item.clientLastName,
-      routineId: item.routineId,
-      routineName: item.routineName,
-      instructorId: item.instructorId,
-      instructorName: item.instructorName,
-      instructorLastName: item.instructorLastName,
-      routineDescription: item.routineDescription,
-      startDate: item.startDate,
-      endDate: item.endDate,
-      reservationStatusId: item.reservationStatusId ?? 2,
-      reservationStatus: item.reservationStatus,
+      id: item.id ?? null,
+      id_client_membership: item.id_client_membership ?? null,
+      id_routine: item.id_routine ?? null,
+      start_time: item.start_time ?? '',
+      end_time: item.end_time ?? '',
+      status: item.status ?? 'pendiente',
+  
+      // Campos opcionales para visualización (no enviados al backend directamente)
+      routineName: item.TB_routines?.name ?? '',
+      routineDescription: item.TB_routines?.description ?? '',
+      clientName: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '',
+      clientLastName: item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '',
     });
   }
+  
 
   ngOnInit(): void {
     this.reservationStatusOptions = Object.values(ReservationStatus)

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Reservation } from '../../../../shared/interfaces/reservation.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,9 @@ import { StorageService } from '../../../../core/services/storage/storage.servic
 import { StorageKey } from '../../../../core/services/storage/storage.model';
 import { Router } from '@angular/router';
 import { DialogViewReservationComponent } from '../../../../shared/components/dialog-view-reservation/dialog-view-reservation.component';
+import { CurrentTokenRole } from '../../../../core/interfaces/current-token-role.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClientService } from '../../../../shared/services/client.service';
 
 @Component({
   selector: 'app-home-client',
@@ -14,51 +17,19 @@ import { DialogViewReservationComponent } from '../../../../shared/components/di
   templateUrl: './home-client.component.html',
   styleUrl: './home-client.component.scss',
 })
-export class HomeClientComponent implements OnInit {
+export class HomeClientComponent implements OnInit, OnDestroy {
   private subscription$: Subscription = new Subscription();
+  private currentUser: CurrentTokenRole | null = null;
 
-  user: any;
+  reservations: Reservation[] = [];
 
-  reservations: Reservation[] = [
-    {
-      id: 1,
-      clientId: 101,
-      clientName: 'Laura',
-      clientLastName: 'Martínez',
-      routineId: 201,
-      routineName: 'Rutina Full Body',
-      instructorId: 301,
-      instructorName: 'Carlos',
-      instructorLastName: 'Gómez',
-      routineDescription: 'Entrenamiento general para todo el cuerpo',
-      startDate: new Date('2025-05-01T08:00:00'),
-      endDate: new Date('2025-05-01T09:00:00'),
-      reservationStatusId: 1,
-      reservationStatus: 'Confirmado'
-    },
-    {
-      id: 2,
-      clientId: 102,
-      clientName: 'Pedro',
-      clientLastName: 'López',
-      routineId: 202,
-      routineName: 'Piernas Intensivo',
-      instructorId: 302,
-      instructorName: 'Andrea',
-      instructorLastName: 'Vargas',
-      routineDescription: 'Enfocado en fuerza y volumen de piernas',
-      startDate: new Date('2025-05-02T10:30:00'),
-      endDate: new Date('2025-05-02T11:30:00'),
-      reservationStatusId: 2,
-      reservationStatus: 'Pendiente'
-    },
-  ];
+  private dialog = inject(MatDialog);
+  private storageService = inject(StorageService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private clientService = inject(ClientService);
 
-  constructor(
-    private dialog: MatDialog,
-    private storageService: StorageService,
-    private router: Router
-  ) {}
+  constructor() {}
 
   navigateTo(path: string) {
     console.log('Navigating to:', path);
@@ -66,16 +37,46 @@ export class HomeClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const user = this.storageService.read(StorageKey.CURRENT_ROLE);
-  
-    if (user) {
-      this.user = user;
-    } else {
-      console.error('No se encontró el usuario en el almacenamiento.');
-      this.navigateTo('/');
+    this.roleValidate();
+    this.getReservations();
+  }
+
+  getReservations() {
+    if (!this.currentUser) {
+      console.error(
+        'currentUser is null or undefined. Cannot fetch reservations.'
+      );
+      return;
+    }
+
+    this.subscription$.add(
+      this.clientService.getReservations(this.currentUser.id_user).subscribe({
+        next: (reservations) => {
+          this.reservations = reservations;
+          console.log('Reservations:', this.reservations);
+        },
+        error: (error) => {
+          console.error('Error fetching reservations:', error);
+        },
+      })
+    );
+  }
+
+  private roleValidate() {
+    this.currentUser = this.storageService.read(StorageKey.CURRENT_ROLE);
+
+    if (this.currentUser?.id_role != 1) {
+      this.snackBar.open(
+        'No tienes permisos para acceder a esta página',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+        }
+      );
+      this.router.navigate(['/']);
     }
   }
-  
 
   viewReservation(reservation: Reservation): void {
     if (!reservation) {

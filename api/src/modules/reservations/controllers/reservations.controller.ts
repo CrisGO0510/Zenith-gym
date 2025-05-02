@@ -12,6 +12,7 @@ import { ReservationsService } from '../services/reservations.service';
 import { Prisma, TB_reservations } from 'generated/prisma';
 import { CreateReservationDto } from '../dto/create-reservation.dto';
 import { UpdateReservationDto } from '../dto/update-reservation.dto';
+import { GetReservationsDto } from '../dto/get-reservations.dto';
 
 @Controller('reservations')
 export class ReservationsController {
@@ -19,7 +20,7 @@ export class ReservationsController {
 
   @Get('')
   get(
-    @Query() query: Prisma.TB_reservationsWhereInput,
+    @Query() query: GetReservationsDto,
   ): Promise<TB_reservations[]> {
     return this.reservationsService.get(query);
   }

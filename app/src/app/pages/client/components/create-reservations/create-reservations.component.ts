@@ -19,10 +19,7 @@ export class CreateReservationsComponent {
   weekStartsOn: number = 1;
   private subscription$: Subscription = new Subscription();
 
-  constructor(
-    public dialog: MatDialog,
-    private snackBar: MatSnackBar,
-  ) {}
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   private isValidReservationTime(date: Date): boolean {
     const now = new Date();
@@ -30,7 +27,7 @@ export class CreateReservationsComponent {
 
     if (now.getMinutes() > 0) {
       minimumReservationTime.setTime(
-        minimumReservationTime.getTime() - 60 * 60 * 1000,
+        minimumReservationTime.getTime() - 60 * 60 * 1000
       );
     }
 
@@ -44,7 +41,7 @@ export class CreateReservationsComponent {
       this.snackBar.open(
         'Las reservas deben hacerse con al menos 1 hora de anticipación y para la próxima hora en punto disponible',
         'Cerrar',
-        { duration: 5000 },
+        { duration: 5000, verticalPosition: 'top' }
       );
       return;
     }
@@ -57,7 +54,7 @@ export class CreateReservationsComponent {
     this.subscription$.add(
       dialogRef.afterClosed().subscribe((result) => {
         console.log('El diálogo se cerró', result);
-      }),
+      })
     );
   }
 

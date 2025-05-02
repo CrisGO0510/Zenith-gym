@@ -20,6 +20,9 @@ export class ClientsController {
 
   @Get('')
   public get(@Query() query: GetClientsDto) {
+    if (query.id_user_role) {
+      query.id_user_role = parseInt(query.id_user_role as unknown as string, 10);
+    }
     return this.clients.get(query);
   }
 

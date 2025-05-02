@@ -6,15 +6,15 @@
       @for (reservation of reservations; track trackById) {
         <mat-list-item role="listitem" class="reservation-item">
           <div matListItemLine class="reservation-info">
-            <span class="routine-name">{{ reservation.routineName }}</span>
+            <span class="routine-name">{{ reservation.TB_routines.name }}</span>
 
             <span class="start-date">{{
-              reservation.startDate | date: "dd/MM/yyyy"
+              reservation.start_time | date: "dd/MM/yyyy"
             }}</span>
 
             <span class="time-range">
-              {{ reservation.startDate | date: "HH:mm" }} -
-              {{ reservation.endDate | date: "HH:mm" }}
+              {{ reservation.start_time | date: "HH:mm" }} -
+              {{ reservation.end_time | date: "HH:mm" }}
             </span>
           </div>
 

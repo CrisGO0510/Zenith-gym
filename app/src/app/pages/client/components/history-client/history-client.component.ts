@@ -102,11 +102,11 @@ export class HistoryClientComponent implements OnInit, OnDestroy {
     }
 
     const sortedReservations = [...currentReservations].sort(
-      (a, b) => a.startDate.getTime() - b.startDate.getTime(),
+      (a, b) => a.start_time.getTime() - b.end_time.getTime(),
     );
     const seriesData: ChartDataPoint[] = sortedReservations.map((res) => ({
-      name: new Date(res.startDate),
-      value: res.reservationStatusId,
+      name: new Date(res.start_time),
+      value: 0, //TODO CORREGIR LUEGO
     }));
     this.chartData = [{ name: 'Historial', series: seriesData }];
   }
@@ -118,11 +118,11 @@ export class HistoryClientComponent implements OnInit, OnDestroy {
       return;
     }
     const sortedReservations = [...currentReservations].sort(
-      (a, b) => b.startDate.getTime() - a.startDate.getTime(),
+      (a, b) => b.start_time.getTime() - a.start_time.getTime(),
     );
     this.tableData = sortedReservations.map((res) => ({
-      date: new Date(res.startDate),
-      status: ReservationStatus.toLabel(res.reservationStatusId),
+      date: new Date(res.start_time),
+      status: res.status
     }));
   }
 

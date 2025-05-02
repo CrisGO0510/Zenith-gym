@@ -11,4 +11,9 @@ export class GetReservationsDto {
   @IsOptional()
   @IsInt()
   id_routine?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsInt()
+  id_user?: number;
 }
