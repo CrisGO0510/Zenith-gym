@@ -61,7 +61,8 @@ export class HomeReceptionistComponent implements OnDestroy, OnInit {
   }
 
   openAttendance() {
-    const dialogRef = this.dialog.open(DialogViewReservationComponent, {//TODO: CAMBIAR DIALOG
+    const dialogRef = this.dialog.open(DialogViewReservationComponent, {
+      //TODO: CAMBIAR DIALOG
       width: '80%',
       data: { data: {}, mode: Mode.update },
     });
