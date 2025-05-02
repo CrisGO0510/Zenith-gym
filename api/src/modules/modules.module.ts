@@ -6,6 +6,7 @@ import { EmployeesModule } from './employees/employees.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { RestrictionsModule } from './restrictions/restrictions.module';
 import { RoutinesModule } from './routines/routines.module';
+import { ReservationsModule } from './reservations/reservation.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { RoutinesModule } from './routines/routines.module';
     NotificationsModule,
     RestrictionsModule,
     RoutinesModule,
+    ReservationsModule
   ],
 })
 export class ModulesModule {}
