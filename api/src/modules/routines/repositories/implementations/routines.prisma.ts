@@ -13,11 +13,16 @@ export class RoutinesPrisma implements RoutinesRepository {
     return this.prisma.tB_routines.findMany({
       where,
       include: {
-        TB_routine_exercise: true,
+        TB_routine_exercise: {
+          include: {
+            TB_exercises: true,
+          },
+        },
         TB_session_capacity: true,
       },
     });
   }
+  
 
   public async create(
     data: Prisma.TB_routinesUncheckedCreateInput,
