@@ -57,7 +57,7 @@ export class DialogUpdateReservationComponent implements OnInit, OnDestroy {
     if (this.searchForm.invalid) return;
     const id = this.searchForm.value.clientId;
     this.subscription$.add(
-      this.clientService.getReservations(id).subscribe({
+      this.clientService.getAllReservations(id).subscribe({
         next: (res) => (this.reservations = res),
         error: (err) => console.error('Error fetching reservations', err),
       })
@@ -111,9 +111,9 @@ export class DialogUpdateReservationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    console.log('result', result);
+    const { id, end_time, ...reservationData } = result;
 
-    this.clientService.updateReservation(result.id, result).subscribe({
+    this.clientService.updateReservation(id, reservationData).subscribe({
       next: () => {
         this.snackBar.open('Reserva actualizada con éxito.', 'Cerrar', {
           duration: 3000,

@@ -57,7 +57,7 @@
         <mat-label>Estado de la reserva</mat-label>
         <mat-select formControlName="status" [disabled]="data.mode !== 2">
           @for (option of reservationStatusOptions; track option.value) {
-          <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          <mat-option [value]="option.label">{{ option.label }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

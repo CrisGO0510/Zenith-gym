@@ -53,16 +53,39 @@ export class DialogViewReservationComponent implements OnInit {
       id: item.id ?? null,
       id_client_membership: item.id_client_membership ?? null,
       id_routine: item.id_routine ?? null,
-      start_time: [{ value: item.start_time ?? '', disabled: this.data.mode !== 2 }],
-      end_time: [{ value: item.end_time ?? '', disabled: this.data.mode !== 2 }],
-      status: [{ value: this.normalizeStatus(item.status), disabled: this.data.mode !== 2 }],
+      start_time: [
+        { value: item.start_time ?? '', disabled: this.data.mode !== 2 },
+      ],
+      end_time: [
+        { value: item.end_time ?? '', disabled: this.data.mode !== 2 },
+      ],
+      status: [{ value: item.status, disabled: this.data.mode !== 2 }],
 
       // Campos opcionales para visualización (no enviados al backend directamente)
       routineName: [{ value: item.TB_routines?.name ?? '', disabled: true }],
-      routineDescription: [{ value: item.TB_routines?.description ?? '', disabled: true }],
-      clientId: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null, disabled: true}],
-      clientName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '', disabled: true }],
-      clientLastName: [{ value: item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '', disabled: true }],
+      routineDescription: [
+        { value: item.TB_routines?.description ?? '', disabled: true },
+      ],
+      clientId: [
+        {
+          value:
+            item.TB_client_membership?.TB_user_role?.TB_users?.id_user ?? null,
+          disabled: true,
+        },
+      ],
+      clientName: [
+        {
+          value: item.TB_client_membership?.TB_user_role?.TB_users?.name ?? '',
+          disabled: true,
+        },
+      ],
+      clientLastName: [
+        {
+          value:
+            item.TB_client_membership?.TB_user_role?.TB_users?.lastname ?? '',
+          disabled: true,
+        },
+      ],
     });
   }
 
@@ -79,11 +102,15 @@ export class DialogViewReservationComponent implements OnInit {
 
   onSubmit() {
     if (this.reservationForm.invalid) {
-      this.snackBar.open('Por favor, completa todos los campos requeridos.', 'Cerrar', {
-        duration: 3000,
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar'],
-      });
+      this.snackBar.open(
+        'Por favor, completa todos los campos requeridos.',
+        'Cerrar',
+        {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        }
+      );
       return;
     }
 
@@ -104,7 +131,6 @@ export class DialogViewReservationComponent implements OnInit {
 
   searchUser() {
     // const id_user = this.reservationForm.get('clientId')?.value;
-
     // if (id_user) {
     //   this.subscription$.add(
     //     this.userServices.getUserById(id_user).subscribe({
@@ -121,7 +147,6 @@ export class DialogViewReservationComponent implements OnInit {
     //           );
     //           return;
     //         }
-
     //         this.reservationForm.patchValue({
     //           clientName: user[0].name,
     //           clientLastName: user[0].lastname,
